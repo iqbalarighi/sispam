@@ -93,7 +93,7 @@
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
-                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Tukar Jaga</a>
+                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a>
@@ -120,7 +120,7 @@
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
-                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Tukar Jaga</a>
+                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a>

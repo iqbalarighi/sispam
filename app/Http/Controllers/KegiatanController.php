@@ -20,8 +20,8 @@ class KegiatanController extends Controller
 {
     public function index() {
 
-        $admin = Auth::user()->name;
-        if ($admin == 'Admin') {
+        $admin = Auth::user()->role;
+        if ($admin == 'admin') {
         $giats = kegiatanModel::with('site')
         ->paginate(15);
         } else {

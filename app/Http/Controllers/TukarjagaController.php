@@ -20,8 +20,8 @@ class tukarjagaController extends Controller
 {
     public function index()
     {   
-        $admin = Auth::user()->name;
-        if ($admin == 'Admin') {
+        $admin = Auth::user()->role;
+        if ($admin == 'admin') {
         $trjg = TukarjagaModel::with('site')
         ->paginate(10);
 
