@@ -10,7 +10,7 @@ class AdduserController extends Controller
 
     public function index()
     {
-        $user = User::paginate(15);
+        $user = User::paginate(10);
 
         return view('adduser.index', ['user' => $user]);
     }
