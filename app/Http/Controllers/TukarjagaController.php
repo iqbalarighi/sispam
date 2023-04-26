@@ -58,7 +58,7 @@ return view('tukarjaga.index', ['trjg' => $trjg]);
         $month = Carbon::now()->format('m');
         $th = Str::substr($year, -2);
         $string = 'TRJ-'.$th.$month.'-';
-        $no_trj = Helper::IDGenerator(new TukarjagaModel, 'no_trj', 3, $string); /** Generate id */
+        $no_trj = Helper::IDGenerator(new TukarjagaModel, 'no_trj', 4, $string); /** Generate id */
 
 
         $request->validate([

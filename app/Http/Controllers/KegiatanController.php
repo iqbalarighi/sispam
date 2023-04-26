@@ -84,7 +84,7 @@ foreach($input['images'] as $image)
 
         $string = 'PAM-'.$th.$month.'-';
 
-        $nolap = Helper::IDGenerator(new kegiatanModel, 'no_lap', 3, $string); /** Generate id */
+        $nolap = Helper::IDGenerator(new kegiatanModel, 'no_lap', 4, $string); /** Generate id */
 
         $files = $request->file('images');
 
