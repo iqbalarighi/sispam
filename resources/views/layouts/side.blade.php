@@ -123,7 +123,7 @@
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a>
+                            {{-- <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
                 </div>
