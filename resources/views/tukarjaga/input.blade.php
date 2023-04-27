@@ -73,7 +73,7 @@
             <p></p>
             <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove">
                 <tr>
-                    <th colspan="">A. Shift Lama </th>
+                    <th colspan="2">A. Shift Lama </th>
                 </tr>
                 <tr>
                     <td>
@@ -86,7 +86,7 @@
                <br>
             <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove1">
                 <tr>
-                    <th colspan="">B. Shift Baru </th>
+                    <th colspan="2">B. Shift Baru </th>
                 </tr>
                 <tr>
                     <td>
