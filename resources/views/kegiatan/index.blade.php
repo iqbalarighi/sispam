@@ -98,6 +98,7 @@
                     @endforeach
                     </table>
                 </div>
+                {{$giats->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
