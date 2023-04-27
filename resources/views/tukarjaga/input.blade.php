@@ -118,8 +118,9 @@
                     </td width="30%">
                 </tr>
             </table>
-
             <button type="button" name="add" id="dynamic-ar2" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
+               <br>
+               <br>
 {{--                 <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove3">
                 <tr>
                     <th colspan="5">Kunci Ruangan</th>
