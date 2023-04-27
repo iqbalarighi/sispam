@@ -78,11 +78,11 @@
                     @foreach ($detil as $key => $item)
                     <tr>
                         {{-- <td>{{$key+1}}</td> --}}
-                        <td>@foreach (explode('|',$item->shift_lama) as $til)
+                        <td align="left" style="padding-left: 10px;">@foreach (explode('|',$item->shift_lama) as $til)
                             {{$til}} <br>
                             @endforeach
                         </td>
-                        <td>@foreach (explode('|',$item->shift_baru) as $tils)
+                        <td align="left" style="padding-left: 10px;">@foreach (explode('|',$item->shift_baru) as $tils)
                             {{$tils}} <br>
                             @endforeach
                         </td>
@@ -105,7 +105,7 @@
                     @foreach ($bar as $key => $ite)
                     <tr>
                         {{-- <td>{{$key+1}}</td> --}}
-                        <td>
+                        <td align="left" style="padding-left: 10px;">
                             {{$ite->nabar}}
                         </td>
                         <td>
@@ -132,7 +132,7 @@
                     @foreach ($urai as $key => $it)
                     <tr>
                         {{-- <td>{{$key+1}}</td> --}}
-                        <td>
+                        <td width="100px" align="left" style="padding-left: 10px;">
                             {{$it->jam}}
                         </td>
                         <td>

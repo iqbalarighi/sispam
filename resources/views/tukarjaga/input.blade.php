@@ -73,30 +73,30 @@
             <p></p>
             <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove">
                 <tr>
-                    <th colspan="2">A. Shift Lama </th>
+                    <th colspan="">A. Shift Lama </th>
                 </tr>
                 <tr>
                     <td>
                         <input type="text" name="shiftlama[]" placeholder="Shift Lama" class="form-control" required />
                     </td>
-                    <td>
-                        <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm bi bi-plus-square"></button>
-                    </td>
                 </tr>
             </table>
+               <button type="button" name="add" id="dynamic-ar" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
+               <br>
+               <br>
             <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove1">
                 <tr>
-                    <th colspan="2">B. Shift Baru </th>
+                    <th colspan="">B. Shift Baru </th>
                 </tr>
                 <tr>
                     <td>
                         <input type="text" name="shiftbaru[]" placeholder="Shift Baru" class="form-control" required />
                     </td>
-                    <td>
-                        <button type="button" name="add" id="dynamic-ar1" class="btn btn-primary btn-sm bi bi-plus-square"></button>
-                    </td>
                 </tr>
             </table>
+            <button type="button" name="add" id="dynamic-ar1" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
+               <br>
+               <br>
                 <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove2">
                 <tr>
                     <th colspan="5">C. Barang Inventaris </th>
@@ -116,11 +116,10 @@
                     <td>
                         <input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-0" required/>
                     </td width="30%">
-                    <td>
-                        <button type="button" name="add" id="dynamic-ar2" class="btn btn-primary btn-sm bi bi-plus-square"></button>
-                    </td>
                 </tr>
             </table>
+
+            <button type="button" name="add" id="dynamic-ar2" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
 {{--                 <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove3">
                 <tr>
                     <th colspan="5">Kunci Ruangan</th>
@@ -168,11 +167,12 @@
                     <td>
                         <textarea type="text" rows="1" name="uraian[]" placeholder="Uraian Kegiatan/Kejadian" class="form-control" required></textarea>
                     </td>
-                    <td>
-                        <button type="button" name="add" id="dynamic-ar4" class="btn btn-primary btn-sm bi bi-plus-square"></button>
-                    </td>
                 </tr>
             </table>
+            <button type="button" name="add" id="dynamic-ar4" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
+            <br>
+            <br>
+                    
                 <center>
                     <button type="submit" class="btn btn-primary" style = "text-align:center">
                         {{ __('Simpan') }}
