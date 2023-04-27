@@ -23,10 +23,12 @@ class KegiatanController extends Controller
         $admin = Auth::user()->role;
         if ($admin == 'admin') {
         $giats = kegiatanModel::with('site')
+        ->orderBy('created_at', 'DESC')
         ->paginate(15);
         } else {
         $giats = kegiatanModel::with('site')
         ->where('danru','=', Auth::user()->name)
+        ->orderBy('created_at', 'DESC')
         ->paginate(15);
         }
 

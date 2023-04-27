@@ -23,12 +23,14 @@ class tukarjagaController extends Controller
         $admin = Auth::user()->role;
         if ($admin == 'admin') {
         $trjg = TukarjagaModel::with('site')
-        ->paginate(10);
+        ->orderBy('created_at', 'DESC')
+        ->paginate(15);
 
         } else {
         $trjg = TukarjagaModel::with('site')
         ->where('danru','=', Auth::user()->name)
-        ->paginate(10);         
+        ->orderBy('created_at', 'DESC')
+        ->paginate(15);         
         }
         
 return view('tukarjaga.index', ['trjg' => $trjg]);
