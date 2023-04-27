@@ -28,6 +28,7 @@ class KegiatanController extends Controller
                 ->where('tanggal', '=', $cari)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+            $giats->appends(['date' => $cari]);
         } else {
             $giats = kegiatanModel::with('site')
         ->orderBy('created_at', 'DESC')
@@ -41,6 +42,7 @@ class KegiatanController extends Controller
                 ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+            $giats->appends(['date' => $cari]);
         } else {
         $giats = kegiatanModel::with('site')
         ->where('danru','=', Auth::user()->name)

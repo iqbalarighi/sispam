@@ -29,6 +29,7 @@ class tukarjagaController extends Controller
                 ->where('tanggal', '=', $cari)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+            $trjg->appends(['date' => $cari]);
         } else {
         $trjg = TukarjagaModel::with('site')
         ->orderBy('created_at', 'DESC')
@@ -40,6 +41,7 @@ class tukarjagaController extends Controller
                 ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
+            $trjg->appends(['date' => $cari]);
         } else {
         $trjg = TukarjagaModel::with('site')
         ->where('danru','=', Auth::user()->name)
