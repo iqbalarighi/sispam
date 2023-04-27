@@ -23,7 +23,7 @@
             <p/>
         @endif
             <div class="card">
-                <div class="card-header text-uppercase font-weight-bold ">{{ __('Buat Laporan Tukar Jaga') }}
+                <div class="card-header text-uppercase font-weight-bold ">{{ __('Buat Laporan Serah Terima') }}
                     <a href="{{route('tukarjaga')}}"><span class="btn btn-primary float-right btn-sm">Kembali</span></a>
                 </div>
 

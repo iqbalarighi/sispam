@@ -55,6 +55,12 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
+                    <form action="" method="GET" class="float-right mb-3">
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
+                        <button class="submit bi bi-search"></button>
+                    </form>
+                    
+
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
@@ -66,6 +72,13 @@
                        <th style="width:72px; ">Option</th>
                        @endif
                     </tr>
+
+                    @if ($giats->count() == 0)
+                    <tr>
+                        <td colspan="5"> Data Tidak Ditemukan</td>
+                    </tr>
+                    @else
+
                     @foreach($giats as $key => $giat)
                     <tr style="cursor: pointer; user-select: none;">
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giats->firstitem() + $key}}</td>
@@ -96,6 +109,8 @@
                          @endif
                     </tr>
                     @endforeach
+
+                    @endif
                     </table>
                 </div>
                 {{$giats->links('pagination::bootstrap-5')}}

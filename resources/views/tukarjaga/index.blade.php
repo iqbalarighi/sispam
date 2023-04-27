@@ -23,7 +23,7 @@
             <p/>
         @endif
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Tukar Jaga') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Serah Terima Jaga') }}
                     <a href="{{route('tukar-tambah')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                 </div>
 
@@ -55,6 +55,11 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
+                    <form action="" method="GET" class="float-right mb-3">
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
+                        <button class="submit bi bi-search"></button>
+                    </form>
+
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
@@ -66,6 +71,12 @@
                        <th style="width:72px; ">Option</th>
                        @endif
                     </tr>
+
+                    @if ($trjg->count() == 0)
+                    <tr>
+                        <td colspan="5"> Data Tidak Ditemukan</td>
+                    </tr>
+                    @else
 
                     @foreach ($trjg as $key => $item)
                     <tr style="user-select: none; cursor: pointer;">
@@ -90,6 +101,8 @@
                          @endif
                     </tr>
                     @endforeach
+
+                    @endif
                     </table>
                      {{$trjg->links('pagination::bootstrap-5')}}
                 </div>

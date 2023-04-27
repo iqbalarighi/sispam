@@ -15,22 +15,39 @@ use Illuminate\Support\Facades\Validator;
 use App\Services\PayUService\Exception;
 use Illuminate\Support\Facades\Auth;
 use PDF;
+use DB;
 
 class KegiatanController extends Controller
 {
-    public function index() {
-
+    public function index(Request $request) {
         $admin = Auth::user()->role;
+        $cari = $request->date;
         if ($admin == 'admin') {
+        if ($cari != null) {
         $giats = kegiatanModel::with('site')
+                ->where('tanggal', '=', $cari)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
+        } else {
+            $giats = kegiatanModel::with('site')
         ->orderBy('created_at', 'DESC')
         ->paginate(15);
+        }
+
+        } else {
+
+            if ($cari != null) {
+        $giats = kegiatanModel::with('site')
+                ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
         } else {
         $giats = kegiatanModel::with('site')
         ->where('danru','=', Auth::user()->name)
         ->orderBy('created_at', 'DESC')
         ->paginate(15);
         }
+    }
 
         return view('kegiatan.index', ['giats' => $giats]);
     }

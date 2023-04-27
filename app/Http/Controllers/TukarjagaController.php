@@ -18,20 +18,35 @@ use Illuminate\Support\Facades\Auth;
 
 class tukarjagaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
         $admin = Auth::user()->role;
+        $cari = $request->date;
+        
         if ($admin == 'admin') {
+            if ($cari != null) {
+        $trjg = TukarjagaModel::with('site')
+                ->where('tanggal', '=', $cari)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
+        } else {
         $trjg = TukarjagaModel::with('site')
         ->orderBy('created_at', 'DESC')
         ->paginate(15);
-
+}
+        } else {
+            if ($cari != null) {
+        $trjg = TukarjagaModel::with('site')
+                ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
         } else {
         $trjg = TukarjagaModel::with('site')
         ->where('danru','=', Auth::user()->name)
         ->orderBy('created_at', 'DESC')
         ->paginate(15);         
         }
+    }
         
 return view('tukarjaga.index', ['trjg' => $trjg]);
 
@@ -160,9 +175,9 @@ public function generatePDF($id)
         $detil = TukarshiftModel::where('no_trj', '=', $detilx->no_trj)->get();
         $bar = TukarbarangModel::where('no_trj', '=', $detilx->no_trj)->get();
         $urai = TukargiatModel::where('no_trj', '=', $detilx->no_trj)->get();
-        $data = ['title' => 'Laporan Tukar Jaga'];
+        $data = ['title' => 'Laporan Serah Terima Jaga'];
         $pdf = PDF::loadView('tukarjaga.savepdf', ['data' => $data, 'detil' => $detil, 'bar' => $bar, 'urai' => $urai, 'detilx' => $detilx]);
-        return $pdf->download('Laporan Tukar Jaga '.$detilx->no_trj.'.pdf');
+        return $pdf->download('Laporan Serah Terima Jaga '.$detilx->no_trj.'.pdf');
     }
 
 public function addshiftlama(Request $request, $trj, $id)
