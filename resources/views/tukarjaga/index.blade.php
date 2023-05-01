@@ -64,10 +64,15 @@
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>
-                        <th>Hari/Tanggal</th>
-                        <th>Jam</th>
-                        <th>Lokasi</th>
                         @if (Auth::user()->role === 'admin')
+                       <th style="width:72px; ">Danru</th>
+                       @endif
+                        <th>Hari/Tanggal</th>
+                        <th>Shift</th>
+                        <th>Jam</th>
+                        <th>Lokasi</th>                        
+                        @if (Auth::user()->role === 'admin')
+
                        <th style="width:72px; ">Option</th>
                        @endif
                     </tr>
@@ -81,10 +86,13 @@
                     @foreach ($trjg as $key => $item)
                     <tr style="user-select: none; cursor: pointer;">
                         <td>{{$trjg->firstitem() + $key}}</td>
-                        <td  onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">
-                            {{$item->no_trj}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->no_trj}}</td>
+                        @if (Auth::user()->role === 'admin')
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->danru}}</td>
+                       @endif
                         <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
-                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('HH:mm:ss')}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->shift}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('HH:mm')}} WIB</td>
                         <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->site->nama_gd}}</td>
                          @if (Auth::user()->role === 'admin')
                         <td>

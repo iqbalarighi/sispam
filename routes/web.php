@@ -127,14 +127,14 @@ Route::get('/hapus-shiftbaru/{item}/{trj}', [TukarjagaController::class, 'hapusb
 Route::delete('/hapus-tukarbarang/{trj}/{id}', [TukarjagaController::class, 'hapusbarang'])->middleware('auth');
 Route::delete('/hapus-tukargiat/{trj}/{id}', [TukarjagaController::class, 'hapusgiat'])->middleware('auth');
 //edit area
-Route::put('/add-shiftl/{trj}/{id}',[TukarjagaController::class, 'addshiftlama'])->middleware('auth');
-Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru'])->middleware('auth');
 Route::put('/update-inv/{trj}/{id}',[TukarjagaController::class, 'editinv'])->middleware('auth');
 Route::put('/update-giat/{trj}/{id}',[TukarjagaController::class, 'editgiat'])->middleware('auth');
+Route::put('/edt-shift/{trj}/{id}',[TukarjagaController::class, 'editshift'])->middleware('auth');
 //add area
 Route::post('/add-inv/{trj}', [TukarjagaController::class, 'simpaninv'])->middleware('auth');
 Route::post('/add-giat/{trj}', [TukarjagaController::class, 'simpangiat'])->middleware('auth');
-
+Route::put('/add-shiftl/{trj}/{id}',[TukarjagaController::class, 'addshiftlama'])->middleware('auth');
+Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru'])->middleware('auth');
 
 // Dokument Section
 // Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);

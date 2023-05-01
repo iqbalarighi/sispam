@@ -23,7 +23,7 @@
             <p/>
         @endif
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold ">{{ __('Detail Laporan Tukar Jaga') }}
+                <div class="card-header text-uppercase font-weight-bold ">{{ __('Detail Laporan Serah Terima Jaga') }}
                     <a href="{{url('edit-lap')}}/{{$detilx->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Editor</span></a> 
                     <a href="{{route('tukarjaga')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
                 </div>
@@ -63,7 +63,7 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
                     <div align="center" class="text-center text-uppercase"> <b>
-                        Laporan Tukar Jaga <br>
+                        Laporan Serah Terima Jaga <br>
                         {{$detilx->site->nama_gd}} <br>
                         </b>
                         </div>
@@ -108,22 +108,22 @@
                     <table class="table-bordered table-striped table-hover text-center" width="auto">
                     <tr class="font-weight-normal xx ">
                         {{-- <th style="max-width:50px; min-width:30px;">No</th> --}}
-                        <th>Nama Barang</th>
-                        <th>Jumlah</th>
-                        <th>Keterangan</th>
+                        <th class="pl-1 pr-1">Nama Barang</th>
+                        <th class="pl-1 pr-1">Jumlah</th>
+                        <th class="pl-1 pr-1">Keterangan</th>
                        {{-- <th style="width:72px; ">Option</th> --}}
                     </tr>
 
                     @foreach ($bar as $key => $ite)
                     <tr>
                         {{-- <td>{{$key+1}}</td> --}}
-                        <td>
+                        <td class="pl-1 pr-1">
                             {{$ite->nabar}}
                         </td>
                         <td>
                             {{$ite->jumlah}}
                         </td>
-                        <td>
+                        <td class="pl-1 pr-1">
                             {{$ite->ket}}
                         </td>
                     </tr>
@@ -137,7 +137,7 @@
                     <table class="table-bordered table-striped table-hover text-center" width="auto">
                     <tr class="font-weight-normal xx ">
                         {{-- <th style="max-width:50px; min-width:30px;">No</th> --}}
-                        <th>Jam</th>
+                        <th >Jam</th>
                         <th>Uraian Kejadian/Kegiatan</th>
                        {{-- <th style="width:72px; ">Option</th> --}}
                     </tr>
@@ -145,11 +145,11 @@
                     @foreach ($urai as $key => $it)
                     <tr>
                         {{-- <td>{{$key+1}}</td> --}}
-                        <td>
+                        <td class="pl-1 pr-3" >
                             {{$it->jam}}
                         </td>
                         <td>
-                            <pre style="word-wrap: break-word; text-align: left;">{{$it->uraian}}</pre>
+                            <pre style="word-wrap: break-word; text-align: left;" class="pl-1 pr-1">{{$it->uraian}}</pre>
                         </td>
                     </tr>
                     @endforeach

@@ -5,13 +5,17 @@
             pre {
                 font-family : Calibri;
             }
-
+            /*table {*/
+            /*    page-break-after: always;*/
+            /*}*/
+                
             .potong {
                 white-space: pre-line;       /* Internet Explorer 5.5+ */
             }
         </style>
     </head>
 <body>
+
                     <h4>
                         <b><center>Laporan Kegiatan Petugas Pengamanan</center></b>
                         <b><center>{{$detil->site->nama_gd}}</center></b>
@@ -35,12 +39,13 @@
                     <tr>
                         <td colspan="3"><pre class="mb-0" >{{$detil->trc}}</pre></td>
                     </tr>
-                    <tr>
-                        <td><b>Update Giat : </b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><pre class="mb-0 potong" style="">{{$detil->giat}}</pre></td>
-                    </tr>
+                    </table>
+
+                    <span class="table table-responsive" width="100%">
+                    <pre class="mb-0 potong" style=""><b>Update Giat :<br><br> </b>{{$detil->giat}}</pre>
+                    </span>
+                    <br>
+                    <table class="table table-responsive" width="100%">
                     <tr>
                         <td><b>Keterangan : </b></td>
                     </tr>
@@ -48,6 +53,7 @@
                         <td colspan="3"><pre class="mb-0 potong">{{$detil->keterangan}}</pre></td> 
                     </tr>
                     </table>
+                    
                     <table align="center">
 
                     <tr>

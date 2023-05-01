@@ -53,7 +53,7 @@
 
                 <div class="card-body overflow " style="overflow-x: auto;">
                     <div align="center" class="text-center text-uppercase"> <b>
-                        Laporan Tukar Jaga <br>
+                        Laporan Serah Terima Jaga <br>
                         {{$detilx->site->nama_gd}} <br>
                         </b>
                         </div>

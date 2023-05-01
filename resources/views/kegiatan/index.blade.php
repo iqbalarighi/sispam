@@ -65,10 +65,15 @@
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>
+                        @if (Auth::user()->role === 'admin')
+                       <th style="width:72px; ">Danru</th>
+                       @endif
+                        <th>Shift</th>
                         <th>Hari/Tanggal</th>
                         <th>Jam</th>
                         <th>Lokasi</th>
                         @if (Auth::user()->role === 'admin')
+                        
                        <th style="width:72px; ">Option</th>
                        @endif
                     </tr>
@@ -83,10 +88,23 @@
                     <tr style="cursor: pointer; user-select: none;">
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giats->firstitem() + $key}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->no_lap}}</td>
+                         @if (Auth::user()->role === 'admin')
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->danru}}</td>
+                       @endif
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'"  title="klik untuk lihat detail">
+                    @if ( Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') >= 193000)
+                        Shift Malam 19.00 - 07.00 WIB
+                    @elseif (Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') <= 73000)
+                        Shift Malam 19.00 - 07.00 WIB
+                    @else
+                        Shift Pagi 07.00 - 19.00 WIB
+                    @endif
+                        </td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
-                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm:ss')}}</td>
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->site->nama_gd}}</td>
                         @if (Auth::user()->role === 'admin')
+                        
                         <td class="d-flex align-items-md-center" >
                         <a href="{{url('edit-giat')}}/{{$giat->id}}" hidden>
                             <button id="{{$giats->firstitem() + $key}}" type="submit" title="Edit Data {{$giat->no_lap}}">

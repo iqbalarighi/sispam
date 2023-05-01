@@ -62,12 +62,70 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
-                    {{-- Tukar Shift --}}
+                    {{-- ubah shift --}}
+                    <div class="mb-3">
+                        <span>{{$edit->shift}}</span>
 
+                        <span
+                        data-toggle="modal"
+                        data-target="#sip"
+                        style="font-size: 10pt;" class="btn btn-sm btn-primary"> Ubah Shift
+                    </span>
+                  
+                    <!-- Modal -->
+                    <div class="modal fade"
+                        id="sip"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                         
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!-- Add image inside the body of modal -->
+                                <div align="center" class="modal-body center">
+                                    <form action="{{url('edt-shift')}}/{{$edit->no_trj}}/{{$edit->id}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                <table class="table table-striped table-hover mx-auto" style="width: 100%; ">
+                                    <tr>
+                                        <th colspan="2"><center>Ubah Jadwal Shift</center></th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                        <select class="form-select pb-0 pt-0" id="shift" name="shift" required>
+                                <option value="{{$edit->shift}}">{{$edit->shift}}</option>
+                            @if ($edit->shift == "Shift Pagi 07.00 - 19.00 WIB")
+                                <option value="Shift Malam 19.00 - 07.00 WIB">Shift Malam 19.00 - 07.00 WIB</option>
+                            @else
+                                <option value="Shift Pagi 07.00 - 19.00 WIB" >Shift Pagi 07.00 - 19.00 WIB</option>
+                            @endif
+                        </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <center> <button type="submit" class="btn btn-primary btn-sm">Simpan</button></center>
+                            </form>
+                                </div>
+                 
+                                <div class="modal-footer">
+                                <button type="button"
+                                        class="btn btn-secondary"
+                                        data-dismiss="modal">
+                                        Close
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    {{-- end of ubah shift --}}
+
+                    {{-- Tukar Shift --}}
                     <table class=" table-striped table-hover text-center table-responsive" width="100%">
                         <tr>
                             <td colspan="2">
-                               <strong>Tukar Shift</strong>
+                               <strong>Serah Terima Jaga</strong>
                             </td>
                         </tr>
                     <tr class="font-weight-normal xx ">
@@ -119,9 +177,8 @@
                             </div>
                         </div>
                     </div>
-
-
                         </th>
+
                         <th style="padding-left:20px; padding-Right:20px;">Shift Baru &nbsp; 
                     <span
                         data-toggle="modal"

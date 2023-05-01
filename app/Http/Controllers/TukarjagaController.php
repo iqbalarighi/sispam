@@ -341,4 +341,15 @@ public function simpangiat(Request $request, $trj)
         ->with('sukses','Berhasil Menambahkan Laporan');
 }
 
+public function editshift(Request $ubah, $trj, $id)
+{
+    $shift = TukarjagaModel::where([['id', '=', $id],['no_trj', '=', $trj]])->get();
+
+    $shift[0]->shift = $ubah->shift;
+    $shift[0]->save();
+
+         return back()
+        ->with('sukses','Berhasil Ubah Shift');
+}
+
 }
