@@ -1,6 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
+@if (Auth::user()->role === 'user')
+    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
+@endif
 <style>
                         .xx {
                             font-size: 10pt;
