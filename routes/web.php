@@ -10,6 +10,7 @@ use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\AdduserController;
+use App\Http\Controllers\KejadianController;
 
 
 /*
@@ -147,3 +148,5 @@ Route::post('/simpan-user', [AdduserController::class, 'save'])->middleware('aut
 Route::delete('/hapus-user/{id}', [AdduserController::class, 'hapus'])->middleware('auth');
 Route::put('/update-user/{id}',[AdduserController::class, 'updateuser'])->middleware('auth');
 
+// kejadian Section
+Route::get('/kejadian', [KejadianController::class, 'index'])->middleware('auth')->name('kejadian');

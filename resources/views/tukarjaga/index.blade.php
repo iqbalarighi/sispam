@@ -55,10 +55,18 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
+                        @if (Auth::user()->role === 'admin')
+                    <form action="" method="GET" class="float-right mb-3">
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" >
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
+                        <button class="submit bi bi-search"></button>
+                    </form>
+                    @else
                     <form action="" method="GET" class="float-right mb-3">
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
                         <button class="submit bi bi-search"></button>
                     </form>
+                       @endif
 
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">

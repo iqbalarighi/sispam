@@ -97,6 +97,29 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Level</td>
+                        <td>:</td>
+                        <td>
+                            <select class="form-select" name="level" id="level">
+                                <option value="" disabled selected>Pilih Level Akses</option>
+                                <option value="koordinator">Koordinator</option>
+                                <option value="danru">Danru</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lokasi Tugas</td>
+                        <td>:</td>
+                        <td>
+                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi" required>
+                                <option value="" disabled selected>Pilih Lokasi</option>
+                                @foreach($site as $item)
+                                <option value="{{$item->id}}">{{$item->nama_gd}}</option>
+                                @endforeach
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Password</td>
                         <td>:</td>
                         <td><input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">

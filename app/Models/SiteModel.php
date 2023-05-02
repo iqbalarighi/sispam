@@ -36,4 +36,9 @@ class SiteModel extends Model
     {
         return $this->hasOne('App\Models\TukarjagaModel');
     }
+
+        public function adduser()
+    {
+        return $this->hasOne('App\Models\TukarjagaModel');
+    }
 }

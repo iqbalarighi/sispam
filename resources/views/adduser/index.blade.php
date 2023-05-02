@@ -85,6 +85,8 @@
                         <th scope="col" class="align-middle">Nama</th>
                         <th scope="col" class="align-middle">Email</th>
                         <th scope="col" class="align-middle">Role</th>
+                        <th scope="col" class="align-middle">Level</th>
+                        <th scope="col" class="align-middle">Lokasi</th>
                        <th class="align-middle" style="width:72px">Option</th>
 
                     </tr>
@@ -99,6 +101,8 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->role}}</td>
+                        <td>{{$item->level}}</td>
+                        <td>{{$item->lokasi_tugas}}</td>
                         <td class="d-flex align-content-center" align="center"> 
 
                         <button
@@ -127,13 +131,17 @@
                                         <th colspan="3">Edit User</th>
                                     </tr>
                 <tr>
-                    <td width="30%">
+                    <td colspan="2">
                         <input type="text" name="name" placeholder="Nama User" value="{{$item->name}}" class="form-control m-0" required/>
                     </td>
-                    <td>
+                    </tr>
+                     <tr>
+                    <td colspan="2">
                         <input type="text" name="email" placeholder="Email" value="{{$item->email}}" class="form-control m-0" required/>
-                    </td width="30%">
-                    <td>
+                    </td width="">
+                     </tr>
+                     <tr>
+                    <td colspan="2">
                         <select class="form-select" name="role" id="role" required>
                                 <option value="{{$item->role}}" >{{ucfirst(trans($item->role))}}</option>
                             @if ($item->role == 'admin')
@@ -143,16 +151,36 @@
                             @endif
 
                             </select>
-                    </td width="30%">
-
-                </tr>                    <tr>
-                        <td>Password</td>
-                        <td colspan="2"><input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                    </td >
+                    </tr>
+                     <tr>
+                    <td colspan="2">
+                        <select class="form-select" name="level" id="level">
+                                <option value="{{$item->level}}" >{{$item->level}}</option>
+                            @if ($item->level == '')
+                            <option value="koordinator">Koordinator</option>
+                                <option value="danru">Danru</option>
+                            @elseif ($item->level == 'koordinator')
+                                <option value="danru">Danru</option>
+                            @else
+                                <option value="koordinator">Koordinator</option>
+                            @endif
+                            </select>
+                    </td>
+                    <td>
+                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi" required>
+                                <option value="{{$item->lokasi_tugas}}" disabled selected>{{$item->lokasi_tugas}}</option>
+                                @foreach($site as $item)
+                                <option value="{{$item->id}}">{{$item->nama_gd}}</option>
+                                @endforeach
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                        <td colspan="2"><input id="password" type="password" placeholder="Password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                     </tr>
                     <tr>
-                        <td>Ulangi<br/>Password</td>
-                        <td colspan="2"><input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"></td>
+                        <td colspan="2"><input id="password-confirm" type="password" placeholder="Konfirmasi Password"  class="form-control" name="password_confirmation" required autocomplete="new-password"></td>
                     </tr>
 
                                 </table>

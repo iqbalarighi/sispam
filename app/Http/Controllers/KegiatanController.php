@@ -20,12 +20,27 @@ use DB;
 class KegiatanController extends Controller
 {
     public function index(Request $request) {
-        $admin = Auth::user()->role;
+        $user = Auth::user()->role;
         $cari = $request->date;
-        if ($admin == 'admin') {
-        if ($cari != null) {
+        $start =$request->start;
+        $end = $request->end;
+$gd = Auth::user()->lokasi_tugas;
+
+        if (Auth::user()->level == 'koordinator') {
+         $giats = kegiatanModel::with('site')
+         ->where('gedung', '=', $gd)
+        ->orderBy('created_at', 'DESC')
+        ->paginate(15);
+        } elseif ($user == 'admin') {
+        if ($start != null){
         $giats = kegiatanModel::with('site')
-                ->where('tanggal', '=', $cari)
+            ->whereBetween('tanggal', [$start, $end])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(15);
+            $giats->appends(['start' => $start, 'end' => $end]);
+        } elseif ($cari != null) {
+        $giats = kegiatanModel::with('site')
+                ->where('tanggal', 'LIKE', '%'.$cari.'%')
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
             $giats->appends(['date' => $cari]);
@@ -34,12 +49,10 @@ class KegiatanController extends Controller
         ->orderBy('created_at', 'DESC')
         ->paginate(15);
         }
-
         } else {
-
             if ($cari != null) {
         $giats = kegiatanModel::with('site')
-                ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
+                ->where([['danru','=', Auth::user()->name],['tanggal','LIKE', '%'.$cari.'%']])
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
             $giats->appends(['date' => $cari]);

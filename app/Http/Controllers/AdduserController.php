@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\SiteModel;
 
 class AdduserController extends Controller
 {
@@ -11,8 +12,9 @@ class AdduserController extends Controller
     public function index()
     {
         $user = User::paginate(10);
+        $site = SiteModel::get();
 
-        return view('adduser.index', ['user' => $user]);
+        return view('adduser.index', ['user' => $user, 'site' => $site]);
     }
 
     public function adduser()
@@ -42,6 +44,8 @@ class AdduserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'level' => $request->level,
+            'lokasi_tugas' => $request->lokasi,
             'password' => bcrypt($request->password),
         ]);
 
@@ -61,6 +65,8 @@ class AdduserController extends Controller
         $update->email = $request->email;
         $update->password = bcrypt($request->password);
         $update->role = $request->role;
+        $update->level = $request->level;
+        $update->lokasi_tugas = $request->lokasi;
         $update->save();
 
             return back()

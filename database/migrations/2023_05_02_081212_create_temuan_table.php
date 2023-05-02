@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('temuan', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50);
-            $table->string('email', 100)->unique();
-            $table->string('role', 20)->default('user');
-            $table->string('level', 20)->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('jam');
+            $table->string('area');
+            $table->string('jenis_bahaya');
+            $table->string('potensi_bahaya');
+            $table->string('pengendalian');
+            $table->string('foto');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('temuan');
     }
 };

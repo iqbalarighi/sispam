@@ -76,7 +76,7 @@
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
-        @if ( Auth::user()->name === 'Superadmin')
+        @if ( Auth::user()->level === 'superadmin')
         <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light">Manage User</a>
         @endif
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light">Personil</a>
@@ -94,7 +94,7 @@
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a>
                         </div> 
@@ -105,7 +105,7 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
         </div>
-        @elseif (Auth::user()->role === 'user')
+        @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
             <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
         
@@ -121,7 +121,7 @@
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
                             {{-- <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
@@ -133,7 +133,9 @@
         </div>
         </div>
         <!-- /#sidebar-wrapper -->
+
         @endif
+
         <!-- Page Content -->
         <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom sticky-top">

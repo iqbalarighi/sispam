@@ -22,9 +22,17 @@ class tukarjagaController extends Controller
     {   
         $admin = Auth::user()->role;
         $cari = $request->date;
+        $start =$request->start;
+        $end = $request->end;
         
         if ($admin == 'admin') {
-            if ($cari != null) {
+        if ($start != null){
+        $trjg = TukarjagaModel::with('site')
+            ->whereBetween('tanggal', [$start, $end])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(15);
+            $trjg->appends(['start' => $start, 'end' => $end]);
+        } elseif ($cari != null) {
         $trjg = TukarjagaModel::with('site')
                 ->where('tanggal', '=', $cari)
                 ->orderBy('created_at', 'DESC')

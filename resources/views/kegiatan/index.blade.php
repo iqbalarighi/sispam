@@ -55,24 +55,33 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
+
+
+                        @if (Auth::user()->role === 'admin')
+                    <form action="" method="GET" class="float-right mb-3">
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" >
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
+                        <button class="submit bi bi-search"></button>
+                    </form>
+                    @else
                     <form action="" method="GET" class="float-right mb-3">
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
                         <button class="submit bi bi-search"></button>
                     </form>
+                       @endif
                     
-
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>
-                        @if (Auth::user()->role === 'admin')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                        <th style="width:72px; ">Danru</th>
                        @endif
                         <th>Shift</th>
                         <th>Hari/Tanggal</th>
                         <th>Jam</th>
                         <th>Lokasi</th>
-                        @if (Auth::user()->role === 'admin')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         
                        <th style="width:72px; ">Option</th>
                        @endif
@@ -80,7 +89,7 @@
 
                     @if ($giats->count() == 0)
                     <tr>
-                        <td colspan="5"> Data Tidak Ditemukan</td>
+                        <td colspan="6"> Data Tidak Ditemukan</td>
                     </tr>
                     @else
 
@@ -88,13 +97,13 @@
                     <tr style="cursor: pointer; user-select: none;">
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giats->firstitem() + $key}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->no_lap}}</td>
-                         @if (Auth::user()->role === 'admin')
+                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->danru}}</td>
                        @endif
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'"  title="klik untuk lihat detail">
-                    @if ( Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') >= 193000)
+                    @if ( Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') >= 200000)
                         Shift Malam 19.00 - 07.00 WIB
-                    @elseif (Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') <= 73000)
+                    @elseif (Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') <= 80000)
                         Shift Malam 19.00 - 07.00 WIB
                     @else
                         Shift Pagi 07.00 - 19.00 WIB
@@ -103,7 +112,7 @@
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->site->nama_gd}}</td>
-                        @if (Auth::user()->role === 'admin')
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         
                         <td class="d-flex align-items-md-center" >
                         <a href="{{url('edit-giat')}}/{{$giat->id}}" hidden>
