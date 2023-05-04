@@ -102,7 +102,7 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->role}}</td>
                         <td>{{$item->level}}</td>
-                        <td>{{$item->lokasi_tugas}}</td>
+                        <td>{{$item->site->nama_gd ?? ''}}</td>
                         <td class="d-flex align-content-center" align="center"> 
 
                         <button
@@ -167,9 +167,11 @@
                             @endif
                             </select>
                     </td>
+                </tr>
+                <tr>
                     <td>
-                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi" required>
-                                <option value="{{$item->lokasi_tugas}}" disabled selected>{{$item->lokasi_tugas}}</option>
+                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi">
+                                <option value="{{$item->site->id ?? ''}}" disabled selected>{{$item->site->nama_gd ?? '::Isi Lokasi::'}}</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
                                 @endforeach

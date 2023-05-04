@@ -101,6 +101,7 @@
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->danru}}</td>
                        @endif
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'"  title="klik untuk lihat detail">
+                    
                     @if ( Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') >= 200000)
                         Shift Malam 19.00 - 07.00 WIB
                     @elseif (Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') <= 80000)
@@ -108,6 +109,7 @@
                     @else
                         Shift Pagi 07.00 - 19.00 WIB
                     @endif
+                    
                         </td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>

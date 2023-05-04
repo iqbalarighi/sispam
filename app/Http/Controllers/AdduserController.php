@@ -11,7 +11,7 @@ class AdduserController extends Controller
 
     public function index()
     {
-        $user = User::paginate(10);
+        $user = User::with('site')->paginate(10);
         $site = SiteModel::get();
 
         return view('adduser.index', ['user' => $user, 'site' => $site]);
@@ -19,7 +19,9 @@ class AdduserController extends Controller
 
     public function adduser()
     {
-        return view('adduser.input');
+        $site = SiteModel::get();
+
+        return view('adduser.input', ['site' => $site]);
     }
 
     public function hapus($id)
