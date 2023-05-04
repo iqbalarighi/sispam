@@ -89,9 +89,9 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <b>Personil Yang Bertugas : </b>
+                            <b>Personil Yang Bertugas : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
                             <pre class="mb-0"><textarea rows="7" class="form-control pb-0 pt-0" name="personil" id="personil" required>
-Danru   : 
+Danru   : {{Auth::user()->name}}
 Patroli : 
 Lobby   : 
 Meja Sekjen :
@@ -102,7 +102,7 @@ Operator Listrik : </textarea></pre>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <b>Tim Tanggap Darurat : </b>
+                            <b>Tim Tanggap Darurat : </b><br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
                             <pre class="mb-0"><textarea rows="7" class="form-control pb-0 pt-0" name="trc" id="trc" required>
 Koordinator Pengamanan : 
 Tim P3K         : 
@@ -113,10 +113,10 @@ Tim SMC         : </textarea></pre>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Udate Giat : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="9" name="giat" id="giat" required></textarea></pre></td>
+                        <td colspan="3"><b>Udate Giat : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="8" name="giat" id="giat" required></textarea></pre></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Keterangan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="4" name="ket" id="ket" required></textarea></pre></td>
+                        <td colspan="3"><b>Keterangan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="6" name="ket" id="ket" required></textarea></pre></td>
                     </tr>
                     <tr>
                         <td><b>Foto Dokumentasi</b></td>
