@@ -109,7 +109,7 @@
                     @else
                         Shift Pagi 07.00 - 19.00 WIB
                     @endif
-                    
+
                         </td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
@@ -142,7 +142,7 @@
                     @endif
                     </table>
                 </div>
-                {{$giats->links('pagination::bootstrap-5')}}
+                {{$giats->onEachSide(1)->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
