@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mw-100">
     <div class="row justify-content-center">
-        <div class="col mw-100 p-1">
+        <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Kegiatan') }}
                     <a href="{{url('/giat-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>

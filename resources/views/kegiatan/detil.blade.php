@@ -5,16 +5,12 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold row">{{ __('Detail Laporan') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Detail Laporan') }}
  
-                    <div class="col-md">
-                        <a href="{{url('edit-giat')}}/{{$detil->id}}">
-                            <span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span>
-                        </a>
-                            <a href="{{route('kegiatan')}}">
-                                <span class="btn btn-primary float-right btn-sm mx-2">Kembali</span>
-                            </a>
-                    </div>
+
+                        <a href="{{url('edit-giat')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span>
+                        </a><a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+
 
                 </div>
 

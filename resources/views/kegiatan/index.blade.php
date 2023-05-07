@@ -24,6 +24,7 @@
         @endif
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Kegiatan') }}
+                    
                     <a href="{{route('tambah-giat')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                 </div>
 
@@ -58,8 +59,13 @@
 
 
                         @if (Auth::user()->role === 'admin')
-                    <form action="" method="GET" class="float-right mb-3">
-                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" >
+                        @if ($start == null)
+
+                        @else
+                        <a href="kegiatan/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
+                        @endif
+                    <form action="" method="GET" class="float-right mb-3">Pilih tanggal: 
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" > - 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
@@ -124,7 +130,7 @@
                         <label for="{{$giats->firstitem() + $key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
 
                         </label>
-                            &nbsp;
+                            <pre> </pre>
                         <form action="hapus-giat/{{ $giat->id }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}

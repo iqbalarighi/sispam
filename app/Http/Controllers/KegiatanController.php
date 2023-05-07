@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-use Carbon\Carbon;
-use App\Models\SiteModel;
-use App\Models\KegiatanModel;
+use App\Exports\KegiatanExport;
 use App\Helpers\Helper;
-use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
+use App\Models\KegiatanModel;
+use App\Models\SiteModel;
 use App\Services\PayUService\Exception;
-use Illuminate\Support\Facades\Auth;
-use PDF;
+use Carbon\Carbon;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use PDF;
+use App\Exports\MttRegistrationsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KegiatanController extends Controller
 {
@@ -111,7 +114,7 @@ class KegiatanController extends Controller
                 $giats = kegiatanModel::with('site')
                     ->whereBetween('tanggal', [$start, $end])
                     ->orderBy('created_at', 'DESC')
-                    ->paginate(15);
+                    ->paginate(100000);
                     $giats->appends(['start' => $start, 'end' => $end]);
 
                 } elseif ($cari != null) {
@@ -148,7 +151,8 @@ class KegiatanController extends Controller
         }
     }
 
-        return view('kegiatan.index', ['giats' => $giats]);
+        return view('kegiatan.index', ['giats' => $giats, 'start' => $start, 'end' => $end]);
+
     }
 
     public function tambah()
@@ -427,6 +431,17 @@ public function downloadPDF($id)
         $pdf = PDF::loadView('kegiatan.savepdf', ['detil' => $detil]);
 
         return $pdf->download('Laporan Kegiatan '.$detil->no_lap.'.pdf');
+    }
+
+// public function export() 
+// {
+
+//     return Excel::download(new KegiatanExport, 'kegiatan.xlsx'); 
+// }
+
+public function export(Request $request, $start, $end)
+    {
+        return Excel::download(new KegiatanExport($request->start, $request->end), 'Laporan Kegiatan.xlsx');
     }
 
 }

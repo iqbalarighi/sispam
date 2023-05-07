@@ -121,7 +121,7 @@ Route::post('/simpan-tukar', [TukarjagaController::class, 'simpan'])->middleware
 Route::get('/trj-detil/{no_trj}/{id}', [TukarjagaController::class, 'detil'])->middleware('auth'); 
 Route::delete('/hapus-jaga/{id}', [TukarjagaController::class, 'hapus'])->middleware('auth');
 Route::get('/edit-lap/{id}', [TukarjagaController::class, 'edit'])->middleware('auth');
-Route::get('/generatePDF/{id}', [TukarjagaController::class, 'generatePDF'])->middleware('auth');
+
 //Delete area
 Route::get('/hapus-shiftlama/{item}/{trj}', [TukarjagaController::class, 'hapuslama'])->middleware('auth');
 Route::get('/hapus-shiftbaru/{item}/{trj}', [TukarjagaController::class, 'hapusbaru'])->middleware('auth');
@@ -140,6 +140,8 @@ Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru']
 // Dokument Section
 // Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);
 Route::get('/downloadPDF/{id}', [kegiatanController::class, 'downloadPDF'])->middleware('auth');
+Route::get('/kegiatan/export/{start}/{end}', [kegiatanController::class, 'export'])->middleware('auth');
+// Route::get('/kegiatan/export/', [kegiatanController::class, 'export'])->middleware('auth');
 
 //Add User Section
 Route::get('/user-area', [AdduserController::class, 'index'])->middleware('auth')->name('users');

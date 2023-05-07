@@ -16,7 +16,7 @@ use App\Helpers\Helper;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-class tukarjagaController extends Controller
+class TukarjagaController extends Controller
 {
     public function index(Request $request)
     {   
