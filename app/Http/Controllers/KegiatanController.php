@@ -441,7 +441,18 @@ public function downloadPDF($id)
 
 public function export(Request $request, $start, $end)
     {
-        return Excel::download(new KegiatanExport($request->start, $request->end), 'Laporan Kegiatan.xlsx');
+        $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
+        $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
+
+        if ($start == $end) {
+
+          return Excel::download(new KegiatanExport($request->start, $request->end), 'Laporan Kegiatan '.$start.'.xlsx');  
+
+        } else {
+            return Excel::download(new KegiatanExport($request->start, $request->end), 'Laporan Kegiatan '.$start.' - '.$end.'.xlsx');
+        }
+
+        
     }
 
 }
