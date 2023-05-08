@@ -375,4 +375,20 @@ public function editshift(Request $ubah, $trj, $id)
         ->with('sukses','Berhasil Ubah Shift');
 }
 
+    public function autocomplete(Request $request)
+    {
+        $hasil = TukarbarangModel::select("nabar")
+                    ->where('nabar', 'LIKE', '%'. $request->get('term'). '%')
+                    ->distinct()
+                    ->get();
+
+       $data = array();
+        foreach ($hasil as $hsl)
+            {
+                $data[] = $hsl->nabar;
+            }
+     
+        return response()->json($data);
+    }
+
 }

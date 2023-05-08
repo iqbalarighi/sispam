@@ -11,7 +11,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+
+<script src="./storage/bootstrap3-typeahead.js"></script>
+
             <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
@@ -186,23 +191,23 @@
          
         <!-- /#wrapper -->
     <!-- Adding scripts to use bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+{{--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity=
 "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous">
-    </script>
+    </script> --}}
     <script src=
 "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity=
 "sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous">
     </script>
-    <script src=
+{{--     <script src=
 "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity=
 "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous">
-    </script> 
+    </script>  --}}
 
 <script type="text/javascript">
   function showPreview(event){
@@ -324,17 +329,47 @@ function myFunction3() {
 {{-- pergantian shift --}}
 
 {{-- inventaris barang --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     var i = 0;
     $("#dynamic-ar2").click(function () {
         ++i;
-        $("#dynamicAddRemove2").append('<tr><td><input type="text" name="nabar[]" placeholder="Nama Barang" class="form-control" required/></td><td><input type="text" name="jumlah[]" placeholder="Jumlah Barang" class="form-control" multiple required/></td><td><input type="text" name="ket[]" placeholder="Keterangan" class="form-control" required/></td><td><button type="button" class="bi bi-trash-fill bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>' 
+        $("#dynamicAddRemove2").append('<tr><td><input type="text" name="nabar[]" placeholder="Nama Barang" class="typeahead form-control" required/></td><td><input type="text" name="jumlah[]" placeholder="Jumlah Barang" class="form-control" multiple required/></td><td><input type="text" name="ket[]" placeholder="Keterangan" class="form-control" required/></td><td><button type="button" class="bi bi-trash-fill bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>' 
             );
     });
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
     });
+</script> --}}
+
+<script type="text/javascript">
+    var i = 0;
+    var path = "{{ route('autocomplete')  }}";
+    $("#dynamic-ar2").click(function () {
+        ++i;
+        $("#dynamicAddRemove2").append('<label class="row"><div class="col p-1"><input class="typeahead form-control m-1 p-1" type="text" name="nabar[]" placeholder="Nama Barang" autocomplete="off" id="search" required/></div><div class="col p-1"><input type="text" name="jumlah[]" onkeypress="return angka(event)" placeholder="Jumlah Barang" class="form-control m-1 p-1" required/></div><div class="col p-1"><input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-1 p-1" required/></div><div class="col-2 mx-auto align-self-center pr-1 pl-1"><button type="button" class="bi bi-trash-fill bg-danger btn-sm float-right remove-input-field m-1"></button></div></label>' 
+            );
+
+    $('input.typeahead').typeahead({
+      source:  function (query, process) {
+      return $.get(path, { term: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
+
+    });
+
+
+      $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('label').remove();
+    });
 </script>
+
+<script type="text/javascript">
+      
+  
+</script>
+
 {{-- inventaris barang --}}
 
 {{-- kunci ruangan --}}
@@ -364,5 +399,6 @@ function myFunction3() {
     });
 </script>
 {{-- uraian kegiatan --}}
+
 
 </html>

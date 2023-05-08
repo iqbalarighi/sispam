@@ -47,6 +47,7 @@
                 <p>{{ Session::get('success') }}</p>
             </div>
             @endif
+     
             <table border="0" class=" mx-auto" style="width: 70%; ">
                 <tr>
                     <td colspan="2">Shift :                         
@@ -97,7 +98,8 @@
             <button type="button" name="add" id="dynamic-ar1" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
                <br>
                <br>
-                <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove2">
+
+{{--                 <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="">
                 <tr>
                     <th colspan="5">C. Barang Inventaris </th>
                 </tr>
@@ -107,18 +109,49 @@
                     <td >Keterangan</td>
                 </tr>
                 <tr>
-                    <td width="30%">
-                        <input type="text" name="nabar[]" placeholder="Nama Barang" class="form-control m-0" required/>
+                    <td width="30%" >
+                        <input class="typeahead form-control" type="text" name="nabar[]" placeholder="Nama Barang" autocomplete="off" id="search" required/>
                     </td>
-                    <td>
+                    <td width="30%">
                         <input type="text" name="jumlah[]" onkeypress="return angka(event)" placeholder="Jumlah Barang" class="form-control m-0" required/>
-                    </td width="30%">
-                    <td>
+                    </td>
+                    <td width="30%">
                         <input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-0" required/>
-                    </td width="30%">
+                    </td >
+                </tr>
+            </table> --}}
+
+
+                <table class="table table-striped table-hover mx-auto" style="width: 100%; " >
+                <tr>
+                    <th colspan="5">C. Barang Inventaris </th>
+                </tr>
+                <tr align="center">
+                    <td >Nama Barang</td>
+                    <td >Jumlah</td>
+                    <td >Keterangan</td>
                 </tr>
             </table>
-            <button type="button" name="add" id="dynamic-ar2" class="btn btn-primary btn-sm float-right">Tambah Kolom</button>
+            <div class="col" id="dynamicAddRemove2">
+                <div class="row mb-1">
+                    <div class="col">
+                        <input class="typeahead form-control" type="text" name="nabar[]" placeholder="Nama Barang" autocomplete="off" id="search" required/>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="jumlah[]" onkeypress="return angka(event)" placeholder="Jumlah Barang" class="form-control m-0" required/>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-0" required/>
+                    </div>
+                <div class="col-1">
+                    &nbsp;
+                    &nbsp;
+                </div>
+                </div>
+            </div>
+
+
+            <button type="button" name="add" id="dynamic-ar2" class="btn btn-primary btn-sm mt-2 float-right">Tambah Kolom</button>
                <br>
                <br>
 {{--                 <table class="table table-striped table-hover mx-auto" style="width: 100%; " id="dynamicAddRemove3">
@@ -187,5 +220,15 @@
     </div>
 </div>
 
+<script>
+  var path = "{{ route('autocomplete')  }}";
+  $('input.typeahead').typeahead({
+      source:  function (query, process) {
+      return $.get(path, { term: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
+</script>
 
 @endsection

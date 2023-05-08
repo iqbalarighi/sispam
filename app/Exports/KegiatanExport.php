@@ -37,8 +37,6 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
     public function view(): View
     {
         $user = Auth::user()->role;
-        
-        // $end = $this->end;
 
                 $giats = kegiatanModel::with('site')
                     ->whereBetween('tanggal', [$this->start, $this->end])
@@ -48,4 +46,3 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
     return view('kegiatan.saveexcel', ['giats' => $giats]);
     }
 }
-        

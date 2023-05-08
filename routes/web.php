@@ -121,6 +121,7 @@ Route::post('/simpan-tukar', [TukarjagaController::class, 'simpan'])->middleware
 Route::get('/trj-detil/{no_trj}/{id}', [TukarjagaController::class, 'detil'])->middleware('auth'); 
 Route::delete('/hapus-jaga/{id}', [TukarjagaController::class, 'hapus'])->middleware('auth');
 Route::get('/edit-lap/{id}', [TukarjagaController::class, 'edit'])->middleware('auth');
+Route::get('/autocomplete', [TukarjagaController::class, 'autocomplete'])->name('autocomplete');
 
 //Delete area
 Route::get('/hapus-shiftlama/{item}/{trj}', [TukarjagaController::class, 'hapuslama'])->middleware('auth');
