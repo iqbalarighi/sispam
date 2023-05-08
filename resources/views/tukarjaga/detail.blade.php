@@ -155,7 +155,7 @@
                     @endforeach
                     </table>
         </p>
-                            <form method="GET" action="/generatePDF/{{$detilx->id}}" enctype="multipart/form-data">
+                            <form method="GET" action="/viewpdf/{{$detilx->id}}" enctype="multipart/form-data">
                             <div class="form-group">
                              <div align="center" class="control">
                                  <button type="submit" class="btn btn-primary">Download Laporan</button>

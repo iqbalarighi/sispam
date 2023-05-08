@@ -138,7 +138,7 @@ Route::put('/add-shiftl/{trj}/{id}',[TukarjagaController::class, 'addshiftlama']
 Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru'])->middleware('auth');
 
 // Dokument Section
-// Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);
+Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);
 Route::get('/downloadPDF/{id}', [kegiatanController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/kegiatan/export/{start}/{end}', [kegiatanController::class, 'export'])->middleware('auth');
 // Route::get('/kegiatan/export/', [kegiatanController::class, 'export'])->middleware('auth');
