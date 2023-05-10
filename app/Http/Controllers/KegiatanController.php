@@ -32,15 +32,19 @@ class KegiatanController extends Controller
         if (Auth::user()->level == 'koordinator') {
 
                 if ($gd == '13') {
-                    if ($cari != null) {
+                    if ($start != null){
 
                 $giats = kegiatanModel::with('site')
-                        ->where([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', $gd]])
-                         ->orwhere([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', '14']])
-                         ->orwhere([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', '15']])
-                        ->orderBy('created_at', 'DESC')
-                        ->paginate(15);
-                    $giats->appends(['date' => $cari]);
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->where('gedung','=', $gd)
+                    ->orwhere(function ($query) use ($start , $end){
+                        $query->whereIn('gedung', ['14','15'])
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);
+
+                    $giats->appends(['start' => $start, 'end' => $end]);
 
                 } else {
 
@@ -53,14 +57,19 @@ class KegiatanController extends Controller
                     }
 
                 } elseif ($gd == '11') {
-                    if ($cari != null) {
+                    if ($start != null){
+                        $giats = kegiatanModel::with('site')
+                            ->whereBetween('tanggal', [$start, $end])
+                            ->where('gedung','=', $gd)
+                            ->orwhere(function ($query) use ($start , $end){
+                                $query->where('gedung', '=', '16')
+                                ->where('danru','=', 'Rizal Kurnia')
+                                ->whereBetween('tanggal', [$start, $end]);
+                            })
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(100000);
 
-                $giats = kegiatanModel::with('site')
-                        ->where([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', $gd]])
-                         ->orwhere([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', '16'],['danru','=','Rizal Kurnia']])
-                        ->orderBy('created_at', 'DESC')
-                        ->paginate(15);
-                    $giats->appends(['date' => $cari]);
+                    $giats->appends(['start' => $start, 'end' => $end]);
 
                 } else {
 
@@ -72,14 +81,20 @@ class KegiatanController extends Controller
                     }
 
                 } elseif ($gd == '2') {
-                    if ($cari != null) {
+                    if ($start != null){
 
                 $giats = kegiatanModel::with('site')
-                        ->where([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', $gd]])
-                         ->orwhere([['tanggal', 'LIKE', '%'.$cari.'%'],['gedung', '=', '16'],['danru','=','Rizal Kurnia']])
-                        ->orderBy('created_at', 'DESC')
-                        ->paginate(15);
-                    $giats->appends(['date' => $cari]);
+                            ->whereBetween('tanggal', [$start, $end])
+                            ->where('gedung','=', $gd)
+                            ->orwhere(function ($query) use ($start , $end){
+                                $query->where('gedung', '=', '16')
+                                ->where('danru','=', 'Andri Triana')
+                                ->whereBetween('tanggal', [$start, $end]);
+                            })
+                            ->orderBy('created_at', 'DESC')
+                            ->paginate(100000);
+
+                    $giats->appends(['start' => $start, 'end' => $end]);
 
                 } else {
 

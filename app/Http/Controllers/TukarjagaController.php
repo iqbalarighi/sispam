@@ -73,7 +73,7 @@ class TukarjagaController extends Controller
                 }
     }
         
-return view('tukarjaga.index', ['trjg' => $trjg]);
+return view('tukarjaga.index', ['trjg' => $trjg, 'start' => $start, 'end' => $end]);
 
     }
 
