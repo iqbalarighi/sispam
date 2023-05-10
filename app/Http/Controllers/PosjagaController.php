@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\posjagaModel;
+use App\Models\PosjagaModel;
 use App\Models\SiteModel;
 use Carbon\Carbon;
 use Illuminate\Support\Str;

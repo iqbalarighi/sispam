@@ -1,5 +1,11 @@
-                    <table border="1">
-                    <tr >
+                    <style type="text/css">
+                        tr > td {
+                                    border-bottom: 1px solid #000000;
+                                }
+                    </style>
+
+                    <table border="1" style="">
+                    <tr style="text-align:center;" >
                         <th >No</th>
                         <th>No. Laporan</th>
 
