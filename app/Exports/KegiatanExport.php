@@ -30,14 +30,9 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
     }
 
     public function view(): View
-<<<<<<< HEAD
-    {
-        $user = Auth::user()->role;
-=======
     {  
         $level = Auth::user()->level;
         $gd = Auth::user()->lokasi_tugas;
->>>>>>> inbox
 
        $start = $this->start;
        $end = $this->end;
@@ -87,9 +82,5 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
 
     return view('kegiatan.saveexcel', ['giats' => $giats]);
     }
-<<<<<<< HEAD
-}
-=======
 }
         
->>>>>>> inbox
