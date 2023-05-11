@@ -17,7 +17,7 @@
     <!-- Styles -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm sticky-top">
             <div class="container">
@@ -73,6 +73,11 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
-</body>
+    <footer class="mt-auto">
+      <center>Copyright &copy; {{Carbon\Carbon::today()->isoFormat('Y');}} www.sispam.id. All Rights Reserved </center>  
+</footer>
+</body>    
+
 </html>

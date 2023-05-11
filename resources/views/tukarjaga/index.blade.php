@@ -27,7 +27,7 @@
                     <a href="{{route('tukar-tambah')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                <div class="card-body overflow pt-1 pb-1" style="overflow-x: auto;">
 
                     <style>
                         .xx {
@@ -61,19 +61,19 @@
                         @else
                         <a href="tukarjaga/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
                         @endif
-                    <form action="" method="GET" class="float-right mb-3">Pilih Tanggal: 
+                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start"> -
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
                     @else
-                    <form action="" method="GET" class="float-right mb-3">
+                    <form action="" method="GET" class="float-right mb-2">
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
                         <button class="submit bi bi-search"></button>
                     </form>
                        @endif
 
-                    <table class="table table-bordered table-striped table-hover text-center ">
+                    <table class="table table-bordered table-striped table-hover text-center mb-0">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>

@@ -142,7 +142,7 @@
         @endif
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+        <div id="page-content-wrapper" class="d-flex flex-column min-vh-100">
         <nav class="navbar navbar-expand-lg navbar-light bg-info border-bottom sticky-top">
             <button class="btn btn-light ms-2" id="menu-toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -181,11 +181,15 @@
 </div>
             </div>
         </nav>
-        <main class="py-4">
+        <main class="py-1">
             @yield('content')
         </main>
+<footer class="mt-auto">
+      <center>Copyright &copy; {{Carbon\Carbon::today()->isoFormat('Y');}} www.sispam.id. All Rights Reserved </center>  
+</footer>
         </div>
     </div>
+
 </div>
 
 </body>

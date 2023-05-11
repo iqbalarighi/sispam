@@ -24,11 +24,10 @@
         @endif
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Kegiatan') }}
-                    
                     <a href="{{route('tambah-giat')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                <div class="card-body overflow pt-1 pb-1" style="overflow-x: auto;">
 
                     <style>
                         .xx {
@@ -56,21 +55,19 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
-
-
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         @if ($start == null)
 
                         @else
                         <a href="kegiatan/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
                         @endif
-                    <form action="" method="GET" class="float-right mb-3">Pilih Tanggal: 
+                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start"> - 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
                     @else
-                    <form action="" method="GET" class="float-right mb-3">
+                    <form action="" method="GET" class="float-right mb-2">
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
                         <button class="submit bi bi-search"></button>
                     </form>
@@ -122,7 +119,7 @@
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->site->nama_gd}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         
-                        <td class="d-flex align-items-md-center" >
+                        <td class="d-flex p-0" >
                         <a href="{{url('edit-giat')}}/{{$giat->id}}" hidden>
                             <button id="{{$giats->firstitem() + $key}}" type="submit" title="Edit Data {{$giat->no_lap}}">
                             </button>
@@ -131,7 +128,7 @@
 
                         </label>
                             <pre> </pre>
-                        <form action="hapus-giat/{{ $giat->id }}" method="post">
+                        <form action="hapus-giat/{{ $giat->id }}" method="post" class="align-self-center">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button id="del{{$giats->firstitem() + $key}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data {{$giat->no_lap}}" hidden>
