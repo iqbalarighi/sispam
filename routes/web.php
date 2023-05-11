@@ -105,14 +105,14 @@ Route::put('/arsip-update/{id}',[ArsipController::class, 'update'])->middleware(
 
 
 //Kegiatan Section
-Route::get('/kegiatan', [kegiatanController::class, 'index'])->middleware('auth')->name('kegiatan');
-Route::get('/tambah-giat', [kegiatanController::class, 'tambah'])->middleware('auth')->name('tambah-giat');
-Route::post('/simpan-giat', [kegiatanController::class, 'simpan'])->middleware('auth')->name('simpan_giat');
-Route::get('/giat-detil/{id}', [kegiatanController::class, 'detil'])->middleware('auth'); 
-Route::get('/edit-giat/{id}', [kegiatanController::class, 'edit'])->middleware('auth');
-Route::put('/update-giat/{id}',[kegiatanController::class, 'update'])->middleware('auth');
-Route::delete('/hapus-giat/{id}', [kegiatanController::class, 'hapus'])->middleware('auth');
-Route::get('/giat/hapus-foto/{item}/{id}', [kegiatanController::class, 'hapusFoto'])->middleware('auth');
+Route::get('/kegiatan', [KegiatanController::class, 'index'])->middleware('auth')->name('kegiatan');
+Route::get('/tambah-giat', [KegiatanController::class, 'tambah'])->middleware('auth')->name('tambah-giat');
+Route::post('/simpan-giat', [KegiatanController::class, 'simpan'])->middleware('auth')->name('simpan_giat');
+Route::get('/giat-detil/{id}', [KegiatanController::class, 'detil'])->middleware('auth'); 
+Route::get('/edit-giat/{id}', [KegiatanController::class, 'edit'])->middleware('auth');
+Route::put('/update-giat/{id}',[KegiatanController::class, 'update'])->middleware('auth');
+Route::delete('/hapus-giat/{id}', [KegiatanController::class, 'hapus'])->middleware('auth');
+Route::get('/giat/hapus-foto/{item}/{id}', [KegiatanController::class, 'hapusFoto'])->middleware('auth');
 
 //Tukarjaga Section
 Route::get('/tukarjaga', [TukarjagaController::class, 'index'])->middleware('auth')->name('tukarjaga');
@@ -140,8 +140,9 @@ Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru']
 
 // Dokument Section
 Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);
-Route::get('/downloadPDF/{id}', [kegiatanController::class, 'downloadPDF'])->middleware('auth');
-Route::get('/kegiatan/export/{start}/{end}', [kegiatanController::class, 'export'])->middleware('auth');
+Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->middleware('auth');
+Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
+Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'export'])->middleware('auth');
 // Route::get('/kegiatan/export/', [kegiatanController::class, 'export'])->middleware('auth');
 
 //Add User Section

@@ -55,7 +55,12 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
-                        @if (Auth::user()->role === 'admin' )
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
+                        @if ($start == null)
+
+                        @else
+                        <a href="tukarjaga/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
+                        @endif
                     <form action="" method="GET" class="float-right mb-3">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start" >
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
@@ -87,7 +92,7 @@
 
                     @if ($trjg->count() == 0)
                     <tr>
-                        <td colspan="5"> Data Tidak Ditemukan</td>
+                        <td colspan="8"> Data Tidak Ditemukan</td>
                     </tr>
                     @else
 

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use App\Models\TukarjagaModel;
-use App\Models\TukarshiftModel;
+use App\Exports\TukarjagaExport;
+use App\Helpers\Helper;
+use App\Models\SiteModel;
 use App\Models\TukarbarangModel;
 use App\Models\TukargiatModel;
-use App\Models\SiteModel;
+use App\Models\TukarjagaModel;
+use App\Models\TukarshiftModel;
 use Carbon\Carbon;
 use DB;
-use PDF;
-use App\Helpers\Helper;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class TukarjagaController extends Controller
 {
@@ -28,38 +30,59 @@ class TukarjagaController extends Controller
         $gd = Auth::user()->lokasi_tugas;
 
         if (Auth::user()->level == 'koordinator') {
-            if ($cari != null) {
+            if ($gd == '13') {
+               if ($start != null){
                 $trjg = TukarjagaModel::with('site')
-                        ->where([['tanggal', 'LIKE', '%'.$cari.'%'],['lokasi', '=', $gd]])
-                        ->orderBy('created_at', 'DESC')
-                        ->paginate(15);
-                    $trjg->appends(['date' => $cari]);
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->where('lokasi','=', $gd)
+                    ->orwhere(function ($query) use ($start , $end){
+                        $query->whereIn('lokasi', ['1','3','14','15'])
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);
+
+                    $trjg->appends(['start' => $start, 'end' => $end]);
                 } else {
+                 $trjg = TukarjagaModel::with('site')
+                         ->where('lokasi', '=', $gd)
+                         ->orwhere('lokasi', '=', '1')
+                         ->orwhere('lokasi', '=', '3')
+                         ->orwhere('lokasi', '=', '14')
+                         ->orwhere('lokasi', '=', '15')
+                        ->orderBy('created_at', 'DESC')
+                        ->paginate(15); 
+                }
+            } else {
+                if ($start != null){
+                $trjg = TukarjagaModel::with('site')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->where('lokasi','=',$gd)
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);
+                    $trjg->appends(['start' => $start, 'end' => $end]);
+                }  else {
                  $trjg = TukarjagaModel::with('site')
                  ->where('lokasi', '=', $gd)
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
             }
+        }
         } elseif ($admin == 'admin') {
                 if ($start != null){
                 $trjg = TukarjagaModel::with('site')
                     ->whereBetween('tanggal', [$start, $end])
                     ->orderBy('created_at', 'DESC')
-                    ->paginate(15);
+                    ->paginate(100000);
                     $trjg->appends(['start' => $start, 'end' => $end]);
-                } elseif ($cari != null) {
-                $trjg = TukarjagaModel::with('site')
-                        ->where('tanggal', '=', $cari)
-                        ->orderBy('created_at', 'DESC')
-                        ->paginate(15);
-                    $trjg->appends(['date' => $cari]);
                 } else {
                 $trjg = TukarjagaModel::with('site')
                 ->orderBy('created_at', 'DESC')
                 ->paginate(15);
                 }
         } else {
-                    if ($cari != null) {
+// Danru
+                if ($cari != null) {
                 $trjg = TukarjagaModel::with('site')
                         ->where([['danru','=', Auth::user()->name],['tanggal', '=', $cari]])
                         ->orderBy('created_at', 'DESC')
@@ -73,7 +96,7 @@ class TukarjagaController extends Controller
                 }
     }
         
-return view('tukarjaga.index', ['trjg' => $trjg, 'start' => $start, 'end' => $end]);
+        return view('tukarjaga.index', ['trjg' => $trjg, 'start' => $start, 'end' => $end]);
 
     }
 
@@ -389,6 +412,22 @@ public function editshift(Request $ubah, $trj, $id)
             }
      
         return response()->json($data);
+    }
+
+public function export(Request $request, $start, $end)
+    {
+        $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
+        $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
+
+        if ($start == $end) {
+
+          return Excel::download(new TukarjagaExport($request->start, $request->end), 'Laporan Serah Terima Jaga '.$start.'.xlsx');  
+
+        } else {
+            return Excel::download(new TukarjagaExport($request->start, $request->end), 'Laporan Serah Terima Jaga '.$start.' - '.$end.'.xlsx');
+        }
+
+        
     }
 
 }

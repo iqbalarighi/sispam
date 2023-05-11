@@ -95,7 +95,7 @@
 
                     @if ($giats->count() == 0)
                     <tr>
-                        <td colspan="6"> Data Tidak Ditemukan</td>
+                        <td colspan="8"> Data Tidak Ditemukan</td>
                     </tr>
                     @else
 

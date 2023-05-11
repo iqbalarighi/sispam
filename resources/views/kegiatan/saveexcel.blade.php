@@ -1,25 +1,16 @@
-                    <style type="text/css">
-                        tr > td {
-                                    border-bottom: 1px solid #000000;
-                                }
-                    </style>
-
-                    <table border="1" style="">
-                    <tr style="text-align:center;" >
-                        <th >No</th>
-                        <th>No. Laporan</th>
-
-                       <th >Danru</th>
-
-                        <th>Shift</th>
-                        <th>Hari/Tanggal</th>
-                        <th>Jam</th>
-                        <th>Lokasi</th>
-
+                    <table>
+                    <tr>
+                        <th style="text-align: center;">No</th>
+                        <th style="text-align: center;">No. Laporan</th>
+                        <th style="text-align: center;">Danru</th>
+                        <th style="text-align: center;">Shift</th>
+                        <th style="text-align: center;">Hari/Tanggal</th>
+                        <th style="text-align: center;">Jam</th>
+                        <th style="text-align: center;">Lokasi</th>
                     </tr>
 
                     @foreach($giats as $key => $giat)
-                    <tr style="cursor: pointer; user-select: none;">
+                    <tr>
                         <td>{{$giats->firstitem() + $key}}</td>
                         <td>{{$giat->no_lap}}</td>
                         <td>{{$giat->danru}}</td>
@@ -30,11 +21,11 @@
                         Shift Malam 19.00 - 07.00 WIB
                     @else
                         Shift Pagi 07.00 - 19.00 WIB
-                    @endif</td>
+                    @endif
+                        </td>
                         <td>{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td>{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
                         <td>{{$giat->site->nama_gd}}</td>
-
                     </tr>
                     @endforeach
                     </table>

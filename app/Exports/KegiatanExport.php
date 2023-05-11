@@ -39,7 +39,7 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
 
         if ($level == 'koordinator'){
             if ($gd == '2') {
-            $giats = kegiatanModel::with('site')
+            $giats = KegiatanModel::with('site')
                     ->whereBetween('tanggal', [$start, $end])
                     ->where('gedung','=', $gd)
                     ->orwhere(function ($query) use ($start , $end){
@@ -50,7 +50,7 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
                     ->orderBy('created_at', 'DESC')
                     ->paginate(100000);
             } elseif ($gd == '11') {
-            $giats = kegiatanModel::with('site')
+            $giats = KegiatanModel::with('site')
                     ->whereBetween('tanggal', [$start, $end])
                     ->where('gedung','=', $gd)
                     ->orwhere(function ($query) use ($start , $end){
@@ -61,7 +61,7 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
                     ->orderBy('created_at', 'DESC')
                     ->paginate(100000);
             } elseif ($gd == '13') {
-             $giats = kegiatanModel::with('site')
+             $giats = KegiatanModel::with('site')
             ->whereBetween('tanggal', [$start, $end])
             ->where('gedung','=', $gd)
             ->orwhere(function ($query) use ($start , $end){
@@ -70,10 +70,16 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
             })
             ->orderBy('created_at', 'DESC')
             ->paginate(100000);   
+        } else {
+            $giats = KegiatanModel::with('site')
+            ->whereBetween('tanggal', [$start, $end])
+            ->where('gedung','=', $gd)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(100000);
         }
             
         } else {
-            $giats = kegiatanModel::with('site')
+            $giats = KegiatanModel::with('site')
                     ->whereBetween('tanggal', [$this->start, $this->end])
                     ->orderBy('created_at', 'DESC')
                     ->paginate(100000);
@@ -83,4 +89,3 @@ class KegiatanExport implements FromView, ShouldAutoSize, WithStyles
     return view('kegiatan.saveexcel', ['giats' => $giats]);
     }
 }
-        

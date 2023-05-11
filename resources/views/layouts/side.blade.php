@@ -185,6 +185,10 @@
             @yield('content')
         </main>
         </div>
+    </div>
+</div>
+
+</body>
 
         <!-- /#page-content-wrapper -->
         </div>
