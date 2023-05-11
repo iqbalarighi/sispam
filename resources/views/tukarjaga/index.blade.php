@@ -62,7 +62,7 @@
                         <a href="tukarjaga/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
                         @endif
                     <form action="" method="GET" class="float-right mb-3">Pilih Tanggal: 
-                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" >
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start"> -
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
@@ -125,7 +125,7 @@
 
                     @endif
                     </table>
-                     {{$trjg->links('pagination::bootstrap-5')}}
+                     {{$trjg->onEachSide(1)->links('pagination::bootstrap-5')}}
                 </div>
 
             </div>
