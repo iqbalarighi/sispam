@@ -14,7 +14,7 @@
 <style>
 .containerx {
   position: relative;
-  width: 50%;
+  width: 25%;
 }
 
 .image {

@@ -12,10 +12,11 @@
     <th style="text-align: center; vertical-align: middle;">Saksi Mata</th>
     <th style="text-align: center; vertical-align: middle;">Korban</th>
     <th style="text-align: center; vertical-align: middle;">Kerugian</th>
-    <th style="text-align: center; vertical-align: middle;">Penyebab Dasar</th>
-    <th style="text-align: center; vertical-align: middle;">Penyebab Langsung<br>(Tindakan Tidak Aman)</th>
-    <th style="text-align: center; vertical-align: middle;">Penyebab Langsung<br>(Kondisi Tidak Aman)</th>
-    <th style="text-align: center; vertical-align: middle; width:500px; min-width:200px;">Uraian Singkat</th>
+    <th style="text-align: center; vertical-align: middle; width: 300px;">Penyebab Dasar</th>
+    <th style="text-align: center; vertical-align: middle; width: 300px">Penyebab Langsung<br>(Tindakan Tidak Aman)</th>
+    <th style="text-align: center; vertical-align: middle; width: 300px">Penyebab Langsung<br>(Kondisi Tidak Aman)</th>
+    <th style="text-align: center; vertical-align: middle;">Nama Pelapor</th>
+    <th style="text-align: center; vertical-align: middle;">Unit Kerja Pelapor</th>
 
 </tr>
 @foreach ($data as $key => $jadi)
@@ -47,44 +48,50 @@
     $tindak = explode('|', $jadi->sebab_tindakan);
     $kondisi = explode('|', $jadi->sebab_kondisi);
     @endphp
-    <td style="vertical-align: middle;">@foreach ($sebab as  $key => $item) 
-                            @if ('Lain-lain :' == Str::substr($item, 0,11))
-                            {{$key+1}}.{{Str::substr($item, 11,1000)}}
-                            @else
-                            {{$key+1}}. {{$item}}
-                        @if (!next($sebab)) 
-                        
-                        @else
-                        <br>
-                        @endif
-                            @endif
-                            @endforeach</td>
-    <td style="vertical-align: middle;">@foreach ($tindak as  $key => $item) 
-                            @if ('Lain-lain :' == Str::substr($item, 0,11))
-                            &nbsp;{{$key+1}}.{{Str::substr($item, 11,1000)}}
-                            @else
-                            &nbsp;{{$key+1}}. {{$item}} 
-                        @if (!next($tindak)) 
-                        
-                        @else
-                        <br>
-                        @endif
-                            @endif
-                            @endforeach</td>
-    <td style="vertical-align: middle;">@foreach ($kondisi as $key => $item) 
-                            @if ('Lain-lain :' == Str::substr($item, 0,11))
-                            &nbsp;{{$key+1}}.{{Str::substr($item, 11,1000)}}
-                            @else
-                            &nbsp;{{$key+1}}. {{$item}}
-                        @if (!next($kondisi)) 
-                        
-                        @else
-                        <br>
-                        @endif
-                            @endif
-                        @endforeach</td>
-    <td style="vertical-align: middle; width:500px; min-width:200px;">{{$jadi->uraian_singkat}}</td>
+    <td style="vertical-align: middle;">
+        @foreach ($sebab as  $key => $item) 
+            @if ('Lain-lain :' == Str::substr($item, 0,11))
+                {{$key+1}}.{{Str::substr($item, 11,1000)}}
+            @else
+                {{$key+1}}. {{$item}}
+            
+                @if (!next($sebab)) 
 
+                @else
+                <br>
+                @endif
+            @endif
+        @endforeach</td>
+    <td style="vertical-align: middle;">
+        @foreach ($tindak as  $key => $item) 
+            @if ('Lain-lain :' == Str::substr($item, 0,11))
+                {{$key+1}}.{{Str::substr($item, 11,1000)}}
+            @else
+                {{$key+1}}. {{$item}} 
+        
+                @if (!next($tindak)) 
+                
+                @else
+                <br>
+                @endif
+            @endif
+        @endforeach</td>
+    <td style="vertical-align: middle;">
+        @foreach ($kondisi as $key => $item) 
+            @if ('Lain-lain :' == Str::substr($item, 0,11))
+            {{$key+1}}.{{Str::substr($item, 11,1000)}}
+            @else
+            {{$key+1}}. {{$item}}
+
+                @if (!next($kondisi)) 
+
+                @else
+                <br>
+                @endif
+            @endif
+        @endforeach</td>
+    <td style="vertical-align: middle;">{{$jadi->nama_pelapor}}</td>
+    <td style="vertical-align: middle;">{{$jadi->uker_pelapor}}</td>
 @endforeach
 
 </table>

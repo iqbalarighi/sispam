@@ -300,7 +300,7 @@ class KejadianController extends Controller
             $kond_isi = $file3;
             $kondis[] = $kond_isi;
        }
-       
+ 
        if (empty($kondis)) {
            $res_kondisi = $konds;
        } else {
@@ -308,10 +308,10 @@ class KejadianController extends Controller
        }
         
         } else {
-        foreach ($nilai->sebab_kondisi as $key => $val) {
-            $kondisi[] = $val;
+            foreach ($nilai->sebab_kondisi as $key => $val) {
+            $kond[] = $val;
         }
-            $res_kondisi = implode('|', $kondisi);
+            $res_kondisi = implode('|', $kond);
         }
 
 // ===============jenis potensi===============================

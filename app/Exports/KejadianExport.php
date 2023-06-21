@@ -27,10 +27,10 @@ class KejadianExport implements FromView, ShouldAutoSize, WithStyles
     public function styles(Worksheet $sheet)
     {   
         $count = $this->count+1;
-        $sheet->getStyle('P2:P'.$count)->getAlignment()->setWrapText(true);
-        $sheet->getStyle('A1:P1')->getFont()->setBold(true);
-        $sheet->getStyle('A1:P1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D3D3D3');
-        $sheet->getStyle('A1:P'.$count)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('M2:O'.$count)->getAlignment()->setWrapText(true);
+        $sheet->getStyle('A1:Q1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:Q1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('D3D3D3');
+        $sheet->getStyle('A1:Q'.$count)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
     }
 
     public function view(): View

@@ -101,11 +101,11 @@
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
-                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a>
+                            {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a> --}}
                         </div> 
                     </div>
                 </div>
-            <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Laporan</a> -->
+             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a>
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>

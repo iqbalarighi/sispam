@@ -46,15 +46,20 @@
                         pre {
                             font-family : system-ui;
                             font-size: 12pt;
+                            word-break: break-word;
+                            white-space: pre-wrap;       /* Since CSS 2.1 */
+                            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                            white-space: -pre-wrap;      /* Opera 4-6 */
+                            white-space: -o-pre-wrap;    /* Opera 7 */
+                            word-wrap: break-word;       /* Internet Explorer 5.5+ */
                         }
                         .xx {
                             font-size: 10pt;
                             text-align: center;
                         }
-                        .table tr td {
-                            padding:0rem !important;
+                        table tr td {
+                        /*  padding:0rem !important;*/
                             vertical-align: middle;
-                            max-width:100%;
                             white-space:nowrap;
                         }
                         .table th {
@@ -65,6 +70,7 @@
                         label {
                             margin: 0em;
                         }
+
                     </style>
 
                     <div class="table-responsive">
@@ -74,7 +80,7 @@
                             <b><center>{{Carbon\Carbon::parse($detil->created_at)->isoFormat('dddd, D MMMM Y')}} {{Carbon\Carbon::parse($detil->created_at)->isoFormat('HH:mm:ss')}} WIB</center></b>
                         </div>
                     <center>
-                    <table class="">
+                    <table class="" width="85%">
                     <tr>
                         <td>No Laporan Kejadian</td><td> : </td><td>&nbsp;{{$detil->no_lap}}</td>
                     </tr>
@@ -160,7 +166,7 @@
                         <td class="p-2"></td> 
                     </tr>
                     <tr>
-                        <td>Uraian Singkat</td><td> : </td><td><pre class="mb-0">&nbsp;{{$detil->uraian_singkat}}</pre></td>
+                        <td>Uraian Singkat</td><td> : </td><td ><pre class="mb-0">&nbsp;{{$detil->uraian_singkat}}</pre></td>
                     </tr>
                     <tr>
                         <td>Perlu Tindakan Perbaikan</td><td> : </td><td>&nbsp;{{$detil->tindak_perbaikan}}</td>
