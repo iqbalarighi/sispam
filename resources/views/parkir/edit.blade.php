@@ -13,7 +13,7 @@
                 <div class="card-body overflow " style="overflow-x: auto;">
 
         @if ($errors->any())
-            <div class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
+            <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
                 <div class="col-md-auto">
                         <div style="float: right;">
                             <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>

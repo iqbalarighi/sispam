@@ -1,18 +1,19 @@
 @extends('layouts.side')
 
 @section('content')
-@if ( Auth::user()->role === 'admin')
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Insiden / Kejadian') }}
-                    <a href="{{route('tambah-personil')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
+                    <a href="{{route('jadi-tambah')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                 </div>
 
                 <div class="card-body overflow " style="overflow-x: auto;">
-        @if ($message = Session::get('berhasil'))
-            <div align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+        
+        <center class="mb-2">
+            @if ($message = Session::get('berhasil'))
+            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -26,8 +27,9 @@
                     </div>
                 </div>
             </div>
+        </center>
         @elseif ($message = Session::get('warning'))
-        <div align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+        <div id="timeout" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -56,35 +58,118 @@
                         .table th {
                             padding:0.3rem;
                             white-space:nowrap;
+                            background-color: seashell;
                         }
                         label {
                             margin: 0em;
                         }
                     </style>
+
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
+                        @if ($start == null)
+
+                        @else
+                        @if ($data->count() == 0)
+
+                        @else
+                        <a href="kejadian/export/{{$start}}/{{$end}}/{{$data->count()}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
+                        {{-- <a href="kegiatan/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left"><s>Export Excel</s></span></a> --}}
+                        @endif
+                        @endif
+                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" > - 
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
+                        <button class="submit bi bi-search"></button>
+                    </form>
+                    @else
+                    <form action="" method="GET" class="float-right mb-2">
+                        <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
+                        <button class="submit bi bi-search"></button>
+                    </form>
+                       @endif
+
                     <div class="table-responsive">
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
                         <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">No</th>
+                        <th scope="col" class="align-middle">No Laporan</th>
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
+                        <th scope="col" class="align-middle">User Pelapor</th>
+                        @endif
                         <th scope="col" class="align-middle">Jenis Kejadian</th>
                         <th scope="col" class="align-middle">Lokasi Kejadian</th>
+                        <th scope="col" class="align-middle">Jenis Potensi</th>
                         <th scope="col" class="align-middle">Waktu Kejadian</th>
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                        <th class="align-middle" style="width:72px; ">Option</th>
-
+                       @endif
                     </tr>
+
+                    @if ($data->count() == 0)
+                    <tr>
+                        <td colspan="8"> Data Tidak Ditemukan</td>
+                    </tr>
+                    @endif
+
+                    @foreach ($data as $key => $jadi)
+                    <tr title="klik untuk lihat detail" style="cursor:pointer;">
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$data->firstitem()+$key}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->no_lap}}</td>
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->user_pelapor}}</td>
+                        @endif
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">
+                            @if ('Lain-lain :' == Str::substr($jadi->jenis_kejadian, 0,11))
+                            {{Str::substr($jadi->jenis_kejadian, 11,1000)}}
+                            @else
+                            {{$jadi->jenis_kejadian}}<br>
+                            @endif
+                        </td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->site->nama_gd}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">
+                            @if ('Lain-lain :' == Str::substr($jadi->jenis_potensi, 0,11))
+                            {{Str::substr($jadi->jenis_potensi, 11,1000)}}
+                            @else
+                            {{$jadi->jenis_potensi}}<br>
+                            @endif
+                        </td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->waktu_kejadian)->isoFormat('dddd, D MMMM Y')}}</td>
+                        @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
+                        <td class="d-flex p-0">
+
+                        <a href="{{url('kejadian-edit')}}/{{$jadi->id}}" hidden>
+                            <button id="{{$data->firstitem() + $key}}" type="submit" title="Edit Data ">
+                            </button>
+                        </a>
+                        <label for="{{$data->firstitem() + $key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
+
+                        </label>
+                        <pre> </pre>
+                        <form action="kejadian/hapus/{{$jadi->id}}" method="post" class="align-self-center m-auto">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button id="del{{$data->firstitem() + $key}}" onclick="return confirm('Yakin nih no Laporan {{$jadi->no_lap}} mau di hapus ?')" type="submit" title="Hapus Data" hidden>
+                                </button>
+                                <label for="del{{$data->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                </label>
+                        </form>
+                        </td>
+                         @endif
+                    </tr>
+                    @endforeach
                     <style>
                          a {color:black;}
                         a:hover { color:rgb(0, 138, 0);}
                         label:hover { color:rgb(0, 138, 0);}
                     </style>
-
                     </table>
                     </div>
+                    {{$data->onEachSide(1)->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-@elseif (Auth::user()->role === 'user')
-    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
-@endif
+
 @endsection
+

@@ -6,7 +6,7 @@
         <div class="col mw-100">
                 <!-- Notifikasi -->
         @if ($message = Session::get('sukses'))
-            <div align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
+            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -30,11 +30,8 @@
                 <div class="card-body overflow p-1 m-0" style="overflow-x: auto;">
 
 {{-- #################################################################################### --}}
-
-        <form action="{{ route('simpan_tukar') }}" method="POST">
-            @csrf
             @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
+            <div id="timeout" class="alert alert-danger" role="alert">
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -47,7 +44,10 @@
                 <p>{{ Session::get('success') }}</p>
             </div>
             @endif
-     
+
+        <form action="{{ route('simpan_tukar') }}" method="POST">
+            @csrf
+
             <table border="0" class=" mx-auto" style="width: 70%; ">
                 <tr>
                     <td colspan="2">Shift :                         

@@ -12,7 +12,7 @@
 
                 <div class="card-body overflow " >
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                        <div id="timeout" class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif

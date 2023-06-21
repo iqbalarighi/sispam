@@ -12,7 +12,7 @@
 
                 <div class="card-body overflow " style="overflow-x: auto;">
         @if ($message = Session::get('berhasil'))
-            <div align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         @elseif ($message = Session::get('warning'))
-        <div align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+        <div id="timeout" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">

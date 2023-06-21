@@ -13,7 +13,7 @@
                 <div class="card-body overflow " style="overflow-x: auto;">
     <!-- Error Handle -->
         @if ($errors->any())
-            <div class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
+            <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
                 <div class="col-md-auto">
                         <div style="float: right;">
                             <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
@@ -32,7 +32,7 @@
         @endif
         {{-- Password Error --}}
                 @error('password')
-            <div class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
+            <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
                 <div class="col-md-auto">
                         <div style="float: right;">
                             <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
@@ -44,7 +44,7 @@
 
     <!-- Notifikasi -->
         @if ($message = Session::get('sukses'))
-            <div align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
+            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -95,14 +95,14 @@
                         a:hover { color:rgb(0, 138, 0);}
                         label:hover { color:rgb(0, 138, 0);}
                     </style>
-                    @foreach ($user as $key => $item)
+                    @foreach ($user as $key => $users)
                     <tr>
                         <td>{{$user->firstitem()+$key}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->role}}</td>
-                        <td>{{$item->level}}</td>
-                        <td>{{$item->site->nama_gd ?? ''}}</td>
+                        <td>{{$users->name}}</td>
+                        <td>{{$users->email}}</td>
+                        <td>{{$users->role}}</td>
+                        <td>{{$users->level}}</td>
+                        <td>{{$users->site->nama_gd ?? ''}}</td>
                         <td class="d-flex align-content-center" align="center"> 
 
                         <button
@@ -123,7 +123,7 @@
                             <div class="modal-content">
                                 <!-- Add image inside the body of modal -->
                                 <div align="center" class="modal-body center">
-                                    <form action="{{url('update-user')}}/{{$item->id}}" method="POST">
+                                    <form action="{{url('update-user')}}/{{$users->id}}" method="POST">
                                         @csrf
                                         @method('PUT')
                                 <table class="table table-striped table-hover mx-auto" style="width: 100%; ">
@@ -132,19 +132,19 @@
                                     </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="text" name="name" placeholder="Nama User" value="{{$item->name}}" class="form-control m-0" required/>
+                        <input type="text" name="name" placeholder="Nama User" value="{{$users->name}}" class="form-control m-0" required/>
                     </td>
                     </tr>
                      <tr>
                     <td colspan="2">
-                        <input type="text" name="email" placeholder="Email" value="{{$item->email}}" class="form-control m-0" required/>
+                        <input type="text" name="email" placeholder="Email" value="{{$users->email}}" class="form-control m-0" required/>
                     </td width="">
                      </tr>
                      <tr>
                     <td colspan="2">
                         <select class="form-select" name="role" id="role" required>
-                                <option value="{{$item->role}}" >{{ucfirst(trans($item->role))}}</option>
-                            @if ($item->role == 'admin')
+                                <option value="{{$users->role}}" >{{ucfirst(trans($users->role))}}</option>
+                            @if ($users->role == 'admin')
                                 <option value="user">User</option>
                             @else
                                 <option value="admin">Admin</option>
@@ -156,11 +156,11 @@
                      <tr>
                     <td colspan="2">
                         <select class="form-select" name="level" id="level">
-                                <option value="{{$item->level}}" >{{$item->level}}</option>
-                            @if ($item->level == '')
+                                <option value="{{$users->level}}" >{{$users->level}}</option>
+                            @if ($users->level == '')
                             <option value="koordinator">Koordinator</option>
                                 <option value="danru">Danru</option>
-                            @elseif ($item->level == 'koordinator')
+                            @elseif ($users->level == 'koordinator')
                                 <option value="danru">Danru</option>
                             @else
                                 <option value="koordinator">Koordinator</option>
@@ -171,7 +171,7 @@
                 <tr>
                     <td>
                         <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi">
-                                <option value="{{$item->lokasi_tugas}}" selected>{{$item->site->nama_gd ?? '::Isi Lokasi::'}}</option>
+                                <option value="{{$users->lokasi_tugas}}" selected>{{$users->site->nama_gd ?? '::Isi Lokasi::'}}</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
                                 @endforeach
@@ -203,10 +203,10 @@
 
                                 &nbsp;
 
-                            <form action="hapus-user/{{$item->id}}" method="post">
+                            <form action="hapus-user/{{$users->id}}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <button id="del{{$user->firstitem() + $key}}" onclick="return confirm('Yakin nih {{$item->nama_gd}} mau di hapus ?')" type="submit" title="Hapus Data " hidden>
+                                <button id="del{{$user->firstitem() + $key}}" onclick="return confirm('Yakin nih {{$users->name}} mau di hapus ?')" type="submit" title="Hapus Data " hidden>
                                     </button>
                                     <label for="del{{$user->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                             </form>

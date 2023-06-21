@@ -140,7 +140,7 @@ class KegiatanController extends Controller
         }
     }
 
-        return view('kegiatan.index', ['giats' => $giats, 'start' => $start, 'end' => $end]);
+        return view('kegiatan.index', ['giats' => $giats, 'start' => $start, 'end' => $end, 'cari' => $cari]);
 
     }
 

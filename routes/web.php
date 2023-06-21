@@ -139,11 +139,12 @@ Route::put('/add-shiftl/{trj}/{id}',[TukarjagaController::class, 'addshiftlama']
 Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru'])->middleware('auth');
 
 // Dokument Section
-Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF']);
+Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF'])->middleware('auth');
 Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
 Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'export'])->middleware('auth');
-// Route::get('/kegiatan/export/', [kegiatanController::class, 'export'])->middleware('auth');
+Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
+Route::get('/kejadianPDF/{id}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');;
 
 //Add User Section
 Route::get('/user-area', [AdduserController::class, 'index'])->middleware('auth')->name('users');
@@ -154,3 +155,11 @@ Route::put('/update-user/{id}',[AdduserController::class, 'updateuser'])->middle
 
 // kejadian Section
 Route::get('/kejadian', [KejadianController::class, 'index'])->middleware('auth')->name('kejadian');
+Route::get('/kejadian-edit/{id}', [KejadianController::class, 'edit'])->middleware('auth');
+Route::get('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');
+Route::get('/kejadian-detil/{id}', [KejadianController::class, 'detil'])->middleware('auth');
+Route::get('/kejadian-tambah', [KejadianController::class, 'tambah'])->middleware('auth')->name('jadi-tambah');
+Route::post('/kejadian/simpan', [KejadianController::class, 'simpan'])->middleware('auth')->name('jadi-simpan');
+Route::put('/kejadian-update/{id}', [KejadianController::class, 'update'])->middleware('auth');
+Route::get('/kejadian/hapus-foto/{item}/{id}', [KejadianController::class, 'hapusFoto'])->middleware('auth');
+Route::delete('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');

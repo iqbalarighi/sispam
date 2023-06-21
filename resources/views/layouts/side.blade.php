@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
 
-<script src="./storage/bootstrap3-typeahead.js"></script>
+<script src={{asset("/storage/bootstrap3-typeahead.js")}}></script>
 
             <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -90,7 +90,7 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light">Arsip</a>
-            <a onclick="cekPass()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
@@ -99,9 +99,9 @@
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a>
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
+                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a>
                         </div> 
                     </div>
                 </div>
@@ -117,7 +117,7 @@
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
-            <a onclick="cekPass()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
@@ -126,8 +126,8 @@
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light">Temuan Patroli</a>
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
                             {{-- <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
@@ -157,41 +157,34 @@
             
                         <!-- Authentication Links -->
                         
-<div class="nav-link me-5 pe-5 ml-auto">
-<div class="dropdown">
-  <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    {{ Auth::user()->name }}
-  </a>
+            <div class="nav-link me-5 pe-5 ml-auto">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ Auth::user()->name }}
+              </a>
 
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li>        <a class="dropdown-item font-weight-bold ps-2" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-  </ul>
-</div>
-
-
-
-</div>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>        <a class="dropdown-item font-weight-bold ps-2" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+              </ul>
+            </div>
+            </div>
             </div>
         </nav>
         <main class="py-1">
             @yield('content')
         </main>
-<footer class="mt-auto">
-      <center>Copyright &copy; {{Carbon\Carbon::today()->isoFormat('Y');}} www.sispam.id. All Rights Reserved </center>  
-</footer>
+            <footer class="mt-auto">
+                  <center>Copyright &copy; {{Carbon\Carbon::today()->isoFormat('Y');}} www.sispam.id. All Rights Reserved </center>  
+            </footer>
         </div>
     </div>
-
 </div>
-
 </body>
 
         <!-- /#page-content-wrapper -->
@@ -216,6 +209,48 @@
 "sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous">
     </script>  --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+
+<script>
+    $('#timepicker').timepicker({ 
+      minuteStep: 60,  
+      showMeridian: false,
+      defaultTime: '00:00' 
+  });
+</script>
+
+<script>
+    function cekPass() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+<script>
+$(document).ready(function () {
+    $('#checkBtn').click(function() {
+        checked = $("input[type=checkbox]:checked").length;
+
+        if(checked == 0) {
+            alert("Peringatan ! \nMohon checklist Penyebab Dasar \nChecklist Penyebab Langsung (Tindakan Tidak Aman) \nDan checklist Penyebab Langsung (Kondisi Tidak Aman)");
+            return false;
+        }
+
+         if(checked == 1) {
+            alert("Peringatan ! \nMohon checklist Penyebab Dasar \nMohon Isi Penyebab Langsung (Tindakan Tidak Aman) \nDan Isi Penyebab Langsung (Kondisi Tidak Aman)");
+            return false;
+        }
+
+        if(checked == 2) {
+            alert("Peringatan ! \nMohon checklist Penyebab Dasar \nMohon Isi Penyebab Langsung (Tindakan Tidak Aman) \nDan Isi Penyebab Langsung (Kondisi Tidak Aman)");
+            return false;
+        }
+    });
+});
+</script>
 
 <script type="text/javascript">
   function showPreview(event){
@@ -300,7 +335,7 @@ function myFunction3() {
 }
 </script> 
 <script>
-    function cekPass() {
+    function cekDown() {
   var x = document.getElementById("ubah");
   if (x.className === "bi bi-caret-right-fill") {
     x.className = "bi bi-caret-down-fill";
@@ -408,5 +443,13 @@ function myFunction3() {
 </script>
 {{-- uraian kegiatan --}}
 
-
+{{-- flash timeout --}}
+<script type="text/javascript">
+    setTimeout(function(){
+     $("#timeout").fadeTo(2000, 300).slideUp(300, function() {
+      $("#timeout").slideUp(300);
+    });
+    }, 500 ); // 5 secs
+</script>
+{{-- flash timeout --}}
 </html>
