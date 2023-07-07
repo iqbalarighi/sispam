@@ -79,13 +79,13 @@
                         label:hover { color:rgb(0, 138, 0);}
                     </style>
                     @foreach($personil as $key => $s) 
-                    <tr >
-                        <td >{{$personil->firstitem() + $key}}</td>
-                        <td>{{$s->nip}}</td> 
-                        <td align="left"><a href="{{route('personil')}}/{{$s->id}}" style="text-decoration:none;" >{{$s->nama}}</a></td>
-                        <td>{{$s->jabatan}}</td>
-                        <td>{{$s->gender}}</td>
-                        <td>{{$s->pendidikan}}</td>
+                    <tr style="cursor: pointer;">
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'">{{$personil->firstitem() + $key}}</td>
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'">{{$s->nip}}</td> 
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'" align="left">{{$s->nama}}</td>
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'">{{$s->jabatan}}</td>
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'">{{$s->gender}}</td>
+                        <td onclick="window.location='{{route('personil')}}/{{$s->id}}'">{{$s->pendidikan}}</td>
                         <td class="d-flex align-items-md-center" >
                         <a href="{{route('edit-personil')}}/{{$s->id}}" hidden>
                             <button id="{{$personil->firstitem() + $key}}" type="submit" title="Edit Data {{$s->name}}">
@@ -109,6 +109,7 @@
                     @endforeach
                     </table>
                     </div>
+                    {{$personil->onEachSide(1)->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>

@@ -387,26 +387,12 @@
                         <td><input type="text" onkeypress="return angka(event)" class="form-control pb-0 pt-0" name="bpjs_kerja" id="bpjs_kerja" value="{{$personil->bpjs_kerja}}" required></td>
                     </tr>
                     <tr>
-                        <td class="align-middle">Lama Bekerja di OJK</td>
+                        <td class="align-middle">Tahun Pertama Bekerja</td>
                         <td>:</td>
-                        <td scope="col">
-                            <div class="row justify-content-center">
-                                <div class="col">
+                        <td>
                             <input type="text" onkeypress="return angka(event)" class="form-control pb-0 pt-0 m-0" name="lama_kerja" id="lama_kerja" value="{{$personil->lama_kerja}}">
-                                </div>
-                                <div class="col-md-auto m-auto" >
-                                    <strong> Tahun </strong>
-                                </div>
-                            </div>
                         </td>
                     </tr>
-                  <!--  <tr >
-                          <td>
-                        <a href="/santri/ubah/{{$personil->id_santri}}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                        <a href="/santri/hapus/{{$personil->id_santri}}" onclick="return confirm('Apakah Anda Yakin Menghapus Data?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                        </td> 
-                    </tr>-->
-
                     </table>
                 </div>
                         </div>

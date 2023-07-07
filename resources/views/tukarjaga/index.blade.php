@@ -73,7 +73,8 @@
                     </form>
                        @endif
 
-                    <table class="table table-bordered table-striped table-hover text-center mb-0">
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>
@@ -125,6 +126,7 @@
 
                     @endif
                     </table>
+                </div>
                      {{$trjg->onEachSide(1)->links('pagination::bootstrap-5')}}
                 </div>
 

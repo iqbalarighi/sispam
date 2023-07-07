@@ -206,7 +206,7 @@ class KejadianController extends Controller
         $nolap = Helper::IDGenerator(new KejadianModel, 'no_lap', 4, $string); /** Generate id */
 
         $jadi = new KejadianModel(); 
-        $jam = Carbon::parse($nilai->jam_kejadian)->format('H:m');
+        $jam = Carbon::parse($nilai->jam_kejadian)->isoformat('HH:mm');
         
         $image = [];
 
@@ -410,7 +410,8 @@ public function kejadianPDF($id)
         
         $pdf = PDF::loadView('kejadian.savepdf', ['detil' => $detil]);
 
-        return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        return $pdf->stream('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
     }
 
 public function update(Request $update, $id)
@@ -457,7 +458,8 @@ public function update(Request $update, $id)
 
 
     $up = KejadianModel::findOrFail($id);
-    $jam = Carbon::parse($update->jam_kejadian)->format('H:m');
+    $jm = $update->jam_kejadian;
+    $jam = Carbon::parse($jm)->isoformat('HH:mm');
 // =====================jenis_potensi===========================
     $potensi = $update->jenis_potensi;
     if (is_array($update->jenis_potensi)) {

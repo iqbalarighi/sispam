@@ -11,6 +11,7 @@ use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\KejadianController;
+use App\Http\Controllers\UnrasController;
 
 
 /*
@@ -140,11 +141,13 @@ Route::put('/add-shiftb/{trj}/{id}',[TukarjagaController::class, 'addshiftbaru']
 
 // Dokument Section
 Route::get('/viewpdf/{id}', [TukarjagaController::class, 'generatePDF'])->middleware('auth');
+Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'export'])->middleware('auth');
 Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
-Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'export'])->middleware('auth');
 Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
-Route::get('/kejadianPDF/{id}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');;
+Route::get('/kejadianPDF/{id}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
+Route::get('/unras/export/{start}/{end}/{count}', [UnrasController::class, 'export'])->middleware('auth');
+
 
 //Add User Section
 Route::get('/user-area', [AdduserController::class, 'index'])->middleware('auth')->name('users');
@@ -163,3 +166,12 @@ Route::post('/kejadian/simpan', [KejadianController::class, 'simpan'])->middlewa
 Route::put('/kejadian-update/{id}', [KejadianController::class, 'update'])->middleware('auth');
 Route::get('/kejadian/hapus-foto/{item}/{id}', [KejadianController::class, 'hapusFoto'])->middleware('auth');
 Route::delete('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');
+
+// Unras Section
+Route::get('/unras', [UnrasController::class, 'index'])->middleware('auth')->name('unras');
+Route::post('/simpan-unras', [UnrasController::class, 'simpan'])->middleware('auth')->name('simpan-unras');
+Route::get('/automasi', [UnrasController::class, 'automasi'])->name('automasi');
+Route::get('/automasi2', [UnrasController::class, 'automasi2'])->name('automasi2');
+Route::put('/update-unras/{id}', [UnrasController::class, 'update'])->middleware('auth');
+Route::delete('/unras/hapus/{id}', [UnrasController::class, 'hapus'])->middleware('auth');
+

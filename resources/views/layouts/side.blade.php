@@ -100,12 +100,13 @@
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Bencana</s></a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
-                            {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a> --}}
+                            {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
                 </div>
-             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Unras</s></a>
+             <a href="{{route('unras')}}" class="list-group-item list-group-item-action bg-light">Unras</a>
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
@@ -128,10 +129,11 @@
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
-                            {{-- <a href="#" class="list-group-item list-group-item-action bg-light">Unras</a> --}}
+                            
                         </div> 
                     </div>
                 </div>
+            <a href="{{route('unras')}}" class="list-group-item list-group-item-action bg-light">Unras</a>
             <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Laporan</a> -->
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
@@ -188,7 +190,6 @@
 </body>
 
         <!-- /#page-content-wrapper -->
-        </div>
          
         <!-- /#wrapper -->
     <!-- Adding scripts to use bootstrap -->
@@ -384,29 +385,6 @@ function myFunction3() {
     });
 </script> --}}
 
-<script type="text/javascript">
-    var i = 0;
-    var path = "{{ route('autocomplete')  }}";
-    $("#dynamic-ar2").click(function () {
-        ++i;
-        $("#dynamicAddRemove2").append('<label class="row"><div class="col p-1"><input class="typeahead form-control m-1 p-1" type="text" name="nabar[]" placeholder="Nama Barang" autocomplete="off" id="search" required/></div><div class="col p-1"><input type="text" name="jumlah[]" onkeypress="return angka(event)" placeholder="Jumlah Barang" class="form-control m-1 p-1" required/></div><div class="col p-1"><input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-1 p-1" required/></div><div class="col-2 mx-auto align-self-center pr-1 pl-1"><button type="button" class="bi bi-trash-fill bg-danger btn-sm float-right remove-input-field m-1"></button></div></label>' 
-            );
-
-    $('input.typeahead').typeahead({
-      source:  function (query, process) {
-      return $.get(path, { term: query }, function (data) {
-              return process(data);
-          });
-      }
-  });
-
-    });
-
-
-      $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('label').remove();
-    });
-</script>
 
 <script type="text/javascript">
       

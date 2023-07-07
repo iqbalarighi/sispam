@@ -25,9 +25,9 @@
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Kegiatan') }}
                     <a href="{{route('tambah-giat')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
-                </div>
+                </div>             
 
-                <div class="card-body overflow pt-1 pb-1" style="overflow-x: auto;">
+                
 
                     <style>
                         .xx {
@@ -55,13 +55,14 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
 
+                <div class="card-body overflow pt-1 pb-1" style="overflow-x: auto;">
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         @if ($start == null)
 
                         @else
                         <a href="kegiatan/export/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm">Export Excel</span></a>
                         @endif
-                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
+                    <form action="" method="GET" style="text-align: right !important;" class="float-right mb-2 mt-2 mr-2">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start"> - 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
@@ -73,7 +74,8 @@
                     </form>
                        @endif
                     
-                    <table class="table table-bordered table-striped table-hover text-center ">
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
                         <th style="max-width:50px; min-width:30px;">No</th>
                         <th>No. Laporan</th>
@@ -146,6 +148,7 @@
                     </table>
                 </div>
                 {{$giats->onEachSide(1)->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>

@@ -241,9 +241,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="align-middle">Lama Bekerja di OJK</td>
+                        <td class="align-middle">Tahun Pertama Bekerja</td>
                         <td>:</td>
-                        <td>{{$s->lama_kerja}} &nbsp; Tahun</td>
+                        <td>{{$s->lama_kerja}}</td>
                     </tr>
                   <!--  <tr >
                           <td>

@@ -10,7 +10,7 @@
                         }
                     </style>
     </head>
-<body>
+                <body>
 
                     <div>
                         <div style="padding-bottom: 1rem;">
@@ -46,7 +46,7 @@
                     </tr>
                     @if ('Lain-lain :' == Str::substr($detil->jenis_potensi, 0,11))
                     <tr>
-                        <td>Jenis Potensi</td><td> :  </td><td>{{Str::substr($detil->jenis_potensi, 12,1000)}}</td>
+                        <td><b>Jenis Potensi</b></td><td> :  </td><td>{{Str::substr($detil->jenis_potensi, 12,1000)}}</td>
                     </tr>
                     @else
                     <tr>
@@ -105,7 +105,7 @@
                         <td style="padding: 0.5rem;"></td> 
                     </tr>
                     <tr>
-                        <td><b>Uraian Singkat</b>   </td><td>:</td><td> <pre class="potong">{{$detil->uraian_singkat}}</pre></td>
+                        <td><b>Uraian Singkat</b>   </td><td>:</td><td > <pre class="potong">{{$detil->uraian_singkat}}</pre></td>
                     </tr>
                     <tr>
                         <td><b>Perlu Tindakan Perbaikan</b>   </td><td>:</td><td> {{$detil->tindak_perbaikan}}</td>
@@ -140,8 +140,31 @@
                     </td>
                     </tr>
                     </table>
-
-                    </div>
                 </div>
+                    <table width="100%" border="0" style="vertical-align: middle; text-align: center;">
+                        <tr>
+                            <td width="30%"><pre>
+Mengetahui,
+Kepala Bagian Pengamanan
+
+
+
+<b>Supriyono</b>
+NIP. 00704</pre>
+                        </td>
+<td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
+                        <td width="33%" style="vertical-align: top;"><pre>
+Disusun Oleh,
+
+
+
+
+<b>{{$detil->nama_pelapor}}</b>
+{{$detil->uker_pelapor}}</pre>
+                        </td>
+                        </tr>
+                    </table>
+                    
+
             </body>
     </html>

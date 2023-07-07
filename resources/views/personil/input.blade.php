@@ -183,17 +183,10 @@
                         <td><input type="file" accept=".jpeg, .jpg, .png" name="bpjsk" id="bpjsk" ></td>
                     </tr>
                     <tr>
-                        <td class="align-middle">Lama Bekerja di OJK</td>
+                        <td class="align-middle">Tahun Pertama Bekerja</td>
                         <td>:</td>
-                        <td scope="col">
-                            <div class="row justify-content-center">
-                                <div class="col">
-                            <input type="text" class="form-control pb-0 pt-0 m-0" name="lama_kerja" id="lama_kerja" >
-                                </div>
-                                <div class="col-md-auto m-auto" >
-                                    <strong> Tahun </strong>
-                                </div>
-                            </div>
+                        <td>
+                            <input type="text" class="form-control pb-0 pt-0 m-0" onkeypress="return angka(event)" placeholder="20xx" name="lama_kerja" id="lama_kerja" >
                         </td>
                     </tr>
                     </table>

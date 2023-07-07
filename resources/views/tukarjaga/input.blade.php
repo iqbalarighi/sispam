@@ -231,4 +231,27 @@
   });
 </script>
 
+<script type="text/javascript">
+    var i = 0;
+    var path = "{{ route('autocomplete')  }}";
+    $("#dynamic-ar2").click(function () {
+        ++i;
+        $("#dynamicAddRemove2").append('<label class="row"><div class="col p-1"><input class="typeahead form-control m-1 p-1" type="text" name="nabar[]" placeholder="Nama Barang" autocomplete="off" id="search" required/></div><div class="col p-1"><input type="text" name="jumlah[]" onkeypress="return angka(event)" placeholder="Jumlah Barang" class="form-control m-1 p-1" required/></div><div class="col p-1"><input type="text" name="ket[]" placeholder="Keterangan" class="form-control m-1 p-1" required/></div><div class="col-2 mx-auto align-self-center pr-1 pl-1"><button type="button" class="bi bi-trash-fill bg-danger btn-sm float-right remove-input-field m-1"></button></div></label>' 
+            );
+
+    $('input.typeahead').typeahead({
+      source:  function (query, process) {
+      return $.get(path, { term: query }, function (data) {
+              return process(data);
+          });
+      }
+  });
+
+    });
+
+
+      $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('label').remove();
+    });
+</script>
 @endsection
