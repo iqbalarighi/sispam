@@ -220,11 +220,7 @@
 
                         @else
                         <a href="unras/export/{{$start}}/{{$end}}/{{$unras->count()}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
-{{--                         
-                        <a href="unras/export/{{$start}}/{{$end}}/{{$unras->count()}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
-                        @else
-                        <a href="#" ><span class="btn btn-primary btn-sm float-left" onclick="alert('Status Kegiatan Unras Belum Lengkap')">Export Excel</span></a>
-                        @endif --}}
+
                         @endif
                         @endif
                     <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
