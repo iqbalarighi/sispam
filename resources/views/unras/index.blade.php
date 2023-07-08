@@ -149,7 +149,6 @@
     </div>
 {{-- end of modal --}}
 
-
         <div class="card-body overflow " style="overflow-x: auto;">
         
         <center class="mb-2">
@@ -543,12 +542,7 @@ if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain
 );
 });
 </script>
-  
-
-                    @endforeach
-
-
-
+                @endforeach
                     </table>
                     </div>
                     {{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
@@ -626,7 +620,6 @@ $('#jumlah').on('keyup', function () {
   //   $('#level').val("").change().css('background', '');
   // }
     
-
   if (0 == $('#jumlah').val()) {
     $('#level').val("").change().css('background', '');
   }
@@ -698,7 +691,6 @@ $("#rese").click(function() {
 );
 });
 </script>
-
 
 @endsection
 
