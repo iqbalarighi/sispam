@@ -111,7 +111,7 @@
                         <td>Lokasi Tugas</td>
                         <td>:</td>
                         <td>
-                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi" required>
+                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi" >
                                 <option value="" disabled selected>Pilih Lokasi</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>

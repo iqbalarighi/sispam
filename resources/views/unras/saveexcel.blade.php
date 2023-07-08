@@ -12,7 +12,7 @@
 </tr>
 <tr>   
     @if ($start == $end)
-    <th colspan="14" style="text-align: center; vertical-align: middle;">{{$start}}</th>
+    <th colspan="14" style="text-align: center; vertical-align: middle;">{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}</th>
     @else
     <th colspan="14" style="text-align: center; vertical-align: middle;">{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}</th>
     @endif

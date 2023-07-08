@@ -255,9 +255,11 @@
                         <th scope="col" class="align-middle" >Level Risiko</th>
                         <th scope="col" class="align-middle" >Sifat Kegiatan</th>
                         <th scope="col" class="align-middle" >Keterangan</th>
-                        @if (Auth::user()->role === 'admin')
+                        @if (Auth::user()->level === 'superadmin')
                         <th scope="col" class="align-middle" >Creator</th>
                         <th scope="col" class="align-middle" >Editor</th>
+                        @endif
+                        @if (Auth::user()->role === 'admin')
                         <th scope="col" class="align-middle" >Opsi</th>
                         @endif
                     </tr>
@@ -310,10 +312,12 @@
                          
                        <td>{{$rasa->sifat_kegiatan}}</td> 
                        <td>{{$rasa->keterangan}}</td>
-                       @if (Auth::user()->role === 'admin')
+                       
+                       @if (Auth::user()->level === 'superadmin')
                        <td>{{$rasa->creator}}</td>
                        <td>{{$rasa->editor}}</td>
-                        
+                       @endif
+                        @if (Auth::user()->role === 'admin')
                         <td >
                         <div class="d-flex justify-content-between">
                         <label style="vertical-align: middle;"  data-toggle="modal" data-target="#unras{{$unras->firstitem()+$key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
