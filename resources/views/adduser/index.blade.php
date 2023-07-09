@@ -126,7 +126,7 @@
                                     <form action="{{url('update-user')}}/{{$users->id}}" method="POST">
                                         @csrf
                                         @method('PUT')
-                                <table class="table table-striped table-hover mx-auto" style="width: 100%; ">
+                                <table class="table mx-auto" style="width: 100%; ">
                                     <tr align="center">
                                         <th colspan="3">Edit User</th>
                                     </tr>
@@ -142,7 +142,7 @@
                      </tr>
                      <tr>
                     <td colspan="2">
-                        <select class="form-select" name="role" id="role" required>
+                        <select class="form-select" name="role" id="rolex" required>
                                 <option value="{{$users->role}}" >{{ucfirst(trans($users->role))}}</option>
                             @if ($users->role == 'admin')
                                 <option value="user">User</option>
@@ -179,10 +179,12 @@
                     </td>
                 </tr>
                 <tr>
-                        <td colspan="2"><input id="password" type="password" placeholder="Password"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <td colspan="2"><input id="password{{$user->firstitem()+$key}}" type="password" placeholder="Ubah Password"  class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
                     </tr>
                     <tr>
-                        <td colspan="2"><input id="password-confirm" type="password" placeholder="Konfirmasi Password"  class="form-control" name="password_confirmation" required autocomplete="new-password"></td>
+                        <td colspan="2"><input id="password-confirm" type="password" placeholder="Konfirmasi Password"  class="form-control xxx{{$user->firstitem()+$key}}" name="password_confirmation" disabled autocomplete="new-password">
+                            <div style="margin-top: 0px;" id="CheckPasswordMatch{{$user->firstitem()+$key}}"></div>
+                        </td>
                     </tr>
 
                                 </table>
@@ -212,6 +214,43 @@
                             </form>
                             </td>
                     </tr>
+                    <script>
+$(document).ready(function () {
+   $(".xxx{{$user->firstitem()+$key}}").on('keyup', function(){
+    var password = $("#password{{$user->firstitem()+$key}}").val();
+    var confirmPassword = $(".xxx{{$user->firstitem()+$key}}").val();
+    if (password != confirmPassword)
+        $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("Password Tidak Sama !").css("color","red");
+    else
+        $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("Password Sama !").css("color","green");
+   
+});
+
+$("#password{{$user->firstitem()+$key}}").on('keyup', function(){
+     if (!$('#password{{$user->firstitem()+$key}}').val().length) {
+    $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("").css("color","");
+  }
+});
+
+$("#password{{$user->firstitem()+$key}}").on('keyup', function(){
+   if ($("#password{{$user->firstitem()+$key}}").val().length === 0){
+        $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("").css("color","");
+        $(".xxx{{$user->firstitem()+$key}}").val("");
+        $(".xxx{{$user->firstitem()+$key}}").prop("disabled", true);
+        $(".xxx{{$user->firstitem()+$key}}").prop("required", false);
+    } else if ( 5 >= $("#password{{$user->firstitem()+$key}}").val().length){
+        $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("Password kurang dari 6 karakter !").css("color","red");
+        $(".xxx{{$user->firstitem()+$key}}").prop("disabled", true);
+        $(".xxx{{$user->firstitem()+$key}}").prop("required", false);
+    } else  {
+        $("#CheckPasswordMatch{{$user->firstitem()+$key}}").html("").css("color","");
+        $(".xxx{{$user->firstitem()+$key}}").prop("disabled", false);
+        $(".xxx{{$user->firstitem()+$key}}").prop("required", true);
+    }
+});
+
+});
+</script>
                     @endforeach
                     </table>
                      {{$user->links('pagination::bootstrap-5')}}
@@ -224,4 +263,6 @@
 @elseif (Auth::user()->role === 'user')
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
 @endif
+
+
 @endsection

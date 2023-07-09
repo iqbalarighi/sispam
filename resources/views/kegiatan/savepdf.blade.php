@@ -15,14 +15,15 @@
         </style>
     </head>
 <body>
-
+                <div>
+                    <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 25px; width: 150px; position: fixed;">
                     <h4>
                         <b><center>Laporan Kegiatan Petugas Pengamanan</center></b>
                         <b><center>{{$detil->site->nama_gd}}</center></b>
                         <b><center>{{Carbon\Carbon::parse($detil->tanggal)->isoFormat('dddd, D MMMM Y')}}</center></b>
                         <b><center>Pukul {{Carbon\Carbon::parse($detil->created_at)->isoFormat('HH:mm:ss')}} WIB</center></b>
                     </h4>
-                
+                </div>
                 <table class="table table-responsive" width="100%">
                     <tr>
                         <td><b>No. laporan: </b>{{$detil->no_lap}} </td> 

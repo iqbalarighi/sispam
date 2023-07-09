@@ -8,11 +8,19 @@
                         .potong {
                             white-space: pre-line;       /* Internet Explorer 5.5+ */
                         }
+                    .narrow {
+                              padding: 0px;
+                              width: 200px;
+                              margin: 0 auto;
+                              font-size: 12pt;
+                              font-family : system-ui;
+                            }
                     </style>
     </head>
                 <body>
 
                     <div>
+                        <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 0px; width: 150px; position: fixed;">
                         <div style="padding-bottom: 1rem;">
                             <center><b>Laporan Kejadian/Insiden</b></center>
                             <center><b>{{$detil->site->nama_gd}}</b></center>
@@ -143,7 +151,7 @@
                 </div>
                     <table width="100%" border="0" style="vertical-align: middle; text-align: center;">
                         <tr>
-                            <td width="30%"><pre>
+                            <td width="30%"><pre class="narrow">
 Mengetahui,
 Kepala Bagian Pengamanan
 
@@ -153,7 +161,7 @@ Kepala Bagian Pengamanan
 NIP. 00704</pre>
                         </td>
 <td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
-                        <td width="33%" style="vertical-align: top;"><pre>
+                        <td width="33%" style="vertical-align: top;"><pre class="narrow">
 Disusun Oleh,
 
 

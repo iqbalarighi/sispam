@@ -50,9 +50,13 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
     </head>
+    <body>
 
                 <div class="card-body overflow " style="overflow-x: auto;">
                     <div align="center" class="text-center text-uppercase"> <b>
+
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+
                         Laporan Serah Terima Jaga <br>
                         {{$detilx->site->nama_gd}} <br>
                         </b>
@@ -142,4 +146,5 @@
                     @endforeach
                     </table>
                 </div>
+</body>
     </html>

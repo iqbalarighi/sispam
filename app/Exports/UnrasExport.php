@@ -9,8 +9,10 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class UnrasExport implements FromView, ShouldAutoSize, WithStyles
+class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
 {
 
     public function __construct($start , $end, $count)
@@ -23,6 +25,18 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles
     /**
     * @return \Illuminate\Support\Collection
     */
+
+    public function drawings()
+    {
+        $drawing = new Drawing();
+        $drawing->setName('OJK');
+        $drawing->setDescription('Otoritas Jasa Keuangan');
+        $drawing->setPath(public_path('storage/img/logo-ojk.png'));
+        $drawing->setWidth(133);
+        $drawing->setCoordinates('B2');
+
+        return $drawing;
+    }
 
     public function styles(Worksheet $sheet)
     {   

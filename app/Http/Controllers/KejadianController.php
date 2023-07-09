@@ -411,7 +411,7 @@ public function kejadianPDF($id)
         $pdf = PDF::loadView('kejadian.savepdf', ['detil' => $detil]);
 
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
-        return $pdf->stream('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
     }
 
 public function update(Request $update, $id)

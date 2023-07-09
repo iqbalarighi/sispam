@@ -57,11 +57,16 @@ class AdduserController extends Controller
 
     public function updateuser(Request $request, $id)
     {   
-            $validator = $request->validate([
-            'password' => 'required|confirmed|min:6',
-        ]);
+            
 
         $update = User::findOrFail($id);
+
+        if ($request->password != null) {
+        $validator = $request->validate([
+            'password' => 'confirmed|min:6',
+        ]);
+        $update->password = bcrypt($request->password);
+        }
 
         $update->name = $request->name;
         $update->email = $request->email;

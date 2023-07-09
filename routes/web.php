@@ -147,6 +147,7 @@ Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export
 Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
 Route::get('/kejadianPDF/{id}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
 Route::get('/unras/export/{start}/{end}/{count}', [UnrasController::class, 'export'])->middleware('auth');
+Route::get('/unrasPDF/{start}/{end}', [UnrasController::class, 'unrasPDF'])->middleware('auth');
 
 
 //Add User Section

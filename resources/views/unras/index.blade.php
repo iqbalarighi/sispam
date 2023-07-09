@@ -169,7 +169,7 @@
             </div>
         </center>
         @elseif ($message = Session::get('warning'))
-        <div id="" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+        <div id="" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1 mb-2" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -220,12 +220,12 @@
 
                         @else
                         <a href="unras/export/{{$start}}/{{$end}}/{{$unras->count()}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
-
+                        <a href="unrasPDF/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
                         @endif
                         @endif
                     <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start" > - 
-                        <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
+                        <input type="date" class=""  name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
                     @else
@@ -408,6 +408,7 @@ if ($unras->count() == 0) {
                                 <option value="" disabled selected >Status Kegiatan</option>
                                 <option value="Selesai Kondusif" {{ 'Selesai Kondusif' == $rasa->status_kegiatan ? 'selected' : '' }}>Selesai Kondusif</option>
                                 <option value="Ricuh" {{ 'Ricuh' == $rasa->status_kegiatan ? 'selected' : '' }}>Ricuh</option>
+                                <option value="Batal" {{ 'Batal' == $rasa->status_kegiatan ? 'selected' : '' }}>Batal</option>
                                 <option value="Lain-lain :" {{ 'Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11) ? 'selected' : '' }}>Lain-lain</option>
                             </select>
                             <input type="text" id="stat{{$unras->firstitem()+$key}}" class="form-control form-control-sm px-1 mt-1" autocomplete="off" name="" value="{{$sta}}" hidden>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\UnrasExport;
 use App\Models\UnrasModel;
 use Carbon\Carbon;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -187,11 +188,25 @@ public function update(Request $request, $id)
         }            
     } else {
         return back()
-        ->with('warning', 'Tetot masih ada yang belom kelar');
+        ->with('warning', 'Lakukan Update Pada Status Kegiatan Berikut');
+    }
     }
 
+public function unrasPDF($start, $end)
+    {   
+        $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);
 
+        
+        $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end'))->setPaper('a4', 'landscape');
 
+        // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        if ($start == $end) {
+        return $pdf->download('Rekap UNRAS '.$start.'.pdf');
+        } else {
+        return $pdf->download('Rekap UNRAS '.$start.'-'.$end.'.pdf');
+        }
     }
 }
 
