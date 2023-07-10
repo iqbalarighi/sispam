@@ -8,17 +8,70 @@
     }
 </style>
 
+@if ($start == $end && str_contains(strtolower($cariin),'ojk') && $result == true)
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
-
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
-        <br><font size="16pt"><b>DATA KEGIATAN UNJUK RASA</b></font>
-
+        <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA OJK</b></font>
     @if ($start == $end)
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
     @else
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
     @endif
 </div>
+@else
+@if ($unras->count() == 0 && $cariin == null)
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
+   @elseif ($unras->count() == 0 && $cariin != null)
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>REKAP GIAT UNJUK RASA OJK</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
+@elseif (Illuminate\Support\Str::contains(Illuminate\Support\Str::lower($cariin), 'ojk'))
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>REKAP GIAT UNJUK RASA OJK</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
+@elseif ($start == $end && $result == true)
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
+   @else
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>REKAP GIAT UNJUK RASA</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
+ @endif
+@endif
+    
 
 <table width="100%">
     <tr class="font-weight-normal" style="background-color: #D3D3D3;">
@@ -35,7 +88,11 @@
         <th style="text-align: center; vertical-align: middle; width: 65px;" >Sifat<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle;" >Keterangan</th>
     </tr>
-
+    @if ($unras->count() == 0)
+    <tr>
+        <td colspan="12" style="text-align: center; vertical-align: middle; font-size: 18pt;"> <b>NIHIL</b></td>
+    </tr>
+    @endif
     @foreach ($unras as $key => $rasa)
         @if ($rasa->status_kegiatan == 'Rencana')
         <tr style="background-color: #b8fffa;" id="{{$rasa->id}}">

@@ -56,7 +56,7 @@
                     <tr>
                         <td>NIP</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" value="{{$parkir->nip}}" disabled></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" value="{{$parkir->nip}}" name="nip" id="nip" required></td>
                     </tr>
                     <tr>
                         <td>Nama</td>

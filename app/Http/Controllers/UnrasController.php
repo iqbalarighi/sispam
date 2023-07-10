@@ -15,38 +15,44 @@ class UnrasController extends Controller
     public function index(Request $request)
     {
         $cari = $request->date;
+        $cariin = $request->cariin;
         $start =$request->start;
         $end = $request->end;
         if (Auth::user()->role == 'admin') {
             if ($start != null){
                 $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->orderBy('created_at', 'DESC')
+                    ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                     ->paginate(100000);
-                    $unras->appends(['start' => $start, 'end' => $end]);
+                    $unras->appends(['start' => $start, 'end' => $end, 'cariin' => $cariin]);
 
                 $cektest = UnrasModel::whereNull('editor')
                 ->whereBetween('tanggal', [$start, $end])
                 ->get();
-                return view('unras.index', compact('unras','start','end','cari','cektest'));
+                return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
                 } else {
-                    $unras = UnrasModel::orderBy('created_at', 'DESC')
+                    $unras = UnrasModel::orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                 ->paginate(15);
                 }
         } else {
             if ($cari != null) {
                 $unras = UnrasModel::where('tanggal','LIKE', '%'.$cari.'%')
-                        ->orderBy('created_at', 'DESC')
+                        ->orderBy('tanggal', 'DESC')
+                        ->orderBy('waktu', 'DESC')
                         ->paginate(15);
                     $unras->appends(['date' => $cari]);
 
                 } else {
-                $unras = UnrasModel::orderBy('created_at', 'DESC')
+                $unras = UnrasModel::orderBy('tanggal', 'DESC')
+                ->orderBy('waktu', 'DESC')
                 ->paginate(15);
         }
         }
 
 
-        return view('unras.index', compact('unras','start','end','cari'));
+        return view('unras.index', compact('unras','start','end','cari','cariin'));
     }
 
     public function simpan(Request $request)
@@ -171,43 +177,108 @@ public function update(Request $request, $id)
         ->with('berhasil', 'Data UNRAS Terhapus');
      }
 
-    public function export(Request $request, $start, $end, $count)
+    public function exportojk(Request $request, $start, $end, $count, $cariin)
     {
         $cektest = UnrasModel::whereNull('editor')
+        ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+        ->where('status_kegiatan', 'Rencana')
         ->whereBetween('tanggal', [$request->start, $request->end])
         ->get();
 
+
         if ($cektest->count() == 0){
+
         $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
         $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
         
         if ($start == $end) {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count), 'Rekap UNRAS '.$start.'.xlsx');  
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.'.xlsx');  
         } else {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
         }            
     } else {
         return back()
         ->with('warning', 'Lakukan Update Pada Status Kegiatan Berikut');
     }
+
+
+    }
+
+        public function export(Request $request, $start, $end, $count)
+    {
+        $cektest = UnrasModel::whereNull('editor')
+        ->where('status_kegiatan', 'Rencana')
+        ->whereBetween('tanggal', [$request->start, $request->end])
+        ->get();
+        $cariin = '';
+
+        if ($cektest->count() == 0){
+
+        $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
+        $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
+        
+        if ($start == $end) {
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.'.xlsx');  
+        } else {
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
+        }            
+    } else {
+        return back()
+        ->with('warning', 'Lakukan Update Pada Status Kegiatan Berikut');
+    }
+
+
     }
 
 public function unrasPDF($start, $end)
     {   
-        $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+        $cariin = '';
+        $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->where('status_kegiatan', 'Rencana')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->exists();
+
+            $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->orderBy('created_at', 'DESC')
                     ->paginate(100000);
 
-        
-        $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
 
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->download('Rekap UNRAS '.$start.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.$start.'.pdf');
         } else {
-        return $pdf->download('Rekap UNRAS '.$start.'-'.$end.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.$start.'-'.$end.'.pdf');
         }
     }
+
+public function unrasOJK($start, $end, $cariin)
+    {   
+
+        $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);   
+
+        $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->where('status_kegiatan', 'Rencana')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->orderBy('created_at', 'DESC')
+                    ->exists();
+
+        $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
+        
+        // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        if ($start == $end) {
+        return $pdf->stream('Rekap UNRAS '.$start.'.pdf');
+        } else {
+        return $pdf->stream('Rekap UNRAS '.$start.'-'.$end.'.pdf');
+        }
+    }
+
+
+
+
 }
 
 

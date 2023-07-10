@@ -25,7 +25,28 @@
                     text-align-last: center;
                     text-align: center
                     }
-                </style>
+
+                    #myBtn {
+                      display: none;
+                      position: fixed;
+                      bottom: 20px;
+                      right: 30px;
+                      z-index: 99;
+                      font-size: 18px;
+                      border: none;
+                      outline: none;
+                      background-color: black;
+                      color: white;
+                      cursor: pointer;
+                      padding: 10px;
+                      border-radius: 4px;
+                    }
+
+                    #myBtn:hover {
+                      background-color: #555;
+                    }
+</style>
+<button onclick="topFunction()" id="myBtn" title="Go to top">TOP</button>
                     <!-- Modal -->
     <div class="modal fade "
         id="tambah"
@@ -183,7 +204,7 @@
                     </div>
                     <div class="col-md-auto">
         <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
+        <a href="{{route('unras')}}?cariin={{$cariin}}&start={{$start}}&end={{$end}}"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" align="right"></button></a>
         </div>                
                     </div>
                 </div>
@@ -213,18 +234,42 @@
                     </style>
 
                         @if (Auth::user()->role === 'admin')
+                        {{-- ==========xxxx============== --}}
                         @if ($start == null)
 
                         @else
                         @if ($unras->count() == 0)
+                    
+                        @if (!$cariin)
+                        <a href="unrasPDF/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        @else
 
+                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+
+                        @endif
+                    {{-- ==========xxxx=========== --}}
+                        @else
+                        {{-- ==========vvvvv============ --}}
+                        @if ($cariin != null)
+                        <a href="unrasojk/export/{{$start}}/{{$end}}/{{$unras->count()}}/{{$cariin}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
                         @else
                         <a href="unras/export/{{$start}}/{{$end}}/{{$unras->count()}}"><span class="btn btn-primary btn-sm float-left">Export Excel</span></a>
+                        @endif
+                        {{-- ==========vvvvv============ --}}
+                        {{-- =========zzzz============ --}}
+                        @if (!$cariin)
                         <a href="unrasPDF/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        @else
+                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+
+                        @endif
+                        {{-- ===========zzzz========== --}}
                         @endif
                         @endif
-                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
-                        <input type="date" class="" max="{{date('Y-m-d')}}" name="start" > - 
+                    <form action="" method="GET" class="float-right mb-2">
+                        <input type="text" name="cariin" align="left" autocomplete="off" placeholder="Cari Tempat Kegiatan">
+                        Pilih Tanggal: 
+                        <input type="date" class=""  name="start" > - 
                         <input type="date" class=""  name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
@@ -234,8 +279,8 @@
                         <button class="submit bi bi-search"></button>
                     </form>
                        @endif 
-
-                    <div class="table-responsive">
+ 
+                    <div class="table-responsive">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
                         <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">No</th>
@@ -243,12 +288,12 @@
                         <th scope="col" class="align-middle">Waktu</th>
                         <th scope="col" class="align-middle">Tempat Kegiatan</th>
                         <th scope="col" class="align-middle">Pelaksana</th>
-                        <th scope="col" class="align-middle">Tuntutan</th>
-                        <th scope="col" class="align-middle">Bentuk Kegiatan</th>
-                        <th scope="col" class="align-middle">Kisaran Jumlah Massa</th>
-                        <th scope="col" class="align-middle" >Status Kegiatan</th>
+                        <th scope="col" class="align-middle" >Tuntutan</th>
+                        <th scope="col" class="align-middle" style="white-space:normal !important;">Bentuk Kegiatan</th>
+                        <th scope="col" class="align-middle" style="white-space:normal !important;">Kisaran Jumlah Massa</th>
+                        <th scope="col" class="align-middle" style="white-space:normal !important;" >Status Kegiatan</th>
                         <th scope="col" class="align-middle" >Level Risiko</th>
-                        <th scope="col" class="align-middle" >Sifat Kegiatan</th>
+                        <th scope="col" class="align-middle" style="white-space:normal !important;" >Sifat Kegiatan</th>
                         <th scope="col" class="align-middle" >Keterangan</th>
                         @if (Auth::user()->level === 'superadmin')
                         <th scope="col" class="align-middle" >Creator</th>
@@ -276,7 +321,7 @@
                        <td style="white-space:normal !important;">{{$rasa->tempat_kegiatan}}</td> 
                        <td style="white-space:normal !important;">{{$rasa->pelaksana}}</td> 
                        <td style="white-space:normal !important;">{{$rasa->tuntutan}}</td> 
-                       <td>
+                       <td style="white-space:normal !important;">
                         @if ('Lain-lain :' == Str::substr($rasa->bentuk_kegiatan, 0,11))
                             {{Str::substr($rasa->bentuk_kegiatan, 12,1000)}}
                             @else
@@ -284,7 +329,7 @@
                             @endif
                        </td> 
                        <td>{{$rasa->jumlah_massa}} Orang</td> 
-                       <td>
+                       <td style="white-space:normal !important;">
                         @if ('Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11))
                             {{Str::substr($rasa->status_kegiatan, 12,1000)}}
                             @else
@@ -305,12 +350,12 @@
                         <td>{{$rasa->level_resiko}}</td>
                             @endif
                          
-                       <td>{{$rasa->sifat_kegiatan}}</td> 
-                       <td>{{$rasa->keterangan}}</td>
+                       <td style="white-space:normal !important;">{{$rasa->sifat_kegiatan}}</td> 
+                       <td style="white-space:normal !important;">{{$rasa->keterangan}}</td>
                        
                        @if (Auth::user()->level === 'superadmin')
-                       <td>{{$rasa->creator}}</td>
-                       <td>{{$rasa->editor}}</td>
+                       <td style="white-space:normal !important;">{{$rasa->creator}}</td>
+                       <td style="white-space:normal !important;">{{$rasa->editor}}</td>
                        @endif
                         @if (Auth::user()->role === 'admin')
                         <td >
@@ -688,6 +733,26 @@ $("#rese").click(function() {
 );
 });
 </script>
+<script>
+// Get the button
+let mybutton = document.getElementById("myBtn");
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 @endsection
 

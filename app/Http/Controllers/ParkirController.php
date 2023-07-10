@@ -62,7 +62,7 @@ class ParkirController extends Controller
 
          // $simpan->kode = $request->kode;
          $simpan->lantai = $request->lantai;
-         // $simpan->nip = $request->nip;
+          $simpan->nip = $request->nip;
          $simpan->nama = $request->nama;
          $simpan->jabatan = $request->jabatan;
          $simpan->akses = $request->akses;

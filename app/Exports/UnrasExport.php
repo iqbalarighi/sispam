@@ -15,11 +15,12 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
 {
 
-    public function __construct($start , $end, $count)
+    public function __construct($start , $end, $count, $cariin)
     {
         $this->start = $start;
         $this->end = $end;
         $this->count = $count;
+        $this->cariin = $cariin;
     }
 
     /**
@@ -52,14 +53,29 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
     {  
        $start = $this->start;
        $end = $this->end;
-       $user = Auth::user()->role;
+       $cariin = $this->cariin;
 
-                $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->orderBy('created_at', 'DESC')
+    if ($cariin != null) {
+                    $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+                    ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
+                    ->paginate(100000);
+
+                $unras->appends(['start' => $start, 'end' => $end]);
+
+    return view('unras.saveexcel', compact('unras','start','end','cariin'));
+    } else {
+        $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'ASC')
                     ->paginate(100000);
                     $unras->appends(['start' => $start, 'end' => $end]);
                 
     return view('unras.saveexcel', ['unras' => $unras,'start' => $start, 'end' => $end]);
+    }
+
+                
     }
 }
 

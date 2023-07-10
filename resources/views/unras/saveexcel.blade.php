@@ -8,7 +8,11 @@
     <th colspan="14" style="text-align: center; vertical-align: middle;"></th>
 </tr>
 <tr>
-    <th colspan="14" style="text-align: center; vertical-align: middle;">DATA KEGIATAN UNJUK RASA</th>
+@if (Illuminate\Support\Str::contains(Illuminate\Support\Str::lower($cariin), 'ojk'))
+    <th colspan="14" style="text-align: center; vertical-align: middle;">REKAP GIAT UNJUK RASA OJK</th>
+@else
+    <th colspan="14" style="text-align: center; vertical-align: middle;">REKAP GIAT UNJUK RASA</th>
+@endif 
 </tr>
 <tr>   
     @if ($start == $end)

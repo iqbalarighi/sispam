@@ -70,7 +70,6 @@ class AdduserController extends Controller
 
         $update->name = $request->name;
         $update->email = $request->email;
-        $update->password = bcrypt($request->password);
         $update->role = $request->role;
         $update->level = $request->level;
         $update->lokasi_tugas = $request->lokasi;
