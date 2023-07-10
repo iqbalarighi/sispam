@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lantai', 50);
             $table->string('nip', 20)->unique();
             $table->string('nama', 100);
-            $table->string('jabatan', 50);
+            $table->string('jabatan');
             $table->integer('akses')->length(10)->unsigned();
             $table->integer('aktif')->length(10)->unsigned();
             $table->text('keterangan')->nullable();
