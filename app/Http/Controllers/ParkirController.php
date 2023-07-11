@@ -8,10 +8,23 @@ use Illuminate\Pagination\Paginator;
 
 class ParkirController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
-        $parkir = ParkirModel::orderby('kode')->paginate(15);
-        return view('parkir.parkir', ['parkir' => $parkir]);
+        $cari = $request->cari;
+        if ($cari != null) {
+             $parkir = ParkirModel::where('nama', 'LIKE', '%'.$cari.'%')
+             ->orwhere('kode', 'LIKE', '%'.$cari.'%')
+             ->orwhere('lantai', 'LIKE', '%'.$cari.'%')
+             ->orwhere('nip', 'LIKE', '%'.$cari.'%')
+             ->orderby('kode', 'ASC')->paginate(15);
+
+            $parkir->appends(['cari' => $cari]);
+        return view('parkir.parkir', compact('parkir','cari'));
+        } else {
+         $parkir = ParkirModel::orderby('kode', 'ASC')
+         ->paginate(15);
+        return view('parkir.parkir', compact('parkir'));   
+        }
      }
 
     public function simpan(Request $request)

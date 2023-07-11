@@ -30,7 +30,7 @@
                     <a href="{{route('tambah-site')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                
 
                     <style>
                         .xx {
@@ -52,8 +52,15 @@
                             margin: 0em;
                         }
                     </style>
-
-
+                    <style>
+                        a {color:black;}
+                       a:hover { color:rgb(0, 138, 0);}
+                       label:hover { color:rgb(0, 138, 0);}
+                    </style>
+                    <div class="mt-1">
+                    {{$site->onEachSide(1)->links('pagination::bootstrap-5')}}
+                    </div>
+                    <div class="card-body overflow pt-0 pb-0" style="overflow-x: auto;">
 
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
@@ -63,18 +70,13 @@
                         <th>Alamat</th>
                         <th>Nomor Telepon</th>
                        <th style="width:72px; ">Option</th>
-
                     </tr>
-                    <style>
-                        a {color:black;}
-                       a:hover { color:rgb(0, 138, 0);}
-                       label:hover { color:rgb(0, 138, 0);}
-                    </style>
+
                     @foreach($site as $key => $sites) 
                     <tr >
                         <td>{{$site->firstitem() + $key}}</td>
                         <td>{{$sites->kode}}</td> 
-                        <td align="left">{{$sites->nama_gd}}</a></td>
+                        <td align="left">{{$sites->nama_gd}}</td>
                         <td align="left">{{$sites->alamat_gd}}</td>
                         <td>{{$sites->nopon}}</td>
                         <td class="d-flex align-content-center"> 
@@ -96,6 +98,7 @@
                     @endforeach
                     </table>
                 </div>
+                {{$site->onEachSide(1)->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>

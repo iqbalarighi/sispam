@@ -9,7 +9,7 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $site = SiteModel::select('*')->paginate(20);
+        $site = SiteModel::select('*')->paginate(15);
         return view('site.gedung', ['site' => $site]);
      }
 

@@ -76,12 +76,12 @@
 <table width="100%">
     <tr class="font-weight-normal" style="background-color: #D3D3D3;">
         <th style="text-align: center; vertical-align: middle; width:30px;">No.</th>
-        <th style="text-align: center; vertical-align: middle;">Tanggal</th>
+        <th style="text-align: center; vertical-align: middle; ">Tanggal</th>
         <th style="text-align: center; vertical-align: middle; width:70px;">Waktu</th>
-        <th style="text-align: center; vertical-align: middle; width: 120px;">Tempat Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle; width: 120px;">Pelaksana</th>
-        <th style="text-align: center; vertical-align: middle; width: 160px;">Tuntutan</th>
-        <th style="text-align: center; vertical-align: middle; width: 70px;">Bentuk<br/>Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 130px;">Tempat Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 130px;">Pelaksana</th>
+        <th style="text-align: center; vertical-align: middle; width: 200px;">Tuntutan</th>
+        <th style="text-align: center; vertical-align: middle; width: 60px;">Bentuk<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle; width: 70px;">Kisaran Jumlah Massa</th>
         <th style="text-align: center; vertical-align: middle; width: 65px;" >Status<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle; width: 65px;" >Level Risiko</th>
@@ -100,7 +100,7 @@
         <tr>
         @endif
        <td style="text-align: center; vertical-align: middle;">{{$unras->firstitem() + $key}}</td>
-       <td style="text-align: center; vertical-align: middle;">{{Carbon\Carbon::parse($rasa->tanggal)->isoFormat('D MMMM Y')}}</td> 
+       <td style="text-align: center; vertical-align: middle; white-space: normal; ">{{Carbon\Carbon::parse($rasa->tanggal)->isoFormat('D MMMM Y')}}</td> 
        <td style="text-align: center; vertical-align: middle;">{{$rasa->waktu}} WIB</td> 
        <td style="vertical-align: middle; width: 100px; text-align: center;">{{$rasa->tempat_kegiatan}}</td> 
        <td style="vertical-align: middle; width: 100px; text-align: center;">{{$rasa->pelaksana}}</td> 

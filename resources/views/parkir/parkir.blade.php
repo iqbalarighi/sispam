@@ -32,7 +32,7 @@
                     <a href="{{route('tambah-lot')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                
     <!-- Error Handle -->
         @if ($errors->any())
             <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
@@ -71,8 +71,13 @@
             </div>
             
         @endif
-                    <br/>
-                    <table class="table table-bordered table-hover text-center ">
+                <form action="" method="GET" class="m-1">
+                    <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
+                </form>
+                {{$parkir->onEachSide(1)->links('pagination::bootstrap-5')}}
+
+            <div class="card-body overflow pt-0 pb-0" style="overflow-x: auto;">
+                    <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
                         <th class="align-middle" style="max-width:50px; min-width:30px;">No</th>
                         <th class="align-middle">Kode</th>
@@ -92,13 +97,13 @@
                        label:hover { color:rgb(0, 138, 0);}
                     </style>
                     @foreach($parkir as $key => $park) 
-                    <tr >
+                    <tr>
                         <td>{{$parkir->firstitem() + $key}}</td>
                         <td>{{$park->kode}}</td> 
-                        <td>{{$park->lantai}}</a></td>
+                        <td>{{$park->lantai}}</td>
                         <td>{{$park->nip}}</td>
                         <td class="text-left">{{$park->nama}}</td>
-                        <td class="text-left">{{$park->jabatan}}</td>
+                        <td class="text-left" style="white-space: normal;">{{$park->jabatan}}</td>
                         <td>
                             @if ($park->akses == 0)
                             <span class="bi bi-check-square" style="color: green;"></span>
@@ -138,8 +143,7 @@
                     
                     </table>
                 </div>
-                <br/>
-                {{$parkir->links('pagination::bootstrap-5')}}
+                {{$parkir->onEachSide(1)->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>

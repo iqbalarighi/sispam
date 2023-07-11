@@ -22,6 +22,7 @@ class UnrasController extends Controller
             if ($start != null){
                 $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->paginate(100000);
@@ -181,6 +182,7 @@ public function update(Request $request, $id)
     {
         $cektest = UnrasModel::whereNull('editor')
         ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+        ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
         ->where('status_kegiatan', 'Rencana')
         ->whereBetween('tanggal', [$request->start, $request->end])
         ->get();
@@ -234,12 +236,14 @@ public function unrasPDF($start, $end)
     {   
         $cariin = '';
         $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->where('status_kegiatan', 'Rencana')
                     ->whereBetween('tanggal', [$start, $end])
                     ->exists();
 
             $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->orderBy('created_at', 'DESC')
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                     ->paginate(100000);
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
@@ -256,14 +260,15 @@ public function unrasOJK($start, $end, $cariin)
     {   
 
         $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->whereBetween('tanggal', [$start, $end])
-                    ->orderBy('created_at', 'DESC')
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                     ->paginate(100000);   
 
         $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
                     ->where('status_kegiatan', 'Rencana')
                     ->whereBetween('tanggal', [$start, $end])
-                    ->orderBy('created_at', 'DESC')
                     ->exists();
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
