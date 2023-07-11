@@ -107,14 +107,14 @@
                         <td class="text-left" style="white-space: normal;">{{$park->nama}}</td>
                         <td class="text-left" style="white-space: normal;">{{$park->jabatan}}</td>
                         <td>
-                            @if ($park->akses == null)
+                            @if ($park->akses == 0)
                             <span class="bi bi-check-square" style="color: green; font-size: 14pt;"></span>
                             @else
                             <span class="bi bi-x-square" style="color: red; font-size: 14pt;"></span>
                             @endif
                         </td>
                         <td>
-                            @if ($park->aktif == null)
+                            @if ($park->aktif == 0)
                             <span class="bi bi-check-square" style="color: green; font-size: 14pt;"></span>
                             @else
                             <span class="bi bi-x-square" style="color: red; font-size: 14pt;"></span>
