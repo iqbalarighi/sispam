@@ -6,17 +6,18 @@
 @endif
 <style>
                         .xx {
-                            font-size: 10pt;
+                            font-size: 11pt;
                             text-align: center;
                         }
                         .table tr td {
-                            padding:0.2rem;
+                            padding:0.1rem;
                             vertical-align: middle;
                             max-width:100%;
                             white-space: nowrap;
+                            font-size: 11pt;
                         }
                         .table th {
-                            padding:0.2rem;
+                            padding:0.1rem;
                             white-space:nowrap;
                         }
                         label {
@@ -74,8 +75,9 @@
                 <form action="" method="GET" class="m-1">
                     <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
                 </form>
+                <div class="ml-2 mr-2">
                 {{$parkir->onEachSide(1)->links('pagination::bootstrap-5')}}
-
+                </div>
             <div class="card-body overflow pt-0 pb-0" style="overflow-x: auto;">
                     <table class="table table-bordered table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
@@ -100,26 +102,27 @@
                     <tr>
                         <td>{{$parkir->firstitem() + $key}}</td>
                         <td>{{$park->kode}}</td> 
-                        <td>{{$park->lantai}}</td>
+                        <td style="white-space: normal;">{{$park->lantai}}</td>
                         <td>{{$park->nip}}</td>
-                        <td class="text-left">{{$park->nama}}</td>
+                        <td class="text-left" style="white-space: normal;">{{$park->nama}}</td>
                         <td class="text-left" style="white-space: normal;">{{$park->jabatan}}</td>
                         <td>
-                            @if ($park->akses == 0)
-                            <span class="bi bi-check-square" style="color: green;"></span>
+                            @if ($park->akses == null)
+                            <span class="bi bi-check-square" style="color: green; font-size: 14pt;"></span>
                             @else
-                            <span class="bi bi-x-square" style="color: red;"></span>
+                            <span class="bi bi-x-square" style="color: red; font-size: 14pt;"></span>
                             @endif
                         </td>
                         <td>
-                            @if ($park->aktif == 0)
-                            <span class="bi bi-check-square" style="color: green;"></span>
+                            @if ($park->aktif == null)
+                            <span class="bi bi-check-square" style="color: green; font-size: 14pt;"></span>
                             @else
-                            <span class="bi bi-x-square" style="color: red;"></span>
+                            <span class="bi bi-x-square" style="color: red; font-size: 14pt;"></span>
                             @endif
                         </td>
                         <td class="text-left">{{$park->keterangan}}</td>
-                        <td class="d-flex align-content-center"> 
+                        <td > 
+                            <div class="d-flex align-content-center">
                             <a href="/edit-lot/{{$park->id}}" hidden>
                                 <button id="dit{{$parkir->firstitem() + $key}}" type="submit" title="Edit Data ">
                                 </button>
@@ -137,13 +140,16 @@
 
                                     </label>
                             </form>
+                            </div>
                             </td>
                     </tr>
                     @endforeach
                     
                     </table>
                 </div>
+                <div class="ml-2 mr-2">
                 {{$parkir->onEachSide(1)->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>

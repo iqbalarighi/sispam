@@ -10,7 +10,7 @@
                     <a href="{{route('tambah-personil')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                
         @if ($message = Session::get('berhasil'))
             <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
@@ -61,6 +61,11 @@
                             margin: 0em;
                         }
                     </style>
+                <form action="" method="GET" class="m-1 pl-3">
+                    <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
+                </form>
+                    <div class="card-body overflow " style="overflow-x: auto;">
+
                     <div class="table-responsive">
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">

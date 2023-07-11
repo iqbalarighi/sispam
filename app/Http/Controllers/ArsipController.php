@@ -10,10 +10,22 @@ use Illuminate\Support\Facades\File;
 
 class ArsipController extends Controller
 {
-   public function index()
-   {
-        $arsip = ArsipModel::paginate(15);
-        return view('arsip.index', ['arsip' => $arsip]);
+   public function index(Request $request)
+   {    
+    $cari = $request->cari;
+        if ($cari != null) {
+            $arsip = ArsipModel::where('no_arsip', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_arsip', 'LIKE', '%'.$cari.'%')
+            ->orWhere('tahun', 'LIKE', '%'.$cari.'%')
+            ->paginate(15) 
+            ->appends(request()->input());
+
+           return view('arsip.index', compact('arsip')); 
+        } else {
+            $arsip = ArsipModel::paginate(15);
+        return view('arsip.index', compact('arsip'));
+        }
+        
    }
 
    public function gen()

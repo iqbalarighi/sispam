@@ -16,10 +16,11 @@ class ParkirController extends Controller
              ->orwhere('kode', 'LIKE', '%'.$cari.'%')
              ->orwhere('lantai', 'LIKE', '%'.$cari.'%')
              ->orwhere('nip', 'LIKE', '%'.$cari.'%')
-             ->orderby('kode', 'ASC')->paginate(15);
+             ->orderby('kode', 'ASC')
+             ->paginate(15)
+             ->appends(request()->input());
 
-            $parkir->appends(['cari' => $cari]);
-        return view('parkir.parkir', compact('parkir','cari'));
+        return view('parkir.parkir', compact('parkir'));
         } else {
          $parkir = ParkirModel::orderby('kode', 'ASC')
          ->paginate(15);

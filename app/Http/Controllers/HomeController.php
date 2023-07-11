@@ -26,10 +26,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        $personil = PersonilModel::orderby('nip','ASC')->paginate(15);
-        return view('personil.home', ['personil' => $personil]);
+    public function index(Request $request)
+    {   $cari = $request->cari;
+        if ($cari != null) {
+            $personil = PersonilModel::where('nama', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nip', 'LIKE', '%'.$cari.'%')
+            ->orWhere('jabatan', 'LIKE', '%'.$cari.'%')
+            ->orderby('nip','ASC')
+            ->paginate(15)
+            ->appends(request()->input());
+
+        return view('personil.home', compact('personil'));
+        } else {
+         $personil = PersonilModel::orderby('nip','ASC')->paginate(15);
+        return view('personil.home', compact('personil'));  
+        }
+
+        
      }
 
     public function detil($id)

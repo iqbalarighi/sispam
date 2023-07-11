@@ -6,7 +6,7 @@
 @endif
 <style>
                         .xx {
-                            font-size: 10pt;
+                            font-size: 11pt;
                             text-align: center;
                         }
                         .table tr td {
@@ -14,10 +14,11 @@
                             vertical-align: middle;
                             max-width:100%;
                             white-space: nowrap;
+                            font-size: 11pt;
                         }
                         .table th {
                             padding:0.2rem;
-                            white-space:nowrap;
+                            white-space: nowrap;
                         }
                         label {
                             margin: 0em;
@@ -32,7 +33,7 @@
                     <a href="{{route('tambah-arsip')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                
     <!-- Error Handle -->
         @if ($errors->any())
             <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
@@ -71,12 +72,16 @@
             </div>
             
         @endif
-                    <br/>
-                    <table class="table table-hover text-center ">
+                <form action="" method="GET" class="m-1">
+                    <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
+                </form>
+        <div class="card-body overflow " style="overflow-x: auto;">
+
+                    <table class="table table-hover table-striped text-center ">
                     <tr class="font-weight-normal xx ">
                         <th class="align-middle" style="max-width:50px; min-width:30px;">No</th>
                         <th class="align-middle">No Arsip</th>
-                        <th class="align-middle">Nama Arsip</th>
+                        <th class="align-middle" style="">Nama Arsip</th>
                         <th class="align-middle">Tahun</th>
                         <th class="align-middle">Uraian</th>
                         <th class="align-middle">Lokasi Fisik</th>
@@ -93,14 +98,20 @@
                     <tr >
                         <td>{{$arsip->firstitem() + $key}}</td>
                         <td>{{$arsp->no_arsip}}</td> 
-                        <td>{{$arsp->nm_arsip}}</td> 
+                        <td style="white-space: normal;">{{$arsp->nm_arsip}}</td> 
                         <td>{{$arsp->tahun}}</a></td>
-                        <td>{{$arsp->uraian}}</td>
+                        <td style="white-space: normal;">{{$arsp->uraian}}</td>
                         <td>{{$arsp->lokasi_fisik}}</td>
-                        <td><a href="{{ asset('storage/arsip/')}}/{{$arsp->tahun.'/'.$arsp->file }}" target="_blank" rel="noopener noreferrer">{{$arsp->file}}
+                        <td style="white-space: normal; font-size: 16pt"><a href="{{ asset('storage/arsip/')}}/{{$arsp->tahun.'/'.$arsp->file }}" target="_blank" rel="noopener noreferrer" title="{{$arsp->nm_arsip}}">
+                            @if ($arsp->file == null)
+
+                            @else
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                            @endif
                         </a>
                         </td>
-                        <td class="d-flex align-content-center"> 
+                        <td style="vertical-align: middle;"> 
+                            <div class="d-flex justify-content-between">
                             <a href="/edit-arsip/{{$arsp->id}}" hidden>
                                 <button id="dit{{$arsip->firstitem() + $key}}" type="submit" title="Edit Data ">
                                 </button>
@@ -118,6 +129,7 @@
 
                                     </label>
                             </form>
+                        </div>
                             </td>
                     </tr>
                     @endforeach
