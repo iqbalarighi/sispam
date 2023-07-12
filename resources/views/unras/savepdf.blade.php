@@ -29,10 +29,20 @@
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
     @endif
 </div>
+@elseif ($start == $end && Illuminate\Support\Str::contains(Illuminate\Support\Str::lower($cariin), 'ojk'))
+<div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
+<img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
+        <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA OJK</b></font>
+    @if ($start == $end)
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
+    @else
+    <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
+    @endif
+</div>
    @elseif ($unras->count() == 0 && $cariin != null)
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
-        <br><font size="16pt"><b>REKAP GIAT UNJUK RASA OJK</b></font>
+        <br><font size="16pt"><b>REKAP GIAT UNJUK RASA OJKa</b></font>
     @if ($start == $end)
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}}
     @else

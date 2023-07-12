@@ -55,28 +55,27 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
        $end = $this->end;
        $cariin = $this->cariin;
 
-    if ($cariin != null) {
-                    $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+            if ($cariin != null){
+
+                $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
                     ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(100000);
-
-                $unras->appends(['start' => $start, 'end' => $end]);
-
-    return view('unras.saveexcel', compact('unras','start','end','cariin'));
-    } else {
-        $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+                    ->paginate(100000)
+                    ->appends(request()->input());
+                    
+                } else { 
+                
+                    $cariin = '';
+                $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->orderBy('tanggal', 'DESC')
-                    ->orderBy('waktu', 'ASC')
-                    ->paginate(100000);
-                    $unras->appends(['start' => $start, 'end' => $end]);
-                
-    return view('unras.saveexcel', ['unras' => $unras,'start' => $start, 'end' => $end]);
-    }
+                    ->orderBy('waktu', 'DESC')
+                    ->paginate(100000)
+                    ->appends(request()->input());
+            }
 
-                
+         return view('unras.saveexcel', compact('unras','start','end','cariin'));       
     }
 }
 
