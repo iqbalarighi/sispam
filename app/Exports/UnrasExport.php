@@ -59,7 +59,6 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
 
                 $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->paginate(100000)

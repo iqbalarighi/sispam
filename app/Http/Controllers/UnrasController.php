@@ -34,7 +34,6 @@ class UnrasController extends Controller
                 return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
                 } else { 
                 $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->whereBetween('tanggal', [$start, $end])
@@ -200,12 +199,11 @@ public function update(Request $request, $id)
     {
         $cektest = UnrasModel::whereNull('editor')
         ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-        ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
-        ->where('status_kegiatan', 'Rencana')
+        ->orwhere('status_kegiatan', 'Rencana')
         ->whereBetween('tanggal', [$request->start, $request->end])
         ->get();
 
-
+dd($cektest->count());
         if ($cektest->count() == 0){
 
         $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
@@ -254,7 +252,6 @@ public function unrasPDF($start, $end)
     {   
         $cariin = '';
         $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->where('status_kegiatan', 'Rencana')
                     ->whereBetween('tanggal', [$start, $end])
                     ->exists();
@@ -279,7 +276,6 @@ public function unrasOJK($start, $end, $cariin)
 
         $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orwhere('pelaksana','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->paginate(100000);
