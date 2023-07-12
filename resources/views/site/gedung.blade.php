@@ -76,11 +76,12 @@
                     <tr >
                         <td>{{$site->firstitem() + $key}}</td>
                         <td>{{$sites->kode}}</td> 
-                        <td align="left">{{$sites->nama_gd}}</td>
-                        <td align="left">{{$sites->alamat_gd}}</td>
+                        <td align="left" style="white-space: normal;">{{$sites->nama_gd}}</td>
+                        <td align="left" style="white-space: normal;">{{$sites->alamat_gd}}</td>
                         <td>{{$sites->nopon}}</td>
-                        <td class="d-flex align-content-center"> 
-                            <a href="{{route('edit-site')}}/{{$sites->id}}" hidden>
+                        <td> 
+                            <div class="d-flex align-content-center">
+                           <a href="{{route('edit-site')}}/{{$sites->id}}" hidden>
                                 <button id="dit{{$site->firstitem() + $key}}" type="submit" title="Edit Data ">
                                 </button>
                             </a>
@@ -92,7 +93,9 @@
                                 <button id="del{{$site->firstitem() + $key}}" onclick="return confirm('Yakin nih {{$sites->nama_gd}} mau di hapus ?')" type="submit" title="Hapus Data " hidden>
                                     </button>
                                     <label for="del{{$site->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
-                            </form>
+                            </form>     
+                            </div>
+                            
                             </td>
                     </tr>
                     @endforeach

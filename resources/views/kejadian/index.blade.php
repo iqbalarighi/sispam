@@ -124,7 +124,7 @@
                             {{$jadi->jenis_kejadian}}<br>
                             @endif
                         </td>
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->site->nama_gd}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="white-space: normal;">{{$jadi->site->nama_gd}}</td>
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">
                             @if ('Lain-lain :' == Str::substr($jadi->jenis_potensi, 0,11))
                             {{Str::substr($jadi->jenis_potensi, 11,1000)}}
@@ -134,8 +134,8 @@
                         </td>
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->waktu_kejadian)->isoFormat('dddd, D MMMM Y')}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
-                        <td class="d-flex p-0">
-
+                        <td>
+                            <div class="d-flex align-content-center">
                         <a href="{{url('kejadian-edit')}}/{{$jadi->id}}" hidden>
                             <button id="{{$data->firstitem() + $key}}" type="submit" title="Edit Data ">
                             </button>
@@ -152,6 +152,7 @@
                                 <label for="del{{$data->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
                                 </label>
                         </form>
+                    </div>
                         </td>
                          @endif
                     </tr>
