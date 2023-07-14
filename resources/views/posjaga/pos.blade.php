@@ -51,7 +51,7 @@
                     <div class="table-responsive">
                     <table class="table table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
-                        <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">#ID</th>
+                        <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">No.</th>
                         <th scope="col" class="align-middle">Id Jaga</th>
                         <th scope="col" class="align-middle">Pos Jaga</th>
                         <th scope="col" class="align-middle">Gedung</th>
@@ -72,12 +72,12 @@
                     <tr >
                         <td >{{$pos->firstitem() + $key}}</td>
                         <td>{{$p->id_jaga}}</td> 
-                        <td>{{$p->pos_jaga}}</td>
-                        <td>{{$p->site->nama_gd}}</td>
-                        <td>{{$p->area_jaga}}</td>
-                        <td>{{$p->kategori_ring}}</td>
-                        <td>{{$p->personil_jaga}}</td>
-                        <td>{{$p->standar_peralatan}}</td>
+                        <td style="text-align: left;">{{$p->pos_jaga}}</td>
+                        <td style="text-align: left;">{{$p->site->nama_gd}}</td>
+                        <td style="text-align: left;">{{$p->area_jaga}}</td>
+                        <td style="text-align: left;">{{$p->kategori_ring}}</td>
+                        <td style="text-align: left;">{{$p->personil_jaga}}</td>
+                        <td style="text-align: left;">{{$p->standar_peralatan}}</td>
                         <td>
                             <!-- Button to launch a modal -->
                     <span

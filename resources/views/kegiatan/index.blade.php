@@ -103,9 +103,9 @@
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giats->firstitem() + $key}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->no_lap}}</td>
                          @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
-                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->danru}}</td>
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$giat->danru}}</td>
                        @endif
-                        <td onclick="window.location='/giat-detil/{{$giat->id}}'"  title="klik untuk lihat detail">
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'"  title="klik untuk lihat detail" style="text-align: left;">
                     
                     @if ( Carbon\Carbon::parse($giat->created_at)->isoFormat('HHmmss') >= 200000)
                         Shift Malam 19.00 - 07.00 WIB
@@ -118,7 +118,7 @@
                         </td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
-                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->site->nama_gd}}</td>
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$giat->site->nama_gd}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         
                         <td class="d-flex p-0" >

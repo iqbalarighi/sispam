@@ -98,9 +98,9 @@
                     <tr >
                         <td>{{$arsip->firstitem() + $key}}</td>
                         <td>{{$arsp->no_arsip}}</td> 
-                        <td style="white-space: normal;">{{$arsp->nm_arsip}}</td> 
+                        <td style="white-space: normal; text-align: left;">{{$arsp->nm_arsip}}</td> 
                         <td>{{$arsp->tahun}}</a></td>
-                        <td style="white-space: normal;">{{$arsp->uraian}}</td>
+                        <td style="white-space: normal; text-align: left;">{{$arsp->uraian}}</td>
                         <td>{{$arsp->lokasi_fisik}}</td>
                         <td style="white-space: normal; font-size: 16pt"><a href="{{ asset('storage/arsip/').'/'.$arsp->tahun.'/'.$arsp->file }}" target="_blank" rel="noopener noreferrer" title="{{$arsp->nm_arsip}}">
                             @if ($arsp->file == null)

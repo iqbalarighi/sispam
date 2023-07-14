@@ -115,17 +115,17 @@
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$data->firstitem()+$key}}</td>
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->no_lap}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->user_pelapor}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="text-align: left;">{{$jadi->user_pelapor}}</td>
                         @endif
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="text-align: left;">
                             @if ('Lain-lain :' == Str::substr($jadi->jenis_kejadian, 0,11))
                             {{Str::substr($jadi->jenis_kejadian, 11,1000)}}
                             @else
                             {{$jadi->jenis_kejadian}}<br>
                             @endif
                         </td>
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="white-space: normal;">{{$jadi->site->nama_gd}}</td>
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="white-space: normal; text-align: left;">{{$jadi->site->nama_gd}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="text-align: left;">
                             @if ('Lain-lain :' == Str::substr($jadi->jenis_potensi, 0,11))
                             {{Str::substr($jadi->jenis_potensi, 11,1000)}}
                             @else

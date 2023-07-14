@@ -102,12 +102,12 @@
                         <td>{{$trjg->firstitem() + $key}}</td>
                         <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->no_trj}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
-                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->danru}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$item->danru}}</td>
                        @endif
                         <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
-                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->shift}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$item->shift}}</td>
                         <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('HH:mm')}} WIB</td>
-                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail">{{$item->site->nama_gd}}</td>
+                        <td onclick="window.location='trj-detil/{{$item->no_trj}}/{{$item->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$item->site->nama_gd}}</td>
                          @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         <td>
                             <form action="/hapus-jaga/{{ $item->id }}" method="post">

@@ -133,7 +133,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <select class="form-select pb-0 pt-0" id="sifat" name="sifat" aria-label="Default select example" >
+                            <select class="form-select pb-0 pt-0" id="sifat" name="sifat" aria-label="Default select example" required>
                                 <option value="" disabled selected >Sifat Kegiatan</option>
                                 <option value="Terencana">Terencana</option>
                                 <option value="Tidak Terencana">Tidak Terencana</option>
@@ -318,9 +318,9 @@
                        <td>{{$unras->firstitem() + $key}}</td>
                        <td>{{Carbon\Carbon::parse($rasa->tanggal)->isoFormat('D MMMM Y')}}</td> 
                        <td>{{$rasa->waktu}} WIB</td> 
-                       <td style="white-space:normal !important;">{{$rasa->tempat_kegiatan}}</td> 
-                       <td style="white-space:normal !important;">{{$rasa->pelaksana}}</td> 
-                       <td style="white-space:normal !important;">{{$rasa->tuntutan}}</td> 
+                       <td style="white-space:normal !important; text-align: left;">{{$rasa->tempat_kegiatan}}</td> 
+                       <td style="white-space:normal !important; text-align: left;">{{$rasa->pelaksana}}</td> 
+                       <td style="white-space:normal !important; text-align: left;">{{$rasa->tuntutan}}</td> 
                        <td style="white-space:normal !important;">
                         @if ('Lain-lain :' == Str::substr($rasa->bentuk_kegiatan, 0,11))
                             {{Str::substr($rasa->bentuk_kegiatan, 12,1000)}}
@@ -461,7 +461,7 @@ if ($unras->count() == 0) {
                     </tr>
                     <tr>
                         <td>
-                            <select class="form-select pb-0 pt-0" id="sifat" name="sifat2" aria-label="Default select example" >
+                            <select class="form-select pb-0 pt-0" id="sifat" name="sifat2" aria-label="Default select example" required>
                                 <option value="" disabled selected >Sifat Kegiatan</option>
                                 <option value="Terencana" {{ 'Terencana' == $rasa->sifat_kegiatan ? 'selected' : '' }}>Terencana</option>
                                 <option value="Tidak Terencana" {{ 'Tidak Terencana' == $rasa->sifat_kegiatan ? 'selected' : '' }}>Tidak Terencana</option>
