@@ -5,6 +5,7 @@
         font-size: 10.5pt;
         border: 1px solid black;
         border-collapse: collapse;
+        padding: 0.1rem;
     }
 </style>
 
@@ -112,9 +113,9 @@
        <td style="text-align: center; vertical-align: middle;">{{$unras->firstitem() + $key}}</td>
        <td style="text-align: center; vertical-align: middle; white-space: normal; ">{{Carbon\Carbon::parse($rasa->tanggal)->isoFormat('D MMMM Y')}}</td> 
        <td style="text-align: center; vertical-align: middle;">{{$rasa->waktu}} WIB</td> 
-       <td style="vertical-align: middle; width: 100px; text-align: center;">{{$rasa->tempat_kegiatan}}</td> 
-       <td style="vertical-align: middle; width: 100px; text-align: center;">{{$rasa->pelaksana}}</td> 
-       <td style="vertical-align: middle; width: 100px; text-align: center;">{{$rasa->tuntutan}}</td> 
+       <td style="vertical-align: middle; width: 100px; text-align: left;">{{$rasa->tempat_kegiatan}}</td> 
+       <td style="vertical-align: middle; width: 100px; text-align: left;">{{$rasa->pelaksana}}</td> 
+       <td style="vertical-align: middle; width: 100px; text-align: left;">{{$rasa->tuntutan}}</td> 
        <td style="text-align: center; vertical-align: middle;">
         @if ('Lain-lain :' == Str::substr($rasa->bentuk_kegiatan, 0,11))
             {{Str::substr($rasa->bentuk_kegiatan, 12,1000)}}

@@ -78,6 +78,8 @@
   height: 150px;
 }
 </style>
+
+{{-- ini style buat gambar --}}
 <style>
 .containerx {
   position: relative;

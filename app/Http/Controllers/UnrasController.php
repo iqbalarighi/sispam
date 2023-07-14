@@ -34,9 +34,13 @@ class UnrasController extends Controller
                 return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
                 } else { 
                 $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orderBy('tanggal', 'DESC')
-                    ->orderBy('waktu', 'DESC')
                     ->whereBetween('tanggal', [$start, $end])
+                    ->orwhere(function ($query) use ($cariin,$start,$end) {
+                        $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orderBy('waktu', 'DESC')
+                    ->orderBy('tanggal', 'DESC')
                     ->paginate(100000)
                     ->appends(request()->input());
 
@@ -199,11 +203,14 @@ public function update(Request $request, $id)
     {
         $cektest = UnrasModel::whereNull('editor')
         ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-        ->orwhere('status_kegiatan', 'Rencana')
         ->whereBetween('tanggal', [$request->start, $request->end])
+        ->orwhere(function ($query) use ($cariin,$start,$end) {
+            $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                  ->whereBetween('tanggal', [$start, $end]);
+        })
+        ->where('status_kegiatan', 'Rencana')
         ->get();
 
-dd($cektest->count());
         if ($cektest->count() == 0){
 
         $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
@@ -225,8 +232,8 @@ dd($cektest->count());
         public function export(Request $request, $start, $end, $count)
     {
         $cektest = UnrasModel::whereNull('editor')
-        ->where('status_kegiatan', 'Rencana')
         ->whereBetween('tanggal', [$request->start, $request->end])
+        ->where('status_kegiatan', 'Rencana')
         ->get();
         $cariin = '';
 
@@ -251,8 +258,7 @@ dd($cektest->count());
 public function unrasPDF($start, $end)
     {   
         $cariin = '';
-        $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->where('status_kegiatan', 'Rencana')
+        $result = UnrasModel::where('status_kegiatan', 'Rencana')
                     ->whereBetween('tanggal', [$start, $end])
                     ->exists();
 
@@ -274,16 +280,24 @@ public function unrasPDF($start, $end)
 public function unrasOJK($start, $end, $cariin)
     {   
 
-        $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orderBy('tanggal', 'DESC')
+        $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->orwhere(function ($query) use ($cariin,$start,$end) {
+                        $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(100000);
-                    $unras->appends(['start' => $start, 'end' => $end, 'cariin' => $cariin]);
+                    ->orderBy('tanggal', 'DESC')
+                    ->paginate(100000)
+                    ->appends(request()->input());
 
         $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->where('status_kegiatan', 'Rencana')
                     ->whereBetween('tanggal', [$start, $end])
+                    ->orwhere(function ($query) use ($cariin,$start,$end) {
+                        $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                              ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->where('status_kegiatan', 'Rencana')
                     ->exists();
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');

@@ -25,14 +25,10 @@
                             }
                         </style>
                     <div class="table-responsive mt-2" style="overflow-x: auto;">
-            <form action="#" method="post" id="form" enctype="multipart/form-data">
+            <form action="{{route('simpan_pos')}}" method="post" id="form" enctype="multipart/form-data">
             @csrf
                     <table class="table mx-auto" style="width: 70%; ">
-                    <tr>
-                        <td>Id Jaga</td>
-                        <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="id" id="id" required></td> 
-                    </tr>
+
                     <tr>
                         <td>Pos Jaga</td>
                         <td>:</td>
@@ -41,7 +37,14 @@
                     <tr>
                         <td>Gedung</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="gedung" id="gedung" required></td>
+                        <td>
+                            <select class="form-select pb-0 pt-0 text-capitalize" id="gedung" name="gedung" required>
+                                <option value="" disabled selected>Pilih Gedung</option>
+                                @foreach($site as $item)
+                                <option value="{{$item->id}}">{{$item->nama_gd}}</option>
+                                @endforeach
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>Area Jaga</td>
@@ -56,7 +59,7 @@
                     <tr>
                         <td>Personil Jaga</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="jaga" id="jaga" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="person" id="person" required></td>
                     </tr>
                     <tr>
                         <td>Standar Peralatan</td>
@@ -66,7 +69,7 @@
                     <tr>
                         <td>Foto</td>
                         <td>:</td>
-                        <td><input type="file" class="form-control pb-0 pt-0" name="foto" id="foto" accept=".png, .jpg, .jpeg" required></td>
+                        <td><input type="file" class="form-control pb-0 pt-0" name="foto" id="foto" accept=".png, .jpg, .jpeg" multiple></td>
                     </tr>
                     </table>
                     <center>

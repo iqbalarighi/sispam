@@ -241,10 +241,10 @@
                         @if ($unras->count() == 0)
                     
                         @if (!$cariin)
-                        <a href="unrasPDF/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        <a href="unrasPDF/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
                         @else
 
-                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
 
                         @endif
                     {{-- ==========xxxx=========== --}}
@@ -258,9 +258,9 @@
                         {{-- ==========vvvvv============ --}}
                         {{-- =========zzzz============ --}}
                         @if (!$cariin)
-                        <a href="unrasPDF/{{$start}}/{{$end}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        <a href="unrasPDF/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
                         @else
-                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
+                        <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
 
                         @endif
                         {{-- ===========zzzz========== --}}

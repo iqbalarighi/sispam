@@ -73,17 +73,17 @@ Route::get('/edit-site/{id}', [SiteController::class, 'edit'])->middleware('auth
 Route::delete('/hapus-site/{id}', [SiteController::class, 'hapus'])->middleware('auth');
 
 // Pos Jaga Section
-Route::get('/tambah-pos', function () {
-    return view('posjaga.input');
-})->middleware('auth')->name('tambah-pos');
+
 Route::get('/edit-pos', function () {
     return view('posjaga.edit');
 })->middleware('auth')->name('edit-pos');
+Route::get('/tambah-pos', [PosjagaController::class, 'tambah'])->middleware('auth')->name('tambah-pos');
 Route::get('/posjaga', [PosjagaController::class, 'index'])->middleware('auth')->name('posjaga');
 Route::put('/pos-update/{id}',[PosjagaController::class, 'update'])->middleware('auth');
 Route::get('/hapus-foto/{id}', [PosjagaController::class, 'hapusFoto'])->middleware('auth');
 Route::get('/edit-pos/{id}', [PosjagaController::class, 'edit'])->middleware('auth');
 Route::delete('/hapus-pos/{id}', [PosjagaController::class, 'hapus'])->middleware('auth');
+Route::post('/simpan-pos', [PosjagaController::class, 'simpan'])->middleware('auth')->name('simpan_pos');
 
 //Lot Parkir Section
 Route::get('/tambah-lot', function () {

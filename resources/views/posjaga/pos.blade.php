@@ -42,7 +42,7 @@
                         }
                         .table th {
                             padding:0.3rem;
-                            white-space:nowrap;
+                            white-space:normal;
                         }
                         label {
                             margin: 0em;
@@ -57,7 +57,7 @@
                         <th scope="col" class="align-middle">Gedung</th>
                         <th scope="col" class="align-middle">Area Jaga</th>
                         <th scope="col" class="align-middle">Kategori Ring</th>
-                        <th scope="col" class="align-middle">Personil Jaga</th>
+                        <th scope="col" class="align-middle">Kekuatan Personil</th>
                         <th scope="col" class="align-middle">Standar Peralatan</th>
                         <th scope="col" class="align-middle">Foto</th>
                        <th class="align-middle" style="width:72px; ">Option</th>
@@ -80,16 +80,22 @@
                         <td style="text-align: left;">{{$p->standar_peralatan}}</td>
                         <td>
                             <!-- Button to launch a modal -->
+                            @foreach (explode('|', $p->foto) as $key => $item)
                     <span
                         data-toggle="modal"
-                        data-target="#bpjs"
+                        data-target="#jaga{{$p->id.$key}}"
                         style="cursor: zoom-in;">
-                        <font color="blue">{{$p->foto}}</font>
+                        <font color="blue">
+  
+                            
+                        <i class="bi bi-images pl-1 pr-1" style="font-size: 14pt;"></i>
+                           
+                        </font>
                     </span>
                   
                     <!-- Modal -->
                     <div class="modal fade"
-                        id="bpjs"
+                        id="jaga{{$p->id.$key}}"
                         tabindex="-1"
                         role="dialog"
                         aria-labelledby="exampleModalLabel"
@@ -99,8 +105,8 @@
                             <div class="modal-content">
                                 <!-- Add image inside the body of modal -->
                                 <div align="center" class="modal-body center">
-                                    <a href="{{asset('storage/posjaga')}}/{{$p->id_jaga}}/{{$p->foto}}" download="" >
-                                    <img src="{{asset('storage/posjaga')}}/{{$p->id_jaga}}/{{$p->foto}}"
+                                    <a href="{{asset('storage/posjaga')}}/{{$p->id_jaga}}/{{$item}}" download="" >
+                                    <img src="{{asset('storage/posjaga')}}/{{$p->id_jaga}}/{{$item}}"
                                         alt="Click on button"
                                         width="350px" /></a>
                                        <br/> Klik Gambar Untuk Download
@@ -116,6 +122,7 @@
                             </div>
                         </div>
                     </div>
+                     @endforeach
                         </td>
                         <td class="d-flex align-items-md-center" >
                         <a href="{{route('edit-pos')}}/{{$p->id}}" hidden>
@@ -142,3 +149,5 @@
     </div>
 </div>
 @endsection
+
+{{-- lanjut edit hapus foto --}}

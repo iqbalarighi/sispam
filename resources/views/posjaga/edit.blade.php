@@ -10,6 +10,46 @@
 
                 </div>
 
+<style>
+.containerx {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.containerx:hover .image {
+  opacity: 0.3;
+}
+
+.containerx:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 24px;
+  padding: auto;
+}
+</style>
                 <div class="card-body overflow " style="overflow-x: auto;">
                     @if (session('status'))
                         <div id="timeout" class="alert alert-success" role="alert">
@@ -71,65 +111,48 @@
                         <td>:</td>
                         <td><input type="text" class="form-control pb-0 pt-0" name="alat" id="alat" value="{{$pos->standar_peralatan}}" required></td>
                     </tr>
+
+                    @if ($pos->foto == null)
                     <tr>
-                        <td>Foto</td>
+                        <td><b>Upload Foto</b></td>
                         <td>:</td>
                         <td>
-<div class="col"> 
-        <table align="center" class="mt-1 table table-sm" style="max-width: 20%;">
-        <tr>
-            <td align="center">
-         <div class="container mt-3">
-        <div class="card" align="center">
-            <div class="card-body p-0"> 
-                
-             @if ($pos->foto == null)
-                   <div style="margin: auto;">
-                    <div class="preview3">
-                        <img id="file-ip-1-preview3" class="relative object-cover" hidden>
-                    </div>
-                    <input type="file" class="form-control pb-0 pt-0" name="foto" accept=".jpg, .jpeg, .png" id="foto" onchange="alert('Klik Tombol Update Untuk Menyimpan Perubahan'); showPreview3(event); myFunction3(); " hidden>  
-                    <div id="myDIV3">
-                      
-                <label align="center" for="foto" style="cursor: pointer; font-size: 70px; margin: auto;" title="Klik untuk Upload Kartu Tanda Anggota" class="bi bi-image">
-                </label>
-                    </div>
-                </div> 
-              @else
-                      <div class="preview3" >
-             <img id="file-ip-1-preview3" hidden>
-                </div>
-                <div id="myDIV3">
-                      <img src="{!! asset('/storage/posjaga/'); !!}/{{$pos->id_jaga}}/{{$pos->foto}}" title="Klik gambar untuk ganti Kartu KTA" width="150px" />
-                  </div>
-                <div class="col">
-             <input type="file" class="form-control pb-0 pt-0" name="foto" accept=".jpg, .jpeg, .png" id="foto" alt="klik untuk ganti foto" onchange="alert('Klik Tombol Update Untuk Menyimpan Perubahan'); showPreview3(event); myFunction3(); " hidden />
-              </div>
-              @endif
-            </div>
-            </div>
-        </div>
-                </td>
-            </tr>
-            <tr align="center">
-            <td>
-            @if ($pos->foto == null)    
-                <label align="center" for="foto" style="cursor: pointer; font-size: 25px;" title="Klik untuk Upload Foto" class="bi bi-upload">
-                </label>
-            @else
-                 <label title="Klik untuk Ganti Foto" align="center" for="foto" style="cursor: pointer; font-size: 25px;" class="bi bi-repeat">
-                 </label>
-                &nbsp;
-               <a href="/hapus-foto/{{$pos->id}}" title="Klik untuk hapus Foto" onclick="return confirm('Yakin Fotonya mau di hapus ?')" style="color:black;">
-                <i class="bi bi-file-earmark-x-fill" style="font-size: 25px;"></i>
-            </a>
-            @endif
-             </td>
-        </tr>
-    </table>
-    </div>
+                            <input type="file" name="images[]"
+                                    class="block w-full mt-1 rounded-md"
+                                    placeholder="" 
+                                    accept=".jpg, .jpeg, .png" 
+                                    multiple/>
+
                         </td>
                     </tr>
+                    @else
+                    <tr>
+                        <td colspan="3"><b>Foto </b>: <br> <p></p>
+                        <div class="row">
+                            @foreach(explode('|',$pos->foto) as $item)
+
+                                <div class="containerx">
+                                
+                               <img class="image" src="{{asset('storage/posjaga')}}/{{$pos->id_jaga}}/{{$item}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
+                            <div class="middle">
+                            <div class="text"><a href="/giat/hapus-foto/{{$item}}/{{$pos->id}}" title="Hapus Foto" onclick="return confirm('Yakin foto dokumentasi mau di hapus ?')"><i class="bi bi-trash3"></i></a></div>
+                          </div>
+                            </div>
+
+                            @endforeach
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"> Tambah Gambar : <br>
+                            <input type="file" name="images[]"
+                                    class="block w-full mt-1 rounded-md"
+                                    placeholder="" 
+                                    accept=".jpg, .jpeg, .png" 
+                                    multiple/>
+                        </td> 
+                    </tr>
+                    @endif
                     </table>
                     <center>
                     <button type="submit" class="btn btn-primary" style = "text-align:center">
