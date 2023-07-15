@@ -1,9 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
-@if (Auth::user()->role === 'user')
+{{-- @if (Auth::user()->role === 'user')
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
-@endif
+@endif --}}
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">

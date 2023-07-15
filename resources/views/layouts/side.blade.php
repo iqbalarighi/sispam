@@ -118,6 +118,9 @@
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
+        @if (Auth::user()->level === 'koordinator')
+            <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
+        @endif
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
