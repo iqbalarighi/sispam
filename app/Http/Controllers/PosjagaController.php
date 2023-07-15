@@ -44,20 +44,33 @@ class PosjagaController extends Controller
          return view('posjaga.input', compact('site'));
     }
 
-        public function hapusFoto($id)
+
+    public function hapusFoto($item, $id)
     {
-        $hapus = PosjagaModel::findOrFail($id);
-        $folder = $hapus->id_jaga;
-        $foto = $hapus->foto;
+        $foto = PosjagaModel::findOrFail($id);
+        $del = explode('|',$foto->foto);
+        $items = $del;
 
-       $del = File::delete(public_path('storage/posjaga/'.$folder.'/'.$foto.''));
+        $hapuspoto = [$item];
+        $poto = [];
 
-       if ($del == true) {
-            $hapus->foto = '';
-            $hapus->save();
-       } 
-       return back()
-             ->with('status','Foto Profil Terhapus');
+        $collection = collect($items)->reject(function ($value) use ($hapuspoto) {
+            return in_array($value, $hapuspoto);
+        });
+
+            foreach ($collection as $file) {
+            $image_name = $file;
+            $poto[] = $image_name;
+            }
+
+        $dele = File::delete(public_path('storage/posjaga/'.$foto->id_jaga.'/'.$item));
+
+        if ($dele == true) {
+        $foto->foto = implode('|', $poto);
+        $foto->save();
+        }
+        return back()
+        ->with('status','Foto Pos Jaga Terhapus !');
     }
 
     public function simpan(Request $request)
@@ -157,9 +170,13 @@ class PosjagaController extends Controller
         $simpan->foto = $tambah;
         $simpan->save();
 
-        return redirect('posjaga')
-            ->with('berhasil','Data berhasil di Update'); 
+        return back()
+            ->with('status','Data berhasil di Update'); 
     }
 }
 
+
+
+
 }
+ 

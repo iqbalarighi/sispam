@@ -80,7 +80,7 @@ Route::get('/edit-pos', function () {
 Route::get('/tambah-pos', [PosjagaController::class, 'tambah'])->middleware('auth')->name('tambah-pos');
 Route::get('/posjaga', [PosjagaController::class, 'index'])->middleware('auth')->name('posjaga');
 Route::put('/pos-update/{id}',[PosjagaController::class, 'update'])->middleware('auth');
-Route::get('/hapus-foto/{id}', [PosjagaController::class, 'hapusFoto'])->middleware('auth');
+Route::get('/pos/hapus-foto/{item}/{id}', [PosjagaController::class, 'hapusFoto'])->middleware('auth');
 Route::get('/edit-pos/{id}', [PosjagaController::class, 'edit'])->middleware('auth');
 Route::delete('/hapus-pos/{id}', [PosjagaController::class, 'hapus'])->middleware('auth');
 Route::post('/simpan-pos', [PosjagaController::class, 'simpan'])->middleware('auth')->name('simpan_pos');

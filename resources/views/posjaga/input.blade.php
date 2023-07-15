@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Data Pos Jaga') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Pos Jaga') }}
                     <a href="{{route('posjaga')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>
@@ -32,7 +32,7 @@
                     <tr>
                         <td>Pos Jaga</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="pos" id="pos" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="pos" id="pos" placeholder="Nama Pos" required></td>
                     </tr>
                     <tr>
                         <td>Gedung</td>
@@ -49,17 +49,17 @@
                     <tr>
                         <td>Area Jaga</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="area" id="area" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="area" id="area" placeholder="Area Penjagaan" required></td>
                     </tr>
                     <tr>
                         <td>Kategori Ring</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="ring" id="ring" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="ring" id="ring" ></td>
                     </tr>
                     <tr>
-                        <td>Personil Jaga</td>
+                        <td>Kekuatan Personil</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="person" id="person" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="person" id="person" placeholder="Jumlah Personil di Pos Jaga" required></td>
                     </tr>
                     <tr>
                         <td>Standar Peralatan</td>
@@ -84,4 +84,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection 

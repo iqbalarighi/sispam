@@ -73,7 +73,7 @@
                         <td >{{$pos->firstitem() + $key}}</td>
                         <td>{{$p->id_jaga}}</td> 
                         <td style="text-align: left;">{{$p->pos_jaga}}</td>
-                        <td style="text-align: left;">{{$p->site->nama_gd}}</td>
+                        <td style="text-align: left; white-space: normal;">{{$p->site->nama_gd}}</td>
                         <td style="text-align: left;">{{$p->area_jaga}}</td>
                         <td style="text-align: left;">{{$p->kategori_ring}}</td>
                         <td style="text-align: left;">{{$p->personil_jaga}}</td>
@@ -124,7 +124,8 @@
                     </div>
                      @endforeach
                         </td>
-                        <td class="d-flex align-items-md-center" >
+                        <td>
+                        <div class="d-flex align-items-md-center" >
                         <a href="{{route('edit-pos')}}/{{$p->id}}" hidden>
                             <button id="{{$pos->firstitem() + $key}}" type="submit" title="Edit Data {{$p->name}}">
                             </button>
@@ -138,6 +139,7 @@
                                 </button>
                                 <label for="del{{$pos->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </form>
+                    </div>
                         </td>
                     </tr>
                     @endforeach
@@ -150,4 +152,4 @@
 </div>
 @endsection
 
-{{-- lanjut edit hapus foto --}}
+{{-- lanjut edit hapus foto --}} 

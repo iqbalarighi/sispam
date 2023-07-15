@@ -43,7 +43,7 @@
 .containerx:hover .middle {
   opacity: 1;
 }
-
+ 
 .text {
   color: black;
   font-size: 24px;
@@ -52,9 +52,11 @@
 </style>
                 <div class="card-body overflow " style="overflow-x: auto;">
                     @if (session('status'))
+                    <center>
                         <div id="timeout" class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                    </center>
                     @endif
                         <style>
                             .table tr td{
@@ -135,7 +137,7 @@
                                 
                                <img class="image" src="{{asset('storage/posjaga')}}/{{$pos->id_jaga}}/{{$item}}" style="width: 100%; margin-bottom: 5pt"> &nbsp;
                             <div class="middle">
-                            <div class="text"><a href="/giat/hapus-foto/{{$item}}/{{$pos->id}}" title="Hapus Foto" onclick="return confirm('Yakin foto dokumentasi mau di hapus ?')"><i class="bi bi-trash3"></i></a></div>
+                            <div class="text"><a href="/pos/hapus-foto/{{$item}}/{{$pos->id}}" title="Hapus Foto" onclick="return confirm('Yakin fotonya mau di hapus ?')"><i class="bi bi-trash3"></i></a></div>
                           </div>
                             </div>
 

@@ -57,8 +57,6 @@ class AdduserController extends Controller
 
     public function updateuser(Request $request, $id)
     {   
-            
-
         $update = User::findOrFail($id);
 
         if ($request->password != null) {
