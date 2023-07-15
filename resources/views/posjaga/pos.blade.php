@@ -12,7 +12,7 @@
                     <a href="{{route('tambah-pos')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
 
-                <div class="card-body overflow " style="overflow-x: auto;">
+                
         @if ($message = Session::get('berhasil'))
             <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
@@ -48,6 +48,8 @@
                             margin: 0em;
                         }
                     </style>
+
+                    <div class="card-body overflow " style="overflow-x: auto;">
                     <div class="table-responsive">
                     <table class="table table-striped table-hover text-center ">
                     <tr class="font-weight-normal xx ">
@@ -78,7 +80,9 @@
                         <td style="text-align: left;">{{$p->kategori_ring}}</td>
                         <td style="text-align: left;">{{$p->personil_jaga}}</td>
                         <td style="text-align: left;">{{$p->standar_peralatan}}</td>
-                        <td>
+                        <td> 
+                            @if ($p->foto == null)
+                            @else
                             <!-- Button to launch a modal -->
                             @foreach (explode('|', $p->foto) as $key => $item)
                     <span
@@ -123,21 +127,22 @@
                         </div>
                     </div>
                      @endforeach
+                     @endif
                         </td>
                         <td>
                         <div class="d-flex align-items-md-center" >
                         <a href="{{route('edit-pos')}}/{{$p->id}}" hidden>
-                            <button id="{{$pos->firstitem() + $key}}" type="submit" title="Edit Data {{$p->name}}">
+                            <button id="{{$p->id}}" type="submit" title="Edit Data {{$p->name}}">
                             </button>
                         </a>
-                        <label for="{{$pos->firstitem() + $key}}" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
+                        <label for="{{$p->id}}" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
                             &nbsp;
-                        <form action="#" method="post">
+                        <form action="{{url('/hapus-pos/'.$p->id)}}" method="get">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="del{{$pos->firstitem() + $key}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data {{$p->name}}" hidden>
+                            <button id="del{{$p->id}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data {{$p->name}}" hidden>
                                 </button>
-                                <label for="del{{$pos->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
+                                <label for="del{{$p->id}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </form>
                     </div>
                         </td>

@@ -12,9 +12,11 @@
 
                 <div class="card-body overflow " >
                     @if (session('status'))
+                    <center>
                         <div id="timeout" class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
+                    </center>
                     @endif
                         <style>
                             .table tr td {

@@ -32,8 +32,20 @@ class PosjagaController extends Controller
     public function hapus($id)
     {
         $hapus = PosjagaModel::findOrFail($id);
-        $hapus->delete();
-        return redirect('posjaga.pos');
+        $idjg = $hapus->id_jaga;
+    if ($hapus->foto != null) {
+           $del = File::deleteDirectory(public_path('storage/posjaga/'.$idjg));
+
+       if ($del == true) {
+            $hapus->delete();
+       }
+
+} else {
+    $hapus->delete();
+}
+
+return back()
+       ->with('berhasil','Pos Jaga '.$hapus->pos_jaga.' Sudah Terhapus');
 
     }
 
@@ -120,7 +132,7 @@ class PosjagaController extends Controller
         $simpan->save();
 
             return back()
-            ->with('berhasil', 'Laporan Berhasil Terkirim');
+            ->with('status', 'Pos Jaga Berhasil Dibuat');
     }
 
     public function update(Request $request, $id)
