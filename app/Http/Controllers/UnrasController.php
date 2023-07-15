@@ -20,19 +20,7 @@ class UnrasController extends Controller
         $end = $request->end;
         if (Auth::user()->role == 'admin') {
             if ($start != null){
-                if (!$cariin){
-                    $cariin = '';
-                $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->orderBy('tanggal', 'DESC')
-                    ->orderBy('waktu', 'DESC')
-                    ->paginate(100000)
-                    ->appends(request()->input());
-
-                $cektest = UnrasModel::whereNull('editor')
-                ->whereBetween('tanggal', [$start, $end])
-                ->get();
-                return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
-                } else { 
+                if ($cariin != null){
                 $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
                     ->whereBetween('tanggal', [$start, $end])
                     ->orwhere(function ($query) use ($cariin,$start,$end) {
@@ -41,6 +29,20 @@ class UnrasController extends Controller
                     })
                     ->orderBy('waktu', 'DESC')
                     ->orderBy('tanggal', 'DESC')
+                    ->paginate(100000)
+                    ->appends(request()->input());
+
+                $cektest = UnrasModel::whereNull('editor')
+                ->whereBetween('tanggal', [$start, $end])
+                ->get();
+                return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
+
+                } else { 
+                    
+                    $cariin = '';
+                $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                     ->paginate(100000)
                     ->appends(request()->input());
 
