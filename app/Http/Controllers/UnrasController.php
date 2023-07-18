@@ -219,9 +219,9 @@ public function update(Request $request, $id)
         $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
         
         if ($start == $end) {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.'.xlsx');  
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.xlsx');  
         } else {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').' - '.Carbon::parse($end)->isoFormat('D MMMM Y').'.xlsx');
         }            
     } else {
         return back()
@@ -245,9 +245,9 @@ public function update(Request $request, $id)
         $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
         
         if ($start == $end) {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.'.xlsx');  
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.xlsx');  
         } else {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').' - '.Carbon::parse($end)->isoFormat('D MMMM Y').'.xlsx');
         }            
     } else {
         return back()
@@ -273,9 +273,9 @@ public function unrasPDF($start, $end)
 
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->stream('Rekap UNRAS '.$start.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
         } else {
-        return $pdf->stream('Rekap UNRAS '.$start.'-'.$end.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
         }
     }
 
@@ -306,9 +306,9 @@ public function unrasOJK($start, $end, $cariin)
         
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->stream('Rekap UNRAS '.$start.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
         } else {
-        return $pdf->stream('Rekap UNRAS '.$start.'-'.$end.'.pdf');
+        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
         }
     }
 
