@@ -101,7 +101,7 @@
                     <tr>
                         <td>Kategori Ring</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="ring" id="ring" value="{{$pos->kategori_ring}}" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="ring" id="ring" value="{{$pos->kategori_ring}}" ></td>
                     </tr>
                     <tr>
                         <td>Personil Jaga</td>

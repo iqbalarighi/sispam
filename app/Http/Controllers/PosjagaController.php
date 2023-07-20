@@ -184,6 +184,18 @@ return back()
 
         return back()
             ->with('status','Data berhasil di Update'); 
+    } else {
+        
+        $simpan->pos_jaga = $request->pos;
+        $simpan->gedung = $request->gedung;
+        $simpan->area_jaga = $request->area;
+        $simpan->kategori_ring = $request->ring;
+        $simpan->personil_jaga = $request->jaga;
+        $simpan->standar_peralatan = $request->alat;
+        $simpan->save();
+
+        return back()
+            ->with('status','Data berhasil di Update'); 
     }
 }
 
