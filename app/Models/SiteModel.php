@@ -39,6 +39,6 @@ class SiteModel extends Model
 
         public function user()
     {
-        return $this->hasOne('App\Models\AdduserController');
+        return $this->hasOne('App\Models\user');
     }
 }

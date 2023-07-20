@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PeralatanController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PosjagaController;
@@ -31,22 +32,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Dashboard
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth')->name('dashboard');
+// Route::get('/tasks',[HomeController::class, 'task'])->name('get_tasks');
+
+
 // Personil section
 Route::get('/edit-personil', function () {
     return view('personil.edit');
 })->middleware('auth')->name('edit-personil');
 
-Route::post('/personil/simpan',[HomeController::class, 'simpan'])->middleware('auth')->name('simpan_personil');
-Route::put('/personil-update/{id}',[HomeController::class, 'update'])->middleware('auth');
-Route::get('/personil', [HomeController::class, 'index'])->middleware('auth')->name('personil');
-Route::get('/tambah-personil', [HomeController::class, 'showInput'])->middleware('auth')->name('tambah-personil');
-Route::get('/personil/{id}', [HomeController::class, 'detil'])->middleware('auth'); 
-Route::get('/edit-personil/{id}', [HomeController::class, 'edit'])->middleware('auth'); 
-Route::delete('/hapus-personil/{id}', [HomeController::class, 'hapus'])->middleware('auth');
-Route::get('/hapus-fopro/{id}', [HomeController::class, 'hapusProfil'])->middleware('auth');
-Route::get('/hapus-kta/{id}', [HomeController::class, 'hapusKta'])->middleware('auth');
-Route::get('/hapus-bpjss/{id}', [HomeController::class, 'hapusBpjss'])->middleware('auth');
-Route::get('/hapus-bpjsk/{id}', [HomeController::class, 'hapusBpjsk'])->middleware('auth');
+Route::post('/personil/simpan',[PersonilController::class, 'simpan'])->middleware('auth')->name('simpan_personil');
+Route::put('/personil-update/{id}',[PersonilController::class, 'update'])->middleware('auth');
+Route::get('/personil', [PersonilController::class, 'index'])->middleware('auth')->name('personil');
+Route::get('/tambah-personil', [PersonilController::class, 'showInput'])->middleware('auth')->name('tambah-personil');
+Route::get('/personil/{id}', [PersonilController::class, 'detil'])->middleware('auth'); 
+Route::get('/edit-personil/{id}', [PersonilController::class, 'edit'])->middleware('auth'); 
+Route::delete('/hapus-personil/{id}', [PersonilController::class, 'hapus'])->middleware('auth');
+Route::get('/hapus-fopro/{id}', [PersonilController::class, 'hapusProfil'])->middleware('auth');
+Route::get('/hapus-kta/{id}', [PersonilController::class, 'hapusKta'])->middleware('auth');
+Route::get('/hapus-bpjss/{id}', [PersonilController::class, 'hapusBpjss'])->middleware('auth');
+Route::get('/hapus-bpjsk/{id}', [PersonilController::class, 'hapusBpjsk'])->middleware('auth');
 
 // Peralatan section
 Route::get('/edit-peralatan', function () {

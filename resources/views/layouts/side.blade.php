@@ -84,6 +84,7 @@
         @if ( Auth::user()->level === 'superadmin')
         <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light">Manage User</a>
         @endif
+            <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light">Personil</a>
             <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light">Inventaris</a>
             <a href="{{route('site')}}" class="list-group-item list-group-item-action bg-light">Site</a>
