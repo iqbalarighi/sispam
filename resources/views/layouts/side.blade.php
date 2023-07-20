@@ -76,7 +76,7 @@
        .list-group-item.active {
         color: #000 !important;
         font-weight: bold !important;
-        border-color: #ffffff !important;
+        border-color: #d9dadb !important;
        } 
         </style>    
     </head>
