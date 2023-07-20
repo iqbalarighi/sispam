@@ -72,6 +72,12 @@
             margin-left: -15rem;
         }
         }
+
+       .list-group-item.active {
+        color: #000 !important;
+        font-weight: bold !important;
+        border-color: #ffffff !important;
+       } 
         </style>    
     </head>
     <body>
@@ -82,31 +88,31 @@
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
         @if ( Auth::user()->level === 'superadmin')
-        <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light">Manage User</a>
+        <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
         @endif
-            <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light">Personil</a>
-            <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light">Inventaris</a>
-            <a href="{{route('site')}}" class="list-group-item list-group-item-action bg-light">Site</a>
-            <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
-            <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light">Lot Parkir</a>
-            <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light">Arsip</a>
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
+            <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a>
+            <a href="{{route('site')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('site') ? 'active' : '' }}">Site</a>
+            <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
+            <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
+            <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light " data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
-                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
+                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Bencana</s></a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
                             {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
                 </div>
-             <a href="{{route('unras')}}" class="list-group-item list-group-item-action bg-light">Unras</a>
+             <a href="{{route('unras')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('unras') ? 'active' : '' }}">Unras</a>
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
@@ -128,9 +134,9 @@
                 <div class="collapse" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light">Kegiatan</a>
-                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light">Serah Terima Jaga</a>
-                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light">Insiden/Kejadian</a>
+                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
+                            <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
                             <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
                             
                         </div> 
