@@ -126,7 +126,8 @@ Tim SMC         : </textarea></pre>
                                     class="block w-full mt-1 rounded-md"
                                     placeholder="" 
                                     accept=".jpg, .jpeg, .png" 
-                                    multiple/>
+                                    multiple 
+                                    required />
                         </td>
                     </tr>
                     </table>

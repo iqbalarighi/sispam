@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('no_arsip', 20)->unique();
             $table->string('nm_arsip', 100);
             $table->string('tahun');
-            $table->string('uraian', 100)->nullable();
+            $table->text('uraian')->nullable();
             $table->string('lokasi_fisik', 150);
             $table->string('file', 100)->nullable();
             $table->timestamps();

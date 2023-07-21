@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Superadmin',
             'email' => 'superadmin@sispam.id',
             'role' => 'admin',
-            'password' => bcrypt('q1w2e3r4'),
+            'password' => bcrypt('blackid'),
         ]);
     }
 }
