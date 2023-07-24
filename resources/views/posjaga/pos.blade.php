@@ -49,6 +49,10 @@
                         }
                     </style>
 
+                <form action="" method="GET" class="m-1 pl-3 mt-2">
+                    <input type="cari" name="cari" placeholder="Cari" size="25%" autocomplete="off" class=""> <button class="submit bi bi-search"></button>
+                </form>
+
                     <div class="card-body overflow " style="overflow-x: auto;">
                     <div class="table-responsive">
                     <table class="table table-striped table-hover text-center ">
@@ -57,7 +61,7 @@
                         <th scope="col" class="align-middle">Id Jaga</th>
                         <th scope="col" class="align-middle">Gedung</th>
                         <th scope="col" class="align-middle">Pos Jaga</th>
-                        <th scope="col" class="align-middle">Area Jaga</th>
+                        <th scope="col" class="align-middle" style="max-width:200px; min-width:100px;">Area Jaga</th>
                         <th scope="col" class="align-middle">Kategori Ring</th>
                         <th scope="col" class="align-middle">Kekuatan Personil</th>
                         <th scope="col" class="align-middle">Standar Peralatan</th>
@@ -76,9 +80,9 @@
                         <td>{{$p->id_jaga}}</td> 
                         <td style="text-align: left; white-space: normal;">{{$p->site->nama_gd}}</td>
                         <td style="text-align: left;">{{$p->pos_jaga}}</td>
-                        <td style="text-align: left; ">{{$p->area_jaga}}</td>
-                        <td style="text-align: left;">{{$p->kategori_ring}}</td>
-                        <td style="text-align: left;">{{$p->personil_jaga}}</td>
+                        <td style="text-align: left; white-space: normal;">{{$p->area_jaga}}</td>
+                        <td style="text-align: center;">{{$p->kategori_ring}}</td>
+                        <td style="text-align: center;">{{$p->personil_jaga}}</td>
                         <td style="text-align: left; white-space: normal;">{{$p->standar_peralatan}}</td>
                         <td> 
                             @if ($p->foto == null)
@@ -150,6 +154,7 @@
                     @endforeach
                     </table>
                     </div>
+                    {{$pos->onEachSide(1)->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>

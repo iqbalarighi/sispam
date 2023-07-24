@@ -13,8 +13,32 @@ use Illuminate\Support\Facades\File;
 
 class PosjagaController extends Controller
 {
-        public function index()
+        public function index(Request $request)
     {
+
+        $cari = $request->cari;
+            if ($cari != null) {
+                $pos = PosjagaModel::where('id_jaga', 'LIKE', '%'.$cari.'%')
+                ->orWhere('pos_jaga', 'LIKE', '%'.$cari.'%')
+                ->orWhereHas('site', function($q) use ($cari){
+                    $q->where('nama_gd', 'LIKE', '%'. $cari.'%');
+                })
+                ->orderby('id_jaga','ASC')
+                ->paginate(15)
+                ->appends(request()->input());
+
+        return view('posjaga.pos', compact('pos')); 
+        } else {
+             $pos = PosjagaModel::with('site')
+             ->paginate(15);
+        return view('posjaga.pos', compact('pos')); 
+        }
+
+
+
+
+
+
         $pos = PosjagaModel::with('site')
         ->paginate(15);
         return view('posjaga.pos', ['pos' => $pos]);
