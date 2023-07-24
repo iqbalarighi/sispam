@@ -15,10 +15,10 @@
 
 $(function() {
 
-    setInterval(() =>  Livewire.emit('ubahData'),10000);
+    setInterval(() =>  Livewire.emit('ubahData'),30000);
 
     var chartData = JSON.parse('<?php echo $unras ?>');
-    console.log(chartData);
+
   const ctx = document.getElementById('myChart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
@@ -35,13 +35,16 @@ $(function() {
             ],
         borderWidth: 1
       },{
+        type: 'bar',
         label: 'Unras Di OJK',
         data: chartData.ojk,
         backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
+
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
+
             ],
         borderWidth: 1
       }]
@@ -59,15 +62,11 @@ Livewire.on('berhasilUpdate', event => {
     var chartData = JSON.parse(event.data);
         
     myChart.data.labels = chartData.bulan;
-    
     myChart.data.datasets[0].data = chartData.total;
-
     myChart.data.datasets[1].data = chartData.ojk;
-
-console.log(myChart.data.datasets[1].data);
-    myChart.update();
+    myChart.update('none');
     
-    })
+    });
 
 
 

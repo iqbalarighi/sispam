@@ -12,21 +12,19 @@ class GrafikUnras extends Component
     public $unras;
     public function mount()
     {
-        $tgl = UnrasModel::select("tanggal")
-                    ->latest()
-                    ->limit(30)
-                    ->pluck('tanggal');
 
         $bulan = UnrasModel::select(DB::raw("MONTHNAME(tanggal) as bulan"))
                     ->GroupBy(DB::raw("MONTHNAME(tanggal)"))
                     ->latest()
                     ->distinct()
+                    ->limit(12)
                     ->pluck('bulan');
 
         $bul = UnrasModel::select(DB::raw("MONTH(tanggal) as bul"))
                     ->GroupBy(DB::raw("MONTH(tanggal)"))
                     ->latest()
                     ->distinct()
+                    ->limit(12)
                     ->pluck('bul');
 
          foreach ($bulan as $value) {
@@ -66,21 +64,19 @@ $this->unras = json_encode($data);
 
 public function changeData($value='')
 {
-   $tgl = UnrasModel::select("tanggal")
-                    ->latest()
-                    ->limit(30)
-                    ->pluck('tanggal');
 
         $bulan = UnrasModel::select(DB::raw("MONTHNAME(tanggal) as bulan"))
                     ->GroupBy(DB::raw("MONTHNAME(tanggal)"))
                     ->latest()
                     ->distinct()
+                    ->limit(12)
                     ->pluck('bulan');
 
         $bul = UnrasModel::select(DB::raw("MONTH(tanggal) as bul"))
                     ->GroupBy(DB::raw("MONTH(tanggal)"))
                     ->latest()
                     ->distinct()
+                    ->limit(12)
                     ->pluck('bul');
 
          foreach ($bulan as $value) {
