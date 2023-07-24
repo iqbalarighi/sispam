@@ -71,7 +71,7 @@
 <script>
     function updateGiat() {
         $.ajax({
-            url: '{{ route('dashboard') }}',
+            url: '{{ route('grafik') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -100,7 +100,7 @@
 
     function updateTime() {
     $.ajax({
-            url: '{{ route('dashboard') }}',
+            url: '{{ route('grafik') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -123,7 +123,7 @@
 
     function updateJadi() {
         $.ajax({
-            url: '{{ route('dashboard') }}',
+            url: '{{ route('grafik') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -135,7 +135,7 @@
                 const nolap = data.datax.jadi;
                 
                 nolap.forEach(function (item) {
-                    dataContainer.append('<tr> <td>' + item.no_lap + '</td></tr>'); // Replace 'name' with the property you want to display
+                    dataContainer.append('<tr> <td>' + item.user_pelapor + '</td></tr>'); // Replace 'name' with the property you want to display
                 });
             },
             error: function (xhr, status, error) {
@@ -149,7 +149,7 @@
 
     function updateTimex() {
     $.ajax({
-            url: '{{ route('dashboard') }}',
+            url: '{{ route('grafik') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -194,6 +194,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
@@ -207,6 +208,15 @@
     </div>
   </div>
 
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Laporan Kejadian</h5>
+        <p class="card-text">Data Terbaru Laporan Kejadian</p>
+            @yield('grafik')
+      </div>
+    </div>
+  </div>
 </div>
 
                 </div>

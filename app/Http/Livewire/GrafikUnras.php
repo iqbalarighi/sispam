@@ -57,7 +57,7 @@ $this->unras = json_encode($data);
 
     public function render()
     {
-        return view('unras.grafik')->extends('layouts.side')->section('content');
+        return view('dashboard.grafik')->extends('dashboard.home')->section('grafik');
     }
 
 

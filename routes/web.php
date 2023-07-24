@@ -35,7 +35,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Dashboard
-Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/grafik', [HomeController::class, 'index'])->middleware('auth')->name('grafik');
 // Route::get('/tasks',[HomeController::class, 'task'])->name('get_tasks');
 
 
@@ -187,4 +187,4 @@ Route::put('/update-unras/{id}', [UnrasController::class, 'update'])->middleware
 Route::delete('/unras/hapus/{id}', [UnrasController::class, 'hapus'])->middleware('auth');
 
 //
-Route::get('/grafik', GrafikUnras::class)->middleware('auth')->name('grafik');
+Route::get('/dashboard', GrafikUnras::class)->middleware('auth')->name('dashboard');

@@ -118,7 +118,7 @@
                     </div>
                 </div>
              <a href="{{route('unras')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('unras') ? 'active' : '' }}">Unras</a>
-             <a href="{{route('grafik')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('grafik') ? 'active' : '' }}">Grafik Unras</a>
+             {{-- <a href="{{route('grafik')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('grafik') ? 'active' : '' }}">Grafik Unras</a> --}}
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
