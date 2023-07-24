@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('waktu', 20);
             $table->string('tempat_kegiatan');
             $table->string('pelaksana');
-            $table->string('bentuk_kegiatan', 30);
+            $table->text('bentuk_kegiatan');
             $table->string('jumlah_massa', 20);
             $table->string('status_kegiatan', 20)->default('Rencana');
             $table->string('level_resiko', 20)->nullable();

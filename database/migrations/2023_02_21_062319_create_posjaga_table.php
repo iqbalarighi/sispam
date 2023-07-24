@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('pos_jaga', 100);
             $table->string('gedung', 30);
             $table->string('area_jaga', 50);
-            $table->string('kategori_ring', 20);
+            $table->string('kategori_ring', 20)->nullable();
             $table->string('personil_jaga', 100);
             $table->string('standar_peralatan', 150);
             $table->string('foto', 30)->nullable();
