@@ -57,7 +57,7 @@ $this->unras = json_encode($data);
 
     public function render()
     {
-        return view('livewire.grafik-unras')->extends('layouts.side')->section('content');
+        return view('unras.grafik')->extends('layouts.side')->section('content');
     }
 
 
