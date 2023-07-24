@@ -19,7 +19,10 @@
 
             <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    
+@livewireScripts
+    @stack('js')
+    @stack('styles')
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -113,6 +116,7 @@
                     </div>
                 </div>
              <a href="{{route('unras')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('unras') ? 'active' : '' }}">Unras</a>
+             <a href="{{route('grafik')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('grafik') ? 'active' : '' }}">Grafik Unras</a>
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>

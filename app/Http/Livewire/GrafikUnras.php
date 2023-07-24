@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\UnrasModel;
+use Livewire\Component;
+use DB;
+
+class GrafikUnras extends Component
+{
+    protected $listeners = ['ubahData' => 'changeData'];
+    public $unras;
+    public function mount()
+    {
+        $tgl = UnrasModel::select("tanggal")
+                    ->latest()
+                    ->limit(30)
+                    ->pluck('tanggal');
+
+        $bulan = UnrasModel::select(DB::raw("MONTHNAME(tanggal) as bulan"))
+                    ->GroupBy(DB::raw("MONTHNAME(tanggal)"))
+                    ->latest()
+                    ->distinct()
+                    ->pluck('bulan');
+
+        $bul = UnrasModel::select(DB::raw("MONTH(tanggal) as bul"))
+                    ->GroupBy(DB::raw("MONTH(tanggal)"))
+                    ->latest()
+                    ->distinct()
+                    ->pluck('bul');
+
+         foreach ($bulan as $value) {
+             $bulans[] = $value;
+         }
+
+            foreach ($bul as $key => $totals) {
+            $total [] = UnrasModel::whereMonth('tanggal','=', $totals )
+                    ->latest()
+                    ->count();
+            }
+
+        foreach ($bul as $key => $ojks) {
+            $ojk [] = UnrasModel::whereMonth('tanggal','=', $ojks)
+                    ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
+                    ->latest()
+                    ->count();
+            }
+
+$data = ['bulan' => $bulans,
+            'total' => $total,
+            'ojk' => $ojk,
+        ];
+
+
+$this->unras = json_encode($data);
+// dd($this->unras);
+
+    }   
+
+    public function render()
+    {
+        return view('livewire.grafik-unras')->extends('layouts.side')->section('content');
+    }
+
+
+
+public function changeData($value='')
+{
+   $tgl = UnrasModel::select("tanggal")
+                    ->latest()
+                    ->limit(30)
+                    ->pluck('tanggal');
+
+        $bulan = UnrasModel::select(DB::raw("MONTHNAME(tanggal) as bulan"))
+                    ->GroupBy(DB::raw("MONTHNAME(tanggal)"))
+                    ->latest()
+                    ->distinct()
+                    ->pluck('bulan');
+
+        $bul = UnrasModel::select(DB::raw("MONTH(tanggal) as bul"))
+                    ->GroupBy(DB::raw("MONTH(tanggal)"))
+                    ->latest()
+                    ->distinct()
+                    ->pluck('bul');
+
+         foreach ($bulan as $value) {
+             $bulans[] = $value;
+         }
+
+            foreach ($bul as $key => $totals) {
+            $total [] = UnrasModel::whereMonth('tanggal','=', $totals )
+                    ->latest()
+                    ->count();
+            }
+
+        foreach ($bul as $key => $ojks) {
+            $ojk [] = UnrasModel::whereMonth('tanggal','=', $ojks)
+                    ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
+                    ->latest()
+                    ->count();
+            }
+
+$data = ['bulan' => $bulans,
+            'total' => $total,
+            'ojk' => $ojk,
+        ];
+
+
+$this->unras = json_encode($data);
+$this->emit('berhasilUpdate', ['data' => $this->unras]);
+}
+
+
+}

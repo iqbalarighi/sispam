@@ -312,7 +312,10 @@ public function unrasOJK($start, $end, $cariin)
         }
     }
 
-
+public function grafik()
+{
+    return view('unras.grafik');
+}
 
 
 }
