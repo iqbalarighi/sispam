@@ -93,7 +93,7 @@
         @if ( Auth::user()->level === 'superadmin')
         <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
         @endif
-            <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Dashboard</a>
+            <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
             <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a>
             <a href="{{route('site')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('site') ? 'active' : '' }}">Site</a>
