@@ -14,12 +14,28 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $giats = KegiatanModel::orderBy('created_at','DESC')->limit(5)->paginate(5);
+        $giats = KegiatanModel::latest()->take(5)->get();
 
-        $jadi = KejadianModel::orderBy('created_at','DESC')->take(3)->paginate(3);
+        $jadi = KejadianModel::latest()->take(3)->get();
+    
+    // $giat = KegiatanModel::select('created_at')->latest()->take(5)->get();
 
+        foreach ($giats as $key => $value) {
+            $time [] = $value->created_at->diffForHumans();
+        }
+
+        foreach ($jadi as $key => $value) {
+            $times [] = $value->created_at->diffForHumans();
+        }
+
+$datas = ['giats' => $giats, 'time' => $time];
+$datax = ['jadi' => $jadi, 'times' => $times];
+
+         // dd($datas);
+
+       
             if($request->ajax()){
-               return response()->json(compact('giats','jadi'));
+               return response()->json(compact('datas','datax'));
             }
 
     return view('dashboard.home', compact('giats'));

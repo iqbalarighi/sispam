@@ -58,8 +58,16 @@
                         label {
                             margin: 0em;
                         }
+                        a {
+                           color: black;
+                           text-decoration: none;
+                        }
+                        a:hover {
+                            text-decoration: none;
+                            color: black;
+                        }
                     </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     function updateGiat() {
         $.ajax({
@@ -72,9 +80,14 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
                 // Append the updated data to the container
-                data.giats.data.forEach(function (item) {
-                    dataContainer.append('<tr> <td>' + item.no_lap + '</td></tr>'); // Replace 'name' with the property you want to display
-                });
+                const nolap = data.datas.giats;
+                
+                nolap.forEach(function (item) {
+                    var urel = "/giat-detil/";
+                    urls = urel.replace(/\/?(\?|#|$)/, '/$1')
+                   dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
+                              });
+
             },
             error: function (xhr, status, error) {
                 console.error('Ajax request error:', error);
@@ -85,10 +98,29 @@
     // Call the function initially to load the data
     updateGiat();
 
-    // Set an interval to update the data every 5 seconds (or any other interval you prefer)
-    setInterval(updateGiat, 3000); // 5000 milliseconds = 5 seconds
-</script>
-<script>
+    function updateTime() {
+    $.ajax({
+            url: '{{ route('dashboard') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Update the view with the new data
+                var dataContainer = $('#data-time');
+                dataContainer.empty(); // Clear existing data (if any)
+
+                data.datas.time.forEach(function (tes) {
+                   dataContainer.append('<tr><td>' + tes + '</td></tr>'); // Replace 'name' with the property you want to display
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
+
+    // Call the function initially to load the data
+    updateTime();
+
     function updateJadi() {
         $.ajax({
             url: '{{ route('dashboard') }}',
@@ -100,7 +132,9 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
                 // Append the updated data to the container
-                data.jadi.data.forEach(function (item) {
+                const nolap = data.datax.jadi;
+                
+                nolap.forEach(function (item) {
                     dataContainer.append('<tr> <td>' + item.no_lap + '</td></tr>'); // Replace 'name' with the property you want to display
                 });
             },
@@ -113,8 +147,37 @@
     // Call the function initially to load the data
     updateJadi();
 
-    // Set an interval to update the data every 5 seconds (or any other interval you prefer)
-    setInterval(updateJadi, 3000); // 5000 milliseconds = 5 seconds
+    function updateTimex() {
+    $.ajax({
+            url: '{{ route('dashboard') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Update the view with the new data
+                var dataContainer = $('#data-timex');
+                dataContainer.empty(); // Clear existing data (if any)
+
+                data.datax.times.forEach(function (time) {
+                   dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
+                    
+                });
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
+
+    // Call the function initially to load the data
+    updateTimex();
+
+    setInterval(function () {
+                updateGiat();
+                updateTime();
+                updateJadi();
+                updateTimex();
+        }, 5000);
 </script>
                     <div class="card-body overflow " style="overflow-x: auto;">
 
@@ -124,24 +187,26 @@
       <div class="card-body">
         <h5 class="card-title">Laporan Kegiatan</h5>
         <p class="card-text">Data Terbaru Laporan Kegiatan</p>
-<table id="data-giat">
-
-</table>
-
+            <div class="row">
+                <table id="data-giat" class="col"></table>
+                <table id="data-time" class="col"></table>
+            </div>
       </div>
     </div>
   </div>
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-<table id="data-jadi">
-
-</table>
+        <h5 class="card-title">Laporan Kejadian</h5>
+        <p class="card-text">Data Terbaru Laporan Kejadian</p>
+            <div class="row">
+                <table id="data-jadi" class="col"></table>
+                <table id="data-timex" class="col"></table>
+            </div>
       </div>
     </div>
   </div>
+
 </div>
 
                 </div>
