@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $giats = KegiatanModel::latest()->take(5)->get();
 
-        $jadi = KejadianModel::latest()->take(3)->get();
+        $jadi = KejadianModel::latest()->take(5)->get();
     
     // $giat = KegiatanModel::select('created_at')->latest()->take(5)->get();
 

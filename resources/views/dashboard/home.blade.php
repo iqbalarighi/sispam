@@ -181,15 +181,26 @@
 </script>
                     <div class="card-body overflow " style="overflow-x: auto;">
 
-                    <div class="row">
+<div class="row">
+
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Laporan Kegiatan</h5>
-        <p class="card-text">Data Terbaru Laporan Kegiatan</p>
+        <h5 class="card-title text-center">Laporan Kegiatan</h5>
+        <p class="card-text text-center">Data Terbaru Laporan Kegiatan</p>
             <div class="row">
-                <table id="data-giat" class="col"></table>
-                <table id="data-time" class="col"></table>
+                <table  class="col">
+                    <tr>
+                        <th>Dibuat Oleh</th>
+                    </tr>
+                    <tr id="data-giat"></tr>
+                </table>
+                <table  class="col">
+                    <tr>
+                        <th>Terakhir Di Buat</th>
+                    </tr>
+                    <tr id="data-time"></tr>
+                </table>
             </div>
       </div>
     </div>
@@ -198,26 +209,49 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Laporan Kejadian</h5>
-        <p class="card-text">Data Terbaru Laporan Kejadian</p>
+        <h5 class="card-title text-center">Laporan Kejadian</h5>
+        <p class="card-text text-center">Data Terbaru Laporan Kejadian</p>
             <div class="row">
-                <table id="data-jadi" class="col"></table>
-                <table id="data-timex" class="col"></table>
+                <table class="col">
+                    <tr>
+                        <th>Dibuat Oleh</th>
+                    </tr>
+                    <tr id="data-jadi"></tr>
+                </table>
+                <table class="col">
+                    <tr>
+                        <th>Terakhir Di Buat</th>
+                    </tr>
+                    <tr id="data-timex"></tr>
+                </table>
             </div>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-6 mt-2">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Laporan Kejadian</h5>
-        <p class="card-text">Data Terbaru Laporan Kejadian</p>
+        <h5 class="card-title text-center">Grafik UNRAS</h5>
+        <p class="card-text text-center">Data Grafik UNRAS</p>
             @yield('grafik')
       </div>
     </div>
   </div>
+
+
+  <div class="col-sm-6 mt-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Grafik UNRAS</h5>
+        <p class="card-text">Data Grafik UNRAS</p>
+            
+      </div>
+    </div>
+  </div>
+
 </div>
+
 
                 </div>
             </div>
