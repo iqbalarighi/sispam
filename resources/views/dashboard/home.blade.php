@@ -86,7 +86,7 @@
                 
                 nolap.forEach(function (item) {
                     var urel = "/giat-detil/";
-                    urls = urel.replace(/\/?(\?|#|$)/, '/$1')
+                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
                               });
 
@@ -137,7 +137,9 @@
                 const nolap = data.datax.jadi;
                 
                 nolap.forEach(function (item) {
-                    dataContainer.append('<tr> <td>' + item.user_pelapor + '</td></tr>'); // Replace 'name' with the property you want to display
+                    var urel = "/kejadian-detil/" + item.no_lap;
+                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
+                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor + '</a></td></tr>'); // Replace 'name' with the property you want to display
                 });
             },
             error: function (xhr, status, error) {
@@ -188,7 +190,9 @@
                 const nolap = data.dataz.jaga;
                 
                 nolap.forEach(function (item) {
-                    dataContainer.append('<tr> <td>' + item.danru + '</td></tr>'); // Replace 'name' with the property you want to display
+                    var urel = "/trj-detil/" + item.no_trj +'/'+ item.id;
+                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
+                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
                 });
             },
             error: function (xhr, status, error) {

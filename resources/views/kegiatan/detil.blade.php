@@ -7,10 +7,10 @@
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Detail Laporan') }}
     @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
-                        <a href="{{url('edit-giat')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span>
-                        </a><a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                        <a href="{{url('edit-giat')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span></a>
+                        <a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
     @else
-                        </a><a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                        <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
     @endif
 
                 </div>
