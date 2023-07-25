@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "bootstrap-icons": "^1.10.3"
+        "bootstrap-icons": "^1.10.3",
+        "chart.js": "^4.3.0"
     }
 }
