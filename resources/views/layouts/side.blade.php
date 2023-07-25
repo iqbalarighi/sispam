@@ -81,18 +81,20 @@
         font-weight: bold !important;
         border-color: #d9dadb !important;
        } 
+
+
         </style>    
     </head>
     <body>
-        @if ( Auth::user()->role === 'admin')
+    @if ( Auth::user()->role === 'admin')
         <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
-        @if ( Auth::user()->level === 'superadmin')
+    @if ( Auth::user()->level === 'superadmin')
         <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
-        @endif
+    @endif
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
             <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a>
@@ -100,12 +102,13 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light " data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
@@ -123,21 +126,22 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
         </div>
-        @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
+    @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
             <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading ">SISPAM</div>
-        @if (Auth::user()->level === 'koordinator')
+    @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
-        @endif
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    @endif
+            <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
@@ -148,7 +152,7 @@
                         </div> 
                     </div>
                 </div>
-            <a href="{{route('unras')}}" class="list-group-item list-group-item-action bg-light">Unras</a>
+            <a href="{{route('unras')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('unras') ? 'active' : '' }}">Unras</a>
             <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Laporan</a> -->
 <!--             <a href="#" class="list-group-item list-group-item-action bg-light">Akun Anggaran</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
@@ -156,7 +160,7 @@
         </div>
         <!-- /#sidebar-wrapper -->
 
-        @endif
+    @endif
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="d-flex flex-column min-vh-100">
@@ -351,9 +355,15 @@ function myFunction3() {
 }
 </script> 
 <script>
+    var z = document.getElementById("ubah");
+    var y = document.getElementById("collapseExample");
+    if (y.className === "collapse show"){
+    z.className = "bi bi-caret-down-fill";
+    }
+
     function cekDown() {
   var x = document.getElementById("ubah");
-  if (x.className === "bi bi-caret-right-fill") {
+   if (x.className === "bi bi-caret-right-fill") {
     x.className = "bi bi-caret-down-fill";
   } else {
     x.className = "bi bi-caret-right-fill";
@@ -399,12 +409,6 @@ function myFunction3() {
         $(this).parents('tr').remove();
     });
 </script> --}}
-
-
-<script type="text/javascript">
-      
-  
-</script>
 
 {{-- inventaris barang --}}
 

@@ -62,9 +62,8 @@ $this->unras = json_encode($data);
 
 
 
-public function changeData($value='')
+public function changeData()
 {
-
         $bulan = UnrasModel::select(DB::raw("MONTHNAME(tanggal) as bulan"))
                     ->GroupBy(DB::raw("MONTHNAME(tanggal)"))
                     ->latest()

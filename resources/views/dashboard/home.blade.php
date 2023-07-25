@@ -1,7 +1,7 @@
 @extends('layouts.side')
 
 @section('content')
-@if ( Auth::user()->role === 'admin')
+{{-- @if ( Auth::user()->role === 'admin') --}}
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -41,6 +41,7 @@
             </div>
         @endif
                     <style>
+
                         .xx {
                             font-size: 10pt;
                             text-align: center;
@@ -50,6 +51,7 @@
                             vertical-align: middle;
                             max-width:100%;
                             white-space:nowrap;
+
                         }
                         .table th {
                             padding:0.3rem;
@@ -67,7 +69,7 @@
                             color: black;
                         }
                     </style>
-
+@push('js')
 <script>
     function updateGiat() {
         $.ajax({
@@ -172,24 +174,80 @@
     // Call the function initially to load the data
     updateTimex();
 
+    function updateJaga() {
+        $.ajax({
+            url: '{{ route('grafik') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Update the view with the new data
+                var dataContainer = $('#data-jaga');
+                dataContainer.empty(); // Clear existing data (if any)
+
+                // Append the updated data to the container
+                const nolap = data.dataz.jaga;
+                
+                nolap.forEach(function (item) {
+                    dataContainer.append('<tr> <td>' + item.danru + '</td></tr>'); // Replace 'name' with the property you want to display
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
+
+    // Call the function initially to load the data
+    updateJaga();
+
+    function updateTimej() {
+    $.ajax({
+            url: '{{ route('grafik') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Update the view with the new data
+                var dataContainer = $('#data-timej');
+                dataContainer.empty(); // Clear existing data (if any)
+
+                data.dataz.timej.forEach(function (time) {
+                   dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
+                    
+                });
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
+
+    // Call the function initially to load the data
+    updateTimej();
+
+
+
     setInterval(function () {
                 updateGiat();
                 updateTime();
                 updateJadi();
                 updateTimex();
+                updateJaga();
+                updateTimej();
         }, 5000);
 </script>
-                    <div class="card-body overflow " style="overflow-x: auto;">
+@endpush
+                    <div class="card-body overflow px-3 pt-1" style="overflow-x: auto;">
 
 <div class="row">
 
-  <div class="col-sm-6">
-    <div class="card">
+  <div class="col-sm-6 mt-2">
+    <div class="card" style="background-color:rgba(179, 255, 240, 0.5);">
       <div class="card-body">
-        <h5 class="card-title text-center">Laporan Kegiatan</h5>
-        <p class="card-text text-center">Data Terbaru Laporan Kegiatan</p>
-            <div class="row">
-                <table  class="col">
+        <h5 class="card-title">Laporan Kegiatan</h5>
+        <p class="card-text">Data Terbaru Laporan Kegiatan</p>
+        <div class="row ">
+                <table class="col">
                     <tr>
                         <th>Dibuat Oleh</th>
                     </tr>
@@ -201,16 +259,39 @@
                     </tr>
                     <tr id="data-time"></tr>
                 </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 mt-2">
+    <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
+      <div class="card-body">
+        <h5 class="card-title">Laporan Serah Terima Jaga</h5>
+        <p class="card-text">Data Terbaru Laporan Serah Terima Jaga</p>
+            <div class="row">
+                <table class="col">
+                    <tr>
+                        <th>Dibuat Oleh</th>
+                    </tr>
+                    <tr id="data-jaga"></tr>
+                </table>
+                <table class="col">
+                    <tr>
+                        <th>Terakhir Di Buat</th>
+                    </tr>
+                    <tr id="data-timej"></tr>
+                </table>
             </div>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6">
-    <div class="card">
+  <div class="col-sm-6 mt-2">
+    <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
       <div class="card-body">
-        <h5 class="card-title text-center">Laporan Kejadian</h5>
-        <p class="card-text text-center">Data Terbaru Laporan Kejadian</p>
+        <h5 class="card-title">Laporan Kejadian</h5>
+        <p class="card-text">Data Terbaru Laporan Kejadian</p>
             <div class="row">
                 <table class="col">
                     <tr>
@@ -229,23 +310,13 @@
     </div>
   </div>
 
-  <div class="col-sm-6 mt-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title text-center">Grafik UNRAS</h5>
-        <p class="card-text text-center">Data Grafik UNRAS</p>
-            @yield('grafik')
-      </div>
-    </div>
-  </div>
-
 
   <div class="col-sm-6 mt-2">
-    <div class="card">
+    <div class="card" style="background-color:rgba(179, 218, 255, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Grafik UNRAS</h5>
-        <p class="card-text">Data Grafik UNRAS</p>
-            
+        {{-- <p class="card-text">Data Grafik UNRAS</p> --}}
+            @yield('grafik')
       </div>
     </div>
   </div>
@@ -258,7 +329,7 @@
         </div>
     </div>
 </div>
-@elseif (Auth::user()->role === 'user')
+{{-- @elseif (Auth::user()->role === 'user')
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
-@endif
+@endif --}}
 @endsection

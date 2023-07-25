@@ -3,7 +3,7 @@
 
     </style>
 <div>
-    <canvas  id="myChart" style="height: 40vh;"></canvas>
+    <canvas  id="myChart" style="height: 40vh; width: auto;"></canvas>
 </div>
   
 
