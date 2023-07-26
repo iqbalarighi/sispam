@@ -41,7 +41,10 @@
             </div>
         @endif
                     <style>
-
+                        tr, td {
+                            padding-left: 1rem;
+                            padding-right: 1rem;
+                        }
                         .xx {
                             font-size: 10pt;
                             text-align: center;
@@ -62,12 +65,16 @@
                         }
                         a {
                            color: black;
-                           text-decoration: none;
+                           text-decoration: ;
                         }
                         a:hover {
                             text-decoration: none;
                             color: black;
                         }
+
+                        /*table, tr, td{
+                            border: 1px black solid;
+                        }*/
                     </style>
 @push('js')
 <script>
@@ -139,7 +146,7 @@
                 nolap.forEach(function (item) {
                     var urel = "/kejadian-detil/" + item.no_lap;
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor + '</a></td></tr>'); // Replace 'name' with the property you want to display
+                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td><a href="'+ urel +'">' + item.status +'</a></td></tr>'); // Replace 'name' with the property you want to display
                 });
             },
             error: function (xhr, status, error) {
@@ -176,58 +183,58 @@
     // Call the function initially to load the data
     updateTimex();
 
-    function updateJaga() {
-        $.ajax({
-            url: '{{ route('grafik') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-jaga');
-                dataContainer.empty(); // Clear existing data (if any)
+    // function updateJaga() {
+    //     $.ajax({
+    //         url: '{{ route('grafik') }}',
+    //         method: 'GET',
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             // Update the view with the new data
+    //             var dataContainer = $('#data-jaga');
+    //             dataContainer.empty(); // Clear existing data (if any)
 
-                // Append the updated data to the container
-                const nolap = data.dataz.jaga;
+    //             // Append the updated data to the container
+    //             const nolap = data.dataz.jaga;
                 
-                nolap.forEach(function (item) {
-                    var urel = "/trj-detil/" + item.no_trj +'/'+ item.id;
-                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
+    //             nolap.forEach(function (item) {
+    //                 var urel = "/trj-detil/" + item.no_trj +'/'+ item.id;
+    //                 urls = urel.replace(/\/?(\?|#|$)/, '/$1');
+    //                 dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
+    //             });
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error('Ajax request error:', error);
+    //         }
+    //     });
+    // }
 
-    // Call the function initially to load the data
-    updateJaga();
+    // // Call the function initially to load the data
+    // updateJaga();
 
-    function updateTimej() {
-    $.ajax({
-            url: '{{ route('grafik') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-timej');
-                dataContainer.empty(); // Clear existing data (if any)
+    // function updateTimej() {
+    // $.ajax({
+    //         url: '{{ route('grafik') }}',
+    //         method: 'GET',
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             // Update the view with the new data
+    //             var dataContainer = $('#data-timej');
+    //             dataContainer.empty(); // Clear existing data (if any)
 
-                data.dataz.timej.forEach(function (time) {
-                   dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
+    //             data.dataz.timej.forEach(function (time) {
+    //                dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
                     
-                });
+    //             });
 
-            },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error('Ajax request error:', error);
+    //         }
+    //     });
+    // }
 
-    // Call the function initially to load the data
-    updateTimej();
+    // // Call the function initially to load the data
+    // updateTimej();
 
 
 
@@ -236,8 +243,8 @@
                 updateTime();
                 updateJadi();
                 updateTimex();
-                updateJaga();
-                updateTimej();
+                // updateJaga();
+                // updateTimej();
         }, 5000);
 </script>
 @endpush
@@ -248,31 +255,29 @@
   <div class="col-sm-6 mt-2">
     <div class="card" style="background-color:rgba(179, 255, 240, 0.5);">
       <div class="card-body">
-        <h5 class="card-title">Laporan Kegiatan</h5>
-        <p class="card-text">Data Terbaru Laporan Kegiatan</p>
+        <h5 class="card-title">Data Terakhir Laporan Kegiatan</h5>
         <div class="row ">
                 <table class="col">
-                    <tr>
-                        <th>Dibuat Oleh</th>
+                    <tr align="center">
+                        <th >Dibuat Oleh</th>
                     </tr>
-                    <tr id="data-giat"></tr>
+                    <tbody align="center" id="data-giat"></tbody>
                 </table>
                 <table  class="col">
-                    <tr>
+                    <tr align="center">
                         <th>Terakhir Di Buat</th>
                     </tr>
-                    <tr id="data-time"></tr>
+                    <tbody align="center" id="data-time"></tbody>
                 </table>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6 mt-2">
+{{--   <div class="col-sm-6 mt-2">
     <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
       <div class="card-body">
-        <h5 class="card-title">Laporan Serah Terima Jaga</h5>
-        <p class="card-text">Data Terbaru Laporan Serah Terima Jaga</p>
+        <h5 class="card-title">Data Terakhir Laporan Serah Terima Jaga</h5>
             <div class="row">
                 <table class="col">
                     <tr>
@@ -289,25 +294,25 @@
             </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <div class="col-sm-6 mt-2">
     <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
       <div class="card-body">
-        <h5 class="card-title">Laporan Kejadian</h5>
-        <p class="card-text">Data Terbaru Laporan Kejadian</p>
+        <h5 class="card-title">Data Terakhir Laporan Kejadian</h5>
             <div class="row">
                 <table class="col">
-                    <tr>
+                    <tr align="center">
                         <th>Dibuat Oleh</th>
+                        <th>Status</th>
                     </tr>
-                    <tr id="data-jadi"></tr>
+                    <tbody align="center" id="data-jadi"></tbody>
                 </table>
                 <table class="col">
-                    <tr>
+                    <tr align="center">
                         <th>Terakhir Di Buat</th>
                     </tr>
-                    <tr id="data-timex"></tr>
+                    <tbody align="center" id="data-timex"></tbody>
                 </table>
             </div>
       </div>
