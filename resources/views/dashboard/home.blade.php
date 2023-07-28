@@ -142,11 +142,16 @@
 
                 // Append the updated data to the container
                 const nolap = data.datax.jadi;
-                
+            console.log(nolap);
                 nolap.forEach(function (item) {
                     var urel = "/kejadian-detil/" + item.no_lap;
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-                    dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td><a href="'+ urel +'">' + item.status +'</a></td></tr>'); // Replace 'name' with the property you want to display
+                    if (item.status == 'Open'){
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.waktu_kejadian +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                    } else {
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.waktu_kejadian +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
+                    }
+
                 });
             },
             error: function (xhr, status, error) {
@@ -169,7 +174,7 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
                 data.datax.times.forEach(function (time) {
-                   dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
+                   dataContainer.append('<tr><td width="100px">' + time + '</td></tr>'); // Replace 'name' with the property you want to display
                     
                 });
 
@@ -245,7 +250,7 @@
                 updateTimex();
                 // updateJaga();
                 // updateTimej();
-        }, 5000);
+        }, 100000);
 </script>
 @endpush
                     <div class="card-body overflow px-3 pt-1" style="overflow-x: auto;">
@@ -304,15 +309,15 @@
                 <table class="col">
                     <tr align="center">
                         <th>Dibuat Oleh</th>
+                        <th>Tanggal Kejadian</th>
                         <th>Status</th>
+                        {{-- <th>Terakhir Di Buat</th> --}}
                     </tr>
-                    <tbody align="center" id="data-jadi"></tbody>
-                </table>
-                <table class="col">
-                    <tr align="center">
-                        <th>Terakhir Di Buat</th>
-                    </tr>
-                    <tbody align="center" id="data-timex"></tbody>
+                    <tbody align="center" id="data-jadi">
+                        
+                    </tbody>
+
+                    {{-- <tbody align="center" id="data-timex"></tbody> --}}
                 </table>
             </div>
       </div>

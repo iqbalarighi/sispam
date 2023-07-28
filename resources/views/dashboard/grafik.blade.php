@@ -19,7 +19,7 @@
 
 $(function() {
 
-    setInterval(() =>  Livewire.emit('ubahData'),30000);
+    setInterval(() =>  Livewire.emit('ubahData'),10000);
 
 var chartData = JSON.parse('<?php echo $unras ?>');
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -27,7 +27,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
    const data = {
       labels: chartData.bulan,
       datasets: [{
-        label: 'Total Unras',
+        label: 'Unras Terjadi',
         data: chartData.total,
         backgroundColor: [
                 'rgba(54, 162, 235, 1)',

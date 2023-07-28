@@ -99,6 +99,9 @@
                         <th scope="col" class="align-middle">Lokasi Kejadian</th>
                         <th scope="col" class="align-middle">Jenis Potensi</th>
                         <th scope="col" class="align-middle">Waktu Kejadian</th>
+                        <th scope="col" class="align-middle">Dibuat</th>
+                        <th scope="col" class="align-middle">Terakhir Diperbarui</th>
+                        <th scope="col" class="align-middle">Status</th>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                        <th class="align-middle" style="width:72px; ">Option</th>
                        @endif
@@ -116,7 +119,7 @@
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{$jadi->no_lap}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="text-align: left;">{{$jadi->user_pelapor}}</td>
-                        @endif
+                        @endif 
                         <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'" style="text-align: left;">
                             @if ('Lain-lain :' == Str::substr($jadi->jenis_kejadian, 0,11))
                             {{Str::substr($jadi->jenis_kejadian, 11,1000)}}
@@ -132,7 +135,15 @@
                             {{$jadi->jenis_potensi}}<br>
                             @endif
                         </td>
-                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->waktu_kejadian)->isoFormat('dddd, D MMMM Y')}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->waktu_kejadian)->isoFormat('DD/MM/Y')}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->created_at)->isoFormat('DD/MM/Y')}}</td>
+                        <td onclick="window.location='/kejadian-detil/{{$jadi->no_lap}}'">{{Carbon\Carbon::parse($jadi->updated_at)->isoFormat('DD/MM/Y')}}</td>
+
+                        <td style="white-space: normal; text-align: left;">
+                            <form action="kejadian/status/{{$jadi->id}}" method="get">@csrf 
+                               <center> <button class="btn btn-sm {{ $jadi->status == 'Open' ? 'btn-danger' : 'btn-success' }}">{{$jadi->status}}</button></center>
+                            </form>
+                        </td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         <td>
                             <div class="d-flex align-content-center">

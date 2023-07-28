@@ -177,6 +177,7 @@ Route::post('/kejadian/simpan', [KejadianController::class, 'simpan'])->middlewa
 Route::put('/kejadian-update/{id}', [KejadianController::class, 'update'])->middleware('auth');
 Route::get('/kejadian/hapus-foto/{item}/{id}', [KejadianController::class, 'hapusFoto'])->middleware('auth');
 Route::delete('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');
+Route::get('/kejadian/status/{id}', [KejadianController::class, 'status'])->middleware('auth');
 
 // Unras Section
 Route::get('/unras', [UnrasController::class, 'index'])->middleware('auth')->name('unras');

@@ -707,4 +707,27 @@ public function update(Request $update, $id)
         
     }
 
+    public function status($id)
+    {
+        $status = KejadianModel::findOrFail($id);
+
+        if ($status->status == "Open"){
+
+            $status->status = "Resolved";
+            $status->save();
+        
+        return back()
+        ->with('berhasil', 'Status Berubah');
+
+        } else {
+
+            $status->status = "Open";
+            $status->save();
+        
+        return back()
+        ->with('berhasil', 'Status Berubah');
+
+        }
+    }
+
 }

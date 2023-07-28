@@ -39,13 +39,23 @@ class GrafikUnras extends Component
             $vc = $but.'01';
      
             $bulantahun[] = Carbon::parse($vc)->format('F Y');
+
+            $bultah[] = Carbon::parse($vc)->format('Y-m');
          }
-  
-            foreach ($bul as $key => $v) {
-                $total []= DB::table('unras')
-                                    ->whereMonth('tanggal', $v)
+   
+            foreach ($bultah as $key => $v) {
+                $total1 []= DB::table('unras')->select('tanggal')
+                                    ->where('tanggal','LIKE','%'.$v.'%')
+                                    ->where('status_kegiatan','=', 'Selesai Kondusif')
                                     ->count();
+                    
+                    $total2 []= DB::table('unras')->select('tanggal')
+                                    ->where('tanggal','LIKE','%'.$v.'%')
+                                    ->where('status_kegiatan','=', 'Ricuh')
+                                    ->count();
+                
                     }
+                    $total = $total1 + $total2; 
 
         foreach ($bul as $ojks) {
             $ojk [] = UnrasModel::whereMonth('tanggal','=', [$ojks])
@@ -97,13 +107,23 @@ public function changeData()
             $vc = $but.'01';
      
             $bulantahun[] = Carbon::parse($vc)->format('F Y');
+
+            $bultah[] = Carbon::parse($vc)->format('Y-m');
          }
   
-            foreach ($b as $key => $v) {
-                $total []= DB::table('unras')
-                                    ->whereMonth('tanggal', $v)
+            foreach ($bultah as $key => $v) {
+                $total1 []= DB::table('unras')->select('tanggal')
+                                    ->where('tanggal','LIKE','%'.$v.'%')
+                                    ->where('status_kegiatan','=', 'Selesai Kondusif')
                                     ->count();
+                    
+                    $total2 []= DB::table('unras')->select('tanggal')
+                                    ->where('tanggal','LIKE','%'.$v.'%')
+                                    ->where('status_kegiatan','=', 'Ricuh')
+                                    ->count();
+                
                     }
+                    $total= $total1 + $total2; 
 
         foreach ($b as $ojks) {
             $ojk [] = UnrasModel::whereMonth('tanggal','=', [$ojks])
