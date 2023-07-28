@@ -247,10 +247,10 @@
                 updateGiat();
                 updateTime();
                 updateJadi();
-                updateTimex();
+                // updateTimex();
                 // updateJaga();
                 // updateTimej();
-        }, 100000);
+        }, 31000);
 </script>
 @endpush
                     <div class="card-body overflow px-3 pt-1" style="overflow-x: auto;">
