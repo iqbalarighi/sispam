@@ -57,19 +57,23 @@ class GrafikUnras extends Component
                     }
                     $total = $total1 + $total2; 
 
-        foreach ($bul as $ojks) {
-            $ojk [] = UnrasModel::whereMonth('tanggal','=', [$ojks])
+        foreach ($bultah as $ojks) {
+            $ojk [] = DB::table('unras')->select('tanggal')
+                    ->where('tanggal','LIKE','%'.$ojks.'%')
                     ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
                     ->latest()
                     ->count();
             }
+$tot = array_reverse($total);
+$bln = array_reverse($bulantahun);
+$jk = array_reverse($ojk);
+
 
 $data = [
-    'total' => $total,
-    'bulan' => $bulantahun,
-    'ojk' => $ojk
+    'total' => $tot,
+    'bulan' => $bln,
+    'ojk' => $jk
     ];
-
 
 $this->unras = json_encode($data);
 // dd($this->unras);
@@ -125,17 +129,23 @@ public function changeData()
                     }
                     $total= $total1 + $total2; 
 
-        foreach ($b as $ojks) {
-            $ojk [] = UnrasModel::whereMonth('tanggal','=', [$ojks])
+        foreach ($bultah as $ojks) {
+            $ojk [] = DB::table('unras')->select('tanggal')
+                    ->where('tanggal','LIKE','%'.$ojks.'%')
                     ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
                     ->latest()
                     ->count();
             }
 
+$tot = array_reverse($total);
+$bln = array_reverse($bulantahun);
+$jk = array_reverse($ojk);
+
+
 $data = [
-    'total' => $total,
-    'bulan' => $bulantahun,
-    'ojk' => $ojk
+    'total' => $tot,
+    'bulan' => $bln,
+    'ojk' => $jk
     ];
 
 

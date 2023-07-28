@@ -53,12 +53,12 @@
                             padding:0.3rem;
                             vertical-align: middle;
                             max-width:100%;
-                            white-space:nowrap;
+                            white-space: normal;
 
                         }
                         .table th {
                             padding:0.3rem;
-                            white-space:nowrap;
+                            white-space: normal;
                         }
                         label {
                             margin: 0em;
@@ -142,15 +142,29 @@
 
                 // Append the updated data to the container
                 const nolap = data.datax.jadi;
-            console.log(nolap);
+            // console.log(nolap);
                 nolap.forEach(function (item) {
                     var urel = "/kejadian-detil/" + item.no_lap;
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
+
+                    function pad(s) { return (s < 10) ? '0' + s : s; }
+                      var d = new Date(item.waktu_kejadian);
+                      var e = new Date(item.updated_at);
+                      
+if (item.jenis_kejadian.includes('Lain-lain')){
                     if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.waktu_kejadian +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian.slice(12, 1000) +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
                     } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.waktu_kejadian +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian.slice(12, 1000) +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
                     }
+} else {
+                        if (item.status == 'Open'){
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                    } else {
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
+                    }
+}
+
 
                 });
             },
@@ -159,7 +173,7 @@
             }
         });
     }
-
+    
     // Call the function initially to load the data
     updateJadi();
 
@@ -305,13 +319,15 @@
     <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Terakhir Laporan Kejadian</h5>
+        <div class="card-body overflow" style="overflow-x: auto;">
             <div class="row">
                 <table class="col">
                     <tr align="center">
                         <th>Dibuat Oleh</th>
-                        <th>Tanggal Kejadian</th>
+                        <th>Jenis<br/>Potensi</th>
+                        <th>Tanggal<br/>Kejadian</th>
+                        <th>Terakhir<br/>Diperbarui</th>
                         <th>Status</th>
-                        {{-- <th>Terakhir Di Buat</th> --}}
                     </tr>
                     <tbody align="center" id="data-jadi">
                         
@@ -320,6 +336,7 @@
                     {{-- <tbody align="center" id="data-timex"></tbody> --}}
                 </table>
             </div>
+        </div>
       </div>
     </div>
   </div>
@@ -346,4 +363,8 @@
 {{-- @elseif (Auth::user()->role === 'user')
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
 @endif --}}
+
+<script>
+
+</script>
 @endsection

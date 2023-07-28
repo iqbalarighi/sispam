@@ -273,9 +273,9 @@ public function unrasPDF($start, $end)
 
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
+        return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
         } else {
-        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
+        return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
         }
     }
 
@@ -306,7 +306,7 @@ public function unrasOJK($start, $end, $cariin)
         
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
+        return $pdf->stream('Rengiat OJK '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
         } else {
         return $pdf->stream('Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
         }
