@@ -6,8 +6,12 @@
         <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Detail Laporan Insiden / Kejadian') }}
-                        <a href="{{url('kejadian-edit')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span>
-                        </a><a href="{{route('kejadian')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @if($detil->user_pelapor == Auth::user()->name || Auth::user()->role == "admin")
+                        <a href="{{url('kejadian-edit')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span></a>
+                        <a href="{{route('kejadian')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @else 
+                        <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @endif
                 </div>
 
                 <div class="card-body overflow " style="overflow-x: auto;">
@@ -204,13 +208,15 @@
                     </div>
 
                 </div>
+                @if($detil->user_pelapor == Auth::user()->name || Auth::user()->role == "admin")
                     <form method="GET" action="/kejadianPDF/{{$detil->id}}" enctype="multipart/form-data">
-                            <div class="form-group">
+                        <div class="form-group">
                              <div align="center" class="control">
                                  <button type="submit" class="btn btn-primary">Download Laporan</button>
                              </div>
-                            </div>
-                            </form> 
+                        </div>
+                    </form> 
+                @endif
             </div>
         </div>
     </div>

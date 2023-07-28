@@ -24,8 +24,12 @@
         @endif
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold ">{{ __('Detail Laporan Serah Terima Jaga') }}
+    @if($detilx->danru == Auth::user()->name || Auth::user()->role == "admin")
                     <a href="{{url('edit-lap')}}/{{$detilx->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Editor</span></a> 
                     <a href="{{route('tukarjaga')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @else
+                    <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @endif
                 </div>
 
                 <div class="card-body overflow " style="overflow-x: auto;">
@@ -155,6 +159,7 @@
                     @endforeach
                     </table>
         </p>
+                @if($detilx->danru == Auth::user()->name || Auth::user()->role == "admin")
                             <form method="GET" action="/viewpdf/{{$detilx->id}}" enctype="multipart/form-data">
                             <div class="form-group">
                              <div align="center" class="control">
@@ -162,6 +167,7 @@
                              </div>
                             </div>
                             </form> 
+                @endif
                 </div>
             </div>
         </div>

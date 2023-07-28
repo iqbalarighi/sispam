@@ -6,11 +6,12 @@
         <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Detail Laporan') }}
- 
-
-                        <a href="{{url('edit-giat')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span>
-                        </a><a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
-
+    @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
+                        <a href="{{url('edit-giat')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span></a>
+                        <a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @else
+                        <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @endif
 
                 </div>
 
@@ -93,14 +94,16 @@
                     </tr>
                     
                     </table>
+                    @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
 
                                                 <form method="GET" action="/downloadPDF/{{$detil->id}}" enctype="multipart/form-data">
                             <div class="form-group">
                              <div align="center" class="control">
-                                 <button type="submit" class="btn btn-primary">Download Laporan</button>
+                                 <button type="submit" class="btn btn-primary" aria-pressed="true">Download Laporan</button>
                              </div>
                             </div>
                             </form> 
+                    @endif
                 </div>
                 </div>
             </div>
