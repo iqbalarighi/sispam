@@ -33,7 +33,7 @@ class HomeController extends Controller
             $jadian['no_lap']= $value2->no_lap;
             $jadian['user_pelapor']= $value2->user_pelapor;
             $jadian['jenis_potensi']= $value2->jenis_potensi;
-            $jadian['waktu_kejadian']= $value2->waktu_kejadian->format('d F Y');
+            $jadian['waktu_kejadian']= $value2->waktu_kejadian->parse()->isoFormat('D MMMM Y');
             $jadian['updated_at']= $value2->updated_at->diffForHumans();
             $jadian['status'] = $value2->status;
 
