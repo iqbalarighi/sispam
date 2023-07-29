@@ -22,22 +22,33 @@ class HomeController extends Controller
     // $giat = KegiatanModel::select('created_at')->latest()->take(5)->get();
 
         foreach ($giats as $key => $value1) {
-            $time [] = $value1->created_at->diffForHumans();
+            $dat['id']= $value1->id;
+            $dat['danru'] = $value1->danru;
+            $dat['time'] = $value1->updated_at->diffForHumans();
+
+            $tes[] = $dat;
         }
 
         foreach ($jadi as $key => $value2) {
-            $times [] = $value2->created_at->diffForHumans();
+            $jadian['no_lap']= $value2->no_lap;
+            $jadian['user_pelapor']= $value2->user_pelapor;
+            $jadian['jenis_potensi']= $value2->jenis_potensi;
+            $jadian['waktu_kejadian']= $value2->waktu_kejadian->format('d F Y');
+            $jadian['updated_at']= $value2->updated_at->diffForHumans();
+            $jadian['status'] = $value2->status;
+
+            $jad[] = $jadian;
         }
 
         foreach ($jaga as $key => $value3) {
             $timej [] = $value3->created_at->diffForHumans();
         }
 
-$datas = ['giats' => $giats, 'time' => $time];
-$datax = ['jadi' => $jadi, 'times' => $times];
+$datas = ['giats' => $tes];
+$datax = ['jadi' => $jad];
 $dataz = ['jaga' => $jaga, 'timej' => $timej];
 
-         // dd($datas);
+          // dd($datax,$datas);
 
        
             if($request->ajax()){

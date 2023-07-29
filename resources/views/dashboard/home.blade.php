@@ -42,8 +42,8 @@
         @endif
                     <style>
                         tr, td {
-                            padding-left: 1rem;
-                            padding-right: 1rem;
+                            padding-left: 0.1rem;
+                            padding-right: 0.1rem;
                         }
                         .xx {
                             font-size: 10pt;
@@ -89,12 +89,13 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
                 // Append the updated data to the container
-                const nolap = data.datas.giats;
-                
-                nolap.forEach(function (item) {
+
+                data.datas.giats.forEach(function (item) {
                     var urel = "/giat-detil/";
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-                   dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
+                   dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.danru + '</a></td><td>' + item.time + '</td></tr>'); // Replace 'name' with the property you want to display
+
+
                               });
 
             },
@@ -107,28 +108,28 @@
     // Call the function initially to load the data
     updateGiat();
 
-    function updateTime() {
-    $.ajax({
-            url: '{{ route('grafik') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-time');
-                dataContainer.empty(); // Clear existing data (if any)
+    // function updateTime() {
+    // $.ajax({
+    //         url: '{{ route('grafik') }}',
+    //         method: 'GET',
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             // Update the view with the new data
+    //             var dataContainer = $('#data-time');
+    //             dataContainer.empty(); // Clear existing data (if any)
 
-                data.datas.time.forEach(function (tes) {
-                   dataContainer.append('<tr><td>' + tes + '</td></tr>'); // Replace 'name' with the property you want to display
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
+    //             data.datas.time.forEach(function (tes) {
+    //                dataContainer.append('<tr><td>' + tes + '</td></tr>'); // Replace 'name' with the property you want to display
+    //             });
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error('Ajax request error:', error);
+    //         }
+    //     });
+    // }
 
-    // Call the function initially to load the data
-    updateTime();
+    // // Call the function initially to load the data
+    // updateTime();
 
     function updateJadi() {
         $.ajax({
@@ -142,28 +143,24 @@
 
                 // Append the updated data to the container
                 const nolap = data.datax.jadi;
-            // console.log(nolap);
+            // 
                 nolap.forEach(function (item) {
                     var urel = "/kejadian-detil/" + item.no_lap;
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-
-                    function pad(s) { return (s < 10) ? '0' + s : s; }
-                      var d = new Date(item.waktu_kejadian);
-                      var e = new Date(item.updated_at);
-                      
-if (item.jenis_kejadian.includes('Lain-lain')){
+                      console.log(item);
+            if (item.jenis_potensi.includes('Lain-lain')){
                     if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian.slice(12, 1000) +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi.slice(12, 1000) +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
                     } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian.slice(12, 1000) +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi.slice(12, 1000) +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
                     }
-} else {
+            } else {
                         if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
                     } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_kejadian +'</td><td>' + [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('-') +'</td><td>' + [pad(e.getDate()), pad(e.getMonth()+1), e.getFullYear()].join('-') +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
                     }
-}
+            }
 
 
                 });
@@ -177,30 +174,30 @@ if (item.jenis_kejadian.includes('Lain-lain')){
     // Call the function initially to load the data
     updateJadi();
 
-    function updateTimex() {
-    $.ajax({
-            url: '{{ route('grafik') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-timex');
-                dataContainer.empty(); // Clear existing data (if any)
+    // function updateTimex() {
+    // $.ajax({
+    //         url: '{{ route('grafik') }}',
+    //         method: 'GET',
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             // Update the view with the new data
+    //             var dataContainer = $('#data-timex');
+    //             dataContainer.empty(); // Clear existing data (if any)
 
-                data.datax.times.forEach(function (time) {
-                   dataContainer.append('<tr><td width="100px">' + time + '</td></tr>'); // Replace 'name' with the property you want to display
+    //             data.datax.times.forEach(function (time) {
+    //                dataContainer.append('<tr><td width="100px">' + time + '</td></tr>'); // Replace 'name' with the property you want to display
                     
-                });
+    //             });
 
-            },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error('Ajax request error:', error);
+    //         }
+    //     });
+    // }
 
-    // Call the function initially to load the data
-    updateTimex();
+    // // Call the function initially to load the data
+    // updateTimex();
 
     // function updateJaga() {
     //     $.ajax({
@@ -259,7 +256,7 @@ if (item.jenis_kejadian.includes('Lain-lain')){
 
     setInterval(function () {
                 updateGiat();
-                updateTime();
+                // updateTime();
                 updateJadi();
                 // updateTimex();
                 // updateJaga();
@@ -279,14 +276,9 @@ if (item.jenis_kejadian.includes('Lain-lain')){
                 <table class="col">
                     <tr align="center">
                         <th >Dibuat Oleh</th>
+                        <th>Terakhir Diperbarui</th>
                     </tr>
                     <tbody align="center" id="data-giat"></tbody>
-                </table>
-                <table  class="col">
-                    <tr align="center">
-                        <th>Terakhir Di Buat</th>
-                    </tr>
-                    <tbody align="center" id="data-time"></tbody>
                 </table>
         </div>
       </div>
@@ -319,7 +311,7 @@ if (item.jenis_kejadian.includes('Lain-lain')){
     <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Terakhir Laporan Kejadian</h5>
-        <div class="card-body overflow" style="overflow-x: auto;">
+        <div class="card-body overflow" style="overflow-x: scroll;">
             <div class="row">
                 <table class="col">
                     <tr align="center">

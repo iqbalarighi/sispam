@@ -1,13 +1,8 @@
 
 <div>
-<style type="text/css">
-    .chartBox {
-        width: ;
-    }
-</style>
 
 <div id="charBox">
-    <canvas  id="myChart" style="height: 40vh; width: auto;"></canvas>
+    <canvas  id="myChart"></canvas>
 </div>
   
 
@@ -35,19 +30,15 @@ const ctx = document.getElementById('myChart').getContext('2d');
             borderColor: [
                 'rgba(54, 162, 235, 1)',
             ], 
-        
       },{
         label: 'Unras Di OJK',
         data: chartData.ojk,
         backgroundColor: [
                 'rgba(209, 6, 6, 1)',
-
             ],
             borderColor: [
                 'rgba(209, 6, 6, 1)',
-
             ],
-
       }]
     };
 

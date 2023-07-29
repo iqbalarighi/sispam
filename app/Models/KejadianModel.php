@@ -10,7 +10,7 @@ class KejadianModel extends Model
     use HasFactory;
 
     protected $table = 'kejadian';
-
+    protected $dates = ['waktu_kejadian'];
     protected $fillable = [
         'jenis_kejadian',
         'user_pelapor',
