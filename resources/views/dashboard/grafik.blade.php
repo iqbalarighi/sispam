@@ -14,7 +14,7 @@
 
 $(function() {
 
-    setInterval(() =>  Livewire.emit('ubahData'),5000);
+    setInterval(() =>  Livewire.emit('ubahData'),30000);
 
 var chartData = JSON.parse('<?php echo $unras ?>');
 const ctx = document.getElementById('myChart').getContext('2d');

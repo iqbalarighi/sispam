@@ -27,7 +27,10 @@ class UnrasController extends Controller
                         $query->where('pelaksana','LIKE', '%'.$cariin.'%')
                             ->whereBetween('tanggal', [$start, $end]);
                     })
-                    ->orWhere('status_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orwhere(function ($querys) use ($cariin,$start,$end) {
+                        $querys->where('status_kegiatan','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->paginate(15)
@@ -54,7 +57,8 @@ class UnrasController extends Controller
             }
                 } elseif ($start == null && $end == null && $cariin != null) {
                     $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
-                    ->orWhere('status_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->orWhere('pelaksana','LIKE', '%'.$cariin.'%')
+                    ->orwhere('status_kegiatan','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
                     ->paginate(15)
@@ -280,7 +284,7 @@ public function unrasPDF($start, $end)
             $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(100000);
+                    ->paginate(1000000);
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
 
@@ -303,7 +307,7 @@ public function unrasOJK($start, $end, $cariin)
                     })
                     ->orderBy('waktu', 'DESC')
                     ->orderBy('tanggal', 'DESC')
-                    ->paginate(100000)
+                    ->paginate(1000000)
                     ->appends(request()->input());
 
         $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')

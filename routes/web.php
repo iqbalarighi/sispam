@@ -13,6 +13,7 @@ use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\KejadianController;
 use App\Http\Controllers\UnrasController;
+use App\Http\Controllers\BencanaController;
 
 use App\Http\Livewire\GrafikUnras;
 
@@ -187,5 +188,11 @@ Route::get('/automasi2', [UnrasController::class, 'automasi2'])->name('automasi2
 Route::put('/update-unras/{id}', [UnrasController::class, 'update'])->middleware('auth');
 Route::delete('/unras/hapus/{id}', [UnrasController::class, 'hapus'])->middleware('auth');
 
-//
+//GrafikUnras
 Route::get('/dashboard', GrafikUnras::class)->middleware('auth')->name('dashboard');
+
+//Bencana
+Route::get('/bencana', [BencanaController::class, 'index'])->middleware('auth')->name('bencana');
+Route::get('/bencana-tambah', [BencanaController::class, 'tambah'])->middleware('auth')->name('tambah-bencana');
+Route::post('/simpan-bencana', [BencanaController::class, 'simpan'])->middleware('auth')->name('simpan_bencana');
+

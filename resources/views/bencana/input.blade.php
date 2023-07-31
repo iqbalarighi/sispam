@@ -65,7 +65,7 @@
 </style>
             <!-- form input Site -->
                     <div class="table-responsive mt-2" style="overflow-x: auto;">
-            <form action="{{route('simpan_giat')}}" method="post" id="form" enctype="multipart/form-data">
+            <form action="{{route('simpan_bencana')}}" method="post" id="form" enctype="multipart/form-data">
             @csrf
                     <table class="table mx-auto" style="width: 70%; ">
                     <tr>
@@ -76,11 +76,11 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Gedung</b></td>
+                        <td><b>Lokasi</b></td>
                         <td>:</td>
                         <td>
                             <select class="form-select pb-0 pt-0 text-capitalize" id="gedung" name="gedung" required>
-                                <option value="" disabled selected>Pilih Gedung</option>
+                                <option value="" disabled selected>Pilih Lokasi Gedung</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
                                 @endforeach
@@ -88,35 +88,58 @@
                         </td> 
                     </tr>
                     <tr>
+                        <td><b>Jenis Bencana</b></td>
+                        <td>:</td>
+                        <td>
+                            <select class="form-select pb-0 pt-0 text-capitalize" id="gedung" name="gedung" required>
+                                <option value="" disabled selected>Pilih Jenis Bencana</option>
+                                <option value="Banjir">Banjir</option>
+                                <option value="Gempa Bumi">Gempa Bumi</option>
+                                <option value="Longsor">Longsor</option>
+                            </select>
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td><b>Nama Pelapor</b></td>
+                        <td>:</td>
+                        <td>
+                            <input type="text" name="pelapor" value="{{Auth::user()->name}}" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off">
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td><b>Satuan Kerja</b></td>
+                        <td>:</td>
+                        <td>
+                            <input type="text" name="satker" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off">
+                        </td> 
+                    </tr>
+                    <tr>
                         <td colspan="3">
-                            <b>Personil Yang Bertugas : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
-                            <pre class="mb-0"><textarea rows="7" class="form-control pb-0 pt-0" name="personil" id="personil" required>
-Danru   : {{Auth::user()->name}}
-Patroli : 
-Lobby   : 
-Meja Sekjen :
-Operator Air : 
-Operator AC  : 
-Operator Listrik : </textarea></pre>
+                            <b>Kejadian Bencana : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <pre class="mb-0" ><textarea style="text-align: justify;" rows="7" class="form-control pb-0 pt-0" name="personil" id="personil" required>
+Pada tanggal ... pukul ... WIB/WITA/WIT, telah terjadi bencana ... di daerah .... . Bencana tersebut diakibatkan oleh ... . Dari bencana ... diatas, gedung kantor OJK ... diidentifikasi sebagai salah satu gedung yang terpengaruh. Adapun dari hasil penelusuran, ditemukan ... korban jiwa, ... korban luka berat, ... dan ... korban luka ringan yang diderita oleh pegawai OJK. Sementara untuk kerusakan sarana dan prasarana Gedung tersebut, ditemukan/tidak ditemukan kerusakan ...(jelaskan kerusakan apabila ada).</textarea></pre>
                     </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td colspan="3">
-                            <b>Tim Tanggap Darurat : </b><br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
-                            <pre class="mb-0"><textarea rows="7" class="form-control pb-0 pt-0" name="trc" id="trc" required>
-Koordinator Pengamanan : 
-Tim P3K         : 
-Tim Pengamanan  : 
-Tim Pemadam     : 
-Tim Evakuasi    : 
-Tim SMC         : </textarea></pre>
+                            <b>Dampak Bencana : </b><br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <pre class="mb-0"><textarea rows="5" class="form-control pb-0 pt-0" name="trc" id="trc" required>
+a. Korban Jiwa : 0 (Meninggal Dunia), 0 (Luka Berat), 0 (Luka Ringan), 0 (Hilang)
+b. Kerusakan : </textarea></pre>
                         </td>
+                    </tr> --}}
+                    <tr>
+                        <td colspan="3"><b>Kronologi Kejadian : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="8" name="giat" id="giat" required>Pukul .... WIB/WITA/WIT
+......
+
+Pukul .... WIB/WITA/WIT
+......
+
+Pukul .... WIB/WITA/WIT
+......</textarea></pre></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Update Giat : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="8" name="giat" id="giat" required></textarea></pre></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><b>Keterangan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="6" name="ket" id="ket" required></textarea></pre></td>
+                        <td colspan="3"><b>Upaya Penanganan yang Dilakukan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="6" name="ket" id="ket" required></textarea></pre></td>
                     </tr>
                     <tr>
                         <td><b>Foto Dokumentasi</b></td>
