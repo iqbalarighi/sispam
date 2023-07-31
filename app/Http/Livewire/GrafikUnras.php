@@ -61,14 +61,16 @@ class GrafikUnras extends Component
             $ojk [] = DB::table('unras')->select('tanggal')
                     ->where('tanggal','LIKE','%'.$ojks.'%')
                     ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
+                    ->where('status_kegiatan','=', 'Selesai Kondusif')
                     ->latest()
                     ->count();
             }
+            
 $tot = array_reverse($total);
 $bln = array_reverse($bulantahun);
 $jk = array_reverse($ojk);
 
-
+// dd($jk);
 $data = [
     'total' => $tot,
     'bulan' => $bln,
@@ -133,6 +135,7 @@ public function changeData()
             $ojk [] = DB::table('unras')->select('tanggal')
                     ->where('tanggal','LIKE','%'.$ojks.'%')
                     ->where('tempat_kegiatan','LIKE', '%'.'ojk'.'%')
+                    ->where('status_kegiatan','=', 'Selesai Kondusif')
                     ->latest()
                     ->count();
             }

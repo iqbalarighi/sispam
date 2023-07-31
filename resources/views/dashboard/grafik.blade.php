@@ -14,7 +14,7 @@
 
 $(function() {
 
-    setInterval(() =>  Livewire.emit('ubahData'),30000);
+    setInterval(() =>  Livewire.emit('ubahData'),5000);
 
 var chartData = JSON.parse('<?php echo $unras ?>');
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -49,8 +49,13 @@ const ctx = document.getElementById('myChart').getContext('2d');
             plugins:{
              datalabels: {
                 anchor: 'start',
-                align: 'top'
-            }
+                align: 'top',
+                weight: 'bold',
+                color: 'black',
+            },
+        font: {
+          
+        }
           },
           tension: 0.4,
             scales: {

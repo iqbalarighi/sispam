@@ -276,7 +276,7 @@
                 <table class="col">
                     <tr align="center">
                         <th >Dibuat Oleh</th>
-                        <th>Terakhir Diperbarui</th>
+                        <th>Terakhir Dibuat</th>
                     </tr>
                     <tbody align="center" id="data-giat"></tbody>
                 </table>
@@ -311,7 +311,7 @@
     <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Terakhir Laporan Kejadian</h5>
-        <div class="card-body overflow" style="overflow-x: scroll;">
+        <div class="card-body overflow" style="overflow-x: auto;">
             <div class="row">
                 <table class="col">
                     <tr align="center">
