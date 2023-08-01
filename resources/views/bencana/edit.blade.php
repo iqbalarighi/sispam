@@ -7,7 +7,7 @@
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Bencana') }}
                     {{-- <a href="{{url('/giat-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a> --}}
-                    <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                    <a href="{{url('bencana-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>
 

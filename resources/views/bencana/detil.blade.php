@@ -7,8 +7,12 @@
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Bencana') }}
                     {{-- <a href="{{url('/giat-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a> --}}
-                    <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
-
+    @if($detil->user_pelapor == Auth::user()->name || Auth::user()->role == "admin")
+                        <a href="{{url('edit-bencana')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span></a>
+                        <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @else 
+                        <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+    @endif
                 </div>
 
                 <div class="card-body overflow pl-0 pr-0" >
