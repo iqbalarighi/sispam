@@ -125,12 +125,14 @@
        </td> 
        <td style="text-align: center; vertical-align: middle;">{{$rasa->jumlah_massa}} Orang</td> 
        <td style="text-align: center; vertical-align: middle;">
-        @if ('Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11))
-            {{Str::substr($rasa->status_kegiatan, 12,1000)}}
-            @else
-            {{$rasa->status_kegiatan}}
+            @if ('Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11))
+                {{Str::substr($rasa->status_kegiatan, 12,1000)}}
+            @elseif ('Batal' == $rasa->status_kegiatan)
+                <b>BATAL</b>
+            @else 
+                {{$rasa->status_kegiatan}}<br>
             @endif
-    </td> 
+        </td> 
         @if ($rasa->level_resiko == 'Minimal')
         <td style="text-align: center; vertical-align: middle; background-color: limegreen; color: black;"><b>{{$rasa->level_resiko}}</b></td>
         @elseif ($rasa->level_resiko == 'Rendah')

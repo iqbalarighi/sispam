@@ -41,4 +41,9 @@ class SiteModel extends Model
     {
         return $this->hasOne('App\Models\user');
     }
+
+        public function bencana()
+    {
+        return $this->hasOne('App\Models\BencanaModel');
+    }
 }

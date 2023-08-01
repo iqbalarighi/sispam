@@ -195,4 +195,6 @@ Route::get('/dashboard', GrafikUnras::class)->middleware('auth')->name('dashboar
 Route::get('/bencana', [BencanaController::class, 'index'])->middleware('auth')->name('bencana');
 Route::get('/bencana-tambah', [BencanaController::class, 'tambah'])->middleware('auth')->name('tambah-bencana');
 Route::post('/simpan-bencana', [BencanaController::class, 'simpan'])->middleware('auth')->name('simpan_bencana');
-
+Route::get('/edit-bencana/{id}', [BencanaController::class, 'edit'])->middleware('auth');
+Route::get('/bencana/hapus-foto/{item}/{id}', [BencanaController::class, 'hapusFoto'])->middleware('auth');
+Route::get('/bencana-detil/{id}', [BencanaController::class, 'detil'])->middleware('auth');

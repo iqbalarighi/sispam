@@ -6,7 +6,7 @@
         <div class="col mw-100 p-1">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Data Kegiatan') }}
-                    <a href="{{route('kegiatan')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                    <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>
 
@@ -91,32 +91,40 @@
                         <td><b>Jenis Bencana</b></td>
                         <td>:</td>
                         <td>
-                            <select class="form-select pb-0 pt-0 text-capitalize" id="gedung" name="gedung" required>
-                                <option value="" disabled selected>Pilih Jenis Bencana</option>
-                                <option value="Banjir">Banjir</option>
+                            {{-- <input type="text" class="form-control form-control-sm px-1 m-0" name="jns_kejadian" value="{{old ('jns_kejadian')}}" required> --}}
+                            <select class="form-select pb-0 pt-0 text-capitalize" id="jenis_bencana" name="jenis_bencana" required>
+                                <option value="" disabled selected>Jenis Bencana</option>
                                 <option value="Gempa Bumi">Gempa Bumi</option>
-                                <option value="Longsor">Longsor</option>
+                                <option value="Gunung Meletus">Gunung Meletus</option>
+                                <option value="Tsunami">Tsunami</option>
+                                <option value="Banjir">Banjir</option>
+                                <option value="Tanah Longsor">Tanah Longsor</option>
+                                <option value="Angin Topan">Angin Topan</option>
+                                <option value="Kebakaran">Kebakaran</option>
+                                <option value="Man-made Hazard :">Man-made Hazard</option>
                             </select>
+                            <input type="text" id="jenis" class="form-control form-control-sm px-1 mt-1" name="" hidden>
+
                         </td> 
                     </tr>
                     <tr>
                         <td><b>Nama Pelapor</b></td>
                         <td>:</td>
                         <td>
-                            <input type="text" name="pelapor" value="{{Auth::user()->name}}" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off">
+                            <input type="text" name="pelapor" value="{{Auth::user()->name}}" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off" required>
                         </td> 
                     </tr>
                     <tr>
                         <td><b>Satuan Kerja</b></td>
                         <td>:</td>
                         <td>
-                            <input type="text" name="satker" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off">
+                            <input type="text" name="satker" class="form-control pb-0 pt-0 text-capitalize" autocomplete="off" required>
                         </td> 
                     </tr>
                     <tr>
                         <td colspan="3">
                             <b>Kejadian Bencana : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
-                            <pre class="mb-0" ><textarea style="text-align: justify;" rows="7" class="form-control pb-0 pt-0" name="personil" id="personil" required>
+                            <pre class="mb-0" ><textarea style="text-align: justify;" rows="7" class="form-control pb-0 pt-0" name="kejadian_bencana" id="kejadian_bencana" required>
 Pada tanggal ... pukul ... WIB/WITA/WIT, telah terjadi bencana ... di daerah .... . Bencana tersebut diakibatkan oleh ... . Dari bencana ... diatas, gedung kantor OJK ... diidentifikasi sebagai salah satu gedung yang terpengaruh. Adapun dari hasil penelusuran, ditemukan ... korban jiwa, ... korban luka berat, ... dan ... korban luka ringan yang diderita oleh pegawai OJK. Sementara untuk kerusakan sarana dan prasarana Gedung tersebut, ditemukan/tidak ditemukan kerusakan ...(jelaskan kerusakan apabila ada).</textarea></pre>
                     </td>
                     </tr>
@@ -129,7 +137,7 @@ b. Kerusakan : </textarea></pre>
                         </td>
                     </tr> --}}
                     <tr>
-                        <td colspan="3"><b>Kronologi Kejadian : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="8" name="giat" id="giat" required>Pukul .... WIB/WITA/WIT
+                        <td colspan="3"><b>Kronologi Kejadian : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="8" name="kronologi_bencana" id="kronologi_bencana" required>Pukul .... WIB/WITA/WIT
 ......
 
 Pukul .... WIB/WITA/WIT
@@ -139,7 +147,7 @@ Pukul .... WIB/WITA/WIT
 ......</textarea></pre></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Upaya Penanganan yang Dilakukan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="6" name="ket" id="ket" required></textarea></pre></td>
+                        <td colspan="3"><b>Upaya Penanganan yang Dilakukan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="6" name="penanganan" id="penanganan" required></textarea></pre></td>
                     </tr>
                     <tr>
                         <td><b>Foto Dokumentasi</b></td>
@@ -166,4 +174,30 @@ Pukul .... WIB/WITA/WIT
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+     $("#jenis").prop("disabled", true); 
+
+    $(window).on('load', function(){
+        $("#jenis_bencana").change(function() {
+          console.log($("#jenis_bencana option:selected").val());
+          if ($("#jenis_bencana option:selected").val() == 'Man-made Hazard :') {
+            $("#jenis").prop("disabled", false);
+            $('#jenis').prop('hidden', false);        
+            $("#jenis").prop('required', true);
+            $("#jenis_bencana").prop('required', true);
+            $("#jenis_bencana").attr("name", "jenis_bencana[]");
+            $("#jenis").attr("name", "jenis_bencana[]");
+          } else {
+            $("#jenis").prop("disabled", true);
+            $('#jenis').prop('hidden', true);
+            $("#jenis").prop('required', false);
+            $("#jenis_bencana").prop('required', true);
+            $("#jenis_bencana").attr("name", "jenis_bencana");
+            $("#jenis").attr("name", "");
+          }
+        }
+);
+});
+</script>
 @endsection

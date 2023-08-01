@@ -117,7 +117,7 @@
                                 <option value="Unjuk Rasa" {{ 'Unjuk Rasa' == $edit->jenis_kejadian ? 'selected' : '' }}>Unjuk Rasa</option>
                                 <option value="Lain-lain :" {{ 'Lain-lain :' == Str::substr($edit->jenis_kejadian, 0,11) ? 'selected' : '' }}>Lain-lain</option>
                             </select>
-                        <input type="text" id="jenis" class="form-control form-control-sm px-1 mt-1" name="jenis_potensi" value="{{Str::substr($edit->jenis_kejadian, 12,1000)}}" hidden>
+                        <input type="text" id="jenis" class="form-control form-control-sm px-1 mt-1" name="jenis_kejadian" value="{{Str::substr($edit->jenis_kejadian, 12,1000)}}" hidden>
                         </div>
                         <div class="form-group mb-2">
                             <label class="mb-0">Lokasi Kejadian</label>
@@ -408,10 +408,6 @@
                         </div> 
                     </div>
                     @endif
-
-
-
-
 
                         <div class="form-group" style="text-align:center;">
                             <button type="submit" class="btn btn-primary" id="">Update</button>

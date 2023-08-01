@@ -93,7 +93,7 @@ class UnrasController extends Controller
         }
 
 
-        return view('unras.index', compact('unras','start','end','cari','cariin'));
+        // return view('unras.index', compact('unras','start','end','cari','cariin'));
     }
 
     public function simpan(Request $request)

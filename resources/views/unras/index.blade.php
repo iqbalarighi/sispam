@@ -243,11 +243,9 @@
                         @if (!$cariin)
                         <a href="unrasPDF/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
                         @else
-
                         <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
-
                         @endif
-                    {{-- ==========xxxx=========== --}}
+                        {{-- ==========xxxx=========== --}}
                         @else
                         {{-- ==========vvvvv============ --}}
                         @if ($cariin != null)
@@ -261,7 +259,6 @@
                         <a href="unrasPDF/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
                         @else
                         <a href="unrasOJK/{{$start}}/{{$end}}/{{$cariin}}" target="_blank"><span class="btn btn-primary btn-sm float-left ml-2">Export PDF</span></a>
-
                         @endif
                         {{-- ===========zzzz========== --}}
                         @endif
@@ -273,7 +270,7 @@
                         <input type="date" class=""  name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
-                    @else
+                        @else
                     <form action="" method="GET" class="float-right mb-2">
                         <input type="date" class="" name="date">
                         <button class="submit bi bi-search"></button>
@@ -330,12 +327,14 @@
                        </td> 
                        <td>{{$rasa->jumlah_massa}} Orang</td> 
                        <td style="white-space:normal !important;">
-                        @if ('Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11))
-                            {{Str::substr($rasa->status_kegiatan, 12,1000)}}
-                            @else
-                            {{$rasa->status_kegiatan}}<br>
+                            @if ('Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11))
+                                {{Str::substr($rasa->status_kegiatan, 12,1000)}}
+                            @elseif ('Batal' == $rasa->status_kegiatan)
+                                <b>BATAL</b>
+                            @else 
+                                {{$rasa->status_kegiatan}}<br>
                             @endif
-                    </td> 
+                        </td> 
                         @if ($rasa->level_resiko == 'Minimal')
                         <td style="background-color: limegreen; color: black;"><b>{{$rasa->level_resiko}}</b></td>
                         @elseif ($rasa->level_resiko == 'Rendah')
