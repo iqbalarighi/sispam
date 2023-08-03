@@ -33,7 +33,7 @@ class UnrasController extends Controller
                     })
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(15)
+                    ->paginate(100000)
                     ->appends(request()->input());
 
                 $cektest = UnrasModel::whereNull('editor')
@@ -47,7 +47,7 @@ class UnrasController extends Controller
                 $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(15)
+                    ->paginate(100000)
                     ->appends(request()->input());
 
                 $cektest = UnrasModel::whereNull('editor')
