@@ -5,9 +5,9 @@
             pre {
                 font-family : Calibri;
             }
-            /*table {*/
-            /*    page-break-after: always;*/
-            /*}*/
+            table {
+               page-break-inside: auto;
+            }
                 
             .potong {
                 white-space: pre-line;       /* Internet Explorer 5.5+ */
@@ -24,42 +24,27 @@
                         <b><center>Pukul {{Carbon\Carbon::parse($detil->created_at)->isoFormat('HH:mm:ss')}} WIB</center></b>
                     </h4>
                 </div>
-                <table class="table table-responsive" width="100%">
+{{--                 <table class="table table-responsive" width="100%" style="">
+                
                     <tr>
                         <td><b>No. laporan: </b>{{$detil->no_lap}} </td> 
                     </tr>
-                    <tr>
-                        <td colspan="3"><b>Personil Yang Bertugas : </b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><pre class="mb-0">{{$detil->personil}}</pre></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><b>Tim Respon Cepat : </b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><pre class="mb-0" >{{$detil->trc}}</pre></td>
-                    </tr>
-                    </table>
-
-                    <span class="table table-responsive" width="100%">
-                    <pre class="mb-0 potong" style=""><b>Update Giat :<br><br> </b>{{$detil->giat}}</pre>
-                    </span>
-                    <br>
-                    <table class="table table-responsive" width="100%">
-                    <tr>
-                        <td><b>Keterangan : </b></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><pre class="mb-0 potong">{{$detil->keterangan}}</pre></td> 
-                    </tr>
-                    </table>
+                </table> --}}
+                    <span class="table table-responsive " width="100%">
+                    <b>No. laporan: </b>{{$detil->no_lap}}
+                    <pre class="mb-0 potong" style=""><b>Personil Yang Bertugas :<br></b>{{$detil->personil}}</pre>
                     
-                    <table align="center">
-
-                    <tr>
-                        <td align="center" colspan="3"><b>Dokumentasi : </b> <br/>
-                             <br/><br/><br/>
+                    <pre class="mb-0 potong" style=""><b>Tim Respon Cepat :<br></b>{{$detil->trc}}</pre>
+                    
+                    <pre class="mb-0 potong" style=""><b>Update Giat :<br></b>{{$detil->giat}}</pre>
+                    
+                    <pre class="mb-0 potong" style=""><b>Keterangan :<br></b>{{$detil->keterangan}}</pre>
+                    </span>
+                    
+                <div style="page-break-after: inherit;" >
+                    <b>Dokumentasi : </b>
+                     <br><br><br><br><br>
+                     <div align="center">
                             @if ($detil->foto != null)
                     @foreach(explode('|',$detil->foto) as $item)
 
@@ -68,9 +53,8 @@
                         @else 
                         Harap Upload Foto Dokumentasi
                         @endif
+                    </div>
+                </div>
 
-                        </td>
-                    </tr>
-                    </table>
 </body>
     </html>

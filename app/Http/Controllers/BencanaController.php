@@ -111,9 +111,78 @@ class BencanaController extends Controller
         ->with('success','Hapus Foto Berhasil');
     }
 
-public function detil($id)
-{
-    $detil = BencanaModel::with('site')->findOrFail($id);
-   return view('bencana.detil', compact('detil'));
-}
+    public function detil($id)
+    {
+        $detil = BencanaModel::with('site')->findOrFail($id);
+       return view('bencana.detil', compact('detil'));
+    }
+
+    public function update(Request $request, $id)
+    {    $update = BencanaModel::findOrFail($id);
+
+$files = $request->file('images');
+
+        $bncn = $request->jenis_bencana;
+        if (is_array($request->jenis_bencana)) {
+            $dian = array_slice($request->jenis_bencana,-2,1);
+            $keja = implode('', $dian);
+            $abc = end($bncn);
+            $bncna = $keja.' '.$abc;
+        } else {
+           $bncna = $request->jenis_bencana;
+        }
+
+        if ($files != null) {
+            foreach ($files as $file) {
+            $image_name = md5(rand(100, 1000));
+            $ext = strtolower($file->getClientOriginalExtension());
+            $image_full_name = $image_name.'.'.$ext;
+            $image_path = public_path('storage/bencana/'.$update->no_bencana.'/');
+            $image_url = $image_path.$image_full_name;
+            $file->move($image_path, $image_full_name);
+            $image[] = $image_full_name;
+            } 
+
+            if ($update->foto == null) {
+                $gambar_dok = implode('|', $image);
+            } else {
+                $gambar_dok = $update->foto.'|'.implode('|', $image);
+            }
+
+        $update->tanggal = $request->tgl;
+        $update->lokasi = $request->gedung;
+        $update->jenis_bencana = $bncna;
+        $update->nama_pelapor = $request->pelapor;
+        $update->satker = $request->satker;
+        $update->kejadian_bencana = $request->kejadian_bencana;
+        $update->kronologi_bencana = $request->kronologi_bencana;
+        $update->penanganan = $request->penanganan;
+        $update->foto = $gambar_dok;
+        $update->save();
+
+    } else {
+
+        $update->tanggal = $request->tgl;
+        $update->lokasi = $request->gedung;
+        $update->jenis_bencana = $bncna;
+        $update->nama_pelapor = $request->pelapor;
+        $update->satker = $request->satker;
+        $update->kejadian_bencana = $request->kejadian_bencana;
+        $update->kronologi_bencana = $request->kronologi_bencana;
+        $update->penanganan = $request->penanganan;
+        $update->save();
+    }
+        return back()
+        ->with('success', 'Laporan Berhasil di Update');
+    }
+
+public function savePDF($id)
+    {   
+        $detil = BencanaModel::with('site')->findOrFail($id);
+        
+        $pdf = PDF::loadView('bencana.savepdf', ['detil' => $detil]);
+
+        return $pdf->stream('Laporan Bencana '.$detil->no_bencana.'.pdf');
+    }
+
 }

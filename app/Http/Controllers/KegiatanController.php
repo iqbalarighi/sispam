@@ -419,7 +419,7 @@ public function downloadPDF($id)
         
         $pdf = PDF::loadView('kegiatan.savepdf', ['detil' => $detil]);
 
-        return $pdf->download('Laporan Kegiatan '.$detil->no_lap.'.pdf');
+        return $pdf->stream('Laporan Kegiatan '.$detil->no_lap.'.pdf');
     }
 
 // public function export() 

@@ -183,8 +183,8 @@ Route::get('/kejadian/status/{id}', [KejadianController::class, 'status'])->midd
 // Unras Section
 Route::get('/unras', [UnrasController::class, 'index'])->middleware('auth')->name('unras');
 Route::post('/simpan-unras', [UnrasController::class, 'simpan'])->middleware('auth')->name('simpan-unras');
-Route::get('/automasi', [UnrasController::class, 'automasi'])->name('automasi');
-Route::get('/automasi2', [UnrasController::class, 'automasi2'])->name('automasi2');
+Route::get('/automasi', [UnrasController::class, 'automasi'])->middleware('auth')->name('automasi');
+Route::get('/automasi2', [UnrasController::class, 'automasi2'])->middleware('auth')->name('automasi2');
 Route::put('/update-unras/{id}', [UnrasController::class, 'update'])->middleware('auth');
 Route::delete('/unras/hapus/{id}', [UnrasController::class, 'hapus'])->middleware('auth');
 
@@ -198,3 +198,6 @@ Route::post('/simpan-bencana', [BencanaController::class, 'simpan'])->middleware
 Route::get('/edit-bencana/{id}', [BencanaController::class, 'edit'])->middleware('auth');
 Route::get('/bencana/hapus-foto/{item}/{id}', [BencanaController::class, 'hapusFoto'])->middleware('auth');
 Route::get('/bencana-detil/{id}', [BencanaController::class, 'detil'])->middleware('auth');
+Route::put('/update-bencana/{id}', [BencanaController::class, 'update'])->middleware('auth');
+Route::get('/savePDF/{id}', [BencanaController::class, 'savePDF'])->middleware('auth');
+

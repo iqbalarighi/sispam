@@ -19,7 +19,7 @@
                         <style>
                             .table tr td {
                             vertical-align: middle;
-                            padding:1px !important;    
+                            padding:1px !important;
                             }
                         pre {
                             font-family : system-ui;
@@ -30,6 +30,7 @@
                             white-space: -pre-wrap;      /* Opera 4-6 */
                             white-space: -o-pre-wrap;    /* Opera 7 */
                             word-wrap: break-word;       /* Internet Explorer 5.5+ */
+                            text-align:justify !important;
                         }
                         .xx {
                             font-size: 10pt;
@@ -39,6 +40,7 @@
                         /*  padding:0rem !important;*/
                             vertical-align: middle;
                             white-space:normal;
+/*                            border: 1px solid black;*/
                         }
                         .table th {
                             padding:0rem;
@@ -152,11 +154,17 @@
 </style>
             <!-- form input Site -->
             <div class="table-responsive mt-2" align="center" style="overflow-x: auto;">
-
-                    <table class="" style="width: 70%;">
+                        <div class="pb-3">
+                    <b><center> 
+                Laporan Bencana {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
+                    </center></b>
+                            <b><center>{{$detil->site->nama_gd}}</center></b>
+                            <b><center>{{Carbon\Carbon::parse($detil->created_at)->isoFormat('dddd, D MMMM Y')}}</center></b>
+                        </div>
+                    <table class="" width="80%" style="">
                     <tr>
-                        <td><b>Nomor Laporan</b></td>
-                        <td>:</td>
+                        <td width="25%"><b>Nomor Laporan</b></td>
+                        <td width="1%">:</td>
                         <td>
                             &nbsp;{{$detil->no_bencana}}
                         </td> 
@@ -165,7 +173,7 @@
                         <td><b>Tanggal</b></td>
                         <td>:</td>
                         <td>
-                            &nbsp;{{$detil->tanggal}}
+                            &nbsp;{{Carbon\Carbon::parse($detil->tanggal)->isoFormat('dddd, D MMMM Y')}}
                         </td> 
                     </tr>
                     <tr>
@@ -179,10 +187,11 @@
                         <td><b>Jenis Bencana</b></td>
                         <td>:</td>
                         <td>
-                            &nbsp;{{$detil->jenis_bencana}}
+                            &nbsp;{{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
                         </td> 
                     </tr>
-                    <tr>
+                    <tr><td>&nbsp;</td></tr>
+{{--                     <tr>
                         <td><b>Nama Pelapor</b></td>
                         <td>:</td>
                         <td>
@@ -195,23 +204,26 @@
                         <td>
                            &nbsp;{{$detil->satker}}
                         </td> 
-                    </tr>
+                    </tr> --}}
                     <tr>
-                        <td><b>Kejadian Bencana</b></td><td> : &nbsp;</td><td width="500px"><pre class="mb-0">{{$detil->kejadian_bencana}}</pre>
+                        <td colspan="3"><b>Kejadian Bencana</b><br/><pre class="mb-0">{{$detil->kejadian_bencana}}</pre>
                         </td>
                     </tr>
+                    <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td><b>Kronologi Kejadian</b></td><td> : &nbsp;</td><td width="500px"><pre class="mb-0">{{$detil->kronologi_bencana}}</pre>
+                        <td colspan="3"><b>Kronologi Kejadian</b><br/><pre class="mb-0">{{$detil->kronologi_bencana}}</pre>
                         </td>
                     </tr>
+                    <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td>
-                            <b>Upaya Penanganan yang Dilakukan</b></td><td><br/> : &nbsp;</td><td width="500px" ><pre  class="mb-0">{{$detil->penanganan}}</pre>
+                        <td colspan="3">
+                            <b>Upaya Penanganan yang Dilakukan</b><br/><pre  class="mb-0">{{$detil->penanganan}}</pre>
                         </td>
                     </tr>
+                    <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td colspan="3" class="m-0">Dokumentasi : <br/> 
-                         <div>
+                        <td colspan="3" class="m-0"><b>Dokumentasi : </b><br/> 
+                         <div align="center">
                     @if ($detil->foto != null)
                     @foreach(explode('|',$detil->foto) as $item)
                     <img align="center" src="{{asset('storage/bencana')}}/{{$detil->no_bencana}}/{{$item}}" style="width:280px; margin-bottom: 5pt">&nbsp;
@@ -224,6 +236,11 @@
                     </tr>
                     </table>
 
+                    @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
+
+                <a href="/savePDF/{{$detil->id}}" target="_blank"><span class="btn btn-primary btn-sm float-center ml-2">Download PDF</span></a>
+
+                    @endif
 
                     </div>
                 </div>

@@ -69,7 +69,7 @@
             @csrf
                     <table class="table mx-auto" style="width: 70%; ">
                     <tr>
-                        <td><b>Tanggal</b></td>
+                        <td><b>Tanggal Kejadian</b></td>
                         <td>:</td>
                         <td>
                             <input type="date" class="form-control pb-0 pt-0" max="{{date('Y-m-d')}}" value="{{ date('Y-m-d')}}" name="tgl" id="tgl" required>

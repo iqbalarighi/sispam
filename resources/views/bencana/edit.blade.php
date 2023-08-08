@@ -123,8 +123,9 @@
 </style>
             <!-- form input Site -->
             <div class="table-responsive mt-2" style="overflow-x: auto;">
-            <form action="{{route('simpan_bencana')}}" method="post" id="form" enctype="multipart/form-data">
+            <form action="{{url('/update-bencana')}}/{{$edit->id}}" method="post" id="form" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
                     <table class="table mx-auto" style="width: 70%;">
                     <tr>
                         <td><b>Tanggal</b></td>

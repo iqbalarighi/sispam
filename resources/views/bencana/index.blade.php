@@ -44,7 +44,7 @@
             <p/>
         @endif
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Bencana') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Kebencanaan') }}
                     <a href="{{route('tambah-bencana')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
                 </div>
                 <div class="card-body p-1 overflow" >
@@ -54,7 +54,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Nomor Laporan</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Kejadian</th>
                     <th>Jenis Bencana</th>
                     <th>Lokasi</th>
                     @if (Auth::user()->role === 'admin')
@@ -67,7 +67,7 @@
                 <tr style="cursor:pointer;">
                     <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{$bencana->firstItem() + $key}}</td>
                     <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{$item->no_bencana}}</td>
-                    <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{Carbon\Carbon::parse($item->tanggal)->isoFormat('DD-MM-Y')}}</td>
+                    <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{Carbon\Carbon::parse($item->tanggal)->isoFormat('D MMMM Y')}}</td>
                     <td onclick="window.location='/bencana-detil/{{$item->id}}'">
                         @if ('Man-made Hazard : ' == Str::substr($item->jenis_bencana, 0,18))
                         {{Str::substr($item->jenis_bencana, 18,1000)}}

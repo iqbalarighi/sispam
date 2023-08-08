@@ -94,17 +94,11 @@
                     </tr>
                     
                     </table>
-                    @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
-
-                                                <form method="GET" action="/downloadPDF/{{$detil->id}}" enctype="multipart/form-data">
-                            <div class="form-group">
-                             <div align="center" class="control">
-                                 <button type="submit" class="btn btn-primary" aria-pressed="true">Download Laporan</button>
-                             </div>
-                            </div>
-                            </form> 
-                    @endif
+                    
                 </div>
+                @if($detil->danru == Auth::user()->name || Auth::user()->role == "admin")
+                <center><a href="/downloadPDF/{{$detil->id}}" target="_blank"><span class="btn btn-primary btn-sm ml-2">Download Laporan</span></a></center>
+                @endif
                 </div>
             </div>
             </div>
