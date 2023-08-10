@@ -18,6 +18,7 @@ class BencanaModel extends Model
             'jenis_bencana',
             'nama_pelapor',
             'satker',
+            'status',
             'kejadian_bencana',
             'kronologi_bencana',
             'penanganan',

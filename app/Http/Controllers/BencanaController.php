@@ -2,21 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
 use App\Models\BencanaModel;
 use App\Models\SiteModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Carbon\Carbon;
-use App\Helpers\Helper;
 use Illuminate\Support\Str;
 use PDF;
 
 class BencanaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bencana = BencanaModel::with('site')->paginate(15);
-         return view('bencana.index', compact('bencana'));
+        $cari = $request->date;
+        $start =$request->start;
+        $end = $request->end;
+
+        if (Auth::user()->role == 'admin'){
+            if ($start != null) {
+               $bencana = BencanaModel::with('site')
+               ->whereBetween('tanggal', [$start, $end])
+               ->orderBy('tanggal', 'DESC')
+               ->paginate(15);
+
+               $bencana->appends(compact('bencana','start','end','cari'));
+               
+               return view('bencana.index', compact('bencana','start','end','cari'));
+            } else {
+                           $bencana = BencanaModel::with('site')->paginate(15);
+
+         return view('bencana.index', compact('bencana','start','end','cari'));
+            }
+        } else {
+            if ($cari != null) {
+                $bencana = BencanaModel::where('tanggal','LIKE', '%'.$cari.'%')
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('tanggal', 'DESC')
+                        ->paginate(15);
+                    $bencana->appends(['date' => $cari]);
+                return view('bencana.index', compact('bencana','cari'));
+
+                } else {
+
+                $bencana = BencanaModel::orderBy('tanggal', 'DESC')
+                ->orderBy('tanggal', 'DESC')
+                ->paginate(15);
+
+                return view('bencana.index', compact('bencana'));
+
+        }
+    }
+
+       
     }
 
     public function tambah()
@@ -70,8 +109,8 @@ class BencanaController extends Controller
         $bencana->foto = $gambar_dok;
         $bencana->save();
 
-        return back()
-        ->with('success', 'Laporan Berhasil Dibuat.');
+        return redirect('bencana')
+        ->with('sukses', 'Laporan Berhasil Dibuat.');
     }
 
 
@@ -183,6 +222,49 @@ public function savePDF($id)
         $pdf = PDF::loadView('bencana.savepdf', ['detil' => $detil]);
 
         return $pdf->stream('Laporan Bencana '.$detil->no_bencana.'.pdf');
+    }
+
+    public function status($id)
+    {
+        $status = BencanaModel::findOrFail($id);
+
+        if ($status->status == "Open"){
+
+            $status->status = "Resolved";
+            $status->save();
+
+        } else {
+
+            $status->status = "Open";
+            $status->save();
+            
+        }
+
+        return back()
+        ->with('sukses', 'Status Berubah');
+    }
+
+    public function hapus($id)
+    {
+        $hapus = BencanaModel::findOrFail($id);
+        $nolap = $hapus->no_bencana;
+
+
+        if ($hapus->dokumentasi == null){
+            $hapus->delete();
+            $message = 'No Laporan '.$nolap.' Sudah Terhapus';
+        } else {
+            $del = File::deleteDirectory(public_path('storage/bencana/'.$nolap));
+       
+       if ($del == true) {
+            $hapus->delete();
+            $message = 'No Laporan '.$nolap.' Sudah Terhapus';
+       } else {
+         $message = "Hapus data gagal !!!";
+       } 
+   }
+       return back()
+       ->with('sukses', $message);
     }
 
 }

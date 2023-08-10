@@ -5,14 +5,15 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Bencana') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Kegawatdaruratan') }}
                     {{-- <a href="{{url('/giat-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a> --}}
     @if($detil->user_pelapor == Auth::user()->name || Auth::user()->role == "admin")
                         <a href="{{url('edit-bencana')}}/{{$detil->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Edit Laporan</span></a>
                         <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
     @else 
-                        <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                        <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
     @endif
+
                 </div>
 
                 <div class="card-body overflow pl-0 pr-0" >
@@ -156,10 +157,10 @@
             <div class="table-responsive mt-2" align="center" style="overflow-x: auto;">
                         <div class="pb-3">
                     <b><center> 
-                Laporan Bencana {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
+                Laporan Kegawatdaruratan {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
                     </center></b>
                             <b><center>{{$detil->site->nama_gd}}</center></b>
-                            <b><center>{{Carbon\Carbon::parse($detil->created_at)->isoFormat('dddd, D MMMM Y')}}</center></b>
+                            <b><center>{{Carbon\Carbon::parse($detil->updated_at)->isoFormat('dddd, D MMMM Y')}}</center></b>
                         </div>
                     <table class="" width="80%" style="">
                     <tr>
@@ -170,7 +171,7 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Tanggal</b></td>
+                        <td><b>Tanggal Kejadian</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{Carbon\Carbon::parse($detil->tanggal)->isoFormat('dddd, D MMMM Y')}}
@@ -184,7 +185,7 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Jenis Bencana</b></td>
+                        <td><b>Jenis Kegawatdaruratan</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
@@ -206,7 +207,7 @@
                         </td> 
                     </tr> --}}
                     <tr>
-                        <td colspan="3"><b>Kejadian Bencana</b><br/><pre class="mb-0">{{$detil->kejadian_bencana}}</pre>
+                        <td colspan="3"><b>Uraian Kejadian</b><br/><pre class="mb-0">{{$detil->kejadian_bencana}}</pre>
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>

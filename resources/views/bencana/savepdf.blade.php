@@ -35,9 +35,9 @@
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 20px; width: 150px; position: fixed;">
     <h4>
         <center> 
-            <b>Laporan Bencana {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}</b><br>
+            <b>Laporan Kegawatdaruratan {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}</b><br>
             <b>{{$detil->site->nama_gd}}</b><br>
-            <b>{{Carbon\Carbon::parse($detil->created_at)->isoFormat('dddd, D MMMM Y')}}</b>
+            <b>{{Carbon\Carbon::parse($detil->updated_at)->isoFormat('dddd, D MMMM Y')}}</b>
         </center>
     </h4>
             </div>
@@ -51,7 +51,7 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Tanggal</b></td>
+                        <td><b>Tanggal Kejadian</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{Carbon\Carbon::parse($detil->tanggal)->isoFormat('dddd, D MMMM Y')}}
@@ -65,7 +65,7 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Jenis Bencana</b></td>
+                        <td><b>Jenis Kegawatdaruratan</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
@@ -73,7 +73,7 @@
                     </tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td colspan="3"><b>Kejadian Bencana</b><br/><pre class="mb-0 potong">{{$detil->kejadian_bencana}}</pre>
+                        <td colspan="3"><b>Uraian Kejadian</b><br/><pre class="mb-0 potong">{{$detil->kejadian_bencana}}</pre>
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
@@ -115,7 +115,7 @@ Kepala Bagian Pengamanan
 <b>Supriyono</b>
 NIP. 00704</pre>
                         </td>
-<td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
+<td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->updated_at)->isoFormat('D MMMM Y')}}</td>
                         <td width="33%" style="vertical-align: top;"><pre class="narrow">
 Disusun Oleh,
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col mw-100 p-1">
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Data Kegiatan') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Laporan Kegawatdaruratan') }}
                     <a href="{{route('bencana')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>

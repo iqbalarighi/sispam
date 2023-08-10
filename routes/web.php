@@ -200,4 +200,6 @@ Route::get('/bencana/hapus-foto/{item}/{id}', [BencanaController::class, 'hapusF
 Route::get('/bencana-detil/{id}', [BencanaController::class, 'detil'])->middleware('auth');
 Route::put('/update-bencana/{id}', [BencanaController::class, 'update'])->middleware('auth');
 Route::get('/savePDF/{id}', [BencanaController::class, 'savePDF'])->middleware('auth');
+Route::get('/bencana/status/{id}', [BencanaController::class, 'status'])->middleware('auth');
+Route::delete('/hapus-bencana/{id}', [BencanaController::class, 'hapus'])->middleware('auth');
 

@@ -73,7 +73,7 @@
                             <select class="form-select pb-0 pt-0 text-capitalize" id="jenis_kejadian" name="jenis_kejadian" required>
                                 <option value="" disabled selected>Jenis Kejadian</option>
                                 <option value="Kecelakaan Kerja">Kecelakaan Kerja</option>
-                                <option value="Keadaan Darurat">Keadaan Darurat</option>
+                                <option value="Insiden">Insiden</option>
                                 <option value="Unjuk Rasa">Unjuk Rasa</option>
                                 <option value="Lain-lain :">Lain-lain</option>
                             </select>

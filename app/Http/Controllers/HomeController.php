@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\BencanaModel;
 use App\Models\KegiatanModel;
 use App\Models\KejadianModel;
 use App\Models\SiteModel;
@@ -18,6 +19,8 @@ class HomeController extends Controller
         $giats = KegiatanModel::latest()->take(5)->get();
         $jadi = KejadianModel::where('status','Open')->latest()->take(3)->get();
         $jadi2 = KejadianModel::where('status','Resolved')->latest()->take(3)->get();
+        $gawat = BencanaModel::where('status','Open')->latest()->take(3)->get();
+        $gawat2 = BencanaModel::where('status','Resolved')->latest()->take(3)->get();
         // $jaga = TukarjagaModel::latest()->take(5)->get();
     
     // $giat = KegiatanModel::select('created_at')->latest()->take(5)->get();
@@ -51,7 +54,52 @@ class HomeController extends Controller
 
             $jadd[] = $jadddd;
         }
-$jjj = array_merge($jad,$jadd);
+
+
+        foreach ($gawat as $key => $gaw) {
+            $wat['id']= $gaw->id;
+            $wat['no_bencana']= $gaw->no_bencana;
+            $wat['jenis_bencana']= $gaw->jenis_bencana;
+            $wat['tanggal_kejadian']= Carbon::parse($gaw->tanggal)->isoFormat('D MMMM Y');
+            $wat['updated_at']= Carbon::parse($gaw->updated_at)->isoFormat('D MMMM Y');
+            $wat['status'] = $gaw->status;
+
+            $gawats[] = $wat;
+        }
+
+        foreach ($gawat2 as $key => $daru) {
+            $wats['id']= $daru->id;
+            $wats['no_bencana']= $daru->no_bencana;
+            $wats['jenis_bencana']= $daru->jenis_bencana;
+            $wats['tanggal_kejadian']= Carbon::parse($daru->tanggal)->isoFormat('D MMMM Y');
+            $wats['updated_at']= Carbon::parse($daru->updated_at)->isoFormat('D MMMM Y');
+            $wats['status'] = $daru->status;
+
+            $gawats2[] = $wats;
+        }
+// dd(count($jadi) != null);
+
+if (count($gawat) == null && count($gawat2) != null) {
+    $xxx = $gawats2;
+} elseif (count($gawat2) == null && count($gawat) != null) {
+    $xxx = $gawats;
+} elseif (count($gawat) == null && count($gawat2) == null) {
+     $xxx = [];
+} elseif (count($gawat) != null && count($gawat2) != null) {
+    $xxx = array_merge($gawats,$gawats2);
+}
+
+
+if (count($jadi) == null && count($jadi2) != null) {
+    $jjj = $jadd;
+} elseif (count($jadi2) == null && count($jadi) != null) {
+    $jjj = $jad;
+} elseif (count($jadi) == null && count($jadi2) == null) {
+     $jjj = [];
+} elseif (count($jadi) != null && count($jadi2) != null) {
+    $jjj = array_merge($jad,$jadd);
+}
+
 
         // foreach ($jaga as $key => $value3) {
         //     $timej [] = $value3->created_at->diffForHumans();
@@ -59,26 +107,24 @@ $jjj = array_merge($jad,$jadd);
 
 $datas = ['giats' => $tes];
 $datax = ['jadi' => $jjj];
+$datay = ['gawat' => $xxx];
+
+
+
+
 // $dataz = ['jaga' => $jaga, 'timej' => $timej];
 
           // dd($datax,$datas);
 
        
             if($request->ajax()){
-               return response()->json(compact('datas','datax'));
+
+               return response()->json(compact('datas','datax','datay'));
             }
 
     return view('dashboard.home');
     }
 
-    public function list(Request $request)
-    {
-        $giats = KegiatanModel::orderBy('created_at','DESC')->take(5)->paginate(5);
 
-            if($request->ajax()){
-               return response()->json($giats);
-            }
-    return view('dashboard.home', compact('giats'));
-    }
     
 }

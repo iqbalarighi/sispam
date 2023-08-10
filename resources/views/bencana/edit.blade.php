@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card ">
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Bencana') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Edit Laporan Kegawatdaruratan') }}
                     {{-- <a href="{{url('/giat-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a> --}}
                     <a href="{{url('bencana-detil')}}/{{$edit->id}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
@@ -128,14 +128,14 @@
             @method('PUT')
                     <table class="table mx-auto" style="width: 70%;">
                     <tr>
-                        <td><b>Tanggal</b></td>
+                        <td><b>Tanggal Kejadian</b></td>
                         <td>:</td>
                         <td>
                             <input type="date" class="form-control pb-0 pt-0" max="{{date('Y-m-d')}}" value="{{$edit->tanggal}}" name="tgl" id="tgl" required>
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Lokasi</b></td>
+                        <td><b>Lokasi Kejadian</b></td>
                         <td>:</td>
                         <td>
                             <select class="form-select pb-0 pt-0" id="gedung" name="gedung" required>
@@ -182,7 +182,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <b>Kejadian Bencana : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <b>Uraian Kejadian : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
                             <pre class="mb-0" ><textarea style="text-align: justify;" rows="7" class="form-control pb-0 pt-0" name="kejadian_bencana" id="kejadian_bencana" required>{{$edit->kejadian_bencana}}
                             </textarea></pre>
                     </td>
@@ -254,7 +254,7 @@ b. Kerusakan : </textarea></pre>
                     </table>
                 <center>
                     <button type="submit" class="btn btn-primary" style = "text-align:center">
-                        {{ __('Simpan') }}
+                        {{ __('Update') }}
                     </button>
                 </center>
                     </form>

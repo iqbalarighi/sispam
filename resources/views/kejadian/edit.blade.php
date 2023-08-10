@@ -113,7 +113,7 @@
                             <select class="form-select pb-0 pt-0 text-capitalize" id="jenis_kejadian" name="jenis_kejadian" required>
                                 <option value="" selected disabled>Jenis Kejadian</option>
                                 <option value="Kecelakaan Kerja" {{ 'Kecelakaan Kerja' == $edit->jenis_kejadian ? 'selected' : '' }}>Kecelakaan Kerja</option>
-                                <option value="Keadaan Darurat" {{ 'Keadaan Darurat' == $edit->jenis_kejadian ? 'selected' : '' }}>Keadaan Darurat</option>
+                                <option value="Insiden" {{ 'Insiden' == $edit->jenis_kejadian ? 'selected' : '' }}>Insiden</option>
                                 <option value="Unjuk Rasa" {{ 'Unjuk Rasa' == $edit->jenis_kejadian ? 'selected' : '' }}>Unjuk Rasa</option>
                                 <option value="Lain-lain :" {{ 'Lain-lain :' == Str::substr($edit->jenis_kejadian, 0,11) ? 'selected' : '' }}>Lain-lain</option>
                             </select>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="form-group mb-2">
                             <label class="mb-0">Waktu Kejadian</label>
-                            <input type="date" class="form-control form-control-sm px-1" name="waktu_kejadian" value="{{ $edit->waktu_kejadian }}" required>
+                            <input type="date" class="form-control form-control-sm px-1" name="waktu_kejadian" max="{{date('Y-m-d')}}" value="{{Carbon\Carbon::parse($edit->waktu_kejadian)->format('Y-m-d')}}" required>
                         </div>
                         <div class="form-group mb-2">
                             <label class="mb-0">Jam Kejadian</label>

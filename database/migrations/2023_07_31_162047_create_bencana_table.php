@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('jenis_bencana');
             $table->string('nama_pelapor');
             $table->string('satker');
+            $table->string('status', 15)->default('Open');
             $table->text('kejadian_bencana');
             $table->text('kronologi_bencana');
             $table->text('penanganan');
