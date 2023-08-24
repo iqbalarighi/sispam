@@ -81,8 +81,8 @@
                     <th>No.</th>
                     <th>Nomor Laporan</th>
                     <th>Tanggal Kejadian</th>
-                    <th>Jenis Kegawatdaruratan</th>
-                    <th>Lokasi</th>
+                    <th>Jenis Kejadian</th>
+                    <th>Lokasi Terdampak</th>
                     <th>Dibuat</th>
                     <th>Terakhir Diperbarui</th>
                     @if (Auth::user()->role === 'admin')

@@ -178,14 +178,14 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Lokasi</b></td>
+                        <td><b>Lokasi Terdampak</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{$detil->site->nama_gd}}
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Jenis Kegawatdaruratan</b></td>
+                        <td><b>Jenis Kejadian</b></td>
                         <td>:</td>
                         <td>
                             &nbsp;{{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}

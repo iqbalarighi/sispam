@@ -135,10 +135,10 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Lokasi Kejadian</b></td>
+                        <td><b>Lokasi Terdampak</b></td>
                         <td>:</td>
                         <td>
-                            <select class="form-select pb-0 pt-0" id="gedung" name="gedung" required>
+                            <select class="form-select pb-0 pt-0" id="gedung" name="gedung" required multiple>
                                 <option value="{{$id[0]->id}}">{{$edit->site->nama_gd}}</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
@@ -147,12 +147,12 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Jenis Bencana</b></td>
+                        <td><b>Jenis Kejadian</b></td>
                         <td>:</td>
                         <td>
                             {{-- <input type="text" class="form-control form-control-sm px-1 m-0" name="jns_kejadian" value="{{old ('jns_kejadian')}}" required> --}}
                             <select class="form-select pb-0 pt-0 text-capitalize" id="jenis_bencana" name="jenis_bencana" required>
-                                <option value="" disabled selected>Jenis Bencana</option>
+                                <option value="" disabled selected>Jenis Kejadian</option>
                                 <option value="Gempa Bumi" {{ 'Gempa Bumi' == $edit->jenis_bencana ? 'selected' : '' }}>Gempa Bumi</option>
                                 <option value="Gunung Meletus" {{ 'Gunung Meletus' == $edit->jenis_bencana ? 'selected' : '' }}>Gunung Meletus</option>
                                 <option value="Tsunami" {{ 'Tsunami' == $edit->jenis_bencana ? 'selected' : '' }}>Tsunami</option>

@@ -88,12 +88,12 @@
                         </td> 
                     </tr>
                     <tr>
-                        <td><b>Jenis Bencana</b></td>
+                        <td><b>Jenis Kejadian</b></td>
                         <td>:</td>
                         <td>
                             {{-- <input type="text" class="form-control form-control-sm px-1 m-0" name="jns_kejadian" value="{{old ('jns_kejadian')}}" required> --}}
                             <select class="form-select pb-0 pt-0 text-capitalize" id="jenis_bencana" name="jenis_bencana" required>
-                                <option value="" disabled selected>Jenis Bencana</option>
+                                <option value="" disabled selected>Jenis Kejadian</option>
                                 <option value="Gempa Bumi">Gempa Bumi</option>
                                 <option value="Gunung Meletus">Gunung Meletus</option>
                                 <option value="Tsunami">Tsunami</option>
@@ -123,9 +123,9 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <b>Kejadian Bencana : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <b>Uraian Kejadian : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
                             <pre class="mb-0" ><textarea style="text-align: justify;" rows="7" class="form-control pb-0 pt-0" name="kejadian_bencana" id="kejadian_bencana" required>
-Pada tanggal ... pukul ... WIB/WITA/WIT, telah terjadi bencana ... di daerah .... . Bencana tersebut diakibatkan oleh ... . Dari bencana ... diatas, gedung kantor OJK ... diidentifikasi sebagai salah satu gedung yang terpengaruh. Adapun dari hasil penelusuran, ditemukan ... korban jiwa, ... korban luka berat, ... dan ... korban luka ringan yang diderita oleh pegawai OJK. Sementara untuk kerusakan sarana dan prasarana Gedung tersebut, ditemukan/tidak ditemukan kerusakan ...(jelaskan kerusakan apabila ada).</textarea></pre>
+Pada tanggal ... pukul ... WIB/WITA/WIT, telah terjadi kegawatdaruratan ... di daerah .... . Kejadian tersebut diakibatkan oleh ... . Dari kejadian ... diatas, gedung kantor OJK ... diidentifikasi sebagai salah satu gedung yang terpengaruh. Adapun dari hasil penelusuran, ditemukan ... korban jiwa, ... korban luka berat, ... dan ... korban luka ringan yang diderita oleh pegawai OJK. Sementara untuk kerusakan sarana dan prasarana Gedung tersebut, ditemukan/tidak ditemukan kerusakan ...(jelaskan kerusakan apabila ada).</textarea></pre>
                     </td>
                     </tr>
                     {{-- <tr>
