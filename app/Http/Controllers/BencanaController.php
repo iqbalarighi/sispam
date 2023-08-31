@@ -83,6 +83,16 @@ class BencanaController extends Controller
            $bncna = $request->jenis_bencana;
         }
 
+        $loka = $request->gedung;
+
+        foreach ($loka as $lok) {
+            $hasil[] = $lok;
+        }
+
+        $lokasi = implode('|', $hasil);
+
+// dd($lokasi);
+
     $files = $request->file('images');
         if ($files != null) {
             foreach ($files as $file) {
@@ -99,7 +109,7 @@ class BencanaController extends Controller
 
         $bencana->no_bencana = $nolap;
         $bencana->tanggal = $request->tgl;
-        $bencana->lokasi = $request->gedung;
+        $bencana->lokasi = $lokasi;
         $bencana->jenis_bencana = $bncna;
         $bencana->nama_pelapor = $request->pelapor;
         $bencana->satker = $request->satker;
@@ -117,9 +127,26 @@ class BencanaController extends Controller
     public function edit(Request $request, $id)
 {
         $edit = BencanaModel::with('site')->findOrFail($id);
-        $id = SiteModel::where('id', '=', $edit->site->id)->get(['id']);
-        $site = SiteModel::where('id', '!=', $edit->site->id)->get(['id', 'nama_gd']);
-        return view('bencana.edit', ['edit' => $edit, "site" => $site, "id" => $id]);
+
+        foreach (explode('|', $edit->lokasi) as $value) {
+
+            $sites = SiteModel::where('id', '=', $value)
+                    ->first();
+
+ $datax[] = (object) ['id' => $sites['id'], 'text' =>$sites['nama_gd']];
+
+        }
+$data = collect($datax);
+// dd($data);
+            // if($request->ajax()){
+
+            //    return response()->json($data);
+            // }
+
+        // $id = SiteModel::where('id', '=', $edit->site->id)->get(['id']);
+        // $site = SiteModel::where('id', '!=', $edit->site->id)->get(['id', 'nama_gd']);
+
+        return view('bencana.edit', ['edit' => $edit, 'data'=>$data]);
 }
 
     public function hapusFoto($item, $id)
@@ -267,4 +294,21 @@ public function savePDF($id)
        ->with('sukses', $message);
     }
 
+    public function select2(Request $request)
+    {
+        $site = SiteModel::where('nama_gd', 'LIKE', '%'.$request->get('term'). '%')
+                    ->distinct()
+                    ->get();
+
+        foreach ($site as $hsl)
+            {
+                $dat['id'] = $hsl->id;
+                $dat['lokasi'] = $hsl->nama_gd;
+
+                $data[] = $dat;
+            }
+
+return response()->json($data);
+        
+    }
 }

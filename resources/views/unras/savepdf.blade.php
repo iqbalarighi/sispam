@@ -90,13 +90,13 @@
         <th style="text-align: center; vertical-align: middle; ">Tanggal</th>
         <th style="text-align: center; vertical-align: middle; width:70px;">Waktu</th>
         <th style="text-align: center; vertical-align: middle; width: 130px;">Tempat Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle; width: 130px;">Pelaksana</th>
+        <th style="text-align: center; vertical-align: middle; width: 120px;">Pelaksana</th>
         <th style="text-align: center; vertical-align: middle; width: 200px;">Tuntutan</th>
-        <th style="text-align: center; vertical-align: middle; width: 60px;">Bentuk<br/>Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle; width: 70px;">Kisaran Jumlah Massa</th>
-        <th style="text-align: center; vertical-align: middle; width: 65px;" >Status<br/>Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle; width: 65px;" >Level Risiko</th>
-        <th style="text-align: center; vertical-align: middle; width: 65px;" >Sifat<br/>Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 55px;">Bentuk<br/>Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 55px;">Kisaran Jumlah Massa</th>
+        <th style="text-align: center; vertical-align: middle; width: 50px;" >Status<br/>Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 55px;" >Level Risiko</th>
+        <th style="text-align: center; vertical-align: middle; width: 60px;" >Sifat<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle;" >Keterangan</th>
     </tr>
     @if ($unras->count() == 0)

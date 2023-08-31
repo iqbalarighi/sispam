@@ -159,7 +159,22 @@
                     <b><center> 
                 Laporan Kegawatdaruratan {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}
                     </center></b>
-                            <b><center>{{$detil->site->nama_gd}}</center></b>
+                            <b><center>
+                    @if (count(explode('|',$detil->lokasi)) >= 2)
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}<br>
+                        @endforeach       
+
+                    @else 
+
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}
+                        @endforeach       
+
+                    @endif
+                            </center></b>
                             <b><center>{{Carbon\Carbon::parse($detil->updated_at)->isoFormat('dddd, D MMMM Y')}}</center></b>
                         </div>
                     <table class="" width="80%" style="">
@@ -181,7 +196,21 @@
                         <td><b>Lokasi Terdampak</b></td>
                         <td>:</td>
                         <td>
-                            &nbsp;{{$detil->site->nama_gd}}
+                            
+                            @if (count(explode('|',$detil->lokasi)) >= 2)
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                             &nbsp;{{$data->nama_gd}}<br>
+                        @endforeach       
+
+                    @else 
+
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}
+                        @endforeach       
+
+                    @endif
                         </td> 
                     </tr>
                     <tr>

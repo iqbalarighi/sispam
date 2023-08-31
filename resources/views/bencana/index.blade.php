@@ -109,7 +109,22 @@
                         {{$item->jenis_bencana}}
                         @endif
                     </td>
-                    <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{$item->site->nama_gd}}</td>
+                    {{-- <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{$item->site->nama_gd}}</td> --}}
+                    @if (count(explode('|',$item->lokasi)) >= 2)
+                    <td onclick="window.location='/bencana-detil/{{$item->id}}'">
+                        @foreach (explode('|', $item->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}<br>
+                        @endforeach       
+                    </td>
+                    @else 
+                    <td onclick="window.location='/bencana-detil/{{$item->id}}'">
+                        @foreach (explode('|', $item->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}
+                        @endforeach       
+                    </td>
+                    @endif
                     <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{Carbon\Carbon::parse($item->created_at)->isoFormat('DD/MM/Y')}}</td>
                     <td onclick="window.location='/bencana-detil/{{$item->id}}'">{{Carbon\Carbon::parse($item->updated_at)->isoFormat('DD/MM/Y')}}</td>
                     @if (Auth::user()->role === 'admin')

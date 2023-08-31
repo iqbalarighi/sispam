@@ -202,4 +202,6 @@ Route::put('/update-bencana/{id}', [BencanaController::class, 'update'])->middle
 Route::get('/savePDF/{id}', [BencanaController::class, 'savePDF'])->middleware('auth');
 Route::get('/bencana/status/{id}', [BencanaController::class, 'status'])->middleware('auth');
 Route::delete('/hapus-bencana/{id}', [BencanaController::class, 'hapus'])->middleware('auth');
+Route::get('/select2', [BencanaController::class, 'select2'])->name('select2');
+
 

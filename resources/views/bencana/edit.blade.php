@@ -138,12 +138,11 @@
                         <td><b>Lokasi Terdampak</b></td>
                         <td>:</td>
                         <td>
-                            <select class="form-select pb-0 pt-0" id="gedung" name="gedung" required multiple>
-                                <option value="{{$id[0]->id}}">{{$edit->site->nama_gd}}</option>
-                                @foreach($site as $item)
-                                <option value="{{$item->id}}">{{$item->nama_gd}}</option>
-                                @endforeach
-                            </select>
+                        <select style="width:100%;" id="js-example-basic-multiple" class="form-select" name="gedung[]" aria-label="Default select example" multiple>
+                            @foreach($data as $item)
+                                <option selected value="{{$item->id}}">{{$item->text}}</option>
+                            @endforeach
+                        </select>
                         </td> 
                     </tr>
                     <tr>
@@ -301,5 +300,27 @@ if ($("#jenis_bencana option:selected").val() == 'Man-made Hazard :') {
         }
 );
 });
+</script>
+<script>
+$('#js-example-basic-multiple').select2({
+        ajax: {
+            url: "{{route('select2')}}",
+            dataType: "json",
+              delay: 250,
+
+processResults: function (data) {
+      // Transforms the top-level key of the response object from 'items' to 'results'
+      return {
+        results: $.map(data, function (item) {
+                        return { text: item.lokasi, id: item.id }
+                    })
+      };
+    }
+},
+maximumSelectionLength: 3,
+placeholder: 'Lokasi Terdampak'
+
+});
+
 </script>
 @endsection
