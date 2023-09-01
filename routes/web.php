@@ -131,7 +131,7 @@ Route::post('/simpan-tukar', [TukarjagaController::class, 'simpan'])->middleware
 Route::get('/trj-detil/{no_trj}/{id}', [TukarjagaController::class, 'detil'])->middleware('auth'); 
 Route::delete('/hapus-jaga/{id}', [TukarjagaController::class, 'hapus'])->middleware('auth');
 Route::get('/edit-lap/{id}', [TukarjagaController::class, 'edit'])->middleware('auth');
-Route::get('/autocomplete', [TukarjagaController::class, 'autocomplete'])->name('autocomplete');
+Route::get('/autocomplete', [TukarjagaController::class, 'autocomplete'])->name('autocomplete')->middleware('auth');
 
 //Delete area
 Route::get('/hapus-shiftlama/{item}/{trj}', [TukarjagaController::class, 'hapuslama'])->middleware('auth');
@@ -202,6 +202,6 @@ Route::put('/update-bencana/{id}', [BencanaController::class, 'update'])->middle
 Route::get('/savePDF/{id}', [BencanaController::class, 'savePDF'])->middleware('auth');
 Route::get('/bencana/status/{id}', [BencanaController::class, 'status'])->middleware('auth');
 Route::delete('/hapus-bencana/{id}', [BencanaController::class, 'hapus'])->middleware('auth');
-Route::get('/select2', [BencanaController::class, 'select2'])->name('select2');
+Route::get('/select2', [BencanaController::class, 'select2'])->name('select2')->middleware('auth');
 
 
