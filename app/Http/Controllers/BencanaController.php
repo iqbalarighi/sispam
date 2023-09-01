@@ -198,6 +198,13 @@ $files = $request->file('images');
            $bncna = $request->jenis_bencana;
         }
 
+    if (is_array($request->gedung)){
+        foreach ($request->gedung as $gedung) {
+            $lok[] = $gedung;
+        }
+        $lokasi = implode('|', $lok);
+    }
+
         if ($files != null) {
             foreach ($files as $file) {
             $image_name = md5(rand(100, 1000));
@@ -215,8 +222,9 @@ $files = $request->file('images');
                 $gambar_dok = $update->foto.'|'.implode('|', $image);
             }
 
+
         $update->tanggal = $request->tgl;
-        $update->lokasi = $request->gedung;
+        $update->lokasi = $lokasi;
         $update->jenis_bencana = $bncna;
         $update->nama_pelapor = $request->pelapor;
         $update->satker = $request->satker;
@@ -229,7 +237,7 @@ $files = $request->file('images');
     } else {
 
         $update->tanggal = $request->tgl;
-        $update->lokasi = $request->gedung;
+        $update->lokasi = $lokasi;
         $update->jenis_bencana = $bncna;
         $update->nama_pelapor = $request->pelapor;
         $update->satker = $request->satker;
@@ -238,7 +246,9 @@ $files = $request->file('images');
         $update->penanganan = $request->penanganan;
         $update->save();
     }
-        return back()
+
+
+        return redirect('bencana-detil/'.$update->id)
         ->with('success', 'Laporan Berhasil di Update');
     }
 

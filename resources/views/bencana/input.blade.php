@@ -219,7 +219,8 @@ processResults: function (data) {
     }
 },
 maximumSelectionLength: 3,
-placeholder: 'Lokasi Terdampak'
+placeholder: 'Lokasi Terdampak',
+width: 'resolve'
 
 });
 
