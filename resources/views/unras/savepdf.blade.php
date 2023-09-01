@@ -88,7 +88,7 @@
     <tr class="font-weight-normal" style="background-color: #D3D3D3;">
         <th style="text-align: center; vertical-align: middle; width:30px;">No.</th>
         <th style="text-align: center; vertical-align: middle; ">Tanggal</th>
-        <th style="text-align: center; vertical-align: middle; width:70px;">Waktu</th>
+        <th style="text-align: center; vertical-align: middle; width:30px;">Waktu</th>
         <th style="text-align: center; vertical-align: middle; width: 130px;">Tempat Kegiatan</th>
         <th style="text-align: center; vertical-align: middle; width: 120px;">Pelaksana</th>
         <th style="text-align: center; vertical-align: middle; width: 200px;">Tuntutan</th>
@@ -97,7 +97,7 @@
         <th style="text-align: center; vertical-align: middle; width: 50px;" >Status<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle; width: 55px;" >Level Risiko</th>
         <th style="text-align: center; vertical-align: middle; width: 60px;" >Sifat<br/>Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle;" >Keterangan</th>
+        <th style="text-align: center; vertical-align: middle; min-width: 80px; max-width: 120px;"  >Keterangan</th>
     </tr>
     @if ($unras->count() == 0)
     <tr>
