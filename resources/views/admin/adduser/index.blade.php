@@ -1,7 +1,7 @@
 @extends('layouts.side')
 
 @section('content')
-@if ( Auth::user()->role === 'admin')
+@if ( Auth::user()->level === 'superadmin')
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -142,7 +142,7 @@
                      </tr>
                      <tr>
                     <td colspan="2">
-                        <select class="form-select" name="role" id="rolex" required>
+                        <select class="form-select" name="role" required>
                                 <option value="{{$users->role}}" >{{ucfirst(trans($users->role))}}</option>
                             @if ($users->role == 'admin')
                                 <option value="user">User</option>
@@ -155,7 +155,7 @@
                     </tr>
                      <tr>
                     <td colspan="2">
-                        <select class="form-select" name="level" id="level">
+                        <select class="form-select" name="level">
                                 <option value="{{$users->level}}" >{{$users->level}}</option>
                             @if ($users->level == '')
                             <option value="koordinator">Koordinator</option>
@@ -170,7 +170,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="form-select pb-0 pt-0 text-capitalize" id="lokasi" name="lokasi">
+                        <select class="form-select pb-0 pt-0 text-capitalize" name="lokasi">
                                 <option value="{{$users->lokasi_tugas}}" selected>{{$users->site->nama_gd ?? '::Isi Lokasi::'}}</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
@@ -182,7 +182,7 @@
                         <td colspan="2"><input id="password{{$user->firstitem()+$key}}" type="password" placeholder="Ubah Password"  class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
                     </tr>
                     <tr>
-                        <td colspan="2"><input id="password-confirm" type="password" placeholder="Konfirmasi Password"  class="form-control xxx{{$user->firstitem()+$key}}" name="password_confirmation" disabled autocomplete="new-password">
+                        <td colspan="2"><input type="password" placeholder="Konfirmasi Password"  class="form-control xxx{{$user->firstitem()+$key}}" name="password_confirmation" disabled autocomplete="new-password">
                             <div style="margin-top: 0px;" id="CheckPasswordMatch{{$user->firstitem()+$key}}"></div>
                         </td>
                     </tr>
@@ -260,8 +260,9 @@ $("#password{{$user->firstitem()+$key}}").on('keyup', function(){
         </div>
     </div>
 </div>
-@elseif (Auth::user()->role === 'user')
-    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
+@elseif (Auth::user()->role === 'user' || Auth::user()->role === 'admin' )
+    {{-- <meta content="0; url={{ route('dashboard') }}" http-equiv="refresh"> --}}
+        {{abort(403)}}
 @endif
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\SiteModel;
+use Illuminate\Support\Facades\Auth;
 
 class AdduserController extends Controller
 {
@@ -14,14 +15,14 @@ class AdduserController extends Controller
         $user = User::with('site')->paginate(10);
         $site = SiteModel::get();
 
-        return view('adduser.index', ['user' => $user, 'site' => $site]);
+        return view('admin.adduser.index', ['user' => $user, 'site' => $site]);
     }
 
     public function adduser()
     {
         $site = SiteModel::get();
 
-        return view('adduser.input', ['site' => $site]);
+        return view('admin.adduser.input', ['site' => $site]);
     }
 
     public function hapus($id)
@@ -76,4 +77,15 @@ class AdduserController extends Controller
             return back()
             ->with('sukses', 'Update User Berhasil');
     }
+
+// public function cekk()
+// {
+     
+//         if (Auth::user() == true) {
+//             return 'benar';
+//         } else {
+//             return 'salah';
+//         } 
+// }
+
 }

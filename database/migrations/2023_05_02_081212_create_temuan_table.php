@@ -15,13 +15,17 @@ return new class extends Migration
     {
         Schema::create('temuan', function (Blueprint $table) {
             $table->id();
+            $table->string('no_lap', 20)->unique();
+            $table->string('pelapor');
+            $table->date('tanggal');
             $table->string('jam');
             $table->string('area');
-            $table->string('jenis_bahaya');
-            $table->string('potensi_bahaya');
-            $table->string('pengendalian');
+            $table->string('lokasi');
+            $table->text('jenis_bahaya');
+            $table->text('potensi_bahaya');
+            $table->text('pengendalian');
             $table->string('foto');
-            $table->string('status');
+            $table->string('status', 15)->default('Open');
             $table->timestamps();
         });
     }

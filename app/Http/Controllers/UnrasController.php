@@ -298,15 +298,15 @@ public function unrasPDF($start, $end)
 
 public function unrasOJK($start, $end, $cariin)
     {   
-
-        $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+        if (str_contains(strtolower($cariin),'ojk')){
+            $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
                     ->whereBetween('tanggal', [$start, $end])
                     ->orwhere(function ($query) use ($cariin,$start,$end) {
                         $query->where('pelaksana','LIKE', '%'.$cariin.'%')
                             ->whereBetween('tanggal', [$start, $end]);
                     })
-                    ->orderBy('waktu', 'DESC')
                     ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
                     ->paginate(1000000)
                     ->appends(request()->input());
 
@@ -318,6 +318,36 @@ public function unrasOJK($start, $end, $cariin)
                     })
                     ->where('status_kegiatan', 'Rencana')
                     ->exists();
+        } else {
+            $unras = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->orwhere(function ($query) use ($cariin,$start,$end) {
+                        $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orwhere(function ($querys) use ($cariin,$start,$end) {
+                        $querys->where('status_kegiatan','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('waktu', 'DESC')
+                    ->paginate(1000000)
+                    ->appends(request()->input());
+
+            $result = UnrasModel::where('tempat_kegiatan','LIKE', '%'.$cariin.'%')
+                    ->whereBetween('tanggal', [$start, $end])
+                    ->orwhere(function ($query) use ($cariin,$start,$end) {
+                        $query->where('pelaksana','LIKE', '%'.$cariin.'%')
+                              ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->orwhere(function ($querys) use ($cariin,$start,$end) {
+                        $querys->where('status_kegiatan','LIKE', '%'.$cariin.'%')
+                            ->whereBetween('tanggal', [$start, $end]);
+                    })
+                    ->where('status_kegiatan', 'Rencana')
+                    ->exists();
+        }
+        
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
         

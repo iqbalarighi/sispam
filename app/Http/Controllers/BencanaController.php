@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Auth;
 use App\Models\BencanaModel;
+use App\Models\OtorisasiModel;
 use App\Models\SiteModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use PDF;
@@ -38,7 +39,6 @@ class BencanaController extends Controller
         } else {
             if ($cari != null) {
                 $bencana = BencanaModel::where('tanggal','LIKE', '%'.$cari.'%')
-                    ->orderBy('tanggal', 'DESC')
                     ->orderBy('tanggal', 'DESC')
                         ->paginate(15);
                     $bencana->appends(['date' => $cari]);
@@ -180,7 +180,10 @@ $data = collect($datax);
     public function detil($id)
     {
         $detil = BencanaModel::with('site')->findOrFail($id);
-       return view('bencana.detil', compact('detil'));
+
+        $otor = OtorisasiModel::all();
+
+       return view('bencana.detil', compact('detil','otor'));
     }
 
     public function update(Request $request, $id)
@@ -252,11 +255,13 @@ $files = $request->file('images');
         ->with('success', 'Laporan Berhasil di Update');
     }
 
-public function savePDF($id)
+public function savePDF($id, $oto)
     {   
         $detil = BencanaModel::with('site')->findOrFail($id);
-        
-        $pdf = PDF::loadView('bencana.savepdf', ['detil' => $detil]);
+
+        $otor = OtorisasiModel::findOrFail($oto);
+
+        $pdf = PDF::loadView('bencana.savepdf', compact('detil','otor'));
 
         return $pdf->stream('Laporan Bencana '.$detil->no_bencana.'.pdf');
     }

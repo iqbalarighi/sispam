@@ -2,7 +2,8 @@
 
 @section('content')
 @if (Auth::user()->role === 'user')
-    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
+    {{-- <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh"> --}}
+        {{abort(404)}}
 @endif
 <div class="container mw-100">
     <div class="row justify-content-center">

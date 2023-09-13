@@ -121,6 +121,7 @@
     </div>
 </div>
 @elseif (Auth::user()->role === 'user')
-    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
+    {{-- <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh"> --}}
+        {{abort(404)}}
 @endif
 @endsection

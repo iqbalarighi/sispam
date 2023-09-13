@@ -9,7 +9,7 @@
     }
 </style>
 
-@if ($start == $end && str_contains(strtolower($cariin),'ojk') && $result == true)
+ @if ($start == $end && str_contains(strtolower($cariin),'ojk') && $result == true) {{-- Rencana unras OJK--}}
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
         <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA OJK</b></font>
@@ -20,7 +20,7 @@
     @endif
 </div>
 @else
-@if ($unras->count() == 0 && $cariin == null)
+@if ($unras->count() == 0 && $cariin == null) {{-- Rekap unras kalo rencana kosong--}}
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
         <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA</b></font>
@@ -30,7 +30,7 @@
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
     @endif
 </div>
-@elseif ($start == $end && Illuminate\Support\Str::contains(Illuminate\Support\Str::lower($cariin), 'ojk'))
+@elseif ($start == $end && Illuminate\Support\Str::contains(Illuminate\Support\Str::lower($cariin), 'ojk')) {{-- Rencana giat OJK--}}
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
         <br><font size="16pt"><b>RENCANA GIAT UNJUK RASA OJK</b></font>
@@ -40,7 +40,7 @@
     <br/>{{Carbon\Carbon::parse($start)->isoFormat('D MMMM Y')}} - {{Carbon\Carbon::parse($end)->isoFormat('D MMMM Y')}}
     @endif
 </div>
-   @elseif ($unras->count() == 0 && $cariin != null)
+   @elseif ($unras->count() == 0 && $cariin != null) {{-- Rekap unras kalo ojk kosong --}}
 <div style="text-align: center; vertical-align: middle; margin-top: 0px; margin-bottom: 20px;">
 <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 10px; width: 150px; position: fixed;">
         <br><font size="16pt"><b>REKAP GIAT UNJUK RASA OJKa</b></font>
@@ -89,8 +89,8 @@
         <th style="text-align: center; vertical-align: middle; width:30px;">No.</th>
         <th style="text-align: center; vertical-align: middle; ">Tanggal</th>
         <th style="text-align: center; vertical-align: middle; width:30px;">Waktu</th>
-        <th style="text-align: center; vertical-align: middle; width: 130px;">Tempat Kegiatan</th>
-        <th style="text-align: center; vertical-align: middle; width: 120px;">Pelaksana</th>
+        <th style="text-align: center; vertical-align: middle; width: 100px;">Tempat Kegiatan</th>
+        <th style="text-align: center; vertical-align: middle; width: 130px;">Pelaksana</th>
         <th style="text-align: center; vertical-align: middle; width: 200px;">Tuntutan</th>
         <th style="text-align: center; vertical-align: middle; width: 55px;">Bentuk<br/>Kegiatan</th>
         <th style="text-align: center; vertical-align: middle; width: 55px;">Kisaran Jumlah Massa</th>

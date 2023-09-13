@@ -44,15 +44,17 @@
             </div>
             <p/>
         @endif
+        
             <div class="card ">
-        @if(Auth::user()->role === 'admin')
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Kegawatdaruratan') }}
+        @if(Auth::user()->role === 'admin')            
                     <a href="{{route('tambah-bencana')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
+        @endif           
                 </div>
-        @endif
-                <div class="card-body overflow " style="overflow-x: auto;">
+       
+                
 {{-- Content disini --}}
-
+<div class="float-right mt-2 mb-0">
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         {{-- @if ($start == null)
 
@@ -64,17 +66,19 @@
 
                         @endif
                         @endif --}}
-                    <form action="" method="GET" class="float-right mb-2">Pilih Tanggal: 
+                    <form action="" method="GET" class="float-right mb-0">Pilih Tanggal: 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="start" > - 
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="end" >
                         <button class="submit bi bi-search"></button>
                     </form>
                     @else
-                    <form action="" method="GET" class="float-right mb-2">
+                    <form action="" method="GET" class="float-right mb-0">
                         <input type="date" class="" max="{{date('Y-m-d')}}" name="date">
                         <button class="submit bi bi-search"></button>
                     </form>
                        @endif
+</div>
+            <div class="card-body overflow pt-0" style="overflow-x: auto;">           
 
             <table class="table table-striped table-hover table-sm text-center mt-3">
                 <tr>

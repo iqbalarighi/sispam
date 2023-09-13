@@ -1,6 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
+
+@if (Auth::user()->level === 'superadmin')
+
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -218,5 +221,9 @@ $(document).ready(function () {
 });
 });
 </script>
+@elseif (Auth::user()->role === 'user' || Auth::user()->role === 'admin' )
+    {{-- <meta content="0; url={{ route('dashboard') }}" http-equiv="refresh"> --}}
+        {{abort(403)}}
+@endif
 @endsection
 

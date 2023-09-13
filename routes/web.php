@@ -1,21 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PersonilController;
-use App\Http\Controllers\PeralatanController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\PosjagaController;
-use App\Http\Controllers\ParkirController;
-use App\Http\Controllers\ArsipController;
-use App\Http\Controllers\KegiatanController;
-use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\AdduserController;
-use App\Http\Controllers\KejadianController;
-use App\Http\Controllers\UnrasController;
+use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\BencanaController;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\KejadianController;
+use App\Http\Controllers\OtorisasiController;
+use App\Http\Controllers\ParkirController;
+use App\Http\Controllers\PeralatanController;
+use App\Http\Controllers\PersonilController;
+use App\Http\Controllers\PosjagaController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\TemuanController;
+use App\Http\Controllers\TukarjagaController;
+use App\Http\Controllers\UnrasController;
 use App\Http\Livewire\GrafikUnras;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -199,9 +200,30 @@ Route::get('/edit-bencana/{id}', [BencanaController::class, 'edit'])->middleware
 Route::get('/bencana/hapus-foto/{item}/{id}', [BencanaController::class, 'hapusFoto'])->middleware('auth');
 Route::get('/bencana-detil/{id}', [BencanaController::class, 'detil'])->middleware('auth');
 Route::put('/update-bencana/{id}', [BencanaController::class, 'update'])->middleware('auth');
-Route::get('/savePDF/{id}', [BencanaController::class, 'savePDF'])->middleware('auth');
+Route::get('/savePDF/{id}/{oto}', [BencanaController::class, 'savePDF'])->middleware('auth');
 Route::get('/bencana/status/{id}', [BencanaController::class, 'status'])->middleware('auth');
 Route::delete('/hapus-bencana/{id}', [BencanaController::class, 'hapus'])->middleware('auth');
 Route::get('/select2', [BencanaController::class, 'select2'])->name('select2')->middleware('auth');
 
 
+//Temuan Section
+Route::get('/temuan', [TemuanController::class, 'index'])->middleware('auth')->name('temuan');
+Route::get('/temuan-tambah', [TemuanController::class, 'tambah'])->middleware('auth')->name('tambah-temuan');
+Route::post('/simpan-temuan', [TemuanController::class, 'simpan'])->middleware('auth')->name('simpan_temuan');
+Route::get('/temuan/status/{id}', [TemuanController::class, 'status'])->middleware('auth');
+Route::get('/temuan-detil/{id}', [TemuanController::class, 'detil'])->middleware('auth');
+Route::get('/temuan-edit/{id}', [TemuanController::class, 'edit'])->middleware('auth');
+Route::delete('/hapus-temuan/{id}', [TemuanController::class, 'hapus'])->middleware('auth');
+Route::get('/temuanPDF/{id}', [TemuanController::class, 'temuanPDF'])->middleware('auth');
+Route::put('/update-temuan/{id}', [TemuanController::class, 'update'])->middleware('auth');
+Route::get('/temuan/hapus-foto/{item}/{id}', [TemuanController::class, 'hapusFoto'])->middleware('auth');
+
+
+//Otorisasi Section
+Route::get('/otorisasi', [OtorisasiController::class, 'index'])->middleware('auth')->name('otorisasi');
+Route::post('/simpan-otorisasi', [OtorisasiController::class, 'simpan'])->middleware('auth')->name('save_otorisasi'); 
+Route::put('/update-otorisasi/{id}', [OtorisasiController::class, 'update'])->middleware('auth');
+Route::delete('otorisasi/hapus/{id}', [OtorisasiController::class, 'hapus'])->middleware('auth');
+
+
+// Route::get('/storage/{whatever}/', [AdduserController::class, 'cekk'])->where('whatever', '.+');

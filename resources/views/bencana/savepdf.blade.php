@@ -36,7 +36,22 @@
     <h4>
         <center> 
             <b>Laporan Kegawatdaruratan {{ 'Man-made Hazard : ' == Str::substr($detil->jenis_bencana, 0,18) ? Str::substr($detil->jenis_bencana, 18,1000) : $detil->jenis_bencana }}</b><br>
-            <b>{{$detil->site->nama_gd}}</b><br>
+            <b><center>
+                    @if (count(explode('|',$detil->lokasi)) >= 2)
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}<br>
+                        @endforeach       
+
+                    @else 
+
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}
+                        @endforeach       
+
+                    @endif
+                            </center></b>
             <b>{{Carbon\Carbon::parse($detil->updated_at)->isoFormat('dddd, D MMMM Y')}}</b>
         </center>
     </h4>
@@ -61,7 +76,20 @@
                         <td><b>Lokasi Terdampak</b></td>
                         <td>:</td>
                         <td>
-                            &nbsp;{{$detil->site->nama_gd}}
+                            &nbsp;@if (count(explode('|',$detil->lokasi)) >= 2)
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                             &nbsp;{{$data->nama_gd}}<br>
+                        @endforeach       
+
+                    @else 
+
+                        @foreach (explode('|', $detil->lokasi) as $lok)
+                            @php $data = \App\Models\SiteModel::where('id', $lok)->first() @endphp
+                            {{$data->nama_gd}}
+                        @endforeach       
+
+                    @endif
                         </td> 
                     </tr>
                     <tr>
@@ -108,12 +136,12 @@
                         <tr>
                             <td width="30%"><pre class="narrow">
 Mengetahui,
-Kepala Bagian Pengamanan
+{{$otor->jabatan}}
 
 
 
-<b>Supriyono</b>
-NIP. 00704</pre>
+<b>{{$otor->nama}}</b>
+NIP. {{$otor->nip}}</pre>
                         </td>
 <td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->updated_at)->isoFormat('D MMMM Y')}}</td>
                         <td width="33%" style="vertical-align: top;"><pre class="narrow">

@@ -99,7 +99,19 @@
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
     @if ( Auth::user()->level === 'superadmin')
-        <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
+        <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
+
+                Superadmin Area 
+                        <i id="rubah" class="bi bi-caret-right-fill"></i>
+              </a>
+                <div class="collapse {{ Route::is('users')||Route::is('otorisasi') ? 'show' : '' }}" id="collapseExamples">
+                    <div class="card card-body">
+                        <div class="list-group list-group-flush" style="width: 100%;">
+                            <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
+                            <a href="{{route('otorisasi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('otorisasi') ? 'active' : '' }}">Otorisasi</a>
+                        </div> 
+                    </div>
+                </div>
     @endif
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
@@ -109,19 +121,20 @@
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
 
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana')||Route::is('temuan') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana') ? 'show' : '' }}" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
+                            <a href="{{route('temuan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('temuan') ? 'active' : '' }}">Temuan Patroli</a>
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
                             <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a>
-                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
+
                             {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
@@ -143,18 +156,19 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana')||Route::is('temuan') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan 
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian') ? 'show' : '' }}" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('bencana')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
+                            <a href="{{route('temuan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('temuan') ? 'active' : '' }}">Temuan Patroli</a>
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
                             <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a>
-                            <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light"><s>Temuan Patroli</s></a>
+
                             
                         </div> 
                     </div>
@@ -456,4 +470,22 @@ function myFunction3() {
     }, 500 ); // 5 secs
 </script>
 {{-- flash timeout --}}
+@if ( Auth::user()->level === 'superadmin')
+<script>
+    var z = document.getElementById("rubah");
+    var y = document.getElementById("collapseExamples");
+    if (y.className === "collapse show"){
+    z.className = "bi bi-caret-down-fill";
+    }
+
+    function cekDowns() {
+  var x = document.getElementById("rubah");
+   if (x.className === "bi bi-caret-right-fill") {
+    x.className = "bi bi-caret-down-fill";
+  } else {
+    x.className = "bi bi-caret-right-fill";
+  }
+}
+</script>
+@endif
 </html>
