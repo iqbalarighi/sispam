@@ -70,7 +70,7 @@ class BencanaController extends Controller
         $year = Carbon::now()->format('Y');
         $month = Carbon::now()->format('m');
         $th = Str::substr($year, -2);
-        $string = 'SMC-'.$th.$month.'-';
+        $string = 'LGD-'.$th.$month.'-';
         $nolap = Helper::IDGenerator($bencana, 'no_bencana', 4, $string); /** Generate id */
 
         $bncn = $request->jenis_bencana;

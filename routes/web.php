@@ -12,6 +12,7 @@ use App\Http\Controllers\PeralatanController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PosjagaController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SmcController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\UnrasController;
@@ -226,4 +227,16 @@ Route::put('/update-otorisasi/{id}', [OtorisasiController::class, 'update'])->mi
 Route::delete('otorisasi/hapus/{id}', [OtorisasiController::class, 'hapus'])->middleware('auth');
 
 
-// Route::get('/storage/{whatever}/', [AdduserController::class, 'cekk'])->where('whatever', '.+');
+//SMC Section
+Route::controller(SmcController::class)->middleware('auth')->group(function () {
+    Route::get('/laporan_smc', 'index')->name('laporan_smc');
+    Route::get('/buat_laporan', 'tambah')->name('buat_laporan'); 
+    Route::post('/simpan-otorisasi','simpan')->name('simpan_lap_smc'); 
+    Route::get('/smc_detil/{id}', 'detil');
+    Route::get('/edit_smc/{id}', 'edit');
+    Route::put('/update_smc/{id}', 'update');
+    Route::get('/hapus_foto_smc/{item}/{id}', 'hapusFoto');
+    Route::delete('/hapus-item/{id}', 'hapus');
+    Route::get('/smcPDF/{id}',  'smcPDF');
+});
+

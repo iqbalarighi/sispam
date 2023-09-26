@@ -46,4 +46,9 @@ class SiteModel extends Model
     {
         return $this->hasOne('App\Models\BencanaModel');
     }
+
+        public function smc()
+    {
+        return $this->hasOne('App\Models\SmcModel');
+    }
 }
