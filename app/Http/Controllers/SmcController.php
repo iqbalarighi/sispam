@@ -239,11 +239,12 @@ foreach($input['images'] as $image)
 public function smcPDF($id)
     {   
         $detil = SmcModel::with('site')->findOrFail($id);
-    if ($detil->creator != Auth::user()->name) {
-        abort(403);
-    } else {
+        
+    if ($detil->creator == Auth::user()->name || Auth::user()->level === 'superadmin') {
         $shift = Str::substr($detil->shift, 0,7);
-        $pdf = PDF::loadView('smc.savepdf', compact('detil'));  
+        $pdf = PDF::loadView('smc.savepdf', compact('detil')); 
+    } else {
+        abort(403);
     }
 
         return $pdf->stream('Laporan Kegiatan '.$shift.' '.$detil->no_lap.'.pdf');
