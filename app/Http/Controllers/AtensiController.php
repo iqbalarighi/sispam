@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\AtensiModel;
+use App\Models\OtorisasiModel;
+use App\Models\UnrasModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use PDF;
 
 class AtensiController extends Controller
 {
@@ -14,7 +20,7 @@ class AtensiController extends Controller
      */
     public function index()
     {
-        $data = AtensiModel::paginate(15);
+        $data = AtensiModel::latest()->paginate(15);
         return view('atensi.index', compact('data'));
     }
 
@@ -26,6 +32,12 @@ class AtensiController extends Controller
     public function create()
     {
         return view('atensi.input');
+    }    
+
+    public function create2($id)
+    {   
+        $tensi = UnrasModel::findOrFail($id);
+        return view('atensi.input-atensi', compact('tensi'));
     }
 
     /**
@@ -36,7 +48,17 @@ class AtensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $store= new AtensiModel;
+
+        $store->creator = Auth::user()->name;
+        $store->yth = $request->yth;
+        $store->rencana = $request->rencana;
+        $store->uraian = $request->uraian;
+        $store->save(); 
+
+        return redirect('atensi')
+        ->with('sukses', 'Berhasil Membuat Laporan Atensi');
+
     }
 
     /**
@@ -47,7 +69,9 @@ class AtensiController extends Controller
      */
     public function show($id)
     {
-        //
+        $show = AtensiModel::findOrFail($id);
+        $otor = OtorisasiModel::all();
+        return view('atensi.detil', compact('show','otor'));
     }
 
     /**
@@ -58,7 +82,9 @@ class AtensiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = AtensiModel::findOrFail($id);
+        
+        return view('atensi.edit', compact('edit'));
     }
 
     /**
@@ -70,7 +96,15 @@ class AtensiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = AtensiModel::findOrFail($id);
+
+        $update->yth = $request->yth;
+        $update->rencana = $request->rencana;
+        $update->uraian = $request->uraian;
+        $update->save(); 
+
+        return redirect('atensi_detil/'.$update->id)
+        ->with('sukses', 'Berhasil Membuat Laporan Atensi');
     }
 
     /**
@@ -81,6 +115,24 @@ class AtensiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hapus = AtensiModel::findOrFail($id);
+        $rencana = Str::substr($hapus->rencana, 15,10000);
+            
+            $hapus->delete();
+
+            $message = 'Laporan Atensi '.$rencana.' Sudah Terhapus';
+        
+       return back()
+       ->with('sukses', $message);
+    }
+
+    public function atensiPDF($id, $oto)
+    {   
+        $detil = AtensiModel::findOrFail($id);
+        $otor = OtorisasiModel::findOrFail($oto);
+        $rencana = Str::substr($detil->rencana, 16,10000);
+        $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor')); 
+
+        return $pdf->stream('Laporan Atensi '.$rencana.'.pdf');
     }
 }

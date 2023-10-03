@@ -359,7 +359,14 @@
                         @if (Auth::user()->role === 'admin')
                         <td >
                         <div class="d-flex justify-content-between">
-                        <label style="vertical-align: middle;"  data-toggle="modal" data-target="#unras{{$unras->firstitem()+$key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
+
+                    @if ($rasa->level_resiko == true)
+                    <label onclick="window.location='/input_atensi/{{$rasa->id}}'"  style="vertical-align: middle; color: black;" title="klik untuk buat laporan Atensi" class="bi bi-eye-fill btn-info btn-sm align-self-center">
+                        </label>
+                        <pre> </pre>
+                    @endif
+
+                        <label style="vertical-align: middle; cursor: pointer;"  data-toggle="modal" data-target="#unras{{$unras->firstitem()+$key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
 
                         </label>
 {{-- Modal --}}
@@ -500,9 +507,9 @@ if ($unras->count() == 0) {
                         <form action="unras/hapus/{{$rasa->id}}" method="post" class="align-self-center m-auto">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="del{{$unras->firstitem() + $key}}" onclick="return confirm('Yakin nih mau di hapus ?')" type="submit" title="Hapus Data" hidden>
+                            <button  id="del{{$unras->firstitem() + $key}}" onclick="return confirm('Yakin nih mau di hapus ?')" type="submit" title="Hapus Data" hidden>
                                 </button>
-                                <label for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                <label style="cursor: pointer;" for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
                                 </label>
                         </form>
                         </div>

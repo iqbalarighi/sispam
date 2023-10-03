@@ -6,7 +6,7 @@
         <div class="col mw-100 p-1">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Tambah Data Kegiatan') }}
-                    <a href="{{route('laporan_smc')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                    <a href="{{route('atensi')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>
 
@@ -65,54 +65,27 @@
 </style>
             <!-- form input Site -->
                     <div class="table-responsive mt-2" style="overflow-x: auto;">
-            <form action="{{route('simpan_lap_smc')}}" method="post" id="form" enctype="multipart/form-data">
+            <form action="{{route('simpan_atensi')}}" method="post" id="form" enctype="multipart/form-data">
             @csrf
                     <table class="mx-auto" style="width: 70%; ">
                     <tr>
-                        <td><b>Tanggal</b></td>
-                        <td>:</td>
-                        <td>
-                            <input type="date" class="form-control pb-0 pt-0" max="{{date('Y-m-d')}}" value="{{ date('Y-m-d')}}" name="tgl" id="tgl" required>
-                        </td> 
-                    </tr>
-                    <tr>
-                        <td><b>Shift</b></td>
-                        <td>:</td>
-                        <td>
-                            <select class="form-select pb-0 pt-0 text-capitalize" name="shift" required>
-                                <option value="" disabled selected>Pilih Shift</option>
-                                <option value="Shift 1 (Pukul 06.00-14.00 WIB)">Shift 1 (Pukul 06.00-14.00 WIB)</option>
-                                <option value="Shift 2 (Pukul 14.00-22.00 WIB)">Shift 2 (Pukul 14.00-22.00 WIB)</option>
-                                <option value="Shift 3 (Pukul 22.00-06.00 WIB)">Shift 3 (Pukul 22.00-06.00 WIB)</option>
-                            </select>
-                        </td> 
-                    </tr>
-                    <tr>
                         <td colspan="3">
-                            <b>Petugas SMC : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
-                            <pre class="mb-0"><textarea rows="3" class="form-control pb-0 pt-0" name="petugas" required>
-Supervisor SMC : Esa Lanang Perkasa
-Staf SMC 1 : {{Auth::user()->name}}
-Staf SMC 2 : </textarea></pre>
+                            <b>Yth : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <pre class="mb-0"><textarea rows="4" class="form-control pb-0 pt-0" name="yth" required>1. Plt. Deputi Komisioner Sekretariat Dewan Komisioner dan Logistik
+2. Kepala Departemen Logistik
+3. Direktur Pengadaan dan Manajemen Aset
+4. Deputi Direktur Fasilitas dan Dukungan Kelogistikan</textarea></pre>
                     </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Kegiatan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="5" name="giat" required></textarea></pre></td>
+                        <td colspan="3">
+                            <b>Rencana Kegiatan : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
+                            <pre class="mb-0"><textarea rows="2" class="form-control pb-0 pt-0" name="rencana" required>Aksi Unjuk Rasa .....</textarea></pre>
+                    </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Keterangan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="5" name="ket" id="ket" ></textarea></pre></td>
-                    </tr>
-                    <tr>
-                        <td><b>Foto Dokumentasi</b></td>
-                        <td>:</td>
-                        <td>
-                            <input type="file" name="images[]"
-                                    class="block w-full mt-1 rounded-md"
-                                    placeholder="" 
-                                    accept=".jpg, .jpeg, .png" 
-                                    multiple 
-                                     />
-                        </td>
+                        <td colspan="3"><b>Uraian Rencana Kegiatan : </b>
+                            <pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="10" name="uraian" id="uraian" required>Informasi rencana unjuk rasa sebagaimana dimaksud diatas diperoleh dari Polda Metro Jaya. Unjuk rasa akan dilaksanakan oleh ...... sebanyak kurang lebih ....... orang. berlokasi di ..... pada tanggal ..... . Adapun tuntutan unjuk rasa tersebut adalah ...... .</textarea></pre></td>
                     </tr>
                     </table>
                 <center>
@@ -127,4 +100,11 @@ Staf SMC 2 : </textarea></pre>
         </div>
     </div>
 </div>
+
+
+<script>
+    $('#uraian').each(function(){
+    this.contentEditable = true;
+});
+</script>
 @endsection

@@ -243,6 +243,14 @@ Route::controller(SmcController::class)->middleware('auth')->group(function () {
 
 //Atensi Section
 Route::controller(AtensiController::class)->middleware('auth')->group(function () {
-Route::get('/atensi', 'index')->name('atensi');
-Route::get('/lap_atensi', 'create')->name('lap_atensi');
+    Route::get('/atensi', 'index')->name('atensi');
+    Route::get('/lap_atensi', 'create')->name('lap_atensi');
+    Route::get('/input_atensi/{id}', 'create2');
+    Route::post('/simpan_atensi','store')->name('simpan_atensi'); 
+    Route::get('/atensi_detil/{id}', 'show');
+    Route::get('/edit_atensi/{id}', 'edit');
+    Route::get('/atensiPDF/{id}/{oto}',  'atensiPDF');
+    Route::delete('/hapus_atensi/{id}', 'destroy');
+    Route::put('/update_atensi/{id}', 'update');
+
 });

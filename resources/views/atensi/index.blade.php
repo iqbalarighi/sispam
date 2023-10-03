@@ -104,13 +104,13 @@
                        @endif
 
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'"  title="klik untuk lihat detail" style="text-align: left;">
-                        {{$item->pelaksana}}
+                        {{Str::substr($item->rencana, 15,1000)}}
                         </td>
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}</td>
                         
                         @if (Auth::user()->name == $item->creator || Auth::user()->level === 'superadmin')
                         <td class="d-flex p-0" >
-                        <a href="{{url('edit_smc')}}/{{$item->id}}" hidden>
+                        <a href="{{url('edit_atensi')}}/{{$item->id}}" hidden>
                             <button id="{{$data->firstitem() + $key}}" type="submit" title="Edit Data">
                             </button>
                         </a>
@@ -118,7 +118,7 @@
                         <label for="{{$data->firstitem() + $key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
 
                             <pre> </pre>
-                        <form action="hapus-item/{{ $item->id }}" method="post" class="align-self-center">
+                        <form action="hapus_atensi/{{ $item->id }}" method="post" class="align-self-center">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button id="del{{$data->firstitem() + $key}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data " hidden>

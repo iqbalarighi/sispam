@@ -140,15 +140,16 @@
                     </div>
                 </div>
                           
-            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan SMC
                         <i id="change" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc') ? 'show' : '' }}" id="collapseExampl">
+                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi') ? 'show' : '' }}" id="collapseExampl">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('laporan_smc')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a>
+                            <a href="{{route('atensi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('atensi') ? 'active' : '' }}">Atensi</a>
 
                             {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
