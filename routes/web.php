@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\AtensiController;
 use App\Http\Controllers\BencanaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KegiatanController;
@@ -222,7 +223,7 @@ Route::get('/temuan/hapus-foto/{item}/{id}', [TemuanController::class, 'hapusFot
 
 //Otorisasi Section
 Route::get('/otorisasi', [OtorisasiController::class, 'index'])->middleware('auth')->name('otorisasi');
-Route::post('/simpan-otorisasi', [OtorisasiController::class, 'simpan'])->middleware('auth')->name('save_otorisasi'); 
+Route::post('/simpan_otorisasi', [OtorisasiController::class, 'simpan'])->middleware('auth');
 Route::put('/update-otorisasi/{id}', [OtorisasiController::class, 'update'])->middleware('auth');
 Route::delete('otorisasi/hapus/{id}', [OtorisasiController::class, 'hapus'])->middleware('auth');
 
@@ -240,3 +241,8 @@ Route::controller(SmcController::class)->middleware('auth')->group(function () {
     Route::get('/smcPDF/{id}',  'smcPDF');
 });
 
+//Atensi Section
+Route::controller(AtensiController::class)->middleware('auth')->group(function () {
+Route::get('/atensi', 'index')->name('atensi');
+Route::get('/lap_atensi', 'create')->name('lap_atensi');
+});

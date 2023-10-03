@@ -96,7 +96,7 @@
                             <div class="modal-content">
                                 <!-- Add image inside the body of modal -->
                                 <div align="center" class="modal-body center">
-                                    <form action="{{route('save_otorisasi')}}" method="POST" id="form">
+                                    <form action="{{url('simpan_otorisasi')}}" method="POST" id="form" enctype="form-data">
                                 @csrf
                                         <h4>Tambah Data Otorisasi</h4>
                                 <label>
