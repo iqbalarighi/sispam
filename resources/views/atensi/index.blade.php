@@ -24,7 +24,7 @@
         @endif
             <div class="card ">
                 
-                <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Atensia') }}
+                <div class="card-header text-uppercase font-weight-bold">{{ __('Laporan Atensi Pimpinan') }}
                     @if (Auth::user()->role === 'admin')
                     <a href="{{route('lap_atensi')}}"><span class="btn btn-primary float-right btn-sm">Buat Laporan</span></a>
                     @endif
@@ -85,7 +85,7 @@
                         @if (Auth::user()->level === 'superadmin' || Auth::user()->role === 'admin')
                        <th style="width:72px; ">Dibuat Oleh</th>
                        @endif
-                        <th>Rencana Kegiatan Oleh</th>
+                        <th>Atensi Unjuk Rasa</th>
                         <th>Hari/Tanggal</th>
                        <th style="width:72px; ">Option</th>
                     </tr>
@@ -96,19 +96,19 @@
                     </tr>
                     @else
 
-                    @foreach($data as $key => $item)
+        @foreach($data as $key => $item)
                     <tr style="cursor: pointer; user-select: none;">
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'" title="klik untuk lihat detail">{{$data->firstitem() + $key}}</td>
-                         @if (Auth::user()->level === 'superadmin' || Auth::user()->role === 'admin')
+                    @if (Auth::user()->level === 'superadmin' || Auth::user()->role === 'admin')
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$item->creator}}</td>
-                       @endif
+                    @endif
 
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'"  title="klik untuk lihat detail" style="text-align: left;">
                         {{Str::substr($item->rencana, 15,1000)}}
                         </td>
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}</td>
                         
-                        @if (Auth::user()->name == $item->creator || Auth::user()->level === 'superadmin')
+                @if (Auth::user()->name == $item->creator || Auth::user()->level === 'superadmin')
                         <td class="d-flex p-0" >
                         <a href="{{url('edit_atensi')}}/{{$item->id}}" hidden>
                             <button id="{{$data->firstitem() + $key}}" type="submit" title="Edit Data">
@@ -128,15 +128,15 @@
                                 </label>
                         </form>
                         </td> 
-                        @else 
+                @else 
                         <td class="d-flex p-0" >
                         <label style="cursor: not-allowed;" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
                          <pre> </pre>
                         <label style="cursor: not-allowed;" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </td> 
-                         @endif
+                @endif
                     </tr>
-                    @endforeach
+        @endforeach
 
                     @endif
                     </table>

@@ -170,7 +170,7 @@
     </div>
 {{-- end of modal --}}
 
-        <div class="card-body overflow " style="overflow-x: auto;">
+
         
         <center class="mb-2">
             @if ($message = Session::get('berhasil'))
@@ -232,7 +232,7 @@
                             margin: 0em;
                         }
                     </style>
-
+        
                         @if (Auth::user()->role === 'admin')
                         {{-- ==========xxxx============== --}}
                         @if ($start == null)
@@ -276,8 +276,13 @@
                         <button class="submit bi bi-search"></button>
                     </form>
                        @endif 
+
  
-                    <div class="table-responsive">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
+
+                    <div class="table-responsive pl-1 pr-1">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
+
+<div class="card-body overflow " style="overflow-x: auto;">
+
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
                         <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">No</th>
@@ -361,7 +366,7 @@
                         <div class="d-flex justify-content-between">
 
                     @if ($rasa->level_resiko == true)
-                    <label onclick="window.location='/input_atensi/{{$rasa->id}}'"  style="vertical-align: middle; color: black;" title="klik untuk buat laporan Atensi" class="bi bi-eye-fill btn-info btn-sm align-self-center">
+                    <label onclick="window.location='/input_atensi/{{$rasa->id}}'"  style="vertical-align: middle; color: black; cursor: pointer;" title="klik untuk buat laporan Atensi" class="bi bi-eye-fill bg-info btn-sm align-self-center">
                         </label>
                         <pre> </pre>
                     @endif

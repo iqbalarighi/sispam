@@ -35,13 +35,11 @@
                         pre {
                             font-family : 'Times new Roman';
                             font-size: 11pt;
-                            word-break: break-word;
-                            white-space: pre-wrap;       /* Since CSS 2.1 */
-                            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-                            white-space: -pre-wrap;      /* Opera 4-6 */
-                            white-space: -o-pre-wrap;    /* Opera 7 */
-                            word-wrap: break-word;       /* Internet Explorer 5.5+ */
-                            text-align:justify !important;
+                                white-space: pre-wrap;       /* Since CSS 2.1 */
+                                white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+                                white-space: -pre-wrap;      /* Opera 4-6 */
+                                white-space: -o-pre-wrap;    /* Opera 7 */
+                                word-wrap: break-word;       /* Internet Explorer 5.5+ */
                             }
 
                     </style>
@@ -100,7 +98,7 @@
                 @if($show->creator == Auth::user()->name || Auth::user()->level == "superadmin")
 
                     <select id="otorisasi"  required>
-                        <option value="" selected>::Pilih Otorisasi::</option>
+                        <option value="" selected>:: Pilih Otorisasi ::</option>
                         @foreach ($otor as $key => $oto)
                         <option value="{{$oto->id}}">{{$oto->nama}}</option>
                         @endforeach

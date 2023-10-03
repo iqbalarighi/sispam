@@ -6,7 +6,7 @@
         <div class="col mw-100 p-1">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Buat Laporan Atensia') }}
-                    <a href="{{route('unras')}}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
+                    <a href="{{ url()->previous() }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
 
                 </div>
 
