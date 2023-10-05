@@ -59,7 +59,7 @@
    f. Melakukan pemantauan jalannya aksi</pre></td>
                     </tr>
                     </table>
-                    <pre class="mb-0 potong" style="margin-top: -1px"><b>C. PENUTUP </b><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian laporan yang dapat kami sampaikan. Atas perhatian Bapak, kami ucapkan terima kasih.</pre>
+                    <pre class="mb-0 potong" style="margin-top: 0px"><b>C. PENUTUP </b><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian laporan yang dapat kami sampaikan. Atas perhatian Bapak, kami ucapkan terima kasih.</pre>
 <p></p>
 <table border="0" width="100%" style="vertical-align: middle; text-align: center;">
                         <tr>

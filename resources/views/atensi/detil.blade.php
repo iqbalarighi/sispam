@@ -47,7 +47,7 @@
                     <div class="row justify-content-md-center">
                     
                     <div class="col-md-auto p-auto">
-                    <table class=" table-responsive" width="100%">
+                    <table class="" width="80%" align="center">
                     <tr>
                         <td>
                         <b><center>Laporan Atensi Pimpinan</center></b>
