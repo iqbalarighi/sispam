@@ -121,30 +121,36 @@
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
 
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('temuan') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                 Laporan PAM
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
                             <a href="{{route('temuan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('temuan') ? 'active' : '' }}">Temuan Patroli</a>
-                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
-                            {{-- <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a> --}}
-
-                            {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
                     </div>
                 </div>
-                          
-            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Laporan HSE
+                        <i id="changeHSE" class="bi bi-caret-right-fill"></i>
+              </a>
+                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="collapseExampl">
+                    <div class="card card-body">
+                        <div class="list-group list-group-flush" style="width: 100%;">
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
+                        </div> 
+                    </div>
+                </div>
+            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamp" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan SMC
                         <i id="change" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi') ? 'show' : '' }}" id="collapseExampl">
+                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi') ? 'show' : '' }}" id="collapseExamp">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('laporan_smc')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc') ? 'active' : '' }}">Kegiatan</a>
@@ -172,21 +178,32 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('temuan') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan PAM
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('kejadian')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
                             <a href="{{route('temuan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('temuan') ? 'active' : '' }}">Temuan Patroli</a>
-                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
-
                         </div> 
                     </div>
                 </div>
+
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamp" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Laporan HSE
+                        <i id="changeHSE" class="bi bi-caret-right-fill"></i>
+              </a>
+                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="collapseExamp">
+                    <div class="card card-body">
+                        <div class="list-group list-group-flush" style="width: 100%;">
+                            <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
+                        </div> 
+                    </div>
+                </div>
+
             <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan SMC
                         <i id="change" class="bi bi-caret-right-fill"></i>
@@ -526,6 +543,22 @@ function myFunction3() {
 
     function cekSmc() {
   var g = document.getElementById("change");
+   if (g.className === "bi bi-caret-right-fill") {
+    g.className = "bi bi-caret-down-fill";
+  } else {
+    g.className = "bi bi-caret-right-fill";
+  }
+}
+</script>
+<script>
+    var d = document.getElementById("changeHSE");
+    var a = document.getElementById("collapseExamp");
+    if (a.className === "collapse show"){
+    d.className = "bi bi-caret-down-fill";
+    }
+
+    function cekHse() {
+  var g = document.getElementById("changeHSE");
    if (g.className === "bi bi-caret-right-fill") {
     g.className = "bi bi-caret-down-fill";
   } else {
