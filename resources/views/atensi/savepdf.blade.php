@@ -79,5 +79,11 @@ NIP. {{$otor->nip}}</pre>
                         </td>
                         </tr>
 </table>
+
+<div style="position: absolute; right: 0; bottom: 0px;" align="center">
+    <img src="data:image/png;base64, {!! $qrcode !!}">
+    <figcaption><font size="8pt" style="margin-top: 20px">Laporan Atensi</font></figcaption>
+</div>
+
 </body>
     </html>

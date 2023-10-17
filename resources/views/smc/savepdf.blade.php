@@ -59,6 +59,9 @@
                     </div>
                 </div>
                 @endif
-
+{{-- <div style="position: absolute; right: 0; bottom: 0px;" align="center">
+    <img src="data:image/png;base64, {!! $qrcode !!}">
+    <figcaption><font size="8pt" style="margin-top: 20px">{{$detil->no_lap}}</font></figcaption>
+</div> --}}
 </body>
     </html>

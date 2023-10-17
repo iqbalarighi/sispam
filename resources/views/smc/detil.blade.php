@@ -104,6 +104,9 @@
                     </table>
                     
                 </div>
+
+
+                
                 @if($detil->creator == Auth::user()->name || Auth::user()->level == "superadmin")
                 <center><a href="/smcPDF/{{$detil->id}}" target="_blank"><span class="btn btn-primary btn-sm ml-2">Download Laporan</span></a></center>
                 @endif

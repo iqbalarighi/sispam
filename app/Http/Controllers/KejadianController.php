@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Exports\KejadianExport;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Auth;
 use App\Models\KejadianModel;
+use App\Models\OtorisasiModel;
 use App\Models\SiteModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use PDF;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class KejadianController extends Controller
 {
@@ -384,8 +386,8 @@ class KejadianController extends Controller
     public function detil($id)
     {
         $detil = KejadianModel::with('site')->where('no_lap', '=', $id)->first();
-
-        return view('kejadian.detil', compact('detil'));
+        $otor = OtorisasiModel::all();
+        return view('kejadian.detil', compact('detil','otor'));
     }
 
     public function edit($id)
@@ -404,14 +406,23 @@ class KejadianController extends Controller
         ]);
     }
 
-public function kejadianPDF($id)
+public function kejadianPDF($id, $oto)
     {   
         $detil = KejadianModel::with('site')->findOrFail($id);
-        
-        $pdf = PDF::loadView('kejadian.savepdf', ['detil' => $detil]);
+        $otor = OtorisasiModel::findOrFail($oto);
+        $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/kejadianPDF/').'/'.$id.'/'.$oto));
+
+        if (Auth::user() == true) {
+        $shift = Str::substr($detil->shift, 0,7);
+        $pdf = PDF::loadView('kejadian.savepdf', compact('detil','qrcode','otor')); 
+    } else {
+        header('Refresh: 10; URL='.route('dashboard'));
+
+        abort(403);
+    }
 
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
-        return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
+        return $pdf->stream('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
     }
 
 public function update(Request $update, $id)

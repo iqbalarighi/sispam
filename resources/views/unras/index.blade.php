@@ -32,7 +32,7 @@
                       bottom: 20px;
                       right: 30px;
                       z-index: 99;
-                      font-size: 18px;
+                      font-size: 11px;
                       border: none;
                       outline: none;
                       background-color: black;
@@ -232,7 +232,7 @@
                             margin: 0em;
                         }
                     </style>
-        
+                    <div class="p-2">
                         @if (Auth::user()->role === 'admin')
                         {{-- ==========xxxx============== --}}
                         @if ($start == null)
@@ -276,7 +276,7 @@
                         <button class="submit bi bi-search"></button>
                     </form>
                        @endif 
-
+                    </div>
  
 
                     <div class="table-responsive pl-1 pr-1">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
@@ -448,20 +448,23 @@ if ($unras->count() == 0) {
                     </tr> 
                     <tr>
                         <td>
-                            <select class="level form-select pb-0 pt-0 " id="" name="level2" aria-label="Default select example" >
-                                <option value="" disabled selected >Level Risiko</option>
+                            <select class="level form-select pb-0 pt-0 " style="" id="levels{{$unras->firstitem()+$key}}" name="level2" aria-label="Default select example" >
+                                <option value="" selected style="color: grey;">Level Risiko</option>
                                 <option style="background-color: limegreen; color: black;" value="Minimal"{{'Minimal' ==$rasa->level_resiko ? 'selected' : '' }}>Minimal</option>
                                 <option style="background-color: yellow; color: black;" value="Rendah"{{'Rendah' == $rasa->level_resiko ? 'selected' : '' }}>Rendah</option>
                                 <option style="background-color: orange; color: black;" value="Sedang"{{'Sedang' == $rasa->level_resiko ? 'selected' : '' }}>Sedang</option>
                                 <option style="background-color: red; color: white;" value="Tinggi"{{'Tinggi' == $rasa->level_resiko ? 'selected' : '' }}>Tinggi</option>
                                 <option style="background-color: darkred; color: white;" value="Ekstrem"{{'Ekstrem' == $rasa->level_resiko ? 'selected' : '' }}>Ekstrem</option>
                             </select>
+
+
                         </td>
                     </tr>
                <tr>
                         <td>
                             <select class="form-select pb-0 pt-0" id="status{{$unras->firstitem()+$key}}" name="status" aria-label="Default select example" required>
-                                <option value="" disabled selected >Status Kegiatan</option>
+                                <option value="" selected style="color: grey;">Status Kegiatan</option>
+                                <option value="Rencana" >Rencana</option>
                                 <option value="Selesai Kondusif" {{ 'Selesai Kondusif' == $rasa->status_kegiatan ? 'selected' : '' }}>Selesai Kondusif</option>
                                 <option value="Ricuh" {{ 'Ricuh' == $rasa->status_kegiatan ? 'selected' : '' }}>Ricuh</option>
                                 <option value="Batal" {{ 'Batal' == $rasa->status_kegiatan ? 'selected' : '' }}>Batal</option>
@@ -506,6 +509,66 @@ if ($unras->count() == 0) {
                 </div>
             </div>
         </div>
+
+<script>
+    if ($("#levels{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else {
+            document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        }
+
+    $("#levels{{$unras->firstitem()+$key}}").on('change', function () {
+                if ($("#levels{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
+        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else {
+            document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = ''
+        }
+
+});
+</script>
+<script>
+    if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("status{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        }
+
+    $("#status{{$unras->firstitem()+$key}}").change(function() {
+                if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("status{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else {
+            document.getElementById("status{{$unras->firstitem()+$key}}").style.backgroundColor  = ''
+        }
+        });
+</script>
     </div>
 {{-- end of modal   --}}
                         <pre> </pre>
@@ -765,5 +828,7 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 </script>
+
+
 @endsection
 

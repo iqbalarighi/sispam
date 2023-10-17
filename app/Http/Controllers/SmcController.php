@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class SmcController extends Controller
 {
@@ -239,14 +240,17 @@ foreach($input['images'] as $image)
 public function smcPDF($id)
     {   
         $detil = SmcModel::with('site')->findOrFail($id);
+        // $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/smcPDF/'.$detil->id)));
         
-    if ($detil->creator == Auth::user()->name || Auth::user()->level === 'superadmin') {
+    // if ($detil->creator == Auth::user()->name || Auth::user()->level === 'superadmin') {
+        
+    // } else {
+    //     header('Refresh: 10; URL='.route('dashboard'));
+
+    //     abort(403);
+    // }
         $shift = Str::substr($detil->shift, 0,7);
         $pdf = PDF::loadView('smc.savepdf', compact('detil')); 
-    } else {
-        abort(403);
-    }
-
         return $pdf->stream('Laporan Kegiatan '.$shift.' '.$detil->no_lap.'.pdf');
     }
 }

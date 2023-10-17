@@ -87,7 +87,9 @@
                        @endif
                         <th>Atensi Unjuk Rasa</th>
                         <th>Hari/Tanggal</th>
+                        @if (Auth::user()->role === 'admin')
                        <th style="width:72px; ">Option</th>
+                       @endif
                     </tr>
 
                     @if ($data->count() == 0)
@@ -107,7 +109,7 @@
                         {{Str::substr($item->rencana, 15,1000)}}
                         </td>
                         <td onclick="window.location='/atensi_detil/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('dddd, D MMMM Y')}}</td>
-                        
+                       @if (Auth::user()->role === 'admin')
                 @if (Auth::user()->name == $item->creator || Auth::user()->level === 'superadmin')
                         <td class="d-flex p-0" >
                         <a href="{{url('edit_atensi')}}/{{$item->id}}" hidden>
@@ -128,12 +130,13 @@
                                 </label>
                         </form>
                         </td> 
-                @else 
+                @else
                         <td class="d-flex p-0" >
                         <label style="cursor: not-allowed;" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
                          <pre> </pre>
                         <label style="cursor: not-allowed;" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </td> 
+                @endif
                 @endif
                     </tr>
         @endforeach

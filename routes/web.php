@@ -12,6 +12,7 @@ use App\Http\Controllers\ParkirController;
 use App\Http\Controllers\PeralatanController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PosjagaController;
+use App\Http\Controllers\RekapController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SmcController;
 use App\Http\Controllers\TemuanController;
@@ -157,7 +158,7 @@ Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'expo
 Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
 Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
-Route::get('/kejadianPDF/{id}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
+Route::get('/kejadianPDF/{id}/{oto}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
 Route::get('/unrasojk/export/{start}/{end}/{count}/{cariin}', [UnrasController::class, 'exportojk'])->middleware('auth');
 Route::get('/unras/export/{start}/{end}/{count}', [UnrasController::class, 'export'])->middleware('auth');
 Route::get('/unrasPDF/{start}/{end}', [UnrasController::class, 'unrasPDF'])->middleware('auth');
@@ -253,4 +254,12 @@ Route::controller(AtensiController::class)->middleware('auth')->group(function (
     Route::delete('/hapus_atensi/{id}', 'destroy');
     Route::put('/update_atensi/{id}', 'update');
 
+});
+
+Route::controller(RekapController::class)->middleware('auth')->group(function () {
+    Route::get('/rekap', 'index')->name('rekap');
+    Route::get('/tambah_rekap', 'create')->name('tambah_rekap');
+    Route::post('/simpan_rekap','store')->name('simpan_rekap'); 
+    Route::get('/rekap_detil/{id}', 'show');
+    Route::delete('/hapus_rekap/{id}', 'destroy');
 });

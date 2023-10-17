@@ -209,17 +209,38 @@
 
                 </div>
                 @if($detil->user_pelapor == Auth::user()->name || Auth::user()->role == "admin")
-                    <form method="GET" action="/kejadianPDF/{{$detil->id}}" enctype="multipart/form-data">
-                        <div class="form-group">
-                             <div align="center" class="control">
-                                 <button type="submit" class="btn btn-primary">Download Laporan</button>
-                             </div>
-                        </div>
-                    </form> 
+
+                <div align="center">
+          
+
+                    <select id="otorisasi"  required>
+                        <option value="" selected>:: Pilih Otorisasi ::</option>
+                        @foreach ($otor as $key => $oto)
+                        <option value="{{$oto->id}}">{{$oto->nama}}</option>
+                        @endforeach
+                    </select>
+
+                <a id="link" target="_blank"><button id="unduh" class="btn btn-primary btn-sm float-center ml-2" disabled>Download PDF</button></a>
+
+                
+                </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
+<script>
+ 
+    $("#otorisasi").change(function() {
+        console.log($("#otorisasi option:selected").val());
+        if ($("#otorisasi option:selected").val() == '') {
+            $("#unduh").prop("disabled", true);
+            $('#link').removeAttr("href");
+        } else {
+            $('#link').attr("href", "/kejadianPDF/{{$detil->id}}/"+this.value);
+            $("#unduh").prop("disabled", false); 
+        }
 
+});
+</script>
 @endsection

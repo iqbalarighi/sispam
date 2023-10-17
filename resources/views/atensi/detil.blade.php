@@ -95,7 +95,7 @@
                     <p></p>
                 </div>
                 <div align="center">
-                @if($show->creator == Auth::user()->name || Auth::user()->level == "superadmin")
+                @if(Auth::user()->role === 'admin' || Auth::user()->level == "superadmin")
 
                     <select id="otorisasi"  required>
                         <option value="" selected>:: Pilih Otorisasi ::</option>

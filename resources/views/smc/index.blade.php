@@ -90,7 +90,9 @@
                         <th>Shift</th>
                         <th>Hari/Tanggal</th>
                         <th>Jam</th>
+                        @if (Auth::user()->role === 'admin')
                        <th style="width:72px; ">Option</th>
+                       @endif
                     </tr>
 
                     @if ($data->count() == 0)
@@ -113,7 +115,7 @@
                         </td>
                         <td onclick="window.location='/smc_detil/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
                         <td onclick="window.location='/smc_detil/{{$item->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($item->created_at)->isoFormat('HH:mm')}} WIB</td>
-                        
+                        @if (Auth::user()->role === 'admin')
                         @if (Auth::user()->name == $item->creator || Auth::user()->level === 'superadmin')
                         <td class="d-flex p-0" >
                         <a href="{{url('edit_smc')}}/{{$item->id}}" hidden>
@@ -140,6 +142,7 @@
                          <pre> </pre>
                         <label style="cursor: not-allowed;" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </td> 
+                         @endif
                          @endif
                     </tr>
                     @endforeach

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AtensiController extends Controller
 {
@@ -131,8 +132,16 @@ class AtensiController extends Controller
         $detil = AtensiModel::findOrFail($id);
         $otor = OtorisasiModel::findOrFail($oto);
         $rencana = Str::substr($detil->rencana, 16,10000);
-        $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor')); 
+        $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->style('round')->generate(url('/atensiPDF/'.$detil->id.'/'.$oto)));
 
+    if (Auth::user() == true) {
+        $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor','qrcode')); 
+    } else {
+        header('Refresh: 10; URL='.route('dashboard'));
+
+        abort(403);
+    }
+        
         return $pdf->stream('Laporan Atensi '.$rencana.'.pdf');
     }
 }

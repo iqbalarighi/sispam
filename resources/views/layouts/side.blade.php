@@ -135,27 +135,28 @@
                         </div> 
                     </div>
                 </div>
-            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="collapseExampl">
+                <div id="hse" class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" >
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
                         </div> 
                     </div>
                 </div>
-            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamp" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi')||Route::is('rekap') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#smc" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan SMC
-                        <i id="change" class="bi bi-caret-right-fill"></i>
+                        <i id="changeSmc" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi') ? 'show' : '' }}" id="collapseExamp">
+                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi')||Route::is('rekap') ? 'show' : '' }}" id="smc">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('laporan_smc')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a>
                             <a href="{{route('atensi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('atensi') ? 'active' : '' }}">Atensi</a>
+                            <a href="{{route('rekap')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('rekap') ? 'active' : '' }}">Rekap Harian</a>
 
                             {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
@@ -192,11 +193,11 @@
                     </div>
                 </div>
 
-            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamp" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="collapseExamp">
+                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="hse">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
@@ -204,16 +205,17 @@
                     </div>
                 </div>
 
-            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExampl" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekSmc()" class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc')||Route::is('bencana')||Route::is('atensi')||Route::is('rekap') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#smc" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan SMC
-                        <i id="change" class="bi bi-caret-right-fill"></i>
+                        <i id="changeSmc" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi') ? 'show' : '' }}" id="collapseExampl">
+                <div class="collapse {{ Route::is('bencana')||Route::is('laporan_smc')||Route::is('atensi')||Route::is('rekap') ? 'show' : '' }}" id="smc">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('laporan_smc')}}"  class="list-group-item list-group-item-action bg-light {{ Route::is('laporan_smc') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('bencana')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('bencana') ? 'active' : '' }}">Kegawatdaruratan</a>
                             <a href="{{route('atensi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('atensi') ? 'active' : '' }}">Atensi</a>
+                            <a href="{{route('rekap')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('rekap') ? 'active' : '' }}">Rekap Harian</a>
 
                             {{-- <a href="#" style="cursor: not-allowed; " class="list-group-item list-group-item-action bg-light">Unras</a> --}}
                         </div> 
@@ -252,13 +254,15 @@
               </a>
 
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li>        <a class="dropdown-item font-weight-bold ps-2" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <li>
+                    <a class="dropdown-item font-weight-bold ps-2" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </li>
+                {{-- <li><a href="#" class="dropdown-item font-weight-bold ps-2"> </a></li> --}}
               </ul>
             </div>
             </div>
@@ -421,22 +425,7 @@ function myFunction3() {
     return true;
 }
 </script> 
-<script>
-    var z = document.getElementById("ubah");
-    var y = document.getElementById("collapseExample");
-    if (y.className === "collapse show"){
-    z.className = "bi bi-caret-down-fill";
-    }
 
-    function cekDown() {
-  var x = document.getElementById("ubah");
-   if (x.className === "bi bi-caret-right-fill") {
-    x.className = "bi bi-caret-down-fill";
-  } else {
-    x.className = "bi bi-caret-right-fill";
-  }
-}
-</script>
 <!-- JavaScript -->
 
 {{-- pergantian shift --}}
@@ -535,14 +524,30 @@ function myFunction3() {
 </script>
 @endif
 <script>
-    var d = document.getElementById("change");
-    var a = document.getElementById("collapseExampl");
+    var z = document.getElementById("ubah");
+    var y = document.getElementById("collapseExample");
+    if (y.className === "collapse show"){
+    z.className = "bi bi-caret-down-fill";
+    }
+
+    function cekDown() {
+  var x = document.getElementById("ubah");
+   if (x.className === "bi bi-caret-right-fill") {
+    x.className = "bi bi-caret-down-fill";
+  } else {
+    x.className = "bi bi-caret-right-fill";
+  }
+}
+</script>
+<script>
+    var d = document.getElementById("changeSmc");
+    var a = document.getElementById("smc");
     if (a.className === "collapse show"){
     d.className = "bi bi-caret-down-fill";
     }
 
     function cekSmc() {
-  var g = document.getElementById("change");
+  var g = document.getElementById("changeSmc");
    if (g.className === "bi bi-caret-right-fill") {
     g.className = "bi bi-caret-down-fill";
   } else {
@@ -552,7 +557,7 @@ function myFunction3() {
 </script>
 <script>
     var d = document.getElementById("changeHSE");
-    var a = document.getElementById("collapseExamp");
+    var a = document.getElementById("hse");
     if (a.className === "collapse show"){
     d.className = "bi bi-caret-down-fill";
     }

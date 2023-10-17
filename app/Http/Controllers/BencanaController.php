@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BencanaController extends Controller
 {
@@ -258,10 +259,10 @@ $files = $request->file('images');
 public function savePDF($id, $oto)
     {   
         $detil = BencanaModel::with('site')->findOrFail($id);
-
         $otor = OtorisasiModel::findOrFail($oto);
+        $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/savePDF/'.$detil->id.'/'.$oto)));
 
-        $pdf = PDF::loadView('bencana.savepdf', compact('detil','otor'));
+        $pdf = PDF::loadView('bencana.savepdf', compact('detil','otor','qrcode'));
 
         return $pdf->stream('Laporan Bencana '.$detil->no_bencana.'.pdf');
     }

@@ -153,12 +153,12 @@
                         <tr>
                             <td width="30%"><pre class="narrow">
 Mengetahui,
-Kepala Bagian Pengamanan
+{{$otor->jabatan}}
 
 
 
-<b>Supriyono</b>
-NIP. 00704</pre>
+<b>{{$otor->nama}}</b>
+NIP. {{$otor->nip}}</pre>
                         </td>
 <td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
                         <td width="33%" style="vertical-align: top;"><pre class="narrow">
@@ -173,6 +173,9 @@ Disusun Oleh,
                         </tr>
                     </table>
                     
-
+<div style="position: absolute; right: 0; bottom: 0px;" align="center">
+    <img src="data:image/png;base64, {!! $qrcode !!}">
+    <figcaption><font size="8pt" style="margin-top: 20px">{{$detil->no_lap}}</font></figcaption>
+</div>
             </body>
     </html>
