@@ -448,7 +448,7 @@ if ($unras->count() == 0) {
                     </tr> 
                     <tr>
                         <td>
-                            <select class="level form-select pb-0 pt-0 " style="" id="levels{{$unras->firstitem()+$key}}" name="level2" aria-label="Default select example" >
+                            <select class="form-select pb-0 pt-0 " style="" id="lev{{$unras->firstitem()+$key}}" name="level2" aria-label="Default select example" >
                                 <option value="" selected style="color: grey;">Level Risiko</option>
                                 <option style="background-color: limegreen; color: black;" value="Minimal"{{'Minimal' ==$rasa->level_resiko ? 'selected' : '' }}>Minimal</option>
                                 <option style="background-color: yellow; color: black;" value="Rendah"{{'Rendah' == $rasa->level_resiko ? 'selected' : '' }}>Rendah</option>
@@ -509,53 +509,53 @@ if ($unras->count() == 0) {
                 </div>
             </div>
         </div>
-
 <script>
-    if ($("#levels{{$unras->firstitem()+$key}} option:selected").val() == '') {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+    if ($("#lev{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'white'
         } else {
-            document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+            document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
         }
 
-    $("#levels{{$unras->firstitem()+$key}}").on('change', function () {
-                if ($("#levels{{$unras->firstitem()+$key}} option:selected").val() == '') {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'black'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
-        } else if (($("#levels{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
-        document.getElementById("levels{{$unras->firstitem()+$key}}").style.color  = 'white'
+    $("#lev{{$unras->firstitem()+$key}}").on('change', function () {
+                if ($("#lev{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Minimal')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'limegreen'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Rendah')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'yellow'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Sedang')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'orange'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'black'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Tinggi')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'red'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'white'
+        } else if (($("#lev{{$unras->firstitem()+$key}} option:selected").val() == 'Ekstrem')) {
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = 'darkred'
+        document.getElementById("lev{{$unras->firstitem()+$key}}").style.color  = 'white'
         } else {
-            document.getElementById("levels{{$unras->firstitem()+$key}}").style.backgroundColor  = ''
+            document.getElementById("lev{{$unras->firstitem()+$key}}").style.backgroundColor  = '';
         }
 
 });
 </script>
+
 <script>
     if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == '') {
         document.getElementById("status{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
