@@ -56,7 +56,8 @@
                 </div>
             </div>
         @endif
-
+    <!-- Notifikasi -->
+    
                     <div class="table-responsive mt-2 justify-content:center">
             <form action="/personil-update/{{$personil->id}}" method="post" id="form" enctype="multipart/form-data">
             @csrf
