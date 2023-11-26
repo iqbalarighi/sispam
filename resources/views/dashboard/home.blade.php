@@ -83,7 +83,7 @@
 <script>
     function updateGiat() {
         $.ajax({
-            url: '{{ route('grafik') }}',
+            url: '{{ route('dashboard') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -140,7 +140,7 @@ if (data.datas.giats.length == 0){
 
     function updateJadi() {
         $.ajax({
-            url: '{{ route('grafik') }}',
+            url: '{{ route('dashboard') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -188,7 +188,7 @@ if (data.datax.jadi.length == 0){
 
     function updateGawat() {
         $.ajax({
-            url: '{{ route('grafik') }}',
+            url: '{{ route('dashboard') }}',
             method: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -323,7 +323,10 @@ if (data.datax.jadi.length == 0){
                 // updateJaga();
                 // updateTimej();
         }, 31000);
+
+
 </script>
+    <livewire:grafik-unras/>
 @endpush
 <div class="card-body overflow px-3 pt-1" style="overflow-x: auto;">
 
@@ -427,7 +430,9 @@ if (data.datax.jadi.length == 0){
       <div class="card-body">
         <h5 class="card-title">Grafik UNRAS</h5>
         {{-- <p class="card-text">Data Grafik UNRAS</p> --}}
-            @yield('grafik')
+            <div id="charBox">
+                <canvas  id="myChart"></canvas>
+            </div>
       </div>
     </div>
   </div>
@@ -444,7 +449,5 @@ if (data.datax.jadi.length == 0){
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
 @endif --}}
 
-<script>
 
-</script>
 @endsection

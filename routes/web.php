@@ -40,9 +40,11 @@ Route::get('/', function () {
 Auth::routes();
 
 // Dashboard
-Route::get('/grafik', [HomeController::class, 'index'])->middleware('auth')->name('grafik');
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware('auth')->name('dashboard');
 // Route::get('/tasks',[HomeController::class, 'task'])->name('get_tasks');
 
+//GrafikUnras
+Route::get('/grafik', GrafikUnras::class)->middleware('auth')->name('grafik');
 
 // Personil section
 Route::get('/edit-personil', function () {
@@ -192,8 +194,7 @@ Route::get('/automasi2', [UnrasController::class, 'automasi2'])->middleware('aut
 Route::put('/update-unras/{id}', [UnrasController::class, 'update'])->middleware('auth');
 Route::delete('/unras/hapus/{id}', [UnrasController::class, 'hapus'])->middleware('auth');
 
-//GrafikUnras
-Route::get('/dashboard', GrafikUnras::class)->middleware('auth')->name('dashboard');
+
 
 //Bencana
 Route::get('/bencana', [BencanaController::class, 'index'])->middleware('auth')->name('bencana');

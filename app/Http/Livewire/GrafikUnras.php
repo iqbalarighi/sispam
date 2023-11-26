@@ -84,7 +84,7 @@ $this->unras = json_encode($data);
 
     public function render()
     {
-        return view('dashboard.grafik')->extends('dashboard.home')->section('grafik');
+        return view('livewire.grafik-unras');
     }
 
 
