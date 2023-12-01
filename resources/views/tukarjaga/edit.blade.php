@@ -6,21 +6,16 @@
         <div class="col mw-100">
                 <!-- Notifikasi -->
         @if ($message = Session::get('sukses'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
-            <p/>
+                        <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{$message}}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+
+            </script>
         @endif
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold ">{{ __('Edit Laporan Tukar Jaga') }}
@@ -122,7 +117,7 @@
                     {{-- end of ubah shift --}}
 
                     {{-- Tukar Shift --}}
-                    <table class=" table-striped table-hover text-center table-responsive" width="100%">
+                    <table class=" table-striped table-hover text-center table-responsive " width="100%">
                         <tr>
                             <td colspan="2">
                                <strong>Serah Terima Jaga</strong>
@@ -230,14 +225,82 @@
                     </tr>
 
                     @foreach ($editshift as $key => $item)
+                    
                     <tr style="user-select: none;">
-                        {{-- <td>{{$key+1}}</td> --}}
-                        <td>@foreach (explode('|',$item->shift_lama) as $til)
-                            {{$til}} &nbsp; <a href="/hapus-shiftlama/{{$til}}/{{$editshift[$key]->no_trj}}" title="Hapus Personil {{$til}}" onclick="return confirm('Hapus Personil {{$til}}?')"><i class="bi bi-trash3"></i></a><br>
-                            @endforeach
+
+                        <td>
+                    @if($item->shift_lama != null)
+                        @foreach (explode('|',$item->shift_lama) as $index => $til)
+
+                                {{$til}} <label style="cursor: pointer; float: right !important;" for="del{{$editshift[$key]->no_trj.$index}}" title="klik untuk hapus laporan" class="bi bi-trash3 float-right"></label> 
+                    <form method="POST" action="/hapus-shiftlama/{{$til}}/{{$editshift[$key]->no_trj}}">
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button type="submit" id="del{{$editshift[$key]->no_trj.$index}}" hidden></button>
+                    </form>
+                                {{-- <a href="/hapus-shiftlama/{{$til}}/{{$editshift[$key]->no_trj}}" title="Hapus Personil {{$til}}" onclick="return confirm('Hapus Personil {{$til}}?')">
+                                    <i class="bi bi-trash3 float-right"></i>
+                                </a> --}}
+                                
+            <script>
+
+                $('#del{{$editshift[$key]->no_trj.$index}}').click(function(event){
+                    var form =  $(this).closest("form");
+                    event.preventDefault();
+                    Swal.fire({
+                              title: "Hapus ",
+                              text: "Yakin personil shift lama mau di hapus ?",
+                              icon: "question",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              cancelButtonText: "Batal",
+                              confirmButtonText: "Hapus"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                form.submit();
+                              }
+                            });
+                });
+            </script>
+                   
+                        @endforeach
+                    @endif
                         </td>
-                        <td>@foreach (explode('|',$item->shift_baru) as $tils)
-                            {{$tils}} &nbsp; <a href="/hapus-shiftbaru/{{$tils}}/{{$editshift[$key]->no_trj}}" title="Hapus Personil {{$tils}}" onclick="return confirm('Hapus Personil {{$tils}}?')"><i class="bi bi-trash3"></i> </a><br>
+                        <td>
+                            @foreach (explode('|',$item->shift_baru) as $keys => $tils)
+                            {{$tils}} &nbsp; <label style="cursor: pointer; float: right !important;" for="delt{{$editshift[$key]->no_trj.$keys}}" title="klik untuk hapus laporan" class="bi bi-trash3 float-right"></label> 
+
+                    <form method="POST" action="/hapus-shiftbaru/{{$tils}}/{{$editshift[$key]->no_trj}}">
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button type="submit" id="delt{{$editshift[$key]->no_trj.$keys}}" hidden></button>
+                    </form>
+
+                            {{-- <a href="/hapus-shiftbaru/{{$tils}}/{{$editshift[$key]->no_trj}}" title="Hapus Personil {{$tils}}" onclick="return confirm('Hapus Personil {{$tils}}?')"><i class="bi bi-trash3 float-right"></i> </a> --}}
+
+
+            <script>
+
+                $('#delt{{$editshift[$key]->no_trj.$keys}}').click(function(event){
+                    var form =  $(this).closest("form");
+                    event.preventDefault();
+                    Swal.fire({
+                              title: "Hapus",
+                              text: "Yakin personil shift baru mau di hapus ?",
+                              icon: "question",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              cancelButtonText: "Batal",
+                              confirmButtonText: "Hapus"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                form.submit();
+                              }
+                            });
+                });
+            </script>
                             @endforeach
                         </td>
                     </tr>
@@ -395,14 +458,35 @@
                         <form action="{{url('hapus-tukarbarang')}}/{{$edit->no_trj}}/{{$editbar[$key]->id}}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="del{{$key}}" onclick="return confirm('Hapus item ?')" type="submit" title="Hapus {{$editbar[$key]->nabar}}" hidden>
+                            <button id="delte{{$key}}" type="submit" title="Hapus {{$editbar[$key]->nabar}}" hidden>
                                 </button>
-                                <label for="del{{$key}}" title="klik untuk hapus barang" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                <label for="delte{{$key}}" title="klik untuk hapus barang" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
 
                                 </label>
                         </form>
                         </td>
                     </tr>
+            <script>
+
+                $('#delte{{$key}}').click(function(event){
+                    var form =  $(this).closest("form");
+                    event.preventDefault();
+                    Swal.fire({
+                              title: "Hapus",
+                              text: "Hapus Barang Inventaris ?",
+                              icon: "question",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              cancelButtonText: "Batal",
+                              confirmButtonText: "Hapus"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                form.submit();
+                              }
+                            });
+                });
+            </script>
                     @endforeach
                     </table>
                     {{--End of Barang Inventaris --}}
@@ -544,14 +628,34 @@
                         <form action="{{url('hapus-tukargiat')}}/{{$edit->no_trj}}/{{$editgiat[$key]->id}}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="delt{{$key}}" onclick="return confirm('Hapus item ?')" type="submit" title="Hapus Laporan ?" hidden>
+                            <button id="delta{{$key}}" type="submit" title="Hapus Laporan ?" hidden>
                                 </button>
-                                <label for="delt{{$key}}" title="klik untuk hapus barang" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                <label for="delta{{$key}}" title="klik untuk hapus barang" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
 
                                 </label>
                         </form>
                         </td>
                     </tr>
+            <script>
+                $('#delta{{$key}}').click(function(event){
+                    var form =  $(this).closest("form");
+                    event.preventDefault();
+                    Swal.fire({
+                              title: "Hapus",
+                              text: "Hapus Laporan Kejadian / Kegiatan ?",
+                              icon: "question",
+                              showCancelButton: true,
+                              confirmButtonColor: "#3085d6",
+                              cancelButtonColor: "#d33",
+                              cancelButtonText: "Batal",
+                              confirmButtonText: "Hapus"
+                            }).then((result) => {
+                              if (result.isConfirmed) {
+                                form.submit();
+                              }
+                            });
+                });
+            </script>
                     @endforeach
                     </table>
                     {{--End of Kegiatan --}}

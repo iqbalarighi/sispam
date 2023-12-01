@@ -6,21 +6,15 @@
         <div class="col mw-100">
                 <!-- Notifikasi -->
         @if ($message = Session::get('sukses'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
-            <p/>
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{ $message }}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+            </script>
         @endif
             <div class="card ">
                 
@@ -129,19 +123,49 @@
                         <form action="hapus-item/{{ $item->id }}" method="post" class="align-self-center">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="del{{$data->firstitem() + $key}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data {{$item->no_lap}}" hidden>
+                            <button id="del{{$data->firstitem() + $key}}" type="submit" title="Hapus Data {{$item->no_lap}}" hidden>
                                 </button>
                                 <label for="del{{$data->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
 
                                 </label>
                         </form>
                         </td> 
+<script>
+    $('#del{{$data->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Laporan {{$item->no_lap}} ?",
+                  text: "Data terhapus tidak dapat dikembalikan !",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                         @else 
                         <td class="d-flex p-0" >
-                        <label style="cursor: not-allowed;" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
+                        <label id="ops{{$item->id}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center"></label>
                          <pre> </pre>
-                        <label style="cursor: not-allowed;" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
+                        <label id="opsx{{$item->id}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </td> 
+<script>
+    $('#ops{{$item->id}}, #opsx{{$item->id}}').click(function(event){
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Anda tidak punya akses",
+
+    });
+});
+</script>
                          @endif
                          @endif
                     </tr>

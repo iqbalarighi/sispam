@@ -332,7 +332,8 @@ public function update(Request $request, $id)
         $personil->save();
             
             return back()
-            ->with('success','Data berhasil di Update');  
+            ->with('success','Data berhasil di Update')
+            ->with('id', $personil->id);
         } 
 
 }

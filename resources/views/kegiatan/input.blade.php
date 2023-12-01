@@ -40,8 +40,25 @@
             </div>
         @endif
 
-    <!-- Notifikasi -->
         @if ($message = Session::get('success'))
+<script>
+        Swal.fire({
+          title: "Berhasil",
+          text:  "Laporan Kegiatan Tersimpan !",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+setTimeout(function () {
+       window.location = "{{url('giat-detil/'.$message)}}";
+    }, 1700); 
+
+        
+</script>
+ @endif
+    <!-- Notifikasi -->
+        {{-- @if ($message = Session::get('success'))
             <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
@@ -56,13 +73,15 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
 <style>
     .textarea {
   width: 300px;
   height: 150px;
 }
 </style>
+
+
             <!-- form input Site -->
                     <div class="table-responsive mt-2" style="overflow-x: auto;">
             <form action="{{route('simpan_giat')}}" method="post" id="form" enctype="multipart/form-data">

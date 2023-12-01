@@ -57,21 +57,15 @@
 
     <!-- Notifikasi -->
         @if ($message = Session::get('status'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
-            
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{ $message }}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+            </script>
         @endif
                 <form action="" method="GET" class="m-1">
                     <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
@@ -103,13 +97,16 @@
                         <td>{{$arsp->tahun}}</a></td>
                         <td style="white-space: normal; text-align: left;">{{$arsp->uraian}}</td>
                         <td>{{$arsp->lokasi_fisik}}</td>
-                        <td style="white-space: normal; font-size: 16pt"><a href="{{ asset('storage/arsip/').'/'.$arsp->tahun.'/'.$arsp->file }}" target="_blank" rel="noopener noreferrer" title="{{$arsp->nm_arsip}}">
-                            @if ($arsp->file == null)
+                        <td style="white-space: normal; font-size: 16pt">
 
+                            @if ($arsp->file == null)
+                            <i class="bi bi-file-earmark-excel"></i>
                             @else
+                            <a href="{{ asset('storage/arsip/').'/'.$arsp->tahun.'/'.$arsp->file }}" target="_blank" rel="noopener noreferrer" title="{{$arsp->nm_arsip}}">
                             <i class="bi bi-file-earmark-pdf-fill"></i>
+                            </a>
                             @endif
-                        </a>
+                        
                         </td>
                         <td style="vertical-align: middle;"> 
                             <div class="d-flex justify-content-between">
@@ -124,7 +121,7 @@
                             <form action="hapus-arsip/{{$arsp->id}}" method="post">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <button id="del{{$arsip->firstitem() + $key}}" onclick="return confirm('Yakin nih {{$arsp->nama_gd}} mau di hapus ?')" type="submit" title="Hapus Data " hidden>
+                                <button id="del{{$arsip->firstitem() + $key}}" type="submit" title="Hapus Data " hidden>
                                     </button>
                                     <label for="del{{$arsip->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
 
@@ -133,6 +130,26 @@
                         </div>
                             </td>
                     </tr>
+<script>
+    $('#del{{$arsip->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Arsip {{$arsp->no_arsip}} ?",
+                  text: "Data terhapus tidak dapat dikembalikan !",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                     @endforeach
                     
                     </table>

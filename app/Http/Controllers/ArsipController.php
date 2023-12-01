@@ -17,12 +17,13 @@ class ArsipController extends Controller
             $arsip = ArsipModel::where('no_arsip', 'LIKE', '%'.$cari.'%')
             ->orWhere('nm_arsip', 'LIKE', '%'.$cari.'%')
             ->orWhere('tahun', 'LIKE', '%'.$cari.'%')
+            ->latest()
             ->paginate(15) 
             ->appends(request()->input());
 
            return view('arsip.index', compact('arsip')); 
         } else {
-            $arsip = ArsipModel::paginate(15);
+            $arsip = ArsipModel::latest()->paginate(15);
         return view('arsip.index', compact('arsip'));
         }
         
@@ -73,8 +74,12 @@ class ArsipController extends Controller
     public function hapus($id)
     {
         $hapus = ArsipModel::findOrFail($id);
+        $tahun = $hapus->tahun;
+        $file = $hapus->file;
         $hapus->delete();
         
+        File::delete(public_path('storage/arsip/'.$tahun.'/'.$file));
+
        return back()
        ->with('status', 'Berhasil Terhapus');
 

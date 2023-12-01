@@ -28,21 +28,15 @@
         <div class="col mw-100">
                 <!-- Notifikasi -->
         @if ($message = Session::get('sukses'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
-            <p/>
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{ $message }}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+            </script>
         @endif
         
             <div class="card ">
@@ -149,12 +143,32 @@
                         <form action="{{url('hapus-bencana')}}/{{$item->id}}" method="post" class="align-self-center m-auto">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                        <button id="del{{$bencana->firstitem() + $key}}" onclick="return confirm('Yakin nih no Laporan {{$item->no_bencana}} mau di hapus ?')" type="submit" title="Hapus Data" hidden>
+                        <button id="del{{$bencana->firstitem() + $key}}" type="submit" title="Hapus Data" hidden>
                         </button>
                         <label style="cursor: pointer;" for="del{{$bencana->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                         </form>
                     </div>
                     </td>
+<script>
+    $('#del{{$bencana->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Laporan",
+                  text: "Laporan yang terhapus tidak dapat dikembalikan !",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                     @endif
                 </tr>
                 @endforeach

@@ -191,8 +191,8 @@ class TukarjagaController extends Controller
          TukargiatModel::create($urai);
         }
 
-         return redirect('tukarjaga')
-         ->with('sukses', 'Laporan Berhasil Terkirim');;
+         return back()
+         ->with('sukses', $no_trj.'/'.$trj->id);
     }
 
 public function hapus($id)
@@ -345,7 +345,7 @@ public function hapusgiat($trj, $id)
     $giat->delete();
 
          return back()
-        ->with('sukses','Poin Kejadian/Kegiatan Terhapus');
+        ->with('sukses','Laporan Kejadian/Kegiatan Berhasil Terhapus');
 
 }
 

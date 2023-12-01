@@ -174,7 +174,7 @@
         
         <center class="mb-2">
             @if ($message = Session::get('berhasil'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
+            {{-- <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
         <div class="card-text" align="center">
@@ -187,7 +187,22 @@
         </div>                
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{$message}}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+
+            // setTimeout(function () {
+            //        window.location = "{{url('rekap')}}";
+            //     }, 1700); 
+                    
+            </script>
         </center>
         @elseif ($message = Session::get('warning'))
         <div id="" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1 mb-2" style="width: 80%; margin: 0 auto;" role="alert">
@@ -281,7 +296,7 @@
 
                     <div class="table-responsive pl-1 pr-1">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
 
-<div class="card-body overflow " style="overflow-x: auto;">
+<div class="card-body overflow " style="overflow-x: auto; height: auto;">
 
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">
@@ -572,15 +587,46 @@ if ($unras->count() == 0) {
     </div>
 {{-- end of modal   --}}
                         <pre> </pre>
-                        <form action="unras/hapus/{{$rasa->id}}" method="post" class="align-self-center m-auto">
+                        {{-- <button id="xxx{{$unras->firstitem() + $key}}">test</button> --}}
+                       {{-- <form action="unras/hapus/{{$rasa->id}}" method="post" class="align-self-center m-auto">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button  id="del{{$unras->firstitem() + $key}}" onclick="return confirm('Yakin nih mau di hapus ?')" type="submit" title="Hapus Data" hidden>
+                            <button  id="del{{$unras->firstitem() + $key}}" type="submit" style="cursor: pointer;" for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
                                 </button>
-                                <label style="cursor: pointer;" for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
-                                </label>
-                        </form>
+                                 <label style="cursor: pointer;" for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                </label> 
+                        </form>--}}
+
+                                {{-- <span style="cursor: pointer;" id="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
+                                </span> --}}
+                <form method="POST" action="unras/hapus/{{$rasa->id}}">
+                @csrf
+                <input name="_method" type="hidden" value="DELETE">
+                <button type="submit" id="del{{$unras->firstitem() + $key}}"  data-toggle="tooltip" title='Delete' hidden></button>
+                <label style="cursor: pointer;" for="del{{$unras->firstitem() + $key}}" title="klik untuk hapus laporan" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label> 
+                </form>
                         </div>
+<script>
+
+    $('#del{{$unras->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Unras ?",
+                  text: "Data terhapus tidak dapat dikembalikan !",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                          @endif
                     
                        </td> 

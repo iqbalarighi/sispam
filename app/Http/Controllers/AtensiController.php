@@ -57,8 +57,8 @@ class AtensiController extends Controller
         $store->uraian = $request->uraian;
         $store->save(); 
 
-        return redirect('atensi')
-        ->with('sukses', 'Berhasil Membuat Laporan Atensi');
+        return back()
+        ->with('sukses', $store->id);
 
     }
 
@@ -105,7 +105,7 @@ class AtensiController extends Controller
         $update->save(); 
 
         return redirect('atensi_detil/'.$update->id)
-        ->with('sukses', 'Berhasil Membuat Laporan Atensi');
+        ->with('sukses', 'Update Laporan Atensi Berhasil');
     }
 
     /**

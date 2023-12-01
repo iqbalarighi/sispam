@@ -128,7 +128,7 @@ class UnrasController extends Controller
         $simpan->save();
 
         return back()
-        ->with('berhasil', 'Sukses');
+        ->with('berhasil', 'Berhasil Tersimpan !');
 
     }
 

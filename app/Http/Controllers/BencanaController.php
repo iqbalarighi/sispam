@@ -120,8 +120,8 @@ class BencanaController extends Controller
         $bencana->foto = $gambar_dok;
         $bencana->save();
 
-        return redirect('bencana')
-        ->with('sukses', 'Laporan Berhasil Dibuat.');
+        return back()
+        ->with('sukses', $bencana->id);
     }
 
 

@@ -140,8 +140,8 @@ Route::get('/edit-lap/{id}', [TukarjagaController::class, 'edit'])->middleware('
 Route::get('/autocomplete', [TukarjagaController::class, 'autocomplete'])->name('autocomplete')->middleware('auth');
 
 //Delete area
-Route::get('/hapus-shiftlama/{item}/{trj}', [TukarjagaController::class, 'hapuslama'])->middleware('auth');
-Route::get('/hapus-shiftbaru/{item}/{trj}', [TukarjagaController::class, 'hapusbaru'])->middleware('auth');
+Route::delete('/hapus-shiftlama/{item}/{trj}', [TukarjagaController::class, 'hapuslama'])->middleware('auth');
+Route::delete('/hapus-shiftbaru/{item}/{trj}', [TukarjagaController::class, 'hapusbaru'])->middleware('auth');
 Route::delete('/hapus-tukarbarang/{trj}/{id}', [TukarjagaController::class, 'hapusbarang'])->middleware('auth');
 Route::delete('/hapus-tukargiat/{trj}/{id}', [TukarjagaController::class, 'hapusgiat'])->middleware('auth');
 //edit area

@@ -1,28 +1,7 @@
 @extends('layouts.side')
 
 @section('content')
-<style>
-.loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
 
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -64,6 +43,23 @@
 
     <!-- Notifikasi -->
         @if ($message = Session::get('status'))
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "Rekap Harian Berhasil Tersimpan !",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+
+            setTimeout(function () {
+                   window.location = "{{url('rekap')}}";
+                }, 1700); 
+                    
+            </script>
+        @endif
+
+    {{-- @if ($message = Session::get('status'))
             <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
                     <div class="col">
@@ -78,7 +74,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
 
             <!-- form input Site -->
                     <div class="table-responsive mt-2" style="overflow-x: auto;">
@@ -106,7 +102,6 @@
             </div>
         </div>
     </div>
-    <div class="loader"></div>
 </div>
 
 <script>

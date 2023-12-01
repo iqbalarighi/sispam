@@ -23,8 +23,6 @@ class TemuanController extends Controller
         $start =$request->start;
         $end = $request->end;
 
-
-
         if (Auth::user()->role == 'admin'||Auth::user()->level == 'koordinator'){
             if ($start != null) {
                $temu = TemuanModel::with('site')
@@ -36,8 +34,8 @@ class TemuanController extends Controller
                $user = TemuanModel::with('site')->first();
                return view('temuan.index', compact('temu','start','end','cari','user'));
             } else {
-                    $temu = TemuanModel::with('site')->paginate(15);
-$user = TemuanModel::with('site')->first();
+                    $temu = TemuanModel::with('site')->latest()->paginate(15);
+    $user = TemuanModel::with('site')->first();
          return view('temuan.index', compact('temu','start','end','cari','user'));
             }
         } else {
@@ -50,9 +48,9 @@ $user = TemuanModel::with('site')->first();
 $user = TemuanModel::with('site')->first();
                 return view('temuan.index', compact('temu','cari','user'));
                 } else {
+
 $user = TemuanModel::with('site')->first();
-                $temu = TemuanModel::orderBy('tanggal', 'DESC')
-                ->orderBy('tanggal', 'DESC')
+                $temu = TemuanModel::latest()
                 ->paginate(15);
 
                 return view('temuan.index', compact('temu','user'));
@@ -113,8 +111,8 @@ $user = TemuanModel::with('site')->first();
 
        $simpan->save();
 
-       return redirect('temuan')
-       ->with('berhasil', 'Laporan Temuan Berhasil Dibuat');
+       return back()
+       ->with('success', $simpan->id);
     }
 
     public function update(Request $request, $id)

@@ -130,8 +130,8 @@ foreach($input['images'] as $image)
             $simpan->keterangan = $request->ket;
             $simpan->save();
 
-            return redirect('laporan_smc')
-            ->with('sukses', 'Laporan Berhasil Dibuat');
+            return back()
+            ->with('sukses', $simpan->id);
 
     }
 
@@ -180,9 +180,9 @@ foreach($input['images'] as $image)
         $update->keterangan = $request->ket;
         $update->save();
 
-
-        return redirect('smc_detil/'.$update->id)
-        ->with('status', 'Update Laporan Berhasil');
+        return back()
+        ->with('success', 'Update Laporan Berhasil')
+        ->with('id', $id);
     }
 
     public function hapusFoto($item, $id)

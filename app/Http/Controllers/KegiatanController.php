@@ -226,7 +226,7 @@ foreach($input['images'] as $image)
             $simpan->save();
 
             return back()
-            ->with('success', 'Laporan Berhasil Terkirim');
+            ->with('success', $simpan->id);
 
 
     }
@@ -291,7 +291,7 @@ public function update(Request $request, $id)
                                         if ($validator->fails()) {
                                             $messages = $validator->messages();
                                             return back()
-                                                ->withErrors($messages);
+                                                ->with('warning','Tidak ada perubahan yang di simpan !');
                                         }
 
                                     return back()
@@ -382,7 +382,7 @@ public function update(Request $request, $id)
             $update->save();
         }
             return back()
-            ->with('success', 'Update Laporan Berhasil');
+            ->with('success', $update->id);
     }
 
     public function hapusFoto($item, $id)

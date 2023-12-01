@@ -10,20 +10,16 @@
                 </div>
 
         @if ($message = Session::get('berhasil'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
+                        <script>
+                    Swal.fire({
+                      title: "Login Sukses",
+                      html: `{{$message}} <br> 
+                            <b>{{Auth::user()->name}}</b>`,
+                      icon: "success",
+
+                    });
+
+            </script>
         @elseif ($message = Session::get('warning'))
         <div id="timeout" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">

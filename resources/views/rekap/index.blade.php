@@ -23,6 +23,11 @@
                         label {
                             margin: 0em;
                         }
+                        .notselect {
+                            -webkit-user-select: none; /* Safari */
+                            -ms-user-select: none; /* IE 10 and IE 11 */
+                            user-select: none; /* Standard syntax */
+                        }
                     </style>
                     <style>
                         a {color:black;}
@@ -62,20 +67,15 @@
 
     <!-- Notifikasi -->
         @if ($message = Session::get('status'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
+            <script type="text/javascript">
+                    Swal.fire({
+              title: "Berhasil",
+              text:  "{{$message}}",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1000
+            });
+            </script>
         @endif
     <!-- Notifikasi -->
                 <div >
@@ -89,10 +89,10 @@
                 </div>
         <div class="card-body overflow " style="overflow-x: auto;">
 
-                    <table class="table table-hover table-striped text-center"  align="center">
+                    <table class="table table-hover table-striped text-center notselect"  align="center">
                     <tr class="font-weight-normal xx ">
                         <th class="align-middle" style="max-width:50px; min-width:30px;">No</th>
-                        <th class="align-middle" style="">Nama File</th>
+                        <th class="align-middle " style="">Nama File</th>
                         <th class="align-middle">Tahun</th>
                         @if (Auth::user()->role === 'admin')
                        <th class="align-middle" style="width:72px; ">Option</th>
@@ -116,12 +116,33 @@
                                 <form action="hapus_rekap/{{$item->id}}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
-                                    <button id="del{{$rekap->firstitem() + $key}}" onclick="return confirm('Yakin nih {{$item->nama_file}} mau di hapus ?')" type="submit" title="Hapus Data " hidden>
+                                    <button id="del{{$rekap->firstitem() + $key}}" type="submit" title="Hapus Data " hidden>
                                         </button>
                                         <label for="del{{$rekap->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center"></label>
                                 </form>
                             </div>
                         </td>
+<script>
+    // $("button").click(function() {
+    $('#del{{$rekap->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Unras ?",
+                  text: "Yakin nih {{$item->nama_file}} mau di hapus ?",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                         @endif
                     </tr>
                     @endforeach

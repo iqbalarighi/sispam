@@ -380,7 +380,7 @@ class KejadianController extends Controller
         $jadi->save();
 
         return back()
-            ->with('berhasil', 'Laporan kejadian berhasil dibuat');
+            ->with('berhasil', $nolap);
     }
 
     public function detil($id)

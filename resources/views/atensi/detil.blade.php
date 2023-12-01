@@ -16,10 +16,16 @@
                 </div>
 
                 <div class="card-body overflow " style="overflow-x: auto;">
-                    @if (session('status'))
-                        <div id="timeout" class="alert alert-success" role="alert">
-                          <center> {{ session('status') }} </center> 
-                        </div>
+                    @if ($message = session('sukses'))
+                        <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{ $message }}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+            </script>
                     @endif
                     <style>
                         .xx {

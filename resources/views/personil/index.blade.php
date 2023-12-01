@@ -12,20 +12,15 @@
 
                 
         @if ($message = Session::get('berhasil'))
-            <div id="timeout" align="center" class="alert alert-success alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
+            <script>
+                    Swal.fire({
+                      title: "Berhasil",
+                      text:  "{{ $message }}",
+                      icon: "success",
+                      showConfirmButton: false,
+                      timer: 2000
+                    });
+            </script>
         @elseif ($message = Session::get('warning'))
         <div id="timeout" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
                 <div class="row">
@@ -103,7 +98,7 @@
                         <form action="hapus-personil/{{ $s->id }}" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button id="del{{$personil->firstitem() + $key}}" onclick="return confirm('Yakin nih datanya mau di hapus ?')" type="submit" title="Hapus Data {{$s->name}}" hidden>
+                            <button id="del{{$personil->firstitem() + $key}}" type="submit" title="Hapus Data {{$s->name}}" hidden>
                                 </button>
                                 <label for="del{{$personil->firstitem() + $key}}" class="bi bi-trash-fill bg-danger btn-sm align-self-center">
 
@@ -111,6 +106,27 @@
                         </form>
                         </td>
                     </tr>
+
+<script>
+    $('#del{{$personil->firstitem() + $key}}').click(function(event){
+        var form =  $(this).closest("form");
+        event.preventDefault();
+        Swal.fire({
+                  title: "Hapus Personil ?",
+                  text: "Yakin data personil mau di hapus ?",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Batal",
+                  confirmButtonText: "Hapus"
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    form.submit();
+                  }
+                });
+    });
+</script>
                     @endforeach
                     </table>
                     </div>
