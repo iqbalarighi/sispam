@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Console\Command;
+use Carbon\Carbon;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -13,9 +15,41 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+
+    protected $commands = [
+        'App\Console\Commands\optimizedCommand'
+    ];
+
     protected function schedule(Schedule $schedule)
     {
+        $path = base_path();
+
         // $schedule->command('inspire')->hourly();
+         // $schedule->call('config:cache')->dailyAt('20:04')->timezone('Asia/Jakarta');
+         // $schedule->command('optim:done')->dailyAt('20:05')->timezone('Asia/Jakarta');
+         $schedule->command('optim:done')->dailyAt('03:00')->timezone('Asia/Jakarta')
+         ->onSuccess(function () {
+             info('Schedule berjalan sukses di Kernel -> '. Carbon::now()); 
+         })
+         ->onFailure(function () {
+             info('Schedule gagal dijalankan di Kernel -> '. Carbon::now()); 
+         });
+
+        $schedule->exec('cd '.$path.' && composer dumpautoload -o')->dailyAt('03:00')->timezone('Asia/Jakarta')
+         ->onSuccess(function () {
+             info('composer berjalan sukses di Kernel -> '. Carbon::now()); 
+         })
+         ->onFailure(function () {
+             info('composer gagal dijalankan di Kernel '. Carbon::now()); 
+         });
+
+         $schedule->exec("/home/n1573881/backup.sh")->twiceDaily(8, 20)->timezone('Asia/Jakarta')
+         ->onSuccess(function () {
+             info('Backup berjalan sukses di Kernel -> '. Carbon::now()); 
+         })
+         ->onFailure(function () {
+             info('Backup gagal dijalankan di Kernel '. Carbon::now()); 
+         });
     }
 
     /**
