@@ -5,6 +5,7 @@
         {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>{{ config('app.name', 'SISPAM') }}</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -102,17 +103,17 @@
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
     @if ( Auth::user()->level === 'superadmin')
-        <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
+        <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
                 Superadmin Area 
                         <i id="rubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('users')||Route::is('otorisasi') ? 'show' : '' }}" id="collapseExamples">
+                <div class="collapse {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'show' : '' }}" id="collapseExamples">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
                             <a href="{{route('otorisasi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('otorisasi') ? 'active' : '' }}">Otorisasi</a>
-                            <a href="#" class="list-group-item list-group-item-action bg-light ">Backup Database</a>
+                            <a href="{{route('filemanager')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('filemanager') ? 'active' : '' }}">File Manager</a>
                         </div> 
                     </div>
                 </div>

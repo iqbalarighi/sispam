@@ -4,6 +4,7 @@ use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\AtensiController;
 use App\Http\Controllers\BencanaController;
+use App\Http\Controllers\FmController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KejadianController;
@@ -264,3 +265,7 @@ Route::controller(RekapController::class)->middleware('auth')->group(function ()
     Route::get('/rekap_detil/{id}', 'show');
     Route::delete('/hapus_rekap/{id}', 'destroy');
 });
+
+
+//filemanaager
+Route::get('/filemanager', [FmController::class, 'index'])->middleware('auth')->name('filemanager');

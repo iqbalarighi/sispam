@@ -16,6 +16,7 @@ class ParkirController extends Controller
              ->orwhere('kode', 'LIKE', '%'.$cari.'%')
              ->orwhere('lantai', 'LIKE', '%'.$cari.'%')
              ->orwhere('nip', 'LIKE', '%'.$cari.'%')
+             ->orwhere('jabatan', 'LIKE', '%'.$cari.'%')
              ->orderby('kode', 'ASC')
              ->paginate(15)
              ->appends(request()->input());
