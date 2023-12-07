@@ -243,6 +243,18 @@
                             background-color: seashell;
                         }
 
+                        table.floatThead-table {
+                            border-top: none;
+                            border-bottom: none;
+                            /*background-color: #fff;*/
+                        }
+
+                        th {
+                          position: sticky;
+                          top: -2px;
+                          background: seashell;
+                        }
+
                         label {
                             margin: 0em;
                         }
@@ -299,9 +311,9 @@
 {{-- <script>
     document.getElementById('tests').setAttribute('style', 'height:' + window.innerHeight + 'px');
 </script> --}}
-<div class="card-body overflow mb-1" id="tests" style="overflow-x: auto; height: 72vh;">
+<div class="card-body overflow mb-1 p-0" id="tests" style="overflow-x: auto; height: 75vh;">
 
-                    <table class="table table-striped table-hover table-sm text-center ">
+                    <table class="table table-striped table-hover table-sm text-center sticky-header">
                     <tr class="font-weight-normal xx ">
                         <th scope="col" class="align-middle" style="max-width:50px; min-width:30px;">No</th>
                         <th scope="col" class="align-middle">Tanggal</th>

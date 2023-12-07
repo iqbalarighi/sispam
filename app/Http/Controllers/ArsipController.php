@@ -125,8 +125,6 @@ public function update(Request $request, $id)
             $request->file('arsip')->move(public_path('storage/arsip/'.$tahun.'/'), $fileName);
 
             $update->file = $fileName;
-        } else {
-            $fileName = '';
         }
 
        $update->no_arsip = $request->no_arsip;

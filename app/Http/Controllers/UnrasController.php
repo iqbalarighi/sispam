@@ -61,7 +61,7 @@ class UnrasController extends Controller
                     ->orwhere('status_kegiatan','LIKE', '%'.$cariin.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                    ->paginate(15)
+                    ->paginate(25)
                     ->appends(request()->input());
 
                 $cektest = UnrasModel::whereNull('editor')
@@ -71,7 +71,7 @@ class UnrasController extends Controller
                 } else {
                     $unras = UnrasModel::orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                ->paginate(15);
+                ->paginate(25);
 
                 return view('unras.index', compact('unras','start','end','cari','cariin'));
                 }
@@ -80,13 +80,13 @@ class UnrasController extends Controller
                 $unras = UnrasModel::where('tanggal','LIKE', '%'.$cari.'%')
                     ->orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
-                        ->paginate(15);
+                        ->paginate(25);
                     $unras->appends(['date' => $cari]);
 
                 } else {
                 $unras = UnrasModel::orderBy('tanggal', 'DESC')
                 ->orderBy('waktu', 'DESC')
-                ->paginate(15);
+                ->paginate(25);
 
                 return view('unras.index', compact('unras','start','end','cari','cariin'));
         }
