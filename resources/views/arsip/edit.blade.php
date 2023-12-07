@@ -86,7 +86,7 @@
                     <tr>
                         <td>Tahun</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="tahun" id="tahun" value="{{$edit->tahun}}" required></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" maxlength="4" onkeypress="return angka(event)" name="tahun" id="tahun" value="{{$edit->tahun}}" required></td>
                     </tr>
                     <tr>
                         <td>Uraian</td>
@@ -103,7 +103,7 @@
                         <td>:</td>
                         <td>
                             @if ($edit->file == null)
-                            <input type="file" class="form-control pb-0 pt-0" accept=".pdf,.csv,.xls,.xlsx,.doc,.docx,.zip" name="arsip" id="arsip" value="{{$edit->file}}" >
+                            <input type="file" class="form-control pb-0 pt-0" accept=".pdf,.csv,.xls,.xlsx,.doc,.docx,.zip" name="arsip" id="arsip" value="{{$edit->file}}" required>
                             @else 
                         <a href="{{ asset('storage/arsip/')}}/{{$edit->tahun.'/'.$edit->file }}" target="_blank" rel="noopener noreferrer">{{$edit->file}}</a>
 
@@ -116,7 +116,7 @@
                     </tr>
                     </table>
                         <center>
-                            <button type="submit" class="btn btn-primary" style = "text-align:center">
+                            <button type="submit" class="btn btn-primary" style="text-align:center" onclick="load()">
                                 {{ __('Update') }}
                             </button>
                         </center>
@@ -127,4 +127,61 @@
         </div>
     </div>
 </div>
+@if ($edit->file == null)
+<script>
+    function load() {
+    if (document.getElementById('nm_arsip').value == ""){
+        document.getElementById('nm_arsip').focus();
+    } else if (document.getElementById("tahun").value == ""){
+        document.getElementById("tahun").focus();
+    } else if (document.getElementById("uraian").value == ""){
+        document.getElementById("uraian").focus();
+    } else if (document.getElementById("lokasi_fisik").value == ""){
+        document.getElementById("lokasi_fisik").focus();
+    } else if (document.getElementById("arsip").value == ""){
+        document.getElementById("arsip").focus();
+    }else {
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menyimpan berkas . . .",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+            backdrop: `
+                rgb(13, 202, 240, 0.4)
+              `,
+              didOpen: () => {
+                Swal.showLoading();
+            }
+            });  
+    }
+}
+</script>
+@else 
+<script>
+    function load() {
+    if (document.getElementById('nm_arsip').value == ""){
+        document.getElementById('nm_arsip').focus();
+    } else if (document.getElementById("tahun").value == ""){
+        document.getElementById("tahun").focus();
+    } else if (document.getElementById("uraian").value == ""){
+        document.getElementById("uraian").focus();
+    } else if (document.getElementById("lokasi_fisik").value == ""){
+        document.getElementById("lokasi_fisik").focus();
+    } else {
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menyimpan berkas . . .",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+            backdrop: `
+                rgb(13, 202, 240, 0.4)
+              `,
+              didOpen: () => {
+                Swal.showLoading();
+            }
+            });  
+    }
+}
+</script>
+@endif
 @endsection

@@ -62,7 +62,7 @@
                     <tr>
                         <td>Nama Arsip</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="nm_arsip" id="nm_arsip" ></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="nm_arsip" id="nm_arsip" required></td>
                     </tr>
                     <tr>
                         <td>Tahun</td>
@@ -77,16 +77,16 @@
                     <tr>
                         <td>Lokasi Fisik</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="losik" id="losik" ></td>
+                        <td><input type="text" class="form-control pb-0 pt-0" name="losik" id="losik" required></td>
                     </tr>
                     <tr>
                         <td>Upload File</td>
                         <td>:</td>
-                        <td><input type="file" accept=".pdf" name="arsip" id="arsip" ></td>
+                        <td><input type="file" accept=".pdf" name="arsip" id="arsip" required></td>
                     </tr>
                     </table>
                 <center>
-                    <button type="submit" class="btn btn-primary" style = "text-align:center">
+                    <button type="submit" class="btn btn-primary" style="text-align:center" onclick="load()">
                         {{ __('Simpan') }}
                     </button>
                 </center>
@@ -97,4 +97,33 @@
         </div>
     </div>
 </div>
+<script>
+    function load() {
+
+    if (document.getElementById('nm_arsip').value == ""){
+        document.getElementById('nm_arsip').focus();
+    } else if (document.getElementById("tahun").value == ""){
+        document.getElementById("tahun").focus();
+    } else if (document.getElementById("uraian").value == ""){
+        document.getElementById("uraian").focus();
+    } else if (document.getElementById("losik").value == ""){
+        document.getElementById("losik").focus();
+    } else if (document.getElementById("arsip").value == ""){
+        document.getElementById("arsip").focus();
+    }else {
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang menyimpan berkas . . .",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+            backdrop: `
+                rgb(13, 202, 240, 0.4)
+              `,
+              didOpen: () => {
+                Swal.showLoading();
+            }
+            });  
+    }
+}
+</script>
 @endsection

@@ -294,9 +294,12 @@
                     </div>
  
 
-                    <div class="table-responsive pl-1 pr-1">{{$unras->onEachSide(1)->links('pagination::bootstrap-5')}}
-
-<div class="card-body overflow " style="overflow-x: auto; height: auto;">
+                    <div class="table-responsive pl-1 pr-1">
+                        {{-- {{$unras->onEachSide(1)->links('pagination::bootstrap-5')}} --}}
+{{-- <script>
+    document.getElementById('tests').setAttribute('style', 'height:' + window.innerHeight + 'px');
+</script> --}}
+<div class="card-body overflow mb-1" id="tests" style="overflow-x: auto; height: 72vh;">
 
                     <table class="table table-striped table-hover table-sm text-center ">
                     <tr class="font-weight-normal xx ">

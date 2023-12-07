@@ -19,7 +19,60 @@
                             padding:1px !important;    
                             }
                         </style>
-                        
+<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
     <!-- Error Handle -->
         @if ($errors->any())
             <div id="timeout" class="alert alert-danger flex flex-col md:justify-between" style="width: 80%; margin: 0 auto;">
@@ -60,18 +113,17 @@
         @if ($message = Session::get('sukses'))
             <script>
                     Swal.fire({
-                      title: "Berhasil",
-                      text:  "Laporan Kegiatan Berhasil Tersimpan !",
-                      icon: "success",
-                      showConfirmButton: false,
-                      timer: 1500
+                        title: "Berhasil",
+                        text:  "Laporan Kegiatan Berhasil Tersimpan !",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 1500
                     });
 
             setTimeout(function () {
                    window.location = "{{url('smc_detil/'.$message)}}";
                 }, 1700); 
 
-                    
             </script>
         @endif
 
@@ -98,7 +150,7 @@
                         <td><b>Shift</b></td>
                         <td>:</td>
                         <td>
-                            <select class="form-select pb-0 pt-0 text-capitalize" name="shift" required>
+                            <select class="form-select pb-0 pt-0 text-capitalize" id="shift" name="shift" required>
                                 <option value="" disabled selected>Pilih Shift</option>
                                 <option value="Shift 1 (Pukul 06.00-14.00 WIB)">Shift 1 (Pukul 06.00-14.00 WIB)</option>
                                 <option value="Shift 2 (Pukul 14.00-22.00 WIB)">Shift 2 (Pukul 14.00-22.00 WIB)</option>
@@ -109,14 +161,14 @@
                     <tr>
                         <td colspan="3">
                             <b>Petugas SMC : </b> <br>( Isian ini dapat di edit.<font color="red"> Hapus yang tidak perlu !</font> )
-                            <pre class="mb-0"><textarea rows="3" class="form-control pb-0 pt-0" name="petugas" required>
+                            <pre class="mb-0"><textarea rows="3" id="petugas" class="form-control pb-0 pt-0" name="petugas" required>
 Supervisor SMC : Esa Lanang Perkasa
 Staf SMC 1 : {{Auth::user()->name}}
 Staf SMC 2 : </textarea></pre>
                     </td>
                     </tr>
                     <tr>
-                        <td colspan="3"><b>Kegiatan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="5" name="giat" required></textarea></pre></td>
+                        <td colspan="3"><b>Kegiatan : </b><pre class="mb-0"><textarea id="giat" class="form-control pb-0 pt-0" rows="5" name="giat" required></textarea></pre></td>
                     </tr>
                     <tr>
                         <td colspan="3"><b>Keterangan : </b><pre class="mb-0"><textarea class="form-control pb-0 pt-0" rows="5" name="ket" id="ket" ></textarea></pre></td>
@@ -135,15 +187,42 @@ Staf SMC 2 : </textarea></pre>
                     </tr>
                     </table>
                 <center>
-                    <button type="submit" class="btn btn-primary mt-2" style = "text-align:center">
+                    <button type="submit" onclick="test()" class="btn btn-primary mt-2" style = "text-align:center">
                         {{ __('Simpan') }}
                     </button>
                 </center>
                     </form>
+                    
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function test() {
+
+    if (document.getElementById('shift').value == ""){
+        document.getElementById('shift').focus();
+    } else if (document.getElementById("petugas").value == ""){
+        document.getElementById("petugas").focus();
+    } else if (document.getElementById("giat").value == ""){
+        document.getElementById("giat").focus();
+    } else {
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang Proses mas bro",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+            backdrop: `
+                rgb(13, 202, 240, 0.4)
+              `,
+              didOpen: () => {
+                Swal.showLoading();
+            }
+            });  
+    }
+}
+</script>
 @endsection

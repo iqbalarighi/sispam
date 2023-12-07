@@ -84,16 +84,16 @@
                     <tr>
                         <td>Tanggal File</td>
                         <td>:</td>
-                        <td><input type="month" class="form-control pb-0 pt-0" onkeypress="return angka(event)" name="bulan" required></td>
+                        <td><input id="bulan" type="month" class="form-control pb-0 pt-0" onkeypress="return angka(event)" name="bulan" required></td>
                     </tr>
                     <tr>
                         <td>Upload File</td>
                         <td>:</td>
-                        <td><input type="file" accept=".pdf" name="rekap[]" required multiple></td>
+                        <td><input id="file" type="file" accept=".pdf" name="rekap[]" required multiple></td>
                     </tr>
                     </table>
                 <center>
-                    <input type="submit" value="Simpan" class="btn btn-primary btn-sm" style = "text-align:center">
+                    <input type="submit" onclick="test()" value="Simpan" class="btn btn-primary btn-sm" style = "text-align:center">
                         
                 </center>
                     </form>
@@ -113,5 +113,28 @@
         }
     });    
 });
+</script>
+<script>
+    function test() {
+
+    if (document.getElementById('bulan').value == ""){
+        document.getElementById('bulan').focus();
+    } else if (document.getElementById("file").value == ""){
+        document.getElementById("file").focus();
+    } else {
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang Proses mas bro",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+            backdrop: `
+                rgb(13, 202, 240, 0.4)
+              `,
+              didOpen: () => {
+                Swal.showLoading();
+            }
+            });  
+    }
+}
 </script>
 @endsection

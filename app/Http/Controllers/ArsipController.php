@@ -123,6 +123,8 @@ public function update(Request $request, $id)
          $ext = $request->file('arsip')->getClientOriginalExtension();
         $fileName = $nm_arsip.'-'.$tahun.'.'.$ext;
             $request->file('arsip')->move(public_path('storage/arsip/'.$tahun.'/'), $fileName);
+
+            $update->file = $fileName;
         } else {
             $fileName = '';
         }
@@ -132,7 +134,6 @@ public function update(Request $request, $id)
        $update->tahun = $request->tahun;
        $update->uraian = $request->uraian;
        $update->lokasi_fisik = $request->lokasi_fisik;
-       $update->file = $fileName;
        $update->save();
 
        return back()
