@@ -236,9 +236,10 @@ public function update(Request $request, $id)
         $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
         
         if ($start == $end) {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.xlsx');  
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.'.xlsx');  
         } else {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').' - '.Carbon::parse($end)->isoFormat('D MMMM Y').'.xlsx');
+            // dd($start);
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $request->cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
         }            
     } else {
         return back()
@@ -262,9 +263,9 @@ public function update(Request $request, $id)
         $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
         
         if ($start == $end) {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.xlsx');  
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.'.xlsx');
         } else {
-            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').' - '.Carbon::parse($end)->isoFormat('D MMMM Y').'.xlsx');
+            return Excel::download(new UnrasExport($request->start, $request->end, $request->count, $cariin), 'Rekap UNRAS '.$start.' - '.$end.'.xlsx');
         }            
     } else {
         return back()
