@@ -45,14 +45,15 @@
             <script>
                     Swal.fire({
                       title: "Berhasil",
-                      text:  "Update Laporan Kegiatan Berhasil !",
+                      text:  {{$message}},
                       icon: "success",
                       showConfirmButton: false,
                       timer: 1500
                     });
 
             setTimeout(function () {
-                   window.location = "{{url('giat-detil/'.$message)}}";
+                   // window.location = "{{url('giat-detil/'.$message)}}";
+                   window.location = "{{url('giat-detil/'.Session::get('id'))}}";
                 }, 1700); 
             </script>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AtensiController;
 use App\Http\Controllers\BencanaController;
 use App\Http\Controllers\FmController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IzinvendorController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KejadianController;
 use App\Http\Controllers\OtorisasiController;
@@ -266,6 +267,51 @@ Route::controller(RekapController::class)->middleware('auth')->group(function ()
     Route::delete('/hapus_rekap/{id}', 'destroy');
 });
 
-
 //filemanaager
 Route::get('/filemanager', [FmController::class, 'index'])->middleware('auth')->name('filemanager');
+
+// Pekerjaan vendor
+Route::get('/form-izin', function () {
+    return view('pekerjaan.form');
+})->name('form_izin');
+
+// Route::get('/update_pekerjaan', function () {
+//     return view('pekerjaan.update_pekerjaan');
+// })->name('update_pekerjaan');
+
+Route::get('/update_pekerjaan', [IzinvendorController::class, 'update_pekerjaan']);
+Route::get('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
+
+Route::post('/simpan_izin', [IzinvendorController::class, 'store'])->name('simpan_izin');
+
+// Route::get('/form-izin', [PekerjaanController::class, 'form'])->name('form_izin');
+Route::controller(IzinvendorController::class)->middleware('auth')->group(function () {
+    Route::get('/izin-kerja', 'index')->name('izin_kerja');
+    Route::get('/izin-detail/{id}', 'detail');
+    Route::get('/izin-validasi/{izinid}', 'valid');
+    Route::get('/izin-edit/{id}', 'edit');
+    Route::put('/simpan_validasi/{izinid}', 'validasi');
+    Route::get('/hapus-selamat/{id}', 'hapus_slmt');
+    Route::get('/update_risiko/{id}', 'update_risiko');
+    Route::get('/update_klasifikasi/{id}', 'update_klasifikasi');
+    Route::get('/update_info/{id}', 'update_info');
+    Route::get('/update_perlengkapan/{id}', 'update_perlengkapan');
+    Route::get('/update_selamat/{izinid}', 'tambahSlmt');
+    Route::put('/update_apdk/{id}', 'update_apdk');
+    Route::get('/hapus_alat/{alat}/{id}/{jmlalt}', 'hapus_alat');
+    Route::get('/hapus_mesin/{mesin}/{id}/{jmlmsn}', 'hapus_mesin');
+    Route::get('/hapus_material/{material}/{id}/{jmlmtr}', 'hapus_material');
+    Route::get('/hapus_alatberat/{alber}/{id}/{jmlalber}', 'hapus_alatberat');
+    Route::get('/hapus_kslmtn/{id}', 'hapus_kslmtn');
+    Route::get('/hapus_apd/{id}/{apd}', 'hapus_apd');
+    Route::get('/hapus_apk/{id}/{apk}', 'hapus_apk');
+    Route::get('/izin-downloadPDF/{id}/{oto}', 'downloadPDF');
+    Route::delete('/hapus-izin/{izinid}', 'hapus');
+    
+});
+
+Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');
+
+// Route::get('maintenance', function() {
+//     return view('maintenance');
+// });

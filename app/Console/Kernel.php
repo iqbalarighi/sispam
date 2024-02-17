@@ -2,9 +2,11 @@
 
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Console\Command;
+use App\Models\IzinvalidasiModel;
+use App\Models\IzinvendorModel;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -50,6 +52,22 @@ class Kernel extends ConsoleKernel
          ->onFailure(function () {
              info('Backup gagal dijalankan di Kernel '. Carbon::now()); 
          });
+
+        $schedule->call(function () {
+            foreach (IzinvalidasiModel::all() as $valid) {
+                if($valid->mulai_granted != null){
+                    $expired = Carbon::parse($valid->sampai_granted);
+                    $status = IzinvendorModel::findorfail($valid->id);
+                        
+                        if ($status->status == "On Progress") {
+                            if (Carbon::now() > $expired) {
+                                 $status->status = "Expired";
+                                 $status->save();
+                            }
+                        }
+                    }
+                }
+            })->everyMinute();
     }
 
     /**

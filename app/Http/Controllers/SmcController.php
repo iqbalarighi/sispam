@@ -210,7 +210,8 @@ foreach($input['images'] as $image)
         $foto->save();
         }
         return back()
-        ->with('success','Hapus Foto Berhasil');
+        ->with('success','Hapus Foto Berhasil')
+        ->with('id', $id);
     }
 
     public function hapus($id)

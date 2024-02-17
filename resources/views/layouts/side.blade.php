@@ -144,10 +144,11 @@
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
               </a>
-                <div id="hse" class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" >
+                <div id="hse" class="collapse {{ Route::is('kejadian')||Route::is('izin_kerja') ? 'show' : '' }}" >
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
+                            <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
                         </div> 
                     </div>
                 </div>
@@ -198,14 +199,17 @@
                     </div>
                 </div>
 
-            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') || Route::is('izin_kerja') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kejadian') ? 'show' : '' }}" id="hse">
+                <div class="collapse {{ Route::is('kejadian') || Route::is('izin_kerja') ? 'show' : '' }}" id="hse">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
+                            {{-- @if("Rizal Kurnia" == Auth::user()->name || "Andri Triana" == Auth::user()->name) --}}
+                            <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+                            {{-- @endif --}}
                         </div> 
                     </div>
                 </div>

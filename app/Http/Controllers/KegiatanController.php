@@ -382,7 +382,8 @@ public function update(Request $request, $id)
             $update->save();
         }
             return back()
-            ->with('success', $update->id);
+            ->with('success', 'Update Laporan Kegiatan Berhasil !')
+            ->with('id', $id);
     }
 
     public function hapusFoto($item, $id)
@@ -410,7 +411,8 @@ public function update(Request $request, $id)
         $foto->save();
         }
         return back()
-        ->with('success','Hapus Foto Berhasil');
+        ->with('success','Hapus Foto Berhasil')
+        ->with('id', $id);
     }
 
 public function downloadPDF($id)

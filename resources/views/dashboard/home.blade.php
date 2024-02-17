@@ -88,7 +88,7 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
 if (data.datas.giats.length == 0){
-        dataContainer.append('<tr> <td colspan="2" align="center"> Laporan Tidak Ditemukan </td></tr>');
+        dataContainer.append('<tr> <td colspan="2" align="center">  Tidak ada laporan </td></tr>');
     } else {
                 // Append the updated data to the container
 
@@ -145,7 +145,7 @@ if (data.datas.giats.length == 0){
                 dataContainer.empty(); // Clear existing data (if any)
 
 if (data.datax.jadi.length == 0){
-        dataContainer.append('<tr> <td colspan="5" align="center"> Laporan Tidak Ditemukan </td></tr>');
+        dataContainer.append('<tr> <td colspan="5" align="center"> Tidak ada laporan </td></tr>');
     } else {
                 // Append the updated data to the container
                 const nolap = data.datax.jadi;
@@ -194,7 +194,7 @@ if (data.datax.jadi.length == 0){
 
 
     if (data.datay.gawat.length == 0){
-        dataContainer.append('<tr> <td colspan="5" >Laporan Tidak Ditemukan </td></tr>');
+        dataContainer.append('<tr> <td colspan="5" >Tidak ada laporan </td></tr>');
     } else {
                 // Append the updated data to the container
                 const nolaps = data.datay.gawat;
@@ -328,8 +328,24 @@ if (data.datax.jadi.length == 0){
 
 <div class="row">
 
-  <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(179, 255, 240, 0.5);">
+<div class="col col-sm-7 px-1">
+    <div class="mt-2 ">
+    <div class="card" style="background-color:rgba(241, 214, 147, 0.5);">
+      <div class="card-body">
+        <h5 class="card-title">Grafik UNRAS</h5>
+        {{-- <p class="card-text">Data Grafik UNRAS</p> --}}
+            <div id="charBox">
+                <canvas  id="myChart"></canvas>
+            </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+<div class="col col-sm-5 px-1">
+    <div class="mt-2">
+    <div class="card" style="background-color:rgba(0, 230, 64, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Laporan Kegiatan</h5>
         <div class="row ">
@@ -345,30 +361,9 @@ if (data.datax.jadi.length == 0){
     </div>
   </div>
 
-{{--   <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
-      <div class="card-body">
-        <h5 class="card-title">Data Terakhir Laporan Serah Terima Jaga</h5>
-            <div class="row">
-                <table class="col">
-                    <tr>
-                        <th>Dibuat Oleh</th>
-                    </tr>
-                    <tr id="data-jaga"></tr>
-                </table>
-                <table class="col">
-                    <tr>
-                        <th>Terakhir Di Buat</th>
-                    </tr>
-                    <tr id="data-timej"></tr>
-                </table>
-            </div>
-      </div>
-    </div>
-  </div> --}}
 
-  <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
+  <div class="mt-2">
+    <div class="card" style="background-color:rgba(255, 240, 0, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Laporan Kejadian</h5>
         <div class="card-body overflow" style="overflow-x: auto;">
@@ -393,9 +388,8 @@ if (data.datax.jadi.length == 0){
     </div>
   </div>
 
-
- <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(179, 236, 255, 0.5);">
+ <div class="mt-2">
+    <div class="card" style="background-color:rgba(207, 0, 15, 0.5);">
       <div class="card-body">
         <h5 class="card-title">Data Laporan Kegawatdaruratan</h5>
         <div class="card-body overflow" style="overflow-x: auto;">
@@ -420,18 +414,30 @@ if (data.datax.jadi.length == 0){
     </div>
   </div>
 
+</div>
 
-  <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(179, 218, 255, 0.5);">
+  
+{{--   <div class="col-sm-6 mt-2">
+    <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
       <div class="card-body">
-        <h5 class="card-title">Grafik UNRAS</h5>
-        {{-- <p class="card-text">Data Grafik UNRAS</p> --}}
-            <div id="charBox">
-                <canvas  id="myChart"></canvas>
+        <h5 class="card-title">Data Terakhir Laporan Serah Terima Jaga</h5>
+            <div class="row">
+                <table class="col">
+                    <tr>
+                        <th>Dibuat Oleh</th>
+                    </tr>
+                    <tr id="data-jaga"></tr>
+                </table>
+                <table class="col">
+                    <tr>
+                        <th>Terakhir Di Buat</th>
+                    </tr>
+                    <tr id="data-timej"></tr>
+                </table>
             </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
 </div>
 

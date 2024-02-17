@@ -19,6 +19,7 @@ class GrafikUnras extends Component
   ->selectRaw('EXTRACT(YEAR_MONTH FROM tanggal) as dasar')
   ->distinct()
   ->latest()
+  ->limit(12)
   ->pluck('dasar');
 
          foreach ($dasar as $value) {
@@ -31,7 +32,6 @@ class GrafikUnras extends Component
                     ->whereMonth('tanggal', $bbb)
                     ->latest()
                     ->distinct()
-                    ->limit(12)
                     ->pluck('bulan');
     }
 
@@ -95,6 +95,7 @@ public function changeData()
   ->selectRaw('EXTRACT(YEAR_MONTH FROM tanggal) as dasar')
   ->distinct()
   ->latest()
+  ->limit(12)
   ->pluck('dasar');
          foreach ($dasar as $value) {
             $b[] = Str::substr($value, 4,2);
@@ -106,7 +107,6 @@ public function changeData()
                     ->whereMonth('tanggal', $bbb)
                     ->latest()
                     ->distinct()
-                    ->limit(12)
                     ->pluck('bulan');
     }
         foreach ($dasar as $but) {

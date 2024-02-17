@@ -86,6 +86,7 @@
                         <th scope="col" class="align-middle">Email</th>
                         <th scope="col" class="align-middle">Role</th>
                         <th scope="col" class="align-middle">Level</th>
+                        <th scope="col" class="align-middle">Unit Kerja</th>
                         <th scope="col" class="align-middle">Lokasi</th>
                        <th class="align-middle" style="width:72px">Option</th>
 
@@ -102,6 +103,7 @@
                         <td>{{$users->email}}</td>
                         <td>{{$users->role}}</td>
                         <td>{{$users->level}}</td>
+                        <td>{{$users->unit_kerja}}</td>
                         <td>{{$users->site->nama_gd ?? ''}}</td>
                         <td class="d-flex align-content-center" align="center"> 
 
