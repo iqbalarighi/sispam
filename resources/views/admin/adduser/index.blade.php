@@ -145,7 +145,7 @@
                      <tr>
                     <td colspan="2">
                         <select class="form-select" name="role" required>
-                                <option value="{{$users->role}}" >{{ucfirst(trans($users->role))}}</option>
+                                <option value="{{$users->role}}" >{{$users->role == null ? 'Pilih Role' : ucfirst(trans($users->role)) }}</option>
                             @if ($users->role == 'admin')
                                 <option value="user">User</option>
                             @else
@@ -158,7 +158,7 @@
                      <tr>
                     <td colspan="2">
                         <select class="form-select" name="level">
-                                <option value="{{$users->level}}" >{{$users->level}}</option>
+                                <option value="{{$users->level}}" >{{$users->level == null ? 'Pilih Level': $users->level}}</option>
                             @if ($users->level == '')
                             <option value="koordinator">Koordinator</option>
                                 <option value="danru">Danru</option>
@@ -171,9 +171,30 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2">
+                        <select class="form-select" name="unit_kerja">
+                                <option value="{{$users->unit_kerja}}">{{$users->unit_kerja == null ? 'Pilih Unit Kerja': $users->unit_kerja}}</option>
+                            @if ($users->unit_kerja == '')
+                                <option value="Security Monitoring Center">Security Monitoring Center</option>
+                                <option value="Health, Safety, & Environment">Health, Safety, & Environment</option>
+                                <option value="PAM">PAM</option>
+                            @elseif ($users->unit_kerja == 'Security Monitoring Center')
+                                <option value="Health, Safety, & Environment">Health, Safety, & Environment</option>
+                                <option value="PAM">PAM</option>
+                            @elseif ($users->unit_kerja == 'Health, Safety, & Environment')
+                                <option value="Security Monitoring Center">Security Monitoring Center</option>
+                                <option value="PAM">PAM</option>
+                            @else
+                                <option value="Security Monitoring Center">Security Monitoring Center</option>
+                                <option value="Health, Safety, & Environment">Health, Safety, & Environment</option>
+                            @endif
+                            </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>
                         <select class="form-select pb-0 pt-0 text-capitalize" name="lokasi">
-                                <option value="{{$users->lokasi_tugas}}" selected>{{$users->site->nama_gd ?? '::Isi Lokasi::'}}</option>
+                                <option value="{{$users->lokasi_tugas}}" selected>{{$users->site->nama_gd ?? '::Pilih Lokasi::'}}</option>
                                 @foreach($site as $item)
                                 <option value="{{$item->id}}">{{$item->nama_gd}}</option>
                                 @endforeach
@@ -255,8 +276,8 @@ $("#password{{$user->firstitem()+$key}}").on('keyup', function(){
 </script>
                     @endforeach
                     </table>
-                     {{$user->links('pagination::bootstrap-5')}}
-                    </div>
+                     
+                    </div>{{$user->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>

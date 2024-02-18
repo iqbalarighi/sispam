@@ -48,6 +48,7 @@ class AdduserController extends Controller
             'email' => $request->email,
             'role' => $request->role,
             'level' => $request->level,
+            'unit_kerja' => $request->unit_kerja,
             'lokasi_tugas' => $request->lokasi,
             'password' => bcrypt($request->password),
         ]);
@@ -71,6 +72,7 @@ class AdduserController extends Controller
         $update->email = $request->email;
         $update->role = $request->role;
         $update->level = $request->level;
+        $update->unit_kerja = $request->unit_kerja;
         $update->lokasi_tugas = $request->lokasi;
         $update->save();
 

@@ -45,7 +45,7 @@ class Kernel extends ConsoleKernel
              info('composer gagal dijalankan di Kernel '. Carbon::now()); 
          });
 
-         $schedule->exec("/home/n1573881/backup.sh")->twiceDaily(8, 20)->timezone('Asia/Jakarta')
+         $schedule->exec("/home/n1573881/backup.sh")->hourly()
          ->onSuccess(function () {
              info('Backup berjalan sukses di Kernel -> '. Carbon::now()); 
          })

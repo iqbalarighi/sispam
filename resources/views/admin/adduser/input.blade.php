@@ -111,6 +111,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Unit Kerja</td>
+                        <td>:</td>
+                        <td>
+                            <select class="form-select" name="unit_kerja" id="unit_kerja">
+                                <option value="" disabled selected>Pilih Unit Kerja</option>
+                                <option value="Security Monitoring Center">Security Monitoring Center</option>
+                                <option value="Health, Safety, & Environment">Health, Safety, & Environment</option>
+                                <option value="PAM">PAM</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Lokasi Tugas</td>
                         <td>:</td>
                         <td>
