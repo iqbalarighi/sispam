@@ -1,6 +1,12 @@
 @extends('layouts.side')
 
 @section('content')
+@if(Auth::user()->unit_kerja != "Health, Safety, & Environment" && Auth::user()->unit_kerja != "Security Monitoring Center" && Auth::user()->role != "admin")
+ @php
+    header( "refresh:5;url=/dashboard" );
+    return abort(401);
+ @endphp
+@endif
                     @if (session('success'))
                             <script type="text/javascript">
 

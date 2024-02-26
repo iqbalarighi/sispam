@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
              info('Schedule gagal dijalankan di Kernel -> '. Carbon::now()); 
          });
 
-        $schedule->exec('cd '.$path.' && composer dumpautoload -o')->dailyAt('03:00')->timezone('Asia/Jakarta')
+        $schedule->exec('cd /home/n1573881/pengamanan && composer dumpautoload -o')->dailyAt('03:00')->timezone('Asia/Jakarta')
          ->onSuccess(function () {
              info('composer berjalan sukses di Kernel -> '. Carbon::now()); 
          })

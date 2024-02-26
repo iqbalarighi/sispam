@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
-                <div class="card-header fw-bold text-uppercase">{{ __('SURAT IZIN PEKERJAAN RESIKO '.$detail->risiko) }}
+                <div class="card-header fw-bold text-uppercase">{{ __('SURAT IZIN PEKERJAAN RISIKO '.$detail->risiko) }}
                     <a href="{{ route('izin_kerja') }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
                     @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
                     <span class="btn btn-sm btn-success float-end p-1" onclick="window.location='{{url('izin-validasi')}}/{{$detail->izin_id}}'" style="cursor: pointer;">Validasi</span>

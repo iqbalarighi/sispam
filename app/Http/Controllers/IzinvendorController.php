@@ -277,9 +277,12 @@ class IzinvendorController extends Controller
  $peralat->save();
  $validasi->save();
 
+$val = IzinvalidasiModel::where('izin_id', $izin_id)->first();
+
 return back()
 ->with('status', 'Data berhasil Tersimpan')
-->with('izinid', $izin_id);
+->with('izinid', $izin_id)
+->with('id', $val->id);
 // --------------------------------------------------------------------
 
 }
@@ -1043,6 +1046,11 @@ public function hapus_apk($id, $apk)
 
 public function downloadPDF($id, $oto)
     {   
+if (Auth::user()->unit_kerja != "Health, Safety, & Environment" && Auth::user()->unit_kerja != "Security Monitoring Center" && Auth::user()->role != "admin") {
+    header( "refresh:5;url=/dashboard" );
+    return abort(401);
+}
+
         // dd($id);
         $detail = IzinvendorModel::with('izin_informasi','izin_perlengkapan','izin_peralatan','izin_validasi')->findOrFail($id);
         $selamat = IzinkeselamatanModel::where('izin_id', $detail->izin_id)->get();
@@ -1125,7 +1133,7 @@ $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->
         
         $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor'));
 
-        return $pdf->stream('Workshop Izin Kerja '.$detail->izin_id.'.pdf');
+        return $pdf->stream('Surat Izin Kerja Risiko '.$detail->izin_id.'.pdf');
     }
 
 
@@ -1149,6 +1157,7 @@ $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->
             if ($update->status == "Open") {
             return back()
             ->with('Open', 'Dokumen Anda belum di Validasi')
+            ->with('izinid', $update->izin_id)
             ->with('id', $update->id);
             } 
         if ($update->status == "Continued") {

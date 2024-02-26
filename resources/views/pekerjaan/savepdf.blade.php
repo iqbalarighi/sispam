@@ -110,7 +110,7 @@ pre {
 <body>
     <div class="mb-5">
         <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 20px; margin-left: 20px; width: 150px; position: fixed;">
-            <center class="text-uppercase fw-bold mt-3"> {{ __('SURAT IZIN PEKERJAAN RESIKO ') }} </center>
+            <center class="text-uppercase fw-bold mt-3"> {{ __('SURAT IZIN KERJA RISIKO ') }} </center>
             <div class="box float-end"></div>
             <div class="box1 float-end">{{$detail->risiko}}</div>
 
