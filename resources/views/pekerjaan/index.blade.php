@@ -45,6 +45,13 @@
                         .btn-cancel:hover {
                             background-color : #ff851f;
                         }
+
+                        .btn-extrem {
+                            background-color : #8b0000;
+                        }
+                        .btn-extrem:hover {
+                            background-color : #9b0101;
+                        }
                         label {
                             margin-bottom: -1px;
                         }
@@ -57,6 +64,7 @@
                             <th scope="col">Nama PT</th>
                             <th scope="col">PIC</th>
                             <th scope="col">Tanggal Permintaan</th>
+                            <th scope="col">Risiko</th>
                             <th scope="col">Validasi</th>
                             <th scope="col">Status</th>
                     @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
@@ -70,6 +78,19 @@
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->perusahaan_pemohon}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->pengawas}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{Carbon\Carbon::parse($izin->created_at)->isoFormat('DD/MM/YYYY')}}</td>
+                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer; text-align: center;">
+                                @if($izin->risiko == "Sangat Rendah")
+                                <font style="color: limegreen; font-weight: bold;">{{$izin->risiko}}</font>
+                                @elseif($izin->risiko == "Rendah")
+                                <font style="color: yellow; font-weight: bold; text-shadow: 1px 1px 3px #000000;">{{$izin->risiko}}</font>
+                                @elseif($izin->risiko == "Sedang")
+                                <font style="color: darkorange; font-weight: bold;">{{$izin->risiko}}</font>
+                                @elseif($izin->risiko == "Tinggi")
+                                <font style="color: red; font-weight: bold;">{{$izin->risiko}}</font>
+                                @elseif($izin->risiko == "Sangat Tinggi")
+                                <font style="color: darkred; font-weight: bold;">{{$izin->risiko}}</font>
+                                @endif
+                            </td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">
                                     @if ($izin->izin_validasi->mulai_granted != null)
                                     {{__('Izin Diberikan')}}
