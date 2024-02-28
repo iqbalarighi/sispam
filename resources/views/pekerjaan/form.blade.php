@@ -854,7 +854,6 @@ function kap(){
     function comma(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-console.log(charCode);
     if (charCode == 44 || charCode == 46) {
         return false;
     }
