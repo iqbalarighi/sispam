@@ -115,7 +115,7 @@ class IzinvendorController extends Controller
             $alats[$key] = $alat;
         }
         foreach ($request->jml_alat as $key => $jml_alat) {
-            $jml_alats[$key] = $jml_alat.$key+1;
+            $jml_alats[$key] = $jml_alat.random_int(10, 99);
         }
 
     $lengkap->alat = implode(",", $alats);
@@ -129,7 +129,7 @@ class IzinvendorController extends Controller
             $msns[$key] = $value;
         }
         foreach ($request->jml_mesin as $key => $jml_mesin) {
-            $jml_msns[$key] = $jml_mesin;
+            $jml_msns[$key] = $jml_mesin.random_int(10, 99);
         }
 
     $lengkap->mesin = implode(",", $msns);
@@ -143,7 +143,7 @@ class IzinvendorController extends Controller
             $materi[$key] = $value;
         }
         foreach ($request->jml_material as $key => $jml_material) {
-            $jml_materi[$key] = $jml_material;
+            $jml_materi[$key] = $jml_material.random_int(10, 99);
         }
     $lengkap->material = implode(",", $materi);
     $lengkap->jml_material = implode(",", $jml_materi);
@@ -155,7 +155,7 @@ class IzinvendorController extends Controller
             $berat[$key] = $value;
         }
         foreach ($request->jml_alber as $key => $jml_alber) {
-            $jml_berat[$key] = $jml_alber;
+            $jml_berat[$key] = $jml_alber.random_int(10, 99);
         }
     $lengkap->alat_berat = implode(",", $berat);
     $lengkap->jml_alat_berat = implode(",", $jml_berat);
