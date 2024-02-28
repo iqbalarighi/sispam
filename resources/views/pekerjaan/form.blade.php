@@ -172,43 +172,48 @@
                 </div>
 
         <div class="row">
-            <b>B. Informasi Pekerjaan</b>
+            <b>B. Informasi Pekerjaan</b> <br>
+            <font size="1" color="red">*Kolom bertanda bintang (*) wajib diisi !</font><br>
             <div class="col pe-0"> 
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="pekerjaan" value="{{ old('pekerjaan') }}" placeholder="Pekerjaan" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="Lokasi" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="pekerjaan" value="{{ old('pekerjaan') }}" placeholder="*Pekerjaan" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ old('area') }}" placeholder="Area" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="*Lokasi" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ old('plant') }}" placeholder="Plant">
+                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ old('area') }}" placeholder="*Area/Lantai" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="manager" value="{{ old('manager') }}" placeholder="Nama Manager" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ old('plant') }}" placeholder="Ruangan">
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="pemohon" value="{{ old('pemohon') }}" placeholder="Nama Pemohon (PIC Supervisor)" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="manager" value="{{ old('manager') }}" placeholder="*Nama Manager" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="tel" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="14" name="tel_pemohon" value="{{ old('tel_pemohon') }}" placeholder="Telepon Pemohon" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="pemohon" value="{{ old('pemohon') }}" placeholder="*Nama Pemohon (PIC Supervisor)" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="pengawas" value="{{ old('pengawas') }}" placeholder="Pengawas" required>
+                    <input type="tel" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="14" name="tel_pemohon" value="{{ old('tel_pemohon') }}" placeholder="*Telepon Pemohon" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="tel" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="14" name="tel_pengawas" value="{{ old('tel_pengawas') }}" placeholder="Telepon Pengawas" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="pengawas" value="{{ old('pengawas') }}" placeholder="*Pengawas" required>
+                </div>
+                <div class="form-group mb-1 col-md-12">
+                    {{-- <label class="mb-0">Pekerjaan</label> --}}
+                    <input type="tel" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="14" name="tel_pengawas" value="{{ old('tel_pengawas') }}" placeholder="*Telepon Pengawas" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -218,16 +223,12 @@
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     <input type="tel" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="14" name="tel_k3" value="{{ old('tel_k3') }}" placeholder="Telepon Petugas K3">
                 </div>
-                <div class="form-group mb-1 col-md-12">
-                    {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="Perusahaan Pemohon" required>
-                </div>
             </div>
 
             <div class="col ps-1">
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="number" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" name="pekerja" value="{{ old('pekerja') }}" placeholder="Daftar Pekerja ( jumlah )" required>
+                    <input type="number" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" name="pekerja" value="{{ old('pekerja') }}" placeholder="*Daftar Pekerja ( jumlah )" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -278,7 +279,8 @@
         </div>
 
         <div class="mt-4">
-            <b>C. Perlengkapan Kerja</b>
+            <b>C. Perlengkapan Kerja</b> <br/>
+            <font size="1" color="red">*Satu kolom diisi satu barang. Jika lebih dari satu barang klik Tambah Kolom</font><br>
             <div class="mb-1">
              <table class="table table-striped table-hover mx-auto mb-1" style="width: 100%; " id="dynamicAddRemove4">
                 <tr align="center">
@@ -349,7 +351,6 @@
                     </td>
                 </tr>
             </table>
-            <font size="1" color="red">*Semua perlengkapan kerja diperiksa oleh Petugas K3</font><br>
             <button type="button" name="add" id="dynamic-ar1" class="btn btn-primary btn-sm float-end mb-1">Tambah Kolom</button>
         </div>
     </div>
@@ -398,48 +399,48 @@
             <tr style="font-size: 10pt; ">
                 <td width="auto">
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri1" name="pelindung_diri[]" value="Helm" /> Helm</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri1" name="pelindung_diri[]" value="Helm" /> Helm</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri2" name="pelindung_diri[]" value="Kacamata"/> Kacamata</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri2" name="pelindung_diri[]" value="Kacamata"/> Kacamata</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri3" name="pelindung_diri[]" value="Googles"/> Googles</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri3" name="pelindung_diri[]" value="Googles"/> Googles</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri4" name="pelindung_diri[]" value="Tameng Muka"/> Tameng Muka</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri4" name="pelindung_diri[]" value="Tameng Muka"/> Tameng Muka</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri5" name="pelindung_diri[]" value="Kap Las" /> Kap Las</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri5" name="pelindung_diri[]" value="Kap Las" /> Kap Las</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri6" name="pelindung_diri[]" value="Masker Kain" /> Masker Kain</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri6" name="pelindung_diri[]" value="Masker Kain" /> Masker Kain</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri7" name="pelindung_diri[]" value="Masker Kimia" /> Masker Kimia</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri7" name="pelindung_diri[]" value="Masker Kimia" /> Masker Kimia</label>
                     </div>
                 </td>
                 <td width="auto">
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri8" name="pelindung_diri[]" value="Earplug / Earmuff" /> Earplug/Earmuff</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri8" name="pelindung_diri[]" value="Earplug / Earmuff" /> Earplug/Earmuff</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri9" name="pelindung_diri[]" value="Sarung tangan katun" /> Sarung tangan katun</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri9" name="pelindung_diri[]" value="Sarung tangan katun" /> Sarung tangan katun</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri10" name="pelindung_diri[]" value="Sarung tangan karet" /> Sarung tangan karet</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri10" name="pelindung_diri[]" value="Sarung tangan karet" /> Sarung tangan karet</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri11" name="pelindung_diri[]" value="Sarung tangan kulit" /> Sarung tangan kulit</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri11" name="pelindung_diri[]" value="Sarung tangan kulit" /> Sarung tangan kulit</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri12" name="pelindung_diri[]" value="Sarung tangan las" /> Sarung tangan las</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri12" name="pelindung_diri[]" value="Sarung tangan las" /> Sarung tangan las</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri13" name="pelindung_diri[]" value="Sabuk keselamatan" /> Sabuk keselamatan</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri13" name="pelindung_diri[]" value="Sabuk keselamatan" /> Sabuk keselamatan</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri14" name="pelindung_diri[]" value="Full body harness" /> Full body harness</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri14" name="pelindung_diri[]" value="Full body harness" /> Full body harness</label>
                     </div>
                 </td>
                 <td width="auto">
@@ -505,9 +506,10 @@
                 </td>
             </tr>
         </table>
+            <font size="1" color="red">*Semua perlengkapan kerja dan peralatan keselamatan akan diperiksa oleh Petugas K3 pada saat pekerjaan berlangsung</font><br>
     </div>
                 <center>
-                    <button type="submit" class="btn btn-primary" id="sbmt" style ="text-align:center">
+                    <button type="submit" class="btn btn-primary mt-2" id="sbmt" style ="text-align:center">
                         {{ __('Simpan') }}
                     </button>
                 </center>
@@ -624,7 +626,7 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar4").click(function () {
         ++i;
-        $("#dynamicAddRemove4").append('<tr><td class="p-0 align-middle"><input type="text" name="alat[]" placeholder="Alat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alat[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove4").append('<tr><td class="p-0 align-middle"><input type="text" name="alat[]" onkeypress="return comma(event)" placeholder="Alat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alat[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {
@@ -635,7 +637,7 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar3").click(function () {
         ++i;
-        $("#dynamicAddRemove3").append('<tr><td class="p-0 align-middle"><input type="text" name="mesin[]" placeholder="Mesin" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_mesin[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove3").append('<tr><td class="p-0 align-middle"><input type="text" name="mesin[]" onkeypress="return comma(event)" placeholder="Mesin" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_mesin[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {
@@ -646,7 +648,7 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar2").click(function () {
         ++i;
-        $("#dynamicAddRemove2").append('<tr><td class="p-0 align-middle"><input type="text" name="material[]" placeholder="Material" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_material[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove2").append('<tr><td class="p-0 align-middle"><input type="text" name="material[]" onkeypress="return comma(event)" placeholder="Material" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_material[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {
@@ -657,7 +659,7 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar1").click(function () {
         ++i;
-        $("#dynamicAddRemove1").append('<tr><td class="p-0 align-middle"><input type="text" name="alat_berat[]" placeholder="Alat Berat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alber[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove1").append('<tr><td class="p-0 align-middle"><input type="text" name="alat_berat[]" onkeypress="return comma(event)" placeholder="Alat Berat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alber[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
     });
     $(document).on('click', '.remove-input-field', function () {
@@ -722,7 +724,7 @@ c9.required = true;
 
  }
 </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 
        var dr1 = document.getElementById("diri1");
        var dr2 = document.getElementById("diri2");
@@ -760,8 +762,8 @@ function con(){
          dr7.required = true;
     }
 }
-</script>
-<script type="text/javascript">
+</script> --}}
+{{-- <script type="text/javascript">
    var dr8 = document.getElementById("diri8");
    var dr9 = document.getElementById("diri9");
    var dr10 = document.getElementById("diri10");
@@ -799,8 +801,22 @@ function con(){
     }
 }
 
-</script>
+</script> --}}
 <script type="text/javascript">
+   var dr1 = document.getElementById("diri1");
+   var dr2 = document.getElementById("diri2");
+   var dr3 = document.getElementById("diri3");
+   var dr4 = document.getElementById("diri4");
+   var dr5 = document.getElementById("diri5");
+   var dr6 = document.getElementById("diri6");
+   var dr7 = document.getElementById("diri7");
+   var dr8 = document.getElementById("diri8");
+   var dr9 = document.getElementById("diri9");
+   var dr10 = document.getElementById("diri10");
+   var dr11 = document.getElementById("diri11");
+   var dr12 = document.getElementById("diri12");
+   var dr13 = document.getElementById("diri13");
+   var dr14 = document.getElementById("diri14");
    var dr15 = document.getElementById("diri15");
    var dr16 = document.getElementById("diri16");
    var dr17 = document.getElementById("diri17");
@@ -809,6 +825,20 @@ function con(){
    var dr20 = document.getElementById("diri20");
    var dr21 = document.getElementById("diri21");
 
+     dr1.required = true;
+     dr2.required = true;
+     dr3.required = true;
+     dr4.required = true;
+     dr5.required = true;
+     dr6.required = true;
+     dr7.required = true;
+     dr8.required = true;
+     dr9.required = true;
+    dr10.required = true;
+    dr11.required = true;
+    dr12.required = true;
+    dr13.required = true;
+    dr14.required = true;
     dr15.required = true;
     dr16.required = true;
     dr17.required = true;
@@ -818,7 +848,21 @@ function con(){
     dr21.required = true;
 
     function con2(){
-        if ((dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+        if ((dr1.checked || dr2.checked || dr3.checked || dr4.checked || dr5.checked || dr6.checked || dr7.checked || dr8.checked || dr9.checked || dr10.checked || dr11.checked || dr12.checked || dr13.checked || dr14.checked || dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+         dr1.required = false;
+         dr2.required = false;
+         dr3.required = false;
+         dr4.required = false;
+         dr5.required = false;
+         dr6.required = false;
+         dr7.required = false;
+         dr8.required = false;
+         dr9.required = false;
+        dr10.required = false;
+        dr11.required = false;
+        dr12.required = false;
+        dr13.required = false;
+        dr14.required = false;
         dr15.required = false;
         dr16.required = false;
         dr17.required = false;
@@ -827,6 +871,20 @@ function con(){
         dr20.required = false;
         dr21.required = false;
     } else {
+         dr1.required = true;
+         dr2.required = true;
+         dr3.required = true;
+         dr4.required = true;
+         dr5.required = true;
+         dr6.required = true;
+         dr7.required = true;
+         dr8.required = true;
+         dr9.required = true;
+        dr10.required = true;
+        dr11.required = true;
+        dr12.required = true;
+        dr13.required = true;
+        dr14.required = true;
         dr15.required = true;
         dr16.required = true;
         dr17.required = true;
@@ -834,6 +892,7 @@ function con(){
         dr19.required = true;
         dr20.required = true;
         dr21.required = true;
+
     }
 }
 </script>
@@ -916,21 +975,11 @@ function kap(){
     function comma(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode == 44 || charCode == 46) {
+    if (charCode == 44 || charCode == 46 || charCode == 55 || charCode == 108 ) {
         return false;
     }
     return true;
 }
 </script>
 
-<script type="text/javascript">
-    function angka(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
-</script>
 @endsection
