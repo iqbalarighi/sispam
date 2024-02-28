@@ -10,34 +10,93 @@
 </style>
 
 <div class="container">
-@if(session('Open'))
-<script type="text/javascript">
-    Swal.fire({
-      icon: "warning",
-      title: "{{ session('Open') }}",
-      showConfirmButton: false,
-      timer: 1500
-    })
 
-    setTimeout(function () {
+@if (session('Open'))
+    @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000)
+    <script>
         Swal.fire({
-        title: "Perhatian",
-        icon: "info",
-        html: `
-        Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
-        <br>
-        <br>
-        <a aria-label="Chat on WhatsApp" target="_blank" href="https://wa.me/6285223442696?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
-        <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
-        <a />
-        `,
-        showConfirmButton: false,
-        allowOutsideClick: false,
+          icon: "warning",
+          title: "{{ session('Open') }}",
+          showConfirmButton: false,
+          timer: 1500
+        })
 
-        });
-    }, 2000); 
+            setTimeout(function () {
+                   Swal.fire({
+                          title: "Perhatian",
+                          icon: "info",
+                          html: `
+                            Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
+                            <br>
+                            <br>
+                            <a aria-label="Chat on WhatsApp" href="https://wa.me/628119809606?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
+                            <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
+                            <a />
+                          `,
+                      showConfirmButton: false,
+                      allowOutsideClick: false,
 
-</script>
+                            });
+                }, 1700); 
+            
+    </script>
+                @elseif (Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+    <script>
+        Swal.fire({
+          icon: "warning",
+          title: "{{ session('Open') }}",
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+            setTimeout(function () {
+                   Swal.fire({
+                          title: "Perhatian",
+                          icon: "info",
+                          html: `
+                            Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
+                            <br>
+                            <br>
+                            <a aria-label="Chat on WhatsApp" href="https://wa.me/628119809606?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
+                            <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
+                            <a />
+                          `,
+                      showConfirmButton: false,
+                      allowOutsideClick: false,
+
+                            });
+                }, 1700); 
+                    
+    </script>
+                @else
+    <script>
+        Swal.fire({
+          icon: "warning",
+          title: "{{ session('Open') }}",
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+            setTimeout(function () {
+                   Swal.fire({
+                          title: "Perhatian",
+                          icon: "info",
+                          html: `
+                            Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
+                            <br>
+                            <br>
+                            <a aria-label="Chat on WhatsApp" href="https://wa.me/6285223442696?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
+                            <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
+                            <a />
+                          `,
+                      showConfirmButton: false,
+                      allowOutsideClick: false,
+
+                            });
+                }, 1700); 
+                    
+    </script>
+            @endif
 @endif
 
 @if(session('Done'))
