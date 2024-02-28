@@ -612,7 +612,7 @@ Mengetahui,
                         </td>
 <td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detail->izin_validasi->created_at)->isoFormat('D MMMM Y')}}</td>
                         <td width="33%" style="vertical-align: top;"><pre class="narrow">
-Disusun Oleh,
+Divalidasi Oleh,
 
 
 <img src="data:image/png;base64, {!! $qrcode2 !!}" >

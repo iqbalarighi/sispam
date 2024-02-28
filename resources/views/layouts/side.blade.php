@@ -185,6 +185,8 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
+            <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
+            <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'active' : '' }}"  data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan PAM
                         <i id="ubah" class="bi bi-caret-right-fill"></i>

@@ -9,7 +9,9 @@
         <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Pos Jaga') }}
+                    @if (Auth::user()->role === 'admin')
                     <a href="{{route('tambah-pos')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
+                    @endif
                 </div>
 
                 
@@ -66,7 +68,9 @@
                         <th scope="col" class="align-middle">Kekuatan Personil</th>
                         <th scope="col" class="align-middle">Standar Peralatan</th>
                         <th scope="col" class="align-middle">Foto</th>
+                        @if (Auth::user()->role === 'admin')
                        <th class="align-middle" style="width:72px; ">Option</th>
+                        @endif
 
                     </tr>
                     <style>
@@ -133,6 +137,7 @@
                      @endforeach
                      @endif
                         </td>
+                        @if (Auth::user()->role === 'admin')
                         <td>
                         <div class="d-flex align-items-md-center" >
                         <a href="{{route('edit-pos')}}/{{$p->id}}" hidden>
@@ -150,6 +155,7 @@
                         </form>
                     </div>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                     </table>

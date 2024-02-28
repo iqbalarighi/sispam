@@ -226,7 +226,7 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="alat[]" placeholder="Alat" id="alats" class="form-control form-control-sm px-1" autocomplete="off" required />
+                        <input type="text" name="alat[]" placeholder="Alat" onkeypress="return comma(event)" id="alats" class="form-control form-control-sm px-1" autocomplete="off" required />
                     </td>
                     <td width="30%" class="py-0 align-middle">
                         <input type="number" name="jml_alat[]" id="jmlalt" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
@@ -244,7 +244,7 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="mesin[]" placeholder="Mesin" id="mesin" class="form-control form-control-sm px-1" autocomplete="off" />
+                        <input type="text" name="mesin[]" placeholder="Mesin" onkeypress="return comma(event)" id="mesin" class="form-control form-control-sm px-1" autocomplete="off" />
                     </td>
                     <td width="30%" class="py-0 align-middle">
                         <input type="number" name="jml_mesin[]" id="jmlmsn" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
@@ -262,7 +262,7 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="material[]" id="mtr" placeholder="Material" class="form-control form-control-sm px-1" autocomplete="off"/>
+                        <input type="text" name="material[]" id="mtr" placeholder="Material" onkeypress="return comma(event)" class="form-control form-control-sm px-1" autocomplete="off"/>
                     </td>
                     <td width="30%" class="py-0 align-middle">
                         <input type="number" name="jml_material[]" id="jmlmtr" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
@@ -280,7 +280,7 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="alat_berat[]" placeholder="Alat Berat" id="berat" class="form-control form-control-sm px-1" autocomplete="off"/>
+                        <input type="text" name="alat_berat[]" placeholder="Alat Berat" onkeypress="return comma(event)" id="berat" class="form-control form-control-sm px-1" autocomplete="off"/>
                     </td>
                     <td width="30%" class="py-0 align-middle">
                         <input type="number" name="jml_alber[]" id="jmlbrt" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
@@ -850,5 +850,26 @@ function kap(){
     }); 
 </script>
 
+<script>
+    function comma(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+console.log(charCode);
+    if (charCode == 44 || charCode == 46) {
+        return false;
+    }
+    return true;
+}
+</script>
 
+<script type="text/javascript">
+    function angka(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+</script>
 @endsection

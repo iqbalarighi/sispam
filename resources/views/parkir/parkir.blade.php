@@ -1,9 +1,9 @@
 @extends('layouts.side')
 
 @section('content')
-@if (Auth::user()->role === 'user')
+{{-- @if (Auth::user()->role === 'user')
     <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
-@endif
+@endif --}}
 <style>
                         .xx {
                             font-size: 11pt;
@@ -30,7 +30,9 @@
         <div class="col mw-100">
             <div class="card ">
                 <div class="card-header text-uppercase font-weight-bold">{{ __('Lot Parkir') }}
+                    @if (Auth::user()->role === 'admin')
                     <a href="{{route('tambah-lot')}}"><span class="btn btn-primary float-right btn-sm">Tambah Data</span></a>
+                    @endif
                 </div>
 
                 
@@ -84,7 +86,9 @@
                         <th class="align-middle">Akses</th>
                         <th class="align-middle">Aktif</th>
                         <th class="align-middle">Keterangan</th>
+                        @if (Auth::user()->role === 'admin')
                        <th class="align-middle" style="width:72px; ">Option</th>
+                       @endif
 
                     </tr>
                     <style>
@@ -115,7 +119,8 @@
                             @endif
                         </td>
                         <td class="text-left">{{$park->keterangan}}</td>
-                        <td > 
+                        @if (Auth::user()->role === 'admin')
+                        <td> 
                             <div class="d-flex align-content-center">
                             <a href="/edit-lot/{{$park->id}}" hidden>
                                 <button id="dit{{$parkir->firstitem() + $key}}" type="submit" title="Edit Data ">
@@ -136,6 +141,7 @@
                             </form>
                             </div>
                             </td>
+                            @endif
                     </tr>
                     @endforeach
                     
