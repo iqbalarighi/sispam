@@ -54,6 +54,10 @@
                                 <table class="table-sm table-bordered" width="auto">
 
                                     <tr>
+                                        <td class="td">Perusahaan Pemohon</td>
+                                        <td>{{$detail->izin_informasi->perusahaan_pemohon}}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Pekerjaan</td>
                                         <td>{{$detail->izin_informasi->pekerjaan}}</td>
                                     </tr>
@@ -96,10 +100,6 @@
                                     <tr>
                                         <td class="td">Telepon Petugas K3</td>
                                         <td>{{$detail->izin_informasi->tel_k3!=null ? $detail->izin_informasi->tel_k3 : '-'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td">Perusahaan Pemohon</td>
-                                        <td>{{$detail->izin_informasi->perusahaan_pemohon}}</td>
                                     </tr>
                                 </table>
                             </div>

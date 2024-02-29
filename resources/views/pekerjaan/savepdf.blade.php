@@ -170,6 +170,11 @@ pre {
                                 
                                 <table class="xsxs" width="auto">
                                     <tr>
+                                        <td class="td">Perusahaan Pemohon</td>
+                                        <td>:</td>
+                                        <td>{{$detail->izin_informasi->perusahaan_pemohon}}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Pekerjaan</td>
                                         <td>:</td>
                                         <td>{{$detail->izin_informasi->pekerjaan}}</td>
@@ -223,11 +228,6 @@ pre {
                                         <td class="td">Telepon Petugas K3</td>
                                         <td>:</td>
                                         <td>{{$detail->izin_informasi->tel_k3!=null ? $detail->izin_informasi->tel_k3 : '-'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="td">Perusahaan Pemohon</td>
-                                        <td>:</td>
-                                        <td>{{$detail->izin_informasi->perusahaan_pemohon}}</td>
                                     </tr>
                                 </table>
                             </div>

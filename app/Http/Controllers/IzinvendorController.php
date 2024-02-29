@@ -19,6 +19,28 @@ use Illuminate\Support\Facades\Auth;
 
 class IzinvendorController extends Controller
 {
+ 
+ public function index(Request $request)
+    {
+
+        $cari = $request->cari;
+    if ($cari != null) {
+        $index = IzinvendorModel::with(['izin_informasi','izin_validasi'])
+        ->whereRelation('izin_informasi', 'pemohon', 'LIKE', '%'.$cari.'%')
+        ->orwhereRelation('izin_informasi', 'perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
+        ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(25)
+        ->appends(request()->input());;
+
+        } else {
+            $index = IzinvendorModel::with('izin_informasi','izin_validasi')->orderBy('created_at', 'DESC')->paginate(25);
+            }
+
+        $valid = IzinvalidasiModel::all();
+        return view('pekerjaan.index', compact('index','valid'));
+    }
+
     public function store(Request $request)
     {
         $izin = new IzinvendorModel;
@@ -287,15 +309,6 @@ return back()
 
 }
 
-public function index()
-{
-    // $allItems = new \Illuminate\Database\Eloquent\Collection;
-
-    $index = IzinvendorModel::with('izin_informasi','izin_validasi')->paginate(25);
-    $valid = IzinvalidasiModel::all();
-// dd($valid->izin_validasi);
-    return view('pekerjaan.index', compact('index','valid'));
-}
 
 public function detail($id)
 {

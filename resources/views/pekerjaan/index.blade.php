@@ -56,6 +56,11 @@
                             margin-bottom: -1px;
                         }
                    </style>
+
+                   <form action="" method="GET" class="mb-2" >
+                    <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
+                </form>
+
             <div class="table-responsive-sm overflow" style="overflow-x: auto; height: 75vh;">
                 <table class="table table-striped table-hover table-sm align-middle sticky-header">
                         <tr align="center">
@@ -76,7 +81,7 @@
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$index->firstitem()+$key}}</td> 
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_id}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->perusahaan_pemohon}}</td>
-                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->pengawas}}</td>
+                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->pemohon}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{Carbon\Carbon::parse($izin->created_at)->isoFormat('DD/MM/YYYY HH:mm:ss')}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer; text-align: center;">
                                 @if($izin->risiko == "Sangat Rendah")
