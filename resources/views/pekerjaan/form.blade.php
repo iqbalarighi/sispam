@@ -185,7 +185,26 @@
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="*Lokasi" required>
+                    {{-- <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="*Lokasi" required> --}}
+                    <select class="form-select form-select-sm px-1 text-capitalize" id="lokasi" name="lokasi" required>
+                                <option value="" disabled selected>*Lokasi</option>
+                                <option value="Gedung Soemitro Djojohadikusumo">Gedung Soemitro Djojohadikusumo</option>
+                                <option value="Gedung Wisma Mulia 2">Gedung Wisma Mulia 2</option>
+                                <option value="Gedung Menara Radius Prawiro">Gedung Menara Radius Prawiro</option>
+                                <option value="Rumah Jabatan DK 1">Rumah Jabatan DK 1</option>
+                                <option value="Rumah Jabatan DK 2">Rumah Jabatan DK 2</option>
+                                <option value="Rumah Jabatan DK 3">Rumah Jabatan DK 3</option>
+                                <option value="Rumah Jabatan DK 4">Rumah Jabatan DK 4</option>
+                                <option value="Rumah Jabatan DK 5">Rumah Jabatan DK 5</option>
+                                <option value="Rumah Jabatan DK 6">Rumah Jabatan DK 6</option>
+                                <option value="Rumah Jabatan DK 7">Rumah Jabatan DK 7</option>
+                                <option value="Rumah Jabatan DK 8">Rumah Jabatan DK 8</option>
+                                <option value="Rumah Jabatan DK 9">Rumah Jabatan DK 9</option>
+                                <option value="Gudang Matraman">Gudang Matraman</option>
+                                <option value="Gudang Bekasi">Gudang Bekasi</option>
+                                <option value="Gudang Salemba">Gudang Salemba</option>
+                                <option value="Gudang Cilandak">Gudang Cilandak</option>
+                            </select>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}

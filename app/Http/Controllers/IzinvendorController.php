@@ -10,12 +10,13 @@ use App\Models\IzinperlengkapanModel;
 use App\Models\IzinvalidasiModel;
 use App\Models\IzinvendorModel;
 use App\Models\OtorisasiModel;
+use App\Models\SiteModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Auth;
 
 class IzinvendorController extends Controller
 {
@@ -40,7 +41,13 @@ class IzinvendorController extends Controller
         $valid = IzinvalidasiModel::all();
         return view('pekerjaan.index', compact('index','valid'));
     }
+// public function form()
+// {
+//     $site = SiteModel::get();
 
+//     return view('pekerjaan.form', compact('site'));
+
+// }
     public function store(Request $request)
     {
         $izin = new IzinvendorModel;

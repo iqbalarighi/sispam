@@ -279,6 +279,7 @@ Route::get('/form-izin', function () {
 //     return view('pekerjaan.update_pekerjaan');
 // })->name('update_pekerjaan');
 
+// Route::get('/form-izin', [IzinvendorController::class, 'form'])->name('form_izin');
 Route::get('/update_pekerjaan', [IzinvendorController::class, 'update_pekerjaan']);
 Route::get('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
 
