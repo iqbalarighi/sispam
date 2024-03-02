@@ -90,6 +90,7 @@ if (count($gawat) == null && count($gawat2) != null) {
 }
 
 
+
 if (count($jadi) == null && count($jadi2) != null) {
     $jjj = $jadd;
 } elseif (count($jadi2) == null && count($jadi) != null) {
@@ -99,7 +100,7 @@ if (count($jadi) == null && count($jadi2) != null) {
 } elseif (count($jadi) != null && count($jadi2) != null) {
     $jjj = array_merge($jad,$jadd);
 }
-
+// dd($jjj);
 
         // foreach ($jaga as $key => $value3) {
         //     $timej [] = $value3->created_at->diffForHumans();

@@ -375,9 +375,19 @@ $bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
 {
     $valid = IzinvalidasiModel::where('izin_id','=', $izinid)->first();
     $izin = IzininformasiModel::where('izin_id','=', $izinid)->first();
+    if ($valid->nm_pmrks_granted != null) {
+    $rese = User::where('name', '!=', $valid->nm_pmrks_granted)
+            ->Where('unit_kerja', '=','Health, Safety, & Environment')
+            ->get();
+    } else {
+        $rese = User::Where('unit_kerja', '=','Health, Safety, & Environment')
+            ->get();
+    }
+
+// dd($rese);
+
     $user = User::where('unit_kerja', '=','Health, Safety, & Environment')->get();
-// dd($valid);
-    return view('pekerjaan.validasi', compact('izinid','valid','izin','user'));
+    return view('pekerjaan.validasi', compact('izinid','valid','izin','user','rese'));
 }
 
 public function validasi(Request $request, $izinid)
