@@ -11,6 +11,7 @@ use App\Models\IzinvalidasiModel;
 use App\Models\IzinvendorModel;
 use App\Models\OtorisasiModel;
 use App\Models\SiteModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -374,8 +375,9 @@ $bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
 {
     $valid = IzinvalidasiModel::where('izin_id','=', $izinid)->first();
     $izin = IzininformasiModel::where('izin_id','=', $izinid)->first();
+    $user = User::where('unit_kerja', '=','Health, Safety, & Environment')->get();
 // dd($valid);
-    return view('pekerjaan.validasi', compact('izinid','valid','izin'));
+    return view('pekerjaan.validasi', compact('izinid','valid','izin','user'));
 }
 
 public function validasi(Request $request, $izinid)

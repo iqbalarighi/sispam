@@ -72,7 +72,17 @@
                               <label for="tgl_pmhn">Tanggal Permohonan</label>
                             </div>
                             <div class="form-floating">
-                              <input type="text" class="form-control" id="nm_pmrks" name="" value="">
+                              {{-- <input type="text" class="form-control" id="nm_pmrks" name="" value=""> --}}
+                              <select class="form-select" id="nm_pmrks" name=""  value="" required>
+                                    <option value="" selected disabled></option>
+                                    {{-- <option id="opt" value="{{$valid->nm_pmrks_granted}}">{{$valid->nm_pmrks_granted == null ? '::Pilih Pemeriksa::': $valid->nm_pmrks_granted}}</option> --}}
+                                    @if($valid->nm_pmrks_granted != null)
+                                        <option id="opt" value="{{$valid->nm_pmrks_granted}}">{{$valid->nm_pmrks_granted == null ? '::Pilih Pemeriksa::': $valid->nm_pmrks_granted}}</option>
+                                    @endif
+                                    @foreach($user as $item)
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
+                                    @endforeach
+                              </select>
                               <label for="nm_pmrks">Nama Pemeriksa</label>
                             </div>
                             {{-- <div class="form-floating">
