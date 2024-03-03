@@ -88,15 +88,21 @@
                 dataContainer.empty(); // Clear existing data (if any)
 
 if (data.datas.giats.length == 0){
-        dataContainer.append('<tr> <td colspan="2" align="center">  Tidak ada laporan </td></tr>');
+        dataContainer.append('<tr> <td colspan="5" align="center">Tidak ada laporan</td></tr>');
     } else {
                 // Append the updated data to the container
 
                 data.datas.giats.forEach(function (item) {
-                    var urel = "/giat-detil/";
+                    var urel = "/izin-detail/";
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-                   dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.danru + '</a></td><td>' + item.time + '</td></tr>'); // Replace 'name' with the property you want to display
 
+                if (item.status == 'Open'){
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: red; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+               } else if (item.status == 'On Progress'){
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+               } else if(item.status == 'Expired') {
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+               }
 
                               });
 
@@ -346,13 +352,16 @@ if (data.datax.jadi.length == 0){
 <div class="col col-sm-5 px-1">
     <div class="mt-2">
     <div class="card" style="background-color:rgba(0, 230, 64, 0.5);">
-      <div class="card-body">
-        <h5 class="card-title">Data Laporan Kegiatan</h5>
+      <div class="card-body overflow" style="overflow-x: auto;">
+        <h5 class="card-title">Data Izin Pekerjaan</h5>
         <div class="row ">
                 <table class="col">
                     <tr align="center">
-                        <th >Dibuat Oleh</th>
-                        <th>Terakhir Dibuat</th>
+                        <th>Nomor<br/>Dokumen</th>
+                        <th>Perusahaan</th>
+                        <th>Pemohon</th>
+                        <th>Tanggal<br/>Permohonan</th>
+                        <th>Status</th>
                     </tr>
                     <tbody align="center" id="data-giat"></tbody>
                 </table>

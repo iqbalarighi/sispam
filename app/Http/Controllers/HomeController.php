@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\BencanaModel;
+use App\Models\IzinvendorModel;
 use App\Models\KegiatanModel;
 use App\Models\KejadianModel;
 use App\Models\SiteModel;
@@ -16,22 +17,60 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $giats = KegiatanModel::latest()->take(5)->get();
-        $jadi = KejadianModel::where('status','Open')->latest()->take(3)->get();
-        $jadi2 = KejadianModel::where('status','Resolved')->latest()->take(3)->get();
+        // $giats = KegiatanModel::latest()->take(5)->get();
+        $kerja = IzinvendorModel::with('izin_informasi')->where('status', 'Open')->latest()->take(2)->get();
+        $kerja2 = IzinvendorModel::with('izin_informasi')->where('status', 'On Progress')->latest()->take(4)->get();
+        $kerja3 = IzinvendorModel::with('izin_informasi')->where('status', 'Expired')->latest()->take(2)->get();
+        $jadi = KejadianModel::where('status','Open')->latest()->take(2)->get();
+        $jadi2 = KejadianModel::where('status','Resolved')->latest()->take(2)->get();
         $gawat = BencanaModel::where('status','Open')->latest()->take(3)->get();
         $gawat2 = BencanaModel::where('status','Resolved')->latest()->take(3)->get();
         // $jaga = TukarjagaModel::latest()->take(5)->get();
-    
+    // dd($kerja);
     // $giat = KegiatanModel::select('created_at')->latest()->take(5)->get();
 
-        foreach ($giats as $key => $value1) {
-            $dat['id']= $value1->id;
-            $dat['danru'] = $value1->danru;
-            $dat['time'] = $value1->created_at->diffForHumans();
+        // foreach ($giats as $key => $value1) {
+        //     $dat['id']= $value1->id;
+        //     $dat['danru'] = $value1->danru;
+        //     $dat['time'] = $value1->created_at->diffForHumans();
 
-            $tes[] = $dat;
+        //     $tes[] = $dat;
+        // }
+
+    foreach ($kerja as $key => $value1) {
+            $ker['id']= $value1->id;
+            $ker['izin_id']= $value1->izin_id;
+            $ker['nm_pt']= $value1->izin_informasi->perusahaan_pemohon;
+            $ker['pemohon']= $value1->izin_informasi->pemohon;
+            $ker['tgl']= Carbon::parse($value1->created_at)->isoFormat('D MMMM Y');
+            $ker['status'] = $value1->status;
+
+            $tes[] = $ker;
         }
+
+    foreach ($kerja2 as $key => $value1) {
+            $ker2['id']= $value1->id;
+            $ker2['izin_id']= $value1->izin_id;
+            $ker2['nm_pt']= $value1->izin_informasi->perusahaan_pemohon;
+            $ker2['pemohon']= $value1->izin_informasi->pemohon;
+            $ker2['tgl']= Carbon::parse($value1->created_at)->isoFormat('D MMMM Y');
+            $ker2['status'] = $value1->status;
+
+            $tes2[] = $ker2;
+        }
+
+    foreach ($kerja3 as $key => $value1) {
+            $ker3['id']= $value1->id;
+            $ker3['izin_id']= $value1->izin_id;
+            $ker3['nm_pt']= $value1->izin_informasi->perusahaan_pemohon;
+            $ker3['pemohon']= $value1->izin_informasi->pemohon;
+            $ker3['tgl']= Carbon::parse($value1->created_at)->isoFormat('D MMMM Y');
+            $ker3['status'] = $value1->status;
+
+            $tes3[] = $ker3;
+        }
+// dd($tes3);
+
 
         foreach ($jadi as $key => $value2) {
             $jadian['no_lap']= $value2->no_lap;
@@ -79,6 +118,26 @@ class HomeController extends Controller
         }
 // dd(count($jadi) != null);
 
+      if (count($kerja2) == null && count($kerja3) == null && count($kerja) != null) {
+    $yyy = $tes;
+} elseif (count($kerja2) == null && count($kerja3) != null && count($kerja) != null) {
+    $yyy = array_merge($tes,$tes3);
+} elseif (count($kerja) == null && count($kerja3) == null && count($kerja2) != null) {
+    $yyy = $tes2;
+} elseif (count($kerja) == null && count($kerja3) != null && count($kerja2) != null) {
+    $yyy = array_merge($tes2,$tes3);
+} elseif (count($kerja) == null && count($kerja2) == null && count($kerja3) != null) {
+    $yyy = $tes3;
+}elseif (count($kerja3) == null && count($kerja) != null && count($kerja2) != null) {
+    $yyy = array_merge($tes,$tes2);
+} elseif (count($kerja) == null && count($kerja3) == null && count($kerja2) == null) {
+     $yyy = [];
+} elseif (count($kerja) != null && count($kerja2) != null && count($kerja3) != null) {
+    $yyy = array_merge($tes,$tes2,$tes3);
+}
+
+// dd($yyy);
+
 if (count($gawat) == null && count($gawat2) != null) {
     $xxx = $gawats2;
 } elseif (count($gawat2) == null && count($gawat) != null) {
@@ -89,6 +148,7 @@ if (count($gawat) == null && count($gawat2) != null) {
     $xxx = array_merge($gawats,$gawats2);
 }
 
+// dd($xxx);
 
 
 if (count($jadi) == null && count($jadi2) != null) {
@@ -106,7 +166,7 @@ if (count($jadi) == null && count($jadi2) != null) {
         //     $timej [] = $value3->created_at->diffForHumans();
         // }
 
-$datas = ['giats' => $tes];
+$datas = ['giats' => $yyy];
 $datax = ['jadi' => $jjj];
 $datay = ['gawat' => $xxx];
 
