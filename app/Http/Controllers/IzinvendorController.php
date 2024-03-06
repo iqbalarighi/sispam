@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image as ResizeImage;
 
 class IzinvendorController extends Controller
 {
@@ -1206,11 +1209,72 @@ $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->
     }
 
     public function update_pekerjaan2(Request $request, $izinid)
-    { 
+    {   
+//start of validator
+if ($request->file('images') == true) {
+    $input = request()->all();
+
+$validator = Validator::make($input, [
+    'images' => 'required|array',
+],
+[
+    'images.required' => 'Wajib Foto Dokumentasi',
+]);
+
+if ($validator->fails()) {
+    $messages = $validator->messages();
+    return back()
+        ->withErrors($messages);
+}
+
+foreach($input['images'] as $image)
+{
+    $image = array('images' => $image);
+    $imageValidator = Validator::make($image, [
+         'images' => 'image|mimes:jpeg,png,jpg|max:4096', //2MB 
+        ],
+        [
+            'images.image' => 'Foto Dokumentasi harus berupa Gambar',
+            'images.mimes' => 'File yang diterima hanya format :values',
+            'images.max' => 'Ukuran Foto melebihi 4096 KB (4 MB)',
+        ]);
+
+    if ($imageValidator->fails()) {
+        $messages = $imageValidator->messages();
+        return back()
+            ->withErrors($messages);
+    }
+}
+}
+//end fo validator
+// dd($request->images);
         $update = IzinvendorModel::with('izin_informasi','izin_perlengkapan','izin_peralatan','izin_validasi')->where('izin_id', $request->izinid)->first();
-       
+
+        $files = $request->file('images');
+        $image = [];
+
+        if ($files != null) {
+            foreach ($files as $file) {
+                $image_name = md5(rand(100, 1000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_full_name = $image_name.'.'.$ext;
+                $image_path = public_path('storage/izin_kerja/'.$izinid.'/');
+                $image_url = $image_path.$image_full_name;
+
+                !is_dir($image_url) && File::makeDirectory($image_path, $mode = 0777, true, true);
+                $imagex = ResizeImage::make($file->getRealPath())
+                ->resize(800, 600)
+                ->save($image_path.$image_full_name);
+   
+                $image[] = $image_full_name;
+            }
+
+            $update->foto = implode('|', $image);
+        } 
+
         $update->status = $request->status;
-        
+        $update->ket = $request->ket;
+
        if($request->status == "Done"){
         $update->save();
         return redirect('update_pekerjaan')
@@ -1257,4 +1321,4 @@ public function hapus($izinid)
         return response()->json($data);
         
     }
-}
+} 

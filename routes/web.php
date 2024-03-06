@@ -281,7 +281,7 @@ Route::get('/form-izin', function () {
 
 // Route::get('/form-izin', [IzinvendorController::class, 'form'])->name('form_izin');
 Route::get('/update_pekerjaan', [IzinvendorController::class, 'update_pekerjaan']);
-Route::get('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
+Route::put('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
 
 Route::post('/simpan_izin', [IzinvendorController::class, 'store'])->name('simpan_izin');
 
