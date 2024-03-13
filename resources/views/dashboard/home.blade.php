@@ -13,9 +13,11 @@
                         <script>
                     Swal.fire({
                       title: "Login Sukses",
+                      imageUrl: "{{asset('storage/img/puasa.png')}}",
+                      imageWidth: 400,
                       html: `{{$message}} <br> 
                             <b>{{Auth::user()->name}}</b>`,
-                      icon: "success",
+                      // icon: "success",
 
                     });
 
