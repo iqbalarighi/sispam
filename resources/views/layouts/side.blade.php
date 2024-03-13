@@ -102,6 +102,7 @@
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
+{{-- user level 1 --}}
     @if ( Auth::user()->level === 'superadmin')
         <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
@@ -117,7 +118,10 @@
                         </div> 
                     </div>
                 </div>
-    @endif
+    @endif 
+{{-- user level 1 --}}
+
+{{-- user level 2 --}}
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
             <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a>
@@ -125,6 +129,7 @@
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
+            <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('layanan') ? 'active' : '' }}">Layanan</a>
 
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
@@ -174,6 +179,9 @@
             <a href="#" class="list-group-item list-group-item-action bg-light">Realisasi Anggaran</a> -->
         </div>
         </div>
+{{-- user level 2 --}}
+
+{{-- user level 3 --}}
     @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
             <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
@@ -241,6 +249,7 @@
         <!-- /#sidebar-wrapper -->
 
     @endif
+{{-- user level 3 --}}
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="d-flex flex-column min-vh-100">

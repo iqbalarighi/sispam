@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IzinvendorController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\KejadianController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\OtorisasiController;
 use App\Http\Controllers\ParkirController;
 use App\Http\Controllers\PeralatanController;
@@ -316,3 +317,14 @@ Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');
 // Route::get('maintenance', function() {
 //     return view('maintenance');
 // });
+
+//Kelogistikan
+
+Route::get('/form-layanan', function () {
+    return view('layanan.form');
+})->name('form_layanan');
+
+Route::controller(LayananController::class)->middleware('auth')->group(function () {
+    Route::get('/layanan', 'index')->name('layanan');
+
+});
