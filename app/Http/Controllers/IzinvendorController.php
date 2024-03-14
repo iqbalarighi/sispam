@@ -22,8 +22,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image as ResizeImage;
 
 class IzinvendorController extends Controller
