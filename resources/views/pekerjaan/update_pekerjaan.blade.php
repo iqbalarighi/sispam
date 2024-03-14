@@ -5,7 +5,7 @@
 <style type="text/css">
     .cen {
     height: auto;
-    margin-top: 50%;
+    margin-top: 40%;
 }
 </style>
 
@@ -161,7 +161,16 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="{{$update == null ? "" : url("update_pekerjaan/".$update->izin_id)}}" onsubmit="{{$update == null ? 'return loads()' : 'return load()'}}">
+                    <form 
+                    action="{{$update == null ? "" : url("update_pekerjaan/".$update->izin_id)}}" 
+                    onsubmit="{{$update == null ? 'return loads()' : 'return load()'}}" 
+                    method="{{$update == null ? "" : "post"}}" 
+                    enctype="multipart/form-data"
+                    >
+                        @csrf
+                        @if($update != null)
+                            @method('PUT')
+                        @endif
                     @if($update == null)
                     <div>
                         Nomor Dokumen
@@ -205,6 +214,14 @@
                             <option value="Continued">Belum Selesai</option>
                         </select>
                     </div>
+                    <div>
+                        <label for="foto">Upload Foto : </label>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
+                    </div>
+                    <div class="form-floating mt-1">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="ket" style="height: 60px;" name="ket"></textarea>
+                      <label for="ket">Keterangan</label>
+                    </div>
                     @endif
 
 
@@ -223,6 +240,18 @@
 
 <script type="text/javascript">
     function load() {
+
+            var $fileUpload = $("input[type='file']");
+            if (parseInt($fileUpload.get(0).files.length)>2){
+                 Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Maksimal upload 2 foto",
+                });
+
+             return false;
+            };
+
                 Swal.fire({
             title: "Loading . . . ",
             text: "Sedang validasi data",
@@ -257,4 +286,5 @@
       }
   });
 </script>
+
 @endsection
