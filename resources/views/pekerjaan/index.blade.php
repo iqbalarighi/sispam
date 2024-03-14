@@ -80,7 +80,14 @@
                         <tr>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$index->firstitem()+$key}}</td> 
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_id}}</td>
-                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->perusahaan_pemohon}}</td>
+                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">
+                                    @if ('Lainnya ' == Str::substr($izin->izin_informasi->perusahaan_pemohon, 0,8))
+                                        {{Str::substr($izin->izin_informasi->perusahaan_pemohon, 8,1000)}}
+                                    @else
+                                        {{$izin->izin_informasi->perusahaan_pemohon}}
+                                    @endif
+
+                            </td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{$izin->izin_informasi->pemohon}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">{{Carbon\Carbon::parse($izin->created_at)->isoFormat('DD/MM/YYYY HH:mm:ss')}}</td>
                             <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer; text-align: center;">

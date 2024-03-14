@@ -58,7 +58,7 @@ class KegiatanController extends Controller
                             ->where('gedung','=', $gd)
                             ->orwhere(function ($query) use ($start , $end){
                                 $query->where('gedung', '=', '16')
-                                ->where('danru','=', 'Rizal Kurnia')
+                                ->where('danru','LIKE','%'.'Rizal Kurnia'.'%')
                                 ->whereBetween('tanggal', [$start, $end]);
                             })
                             ->orderBy('created_at', 'DESC')
@@ -68,7 +68,7 @@ class KegiatanController extends Controller
                 } else {
                  $giats = kegiatanModel::with('site')
                          ->where('gedung', '=', $gd)
-                         ->orwhere([['gedung', '=', '16'],['danru','=','Rizal Kurnia']])
+                         ->orwhere([['gedung', '=', '16'],['danru','LIKE','%'.'Rizal Kurnia'.'%']])
                         ->orderBy('created_at', 'DESC')
                         ->paginate(15); 
                     }
@@ -132,10 +132,20 @@ class KegiatanController extends Controller
 
         } else {
 
+            if (Auth::user()->unit_kerja == "Health, Safety, & Environment" && Auth::user()->name == 'M. Arizal Kurnia'){
+                $giats = kegiatanModel::with('site')
+                ->where('danru','LIKE', '%'.'rizal Kurnia'.'%')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
+            } else {
         $giats = kegiatanModel::with('site')
-        ->where('danru','=', Auth::user()->name)
+        ->where('danru','LIKE', '%'.Auth::user()->name.'%')
         ->orderBy('created_at', 'DESC')
         ->paginate(15);
+                // dd($giats);
+            }
+
+
 
         }
     }

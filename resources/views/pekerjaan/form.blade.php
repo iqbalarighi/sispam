@@ -6,7 +6,24 @@
         <div class="col-md-8 px-0">
             <div class="card">
                 <div class="card-header"><b>{{ __('PERMINTAAN SURAT IZIN KERJA') }}</b></div>
+<style type="text/css">
+    .custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
 
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
                 <div class="card-body px-1 pt-1">
                     @if (session('status'))
 
@@ -167,17 +184,27 @@
                     <div class="col-md-5">
                         <label class="mb-0">
                                             <input type="checkbox" id="clas9" name="klasifikasi[]" onclick="firm()" value="Lain-lain :" /> Lain-lain</label>
-                         <input class="form-control form-control-sm px-1" size="15" type="text" id="nilain" name="klasifikasi[]" />
+                         <input class="form-control form-control-sm px-1" size="15" type="text" id="nilain" name="klasifikasi[]" hidden disabled/>
                     </div>
                 </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <b>B. Informasi Pekerjaan</b> <br>
             <font size="1" color="red">*Kolom bertanda bintang (*) wajib diisi !</font><br>
             <div class="col pe-0"> 
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required>
+                    {{-- <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required> --}}
+
+                    <select class="form-select form-select-sm px-1 text-capitalize" id="perusahaan_pemohon" name="perusahaan_pemohon[]" required>
+                        <option value="" disabled selected>*Perusahaan Pemohon</option>
+                        <option value="PT. Prima Karya Sarana Sejahtera (PT. PKSS)">PT. Prima Karya Sarana Sejahtera (PT. PKSS)</option>
+                        <option value="PT. Kopojeka Daya Indonesia (PT. KDI)">PT. Kopojeka Daya Indonesia (PT. KDI)</option>
+                        <option value="PT. Swadharma Griyasatya (PT. SGRS)">PT. Swadharma Griyasatya (PT. SGRS)</option>
+                        <option value="PT. Bangun Prestasi Bersama (PT. BPB)">PT. Bangun Prestasi Bersama (PT. BPB)</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                    <input class="form-control form-control-sm px-1 mt-1" size="15" type="text" id="perusahaan" name="perusahaan_pemohon[]" hidden disabled placeholder="*Perusahaan Pemohon" />
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -187,24 +214,24 @@
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     {{-- <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="*Lokasi" required> --}}
                     <select class="form-select form-select-sm px-1 text-capitalize" id="lokasi" name="lokasi" required>
-                                <option value="" disabled selected>*Lokasi</option>
-                                <option value="Gedung Soemitro Djojohadikusumo">Gedung Soemitro Djojohadikusumo</option>
-                                <option value="Gedung Wisma Mulia 2">Gedung Wisma Mulia 2</option>
-                                <option value="Gedung Menara Radius Prawiro">Gedung Menara Radius Prawiro</option>
-                                <option value="Rumah Jabatan DK 1">Rumah Jabatan DK 1</option>
-                                <option value="Rumah Jabatan DK 2">Rumah Jabatan DK 2</option>
-                                <option value="Rumah Jabatan DK 3">Rumah Jabatan DK 3</option>
-                                <option value="Rumah Jabatan DK 4">Rumah Jabatan DK 4</option>
-                                <option value="Rumah Jabatan DK 5">Rumah Jabatan DK 5</option>
-                                <option value="Rumah Jabatan DK 6">Rumah Jabatan DK 6</option>
-                                <option value="Rumah Jabatan DK 7">Rumah Jabatan DK 7</option>
-                                <option value="Rumah Jabatan DK 8">Rumah Jabatan DK 8</option>
-                                <option value="Rumah Jabatan DK 9">Rumah Jabatan DK 9</option>
-                                <option value="Gudang Matraman">Gudang Matraman</option>
-                                <option value="Gudang Bekasi">Gudang Bekasi</option>
-                                <option value="Gudang Salemba">Gudang Salemba</option>
-                                <option value="Gudang Cilandak">Gudang Cilandak</option>
-                            </select>
+                        <option value="" disabled selected>*Lokasi</option>
+                        <option value="Gedung Soemitro Djojohadikusumo">Gedung Soemitro Djojohadikusumo</option>
+                        <option value="Gedung Wisma Mulia 2">Gedung Wisma Mulia 2</option>
+                        <option value="Gedung Menara Radius Prawiro">Gedung Menara Radius Prawiro</option>
+                        <option value="Rumah Jabatan DK 1">Rumah Jabatan DK 1</option>
+                        <option value="Rumah Jabatan DK 2">Rumah Jabatan DK 2</option>
+                        <option value="Rumah Jabatan DK 3">Rumah Jabatan DK 3</option>
+                        <option value="Rumah Jabatan DK 4">Rumah Jabatan DK 4</option>
+                        <option value="Rumah Jabatan DK 5">Rumah Jabatan DK 5</option>
+                        <option value="Rumah Jabatan DK 6">Rumah Jabatan DK 6</option>
+                        <option value="Rumah Jabatan DK 7">Rumah Jabatan DK 7</option>
+                        <option value="Rumah Jabatan DK 8">Rumah Jabatan DK 8</option>
+                        <option value="Rumah Jabatan DK 9">Rumah Jabatan DK 9</option>
+                        <option value="Gudang Matraman">Gudang Matraman</option>
+                        <option value="Gudang Bekasi">Gudang Bekasi</option>
+                        <option value="Gudang Salemba">Gudang Salemba</option>
+                        <option value="Gudang Cilandak">Gudang Cilandak</option>
+                    </select>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -292,6 +319,22 @@
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     <input type="number" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" name="lainnya" value="{{ old('lainnya') }}" placeholder="Lainnya">
+                </div>
+                <div class="form-group mb-1 col-md-12" hidden id="foto">
+                    {{-- <label class="mb-0">Pekerjaan</label> --}}
+                    
+
+                    <div class="input-group custom-file-button">
+                    <label class="input-group-text p-1" class="form-control form-control-sm" for="inputGroupFile" style="font-size: 10pt;">Upload KTP</label>
+                    <input style="font-size: 10pt;" 
+                    name="images[]" 
+                    class="form-control form-control-sm p-1" 
+                    id="inputGroupFile" 
+                    type="file" 
+                    accept=".jpg, .jpeg, .png, .bnp" 
+                    multiple 
+                    onclick="alarm()" />
+                  </div>
                 </div>
             </div>
         
@@ -571,12 +614,12 @@
 <script>
 const clas9 = document.querySelector('#clas9');
 const nilain = document.querySelector('#nilain');
-nilain.disabled = true;
-nilain.style.visibility = 'hidden';
+// nilain.disabled = true;
+// nilain.style.visibility = 'hidden';
 
 clas9.addEventListener('change', () => {
   if (clas9.checked) {
-    nilain.style.visibility = 'visible';
+    $("#nilain").removeAttr('hidden');
     nilain.value = '';
     nilain.name = 'klasifikasi[]';
     nilain.required= true;
@@ -584,11 +627,56 @@ clas9.addEventListener('change', () => {
   } else {
     nilain.disabled = true;
     nilain.required = false;
-    nilain.style.visibility = 'hidden';
+    $("#nilain").prop('hidden', true);
     nilain.name = '';
   }
 });
 </script>
+
+<script>
+ // $("#perusahaan").prop('disabled',true);
+ // $("#perusahaan").prop('hidden', true);
+    $("#perusahaan_pemohon").change(function() {
+console.log($("#perusahaan_pemohon").val())
+if ($("#perusahaan_pemohon option:selected").val() == "Lainnya") {
+            $("#perusahaan").removeAttr('disabled');
+            $("#perusahaan").prop('required',true);
+            $("#perusahaan").removeAttr('hidden');
+            $("#foto").prop('required',true);
+            $("#foto").removeAttr('hidden');
+       } else {
+            $("#perusahaan").prop('disabled', true);
+            $("#perusahaan").prop('required', false);
+            $("#perusahaan").prop('hidden', true);
+            $("#foto").prop('required', false);
+            $("#foto").prop('hidden', true);
+       }
+    }); 
+
+function alarm() {
+    alert("Upload foto sesuai dengan jumlah pekerja !");
+}
+// const perusahaan_pemohon = document.querySelector('#perusahaan_pemohon');
+// const perusahaan = document.querySelector('#perusahaan');
+// perusahaan.disabled = true;
+// perusahaan.style.visibility = 'hidden';
+
+// perusahaan_pemohon.addEventListener('change', () => {
+//   if (perusahaan_pemohon.selected) {
+//     perusahaan.style.visibility = 'visible';
+//     perusahaan.value = '';
+//     perusahaan.name = 'klasifikasi[]';
+//     perusahaan.required= true;
+//     perusahaan.disabled = false;
+//   } else {
+//     perusahaan.disabled = true;
+//     perusahaan.required = false;
+//     perusahaan.style.visibility = 'hidden';
+//     perusahaan.name = '';
+//   }
+// });
+</script>
+
 <script>
 const diri21 = document.querySelector('#diri21');
 const lainlain = document.querySelector('#lainlain');

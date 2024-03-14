@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+
 use App\Models\IzininformasiModel;
 use App\Models\IzinkeselamatanModel;
 use App\Models\IzinperalatanModel;
@@ -13,9 +14,12 @@ use App\Models\OtorisasiModel;
 use App\Models\SiteModel;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Validator;
@@ -52,8 +56,13 @@ class IzinvendorController extends Controller
 //     return view('pekerjaan.form', compact('site'));
 
 // }
+
+
+
     public function store(Request $request)
     {
+        // dd($request->file('images'));
+
         $izin = new IzinvendorModel;
 
         $year = Carbon::now()->format('Y');
@@ -109,9 +118,71 @@ class IzinvendorController extends Controller
 // -----------------------------------------------------------------------------------------
 
 // ---------------------------------Informasi-----------------------------------------------
+    //start of validator
+    $input = request()->all();
+
+    $validator = Validator::make($input, [
+        'images' => 'required|array',
+    ],
+    [
+        'images.required' => 'Wajib Foto Dokumentasi',
+    ]);
+
+    if ($validator->fails()) {
+        $messages = $validator->messages();
+        return back()
+            ->withErrors($messages);
+    }
+
+    foreach($input['images'] as $image)
+    {
+        $image = array('images' => $image);
+        $imageValidator = Validator::make($image, [
+             'images' => 'image|mimes:jpeg,png,jpg|max:4096', //2MB 
+            ],
+            [
+                'images.image' => 'Foto Dokumentasi harus berupa Gambar',
+                'images.mimes' => 'File yang diterima hanya format :values',
+                'images.max' => 'Ukuran Foto melebihi 4096 KB (4 MB)',
+            ]);
+
+        if ($imageValidator->fails()) {
+            $messages = $imageValidator->messages();
+            return back()
+                ->withErrors($messages);
+        }
+    }
+//end fo validator
+    $files = $request->file('images');
+
+        $image = [];
+
+        if ($files != null) {
+            foreach ($files as $file) {
+                $image_name = md5(rand(100, 1000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_full_name = $image_name.'.'.$ext;
+                $image_path = public_path('storage/izin_kerja/'.$izin_id.'/');
+                $image_url = $image_path.$image_full_name;
+                $file->move($image_path, $image_full_name);
+                $image[] = $image_full_name;
+            }
+        }
+
     $info = new IzininformasiModel;
 
+        $permon = $request->perusahaan_pemohon;
+    if (is_array($request->perusahaan_pemohon)) {
+        $dian = array_slice($request->perusahaan_pemohon,-2,1);
+        $keja = implode('', $dian);
+        $abc = end($permon);
+        $perusahaan = $keja.' '.$abc;
+    } else {
+       $perusahaan = $request->perusahaan_pemohon;
+    }
+
     $info->izin_id = $izin_id;
+    $info->perusahaan_pemohon = $perusahaan;
     $info->pekerjaan = $request->pekerjaan;
     $info->lokasi = $request->lokasi;
     $info->area = $request->area;
@@ -123,7 +194,6 @@ class IzinvendorController extends Controller
     $info->tel_pengawas = $request->tel_pengawas;
     $info->k3 = $request->k3;
     $info->tel_k3 = $request->tel_k3;
-    $info->perusahaan_pemohon = $request->perusahaan_pemohon;
     $info->pekerja = $request->pekerja;
     $info->enginer = $request->enginer;
     $info->surveyor = $request->surveyor;
@@ -136,6 +206,7 @@ class IzinvendorController extends Controller
     $info->tukang_bangunan = $request->tukang_bangunan;
     $info->tukang_kayu = $request->tukang_kayu;
     $info->lainnya = $request->lainnya;
+    $info->ktp = implode('|', $image);
 // -----------------------------------------------------------------------------------------
 
 // ----------------------Perlengkapan----------------------------------
