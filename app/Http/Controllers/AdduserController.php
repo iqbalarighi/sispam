@@ -39,7 +39,7 @@ class AdduserController extends Controller
     {
     $validator = $request->validate([
     'name' => 'required|min:3|max:50',
-    'email' => 'email',
+    'email' => 'email|unique:users',
     'password' => 'required|confirmed|min:6',
 ]);
 

@@ -2,6 +2,11 @@
 
 @section('content')
 {{-- @if ( Auth::user()->role === 'admin') --}}
+@if(Auth::user()->unit_kerja == 'Teknisi')
+ <script type="text/javascript">
+     window.location.href = '{{route('izin_kerja')}}';
+ </script>
+@endif
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -99,11 +104,26 @@ if (data.datas.giats.length == 0){
                     urls = urel.replace(/\/?(\?|#|$)/, '/$1');
 
                 if (item.status == 'Open'){
+                    let text = item.nm_pt;
+                    if('Lainnya' == text.substring(0, 7)){
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + text.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: red; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    } else {
                     dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: red; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    }
                } else if (item.status == 'On Progress'){
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    let texts = item.nm_pt;
+                    if('Lainnya' == texts.substring(0, 7)){
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + texts.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    } else {
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display    
+                    }
                } else if(item.status == 'Expired') {
+                    let textx = item.nm_pt;
+                    if('Lainnya' == textx.substring(0, 7)){
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + textx.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    } else {
                     dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    }
                }
 
                               });
@@ -326,7 +346,7 @@ if (data.datax.jadi.length == 0){
                 updateGawat();
                 // updateJaga();
                 // updateTimej();
-        }, 31000);
+        }, 30000);
 
 
 </script>

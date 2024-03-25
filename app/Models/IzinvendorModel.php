@@ -19,7 +19,12 @@ class IzinvendorModel extends Model
     protected $fillable = [
         'izin_id',
         'klasifikasi', 
-        'no_dok'
+        'no_dok',
+        'biaya',
+        'risiko',
+        'status',
+        'foto',
+        'ket',
     ];
 
 

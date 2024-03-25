@@ -461,7 +461,32 @@
                             </div>
                     </div>
                     @endif
-@if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
+
+                    
+                    <div class="row p-0 mb-3">
+                        <div class="col-sm-auto px-0">
+                            <center>
+                                <table class="table-sm">
+                                    <tr>
+                    <td style="text-align: center;" colspan="3"><b>Foto KTP Pekerja: </b>
+                            <p></p>
+                            @if ($detail->izin_informasi->ktp != null)
+                    @foreach(explode('|',$detail->izin_informasi->ktp) as $ktp)
+                    <img  src="{{asset('storage/izin_kerja')}}/{{$detail->izin_id}}/{{$ktp}}" style="width:280px; margin-bottom: 5pt"> &nbsp;
+                    @endforeach
+                        @else 
+                        Harap Upload Foto Dokumentasi
+                        @endif
+                        </td>
+                    
+                                    </tr>
+                        </table>
+                            </center>
+                    </div>
+                </div>
+
+
+    @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
                                 <div align="center">
                                     <select id="otorisasi"  required>
                                         <option value="" selected>:: Pilih Otorisasi ::</option>

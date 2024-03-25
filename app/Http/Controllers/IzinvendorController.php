@@ -31,21 +31,48 @@ class IzinvendorController extends Controller
     {
 
         $cari = $request->cari;
-    if ($cari != null) {
-        $index = IzinvendorModel::with(['izin_informasi','izin_validasi'])
-        ->whereRelation('izin_informasi', 'pemohon', 'LIKE', '%'.$cari.'%')
-        ->orwhereRelation('izin_informasi', 'perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
-        ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
-        ->orderBy('created_at', 'DESC')
-        ->paginate(25)
-        ->appends(request()->input());;
+        $start = $request->start;
+        $end = $request->end;
+
+    if ($cari != null && $start != null && $end != null){
+            $index = IzinvendorModel::with('izin_informasi','izin_validasi')
+            ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()])
+            ->whereRelation('izin_informasi', function ($query) use ($cari, $start , $end){
+                        $query->where ('pemohon', 'LIKE', '%'.$cari.'%')
+                            ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()]);
+                    })
+            ->orwhereRelation('izin_informasi', function ($query) use ($cari, $start , $end){
+                        $query->where ('perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
+                            ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()]);
+                    })
+            ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(25);
+
+            $index->appends(['start' => $start, 'end' => $end]);
+        } else if ($start != null && $end != null) {
+            $index = IzinvendorModel::with('izin_informasi','izin_validasi')
+            ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()])
+            ->paginate(25)
+            ->appends(request()->input());
+
+            $index->appends(['start' => $start, 'end' => $end]);
+        } elseif ($cari != null) {
+            $index = IzinvendorModel::with('izin_informasi','izin_validasi')
+            ->whereRelation('izin_informasi', 'pemohon', 'LIKE', '%'.$cari.'%')
+            ->orwhereRelation('izin_informasi', 'perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
+            ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(25);
+
+        $index->appends(['start' => $start, 'end' => $end]);
 
         } else {
             $index = IzinvendorModel::with('izin_informasi','izin_validasi')->orderBy('created_at', 'DESC')->paginate(25);
             }
 
         $valid = IzinvalidasiModel::all();
-        return view('pekerjaan.index', compact('index','valid'));
+        return view('pekerjaan.index', compact('index','valid','cari','start','end'));
     }
 // public function form()
 // {
@@ -117,39 +144,39 @@ class IzinvendorController extends Controller
 
 // ---------------------------------Informasi-----------------------------------------------
     //start of validator
-    $input = request()->all();
+    // $input = request()->all();
 
-    $validator = Validator::make($input, [
-        'images' => 'required|array',
-    ],
-    [
-        'images.required' => 'Wajib Foto Dokumentasi',
-    ]);
+    // $validator = Validator::make($input, [
+    //     'images' => 'required|array',
+    // ],
+    // [
+    //     'images.required' => 'Wajib Foto Dokumentasi',
+    // ]);
 
-    if ($validator->fails()) {
-        $messages = $validator->messages();
-        return back()
-            ->withErrors($messages);
-    }
+    // if ($validator->fails()) {
+    //     $messages = $validator->messages();
+    //     return back()
+    //         ->withErrors($messages);
+    // }
 
-    foreach($input['images'] as $image)
-    {
-        $image = array('images' => $image);
-        $imageValidator = Validator::make($image, [
-             'images' => 'image|mimes:jpeg,png,jpg|max:4096', //2MB 
-            ],
-            [
-                'images.image' => 'Foto Dokumentasi harus berupa Gambar',
-                'images.mimes' => 'File yang diterima hanya format :values',
-                'images.max' => 'Ukuran Foto melebihi 4096 KB (4 MB)',
-            ]);
+    // foreach($input['images'] as $image)
+    // {
+    //     $image = array('images' => $image);
+    //     $imageValidator = Validator::make($image, [
+    //          'images' => 'image|mimes:jpeg,png,jpg|max:4096', //2MB 
+    //         ],
+    //         [
+    //             'images.image' => 'Foto Dokumentasi harus berupa Gambar',
+    //             'images.mimes' => 'File yang diterima hanya format :values',
+    //             'images.max' => 'Ukuran Foto melebihi 4096 KB (4 MB)',
+    //         ]);
 
-        if ($imageValidator->fails()) {
-            $messages = $imageValidator->messages();
-            return back()
-                ->withErrors($messages);
-        }
-    }
+    //     if ($imageValidator->fails()) {
+    //         $messages = $imageValidator->messages();
+    //         return back()
+    //             ->withErrors($messages);
+    //     }
+    // }
 //end fo validator
     $files = $request->file('images');
 
@@ -1215,20 +1242,20 @@ $bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
             } elseif ($bulan == '12'){
                 $romawi = 'XII';
             } 
-$expired = Carbon::parse($detail->izin_validasi->updated_at)->addHours(12);
+$expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
 
 $text = 
 "Nama: ".$otor->nama."
 Jabatan : ".$otor->jabatan."
 NIP : ".$otor->nip."
-Tanggal Validasi ".Carbon::parse($detail->izin_validasi->updated_at)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text);
 $text2 = 
 "Nama: ".Auth::user()->name."
 Jabatan : ".Auth::user()->unit_kerja."
-Tanggal Validasi ".Carbon::parse($detail->izin_validasi->updated_at)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text2);
@@ -1390,4 +1417,62 @@ public function hapus($izinid)
         return response()->json($data);
         
     }
+
+
+    public function izinkerja1($cari, $start, $end)
+    {
+        $index = IzinvendorModel::with('izin_informasi','izin_validasi')
+        ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()])
+        ->whereRelation('izin_informasi', function ($query) use ($cari, $start , $end){
+                    $query->where ('pemohon', 'LIKE', '%'.$cari.'%')
+                        ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()]);
+                })
+        ->orwhereRelation('izin_informasi', function ($query) use ($cari, $start , $end){
+                    $query->where ('perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
+                        ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()]);
+                })
+        ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(100000000);
+
+        $index->appends(['start' => $start, 'end' => $end]);
+
+        $pdf = PDF::loadView('pekerjaan.izinpdf', compact('index', 'cari', 'start', 'end'))->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Izin Kerja '.$cari.'.pdf');
+    }
+
+public function izinkerja2($start, $end)
+{
+    $cari = null;
+        $index = IzinvendorModel::with('izin_informasi','izin_validasi')
+            ->whereBetween('created_at', [Carbon::createFromFormat('Y-m-d', $start)->startOfDay(), Carbon::createFromFormat('Y-m-d', $end)->endOfDay()])
+            ->paginate(100000000)
+            ->appends(request()->input());
+
+            $index->appends(['start' => $start, 'end' => $end]);
+        
+        $pdf = PDF::loadView('pekerjaan.izinpdf', compact('index','cari', 'start', 'end'))->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Izin Kerja '.Carbon::parse($start)->isoFormat('DD-MM-YY').'-'.Carbon::parse($end)->isoFormat('DD-MM-YY').'.pdf');
+}
+
+public function izinkerja3($cari)
+{
+    $start = null;
+    $end = null;
+        $index = IzinvendorModel::with(['izin_informasi','izin_validasi'])
+            ->whereRelation('izin_informasi', 'pemohon', 'LIKE', '%'.$cari.'%')
+            ->orwhereRelation('izin_informasi', 'perusahaan_pemohon', 'LIKE', '%'.$cari.'%')
+            ->orwhere('izin_id', 'LIKE', '%'.$cari.'%')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10000000)
+            ->appends(request()->input());
+
+
+        $pdf = PDF::loadView('pekerjaan.izinpdf', compact('index', 'cari', 'start', 'end'))->setPaper('a4', 'landscape');
+
+        return $pdf->stream('Laporan Izin Kerja '.$cari.'.pdf');
+}
+
 } 

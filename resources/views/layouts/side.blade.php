@@ -180,7 +180,7 @@
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading ">SISPAM</div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
 {{--     @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
@@ -239,6 +239,16 @@
         </div>
         </div>
         <!-- /#sidebar-wrapper -->
+        @elseif(Auth::user()->unit_kerja == 'Teknisi')
+        <div class="d-flex " id="wrapper">
+        <!-- Sidebar -->
+        
+        <div class="bg-light border-right " id="sidebar-wrapper">
+        <div class="list-group list-group-flush sticky-top">
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
+        <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+        </div>
+        </div>
 
     @endif
 
@@ -534,6 +544,7 @@ function myFunction3() {
 }
 </script>
 @endif
+@if(Auth::user()->role == 'admin' or Auth::user()->level == 'danru')
 <script>
     var z = document.getElementById("ubah");
     var y = document.getElementById("collapseExample");
@@ -550,6 +561,7 @@ function myFunction3() {
   }
 }
 </script>
+
 <script>
     var d = document.getElementById("changeSmc");
     var a = document.getElementById("smc");
@@ -566,6 +578,7 @@ function myFunction3() {
   }
 }
 </script>
+
 <script>
     var d = document.getElementById("changeHSE");
     var a = document.getElementById("hse");
@@ -582,4 +595,5 @@ function myFunction3() {
   }
 }
 </script>
+@endif
 </html>

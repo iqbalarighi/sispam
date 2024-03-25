@@ -196,7 +196,7 @@
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     {{-- <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required> --}}
 
-                    <select class="form-select form-select-sm px-1 text-capitalize" id="perusahaan_pemohon" name="perusahaan_pemohon[]" required>
+                    <select class="form-select form-select-sm px-1 text-capitalize" id="perusahaan_pemohon" name="perusahaan_pemohon" required>
                         <option value="" disabled selected>*Perusahaan Pemohon</option>
                         <option value="PT. Prima Karya Sarana Sejahtera (PT. PKSS)">PT. Prima Karya Sarana Sejahtera (PT. PKSS)</option>
                         <option value="PT. Kopojeka Daya Indonesia (PT. KDI)">PT. Kopojeka Daya Indonesia (PT. KDI)</option>
@@ -204,7 +204,7 @@
                         <option value="PT. Bangun Prestasi Bersama (PT. BPB)">PT. Bangun Prestasi Bersama (PT. BPB)</option>
                         <option value="Lainnya">Lainnya</option>
                     </select>
-                    <input class="form-control form-control-sm px-1 mt-1" size="15" type="text" id="perusahaan" name="perusahaan_pemohon[]" hidden disabled placeholder="*Perusahaan Pemohon" />
+                    <input class="form-control form-control-sm px-1 mt-1" size="15" type="text" id="perusahaan" hidden disabled placeholder="*Perusahaan Pemohon" />
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -639,16 +639,20 @@ clas9.addEventListener('change', () => {
     $("#perusahaan_pemohon").change(function() {
 console.log($("#perusahaan_pemohon").val())
 if ($("#perusahaan_pemohon option:selected").val() == "Lainnya") {
+            $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon[]');
+            $("#perusahaan").attr('name', 'perusahaan_pemohon[]');
             $("#perusahaan").removeAttr('disabled');
             $("#perusahaan").prop('required',true);
             $("#perusahaan").removeAttr('hidden');
-            $("#foto").prop('required',true);
             $("#foto").removeAttr('hidden');
+            $("#inputGroupFile").prop('required',true);
        } else {
+            $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+            $("#perusahaan").removeAttr('name');
             $("#perusahaan").prop('disabled', true);
             $("#perusahaan").prop('required', false);
             $("#perusahaan").prop('hidden', true);
-            $("#foto").prop('required', false);
+            $("#inputGroupFile").prop('required', false);
             $("#foto").prop('hidden', true);
        }
     }); 
@@ -999,7 +1003,6 @@ function con(){
         dr19.required = true;
         dr20.required = true;
         dr21.required = true;
-
     }
 }
 </script>
@@ -1082,7 +1085,7 @@ function kap(){
     function comma(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode == 44 || charCode == 46 || charCode == 55 || charCode == 108 ) {
+    if (charCode == 44 || charCode == 46 || charCode == 55 ) {
         return false;
     }
     return true;

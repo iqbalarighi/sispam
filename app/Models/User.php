@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'role',
         'level',
+        'unit_kerja',
         'lokasi_tugas',
         'password',
     ];

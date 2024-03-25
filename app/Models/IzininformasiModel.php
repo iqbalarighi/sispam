@@ -37,6 +37,7 @@ class IzininformasiModel extends Model
         'tukang_bangunan',
         'tukang_kayu',
         'lainnya',
+        'ktp',
     ];
 
 public function izinvendor()

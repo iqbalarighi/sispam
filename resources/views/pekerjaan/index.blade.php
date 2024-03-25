@@ -57,9 +57,41 @@
                         }
                    </style>
 
-                   <form action="" method="GET" class="mb-2" >
-                    <input type="cari" name="cari" placeholder="Cari" autocomplete="off"> <button class="submit bi bi-search"></button>
+            <div class="row">
+                <div class="col-md-10">
+                <form action="" method="GET" class="mb-2" id="carii">
+                    <div class="col-sm-4 float-start mb-1 px-1" style="display: inline-block;">
+                        <input type="text" class="form-control form-control-sm" name="cari" placeholder="Cari" autocomplete="off" id="cari" value="{{$cari ? $cari:''}}"> 
+                    </div>
+            @if(Auth::user()->role == "admin" or Auth::user()->unit_kerja == "Teknisi" or Auth::user()->unit_kerja == "Health, Safety, & Environment")
+                    <div class="col-sm-3 float-start mb-1 px-1" style="display: inline-block; ">
+                      <input type="text" class="form-control form-control-sm" id="start" name="start" value="{{$start ? Carbon\Carbon::parse($start)->isoFormat('MM/DD/YYYY'):''}}" placeholder="Tanggal Awal" onfocus="(this.type='date')" onblur="(this.type='date')">
+                    </div>
+                    <div class="col-sm-3 float-start mb-1 px-1" style="display: inline-block; ">
+                      <input type="text" class="form-control form-control-sm" id="end" name="end" value="{{$end ? Carbon\Carbon::parse($end)->isoFormat('MM/DD/YYYY'):''}}" placeholder="Tangal Akhir" onfocus="(this.type='date')" onblur="(this.type='date')">
+                    </div>
+            @endif
+                    <div class="float-start col-sm-2 mb-1 px-1 ">
+                        <span class="mx-1 btn btn-sm float-end " style="display: inline-block; background-color: lightgrey;" id="reset"> Reset </span>
+                        <button class="submit bi bi-search mx-1 float-end " style="display: inline-block;"></button> &nbsp;
+                    </div>
                 </form>
+                </div>
+            @if(Auth::user()->role == "admin" or Auth::user()->unit_kerja == "Teknisi" or Auth::user()->unit_kerja == "Health, Safety, & Environment")
+                <div class="col-md-2 float-end">
+                    @if($cari or $start)
+                        @if($cari == null)
+                     {{-- <button class="btn btn-sm float-end btn-primary mr-1">Download</button> --}}
+                            <a href="izinkerja/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-end mr-1">Download</span></a>
+                        @elseif($start == null)
+                    <a href="izinkerja/{{$cari}}/" target="_blank"><span class="btn btn-primary btn-sm float-end mr-1">Download</span></a>
+                        @else
+                    <a href="izinkerja/{{$cari}}/{{$start}}/{{$end}}" target="_blank"><span class="btn btn-primary btn-sm float-end mr-1">Download</span></a>
+                        @endif
+                    @endif 
+                </div>
+            @endif
+            </div>
 
             <div class="table-responsive-sm overflow" style="overflow-x: auto; height: 75vh;">
                 <table class="table table-striped table-hover table-sm align-middle sticky-header">
@@ -181,7 +213,14 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+     $("#reset").click(function() {
+        $("#cari").val(null);
+        $("#start").val(null);
+        $("#end").val(null);
+        $("#carii").submit();
+     });
+</script>
 
 @endsection
 {{-- @foreach (explode(',',$izin->izin_perlengkapan->alat) as $item) {{$item}}<br> @endforeach --}}
