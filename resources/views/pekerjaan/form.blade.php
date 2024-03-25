@@ -5,7 +5,14 @@
     <div class="row justify-content-center" id="target">
         <div class="col-md-8 px-0">
             <div class="card">
-                <div class="card-header"><b>{{ __('PERMINTAAN SURAT IZIN KERJA') }}</b></div>
+                <div class="card-header">
+                    <b>{{ __('PERMINTAAN SURAT IZIN KERJA') }}</b>
+                <div class="col-sm-0 float-end" onclick="quest()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-question-fill" viewBox="0 0 16 16">
+                  <path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627"></path>
+                </svg>
+                </div>
+                </div>
 <style type="text/css">
     .custom-file-button input[type=file] {
   margin-left: -2px !important;
@@ -24,39 +31,45 @@
   cursor: pointer;
 }
 </style>
+
+    @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+<script type="text/javascript">
+function quest() {
+        Swal.fire({
+  title: "Hubungi Kami",
+  html: `
+    Jika ada pertanyaa lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
+    <br/>
+    <br/>
+    <a target="_blank" href="https://wa.me/628119809606"><img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" /></a>
+  `,
+  icon: "warning",
+  showCancelButton: false,
+  showConfirmButton: false,
+});
+}
+</script>
+@else
+<script type="text/javascript">
+function quest() {
+        Swal.fire({
+  title: "Hubungi Kami",
+  html: `
+    Jika ada pertanyaa lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
+    <br/>
+    <br/>
+    <a target="_blank" href="https://wa.me/6285223442696"><img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" /></a>
+  `,
+  icon: "warning",
+  showCancelButton: false,
+  showConfirmButton: false,
+});
+}
+</script>
+@endif
                 <div class="card-body px-1 pt-1">
                     @if (session('status'))
-
-                            @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000)
-                                <script>
-                                Swal.fire({
-                                  title: "Berhasil",
-                                  text:  "{{ session('status') }}",
-                                  icon: "success",
-                                  showConfirmButton: false,
-                                  timer: 1500
-                                });
-
-                        setTimeout(function () {
-                               Swal.fire({
-                                      title: "Perhatian",
-                                      icon: "info",
-                                      html: `
-                                        Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
-                                        <br>
-                                        <br>
-                                        <a aria-label="Chat on WhatsApp" href="https://wa.me/628119809606?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
-                                        <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
-                                        <a />
-                                      `,
-                                  showConfirmButton: false,
-                                  allowOutsideClick: false,
-
-                                        });
-                            }, 1700); 
-                                
-                        </script>
-                            @elseif (Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+                            @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
                                 <script>
                                 Swal.fire({
                                   title: "Berhasil",
@@ -115,7 +128,6 @@
                                 
                         </script>
                             @endif
-                        
                     @endif
             <form action="{{route('simpan_izin')}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return loding(this);">
                 @csrf
