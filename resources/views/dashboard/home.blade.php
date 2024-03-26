@@ -120,9 +120,9 @@ if (data.datas.giats.length == 0){
                } else if(item.status == 'Expired') {
                     let textx = item.nm_pt;
                     if('Lainnya' == textx.substring(0, 7)){
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + textx.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + textx.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold; text-shadow: 1px 1px 3px #000000;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
                     } else {
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
+                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold; text-shadow: 1px 1px 3px #000000;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
                     }
                }
 
@@ -233,13 +233,13 @@ if (data.datax.jadi.length == 0){
 
             if (item.jenis_bencana.includes('Man-made Hazard')){
                     if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana.slice(18, 1000) +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana.slice(18, 1000) +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red; text-shadow: 1px 1px 5px #000000;"><b>' + item.status +'</b></span></td></tr>');
                     } else {
                         dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana.slice(18, 1000) +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
                     }
             } else {
                         if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
+                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red; text-shadow: 1px 1px 5px #000000;"><b>' + item.status +'</b></span></td></tr>');
                     } else {
                         dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
                     }

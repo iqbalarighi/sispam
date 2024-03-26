@@ -101,7 +101,7 @@
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
     @if ( Auth::user()->level === 'superadmin')
         <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
@@ -180,7 +180,7 @@
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
 {{--     @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
@@ -245,7 +245,7 @@
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
         <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
         </div>
         </div>
@@ -264,7 +264,7 @@
             <button class="navbar-toggler me-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent jam">
             
                         <!-- Authentication Links -->
                         
@@ -299,7 +299,26 @@
     </div>
 </div>
 </body>
-
+    <script type="text/javascript">
+        window.onload = function() { jam(); }
+       
+        function jam() {
+            var e = document.getElementById('jam'),
+            d = new Date(), h, m, s;
+            h = d.getHours();
+            m = set(d.getMinutes());
+            s = set(d.getSeconds());
+       
+            e.innerHTML = h +':'+ m +':'+ s;
+       
+            setTimeout('jam()', 1000);
+        }
+       
+        function set(e) {
+            e = e < 10 ? '0'+ e : e;
+            return e;
+        }
+    </script>
         <!-- /#page-content-wrapper -->
          
         <!-- /#wrapper -->
