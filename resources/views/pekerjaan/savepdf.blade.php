@@ -168,7 +168,7 @@ pre {
                                 </div>
                             <div class="col-sm-auto" style="width:auto; display:inline-block; vertical-align: top;">
                                 
-                                <table class="xsxs" width="auto">
+                                <table class="xsxs" width="500px">
                                     <tr>
                                         <td class="td">Perusahaan Pemohon</td>
                                         <td>:</td>
@@ -185,12 +185,12 @@ pre {
                                         <td>{{$detail->izin_informasi->lokasi}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Area</td>
+                                        <td>Area/Lantai</td>
                                         <td>:</td>
                                         <td>{{$detail->izin_informasi->area}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Plant</td>
+                                        <td>Ruangan</td>
                                         <td>:</td>
                                         <td>{{$detail->izin_informasi->plant!=null ? $detail->izin_informasi->plant : '-' }}</td>
                                     </tr>
@@ -231,7 +231,7 @@ pre {
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-sm-auto" style="width: auto; margin-left: 100px; display:inline-block; vertical-align: top;">
+                            <div class="col-sm-auto" style="width: auto; margin-left: 50px; display:inline-block; vertical-align: top;">
                                 <table class=" xsxs" width="auto">
                                     <tr>
                                         <td>Daftar Pekerja</td>

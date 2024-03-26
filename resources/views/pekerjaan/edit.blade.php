@@ -252,11 +252,11 @@ clas9.addEventListener('change', () => {
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ $detail->izin_informasi->area }}" placeholder="Area" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ $detail->izin_informasi->area }}" placeholder="Area/Lantai" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ $detail->izin_informasi->plant }}" placeholder="Plant">
+                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ $detail->izin_informasi->plant }}" placeholder="Ruangan">
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
