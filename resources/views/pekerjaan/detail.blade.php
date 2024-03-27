@@ -55,7 +55,15 @@
 
                                     <tr>
                                         <td class="td">Perusahaan Pemohon</td>
-                                        <td>{{$detail->izin_informasi->perusahaan_pemohon}}</td>
+                                        <td>
+                                    @if ('Lainnya ' == Str::substr($detail->izin_informasi->perusahaan_pemohon, 0,8))
+                                        {{Str::substr($detail->izin_informasi->perusahaan_pemohon, 8,1000)}}
+                                    @else
+                                        {{$detail->izin_informasi->perusahaan_pemohon}}
+                                    @endif
+                                        </td>
+
+
                                     </tr>
                                     <tr>
                                         <td>Pekerjaan</td>
