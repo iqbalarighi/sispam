@@ -252,11 +252,11 @@ clas9.addEventListener('change', () => {
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ $detail->izin_informasi->area }}" placeholder="Area" required>
+                    <input type="text" class="form-control form-control-sm px-1" name="area" value="{{ $detail->izin_informasi->area }}" placeholder="Area/Lantai" required>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ $detail->izin_informasi->plant }}" placeholder="Plant">
+                    <input type="text" class="form-control form-control-sm px-1" name="plant" value="{{ $detail->izin_informasi->plant }}" placeholder="Ruangan">
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -1167,7 +1167,7 @@ clas9.addEventListener('change', () => {
                                     <tr>
                                         <td>
                                             @if('Lainnya' === Str::substr($pdiri, 0,7))
-                                            {{Str::substr($pdiri, 8,1000)}}
+                                            {{Str::substr($pdiri, 10,1000)}}
                                             @else
                                             {{$pdiri}}
                                             @endif
@@ -1221,7 +1221,7 @@ clas9.addEventListener('change', () => {
                                     <tr>
                                         <td>
                                             @if('Lainnya' === Str::substr($lengkap, 0,7))
-                                            {{Str::substr($lengkap, 8,1000)}}
+                                            {{Str::substr($lengkap, 10,1000)}}
                                             @else
                                             {{$lengkap}}
                                             @endif
@@ -1297,48 +1297,48 @@ clas9.addEventListener('change', () => {
             <tr style="font-size: 10pt; ">
                 <td width="auto">
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri1" name="pelindung_diri[]" {{ in_array('Helm', $pds) ? 'checked' : '' }} value="Helm" /> Helm</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri1" name="pelindung_diri[]" {{ in_array('Helm', $pds) ? 'checked' : '' }} value="Helm" /> Helm</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri2" name="pelindung_diri[]" {{ in_array('Kacamata', $pds) ? 'checked' : ''}} value="Kacamata"/> Kacamata</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri2" name="pelindung_diri[]" {{ in_array('Kacamata', $pds) ? 'checked' : ''}} value="Kacamata"/> Kacamata</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri3" name="pelindung_diri[]" {{ in_array('Googles', $pds) ? 'checked' : ''}} value="Googles"/> Googles</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri3" name="pelindung_diri[]" {{ in_array('Googles', $pds) ? 'checked' : ''}} value="Googles"/> Googles</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri4" name="pelindung_diri[]" {{ in_array('Tameng Muka', $pds) ? 'checked' : ''}} value="Tameng Muka"/> Tameng Muka</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri4" name="pelindung_diri[]" {{ in_array('Tameng Muka', $pds) ? 'checked' : ''}} value="Tameng Muka"/> Tameng Muka</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri5" name="pelindung_diri[]" {{ in_array('Kap Las', $pds) ? 'checked' : ''}} value="Kap Las" /> Kap Las</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri5" name="pelindung_diri[]" {{ in_array('Kap Las', $pds) ? 'checked' : ''}} value="Kap Las" /> Kap Las</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri6" name="pelindung_diri[]" {{ in_array('Masker Kain', $pds) ? 'checked' : ''}} value="Masker Kain" /> Masker Kain</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri6" name="pelindung_diri[]" {{ in_array('Masker Kain', $pds) ? 'checked' : ''}} value="Masker Kain" /> Masker Kain</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con()" id="diri7" name="pelindung_diri[]" {{ in_array('Masker Kimia', $pds) ? 'checked' : ''}} value="Masker Kimia" /> Masker Kimia</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri7" name="pelindung_diri[]" {{ in_array('Masker Kimia', $pds) ? 'checked' : ''}} value="Masker Kimia" /> Masker Kimia</label>
                     </div>
                 </td>
                 <td width="auto">
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri8" name="pelindung_diri[]" {{in_array('Earplug / Earmuff', $pds ) ? 'checked' : ''}} value="Earplug / Earmuff" /> Earplug/Earmuff</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri8" name="pelindung_diri[]" {{in_array('Earplug / Earmuff', $pds ) ? 'checked' : ''}} value="Earplug / Earmuff" /> Earplug/Earmuff</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri9" name="pelindung_diri[]" {{in_array('Sarung tangan katun', $pds ) ? 'checked' : ''}} value="Sarung tangan katun" /> Sarung tangan katun</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri9" name="pelindung_diri[]" {{in_array('Sarung tangan katun', $pds ) ? 'checked' : ''}} value="Sarung tangan katun" /> Sarung tangan katun</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri10" name="pelindung_diri[]" {{in_array('Sarung tangan karet', $pds ) ? 'checked' : ''}} value="Sarung tangan karet" /> Sarung tangan karet</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri10" name="pelindung_diri[]" {{in_array('Sarung tangan karet', $pds ) ? 'checked' : ''}} value="Sarung tangan karet" /> Sarung tangan karet</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri11" name="pelindung_diri[]" {{in_array('Sarung tangan kulit', $pds ) ? 'checked' : ''}} value="Sarung tangan kulit" /> Sarung tangan kulit</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri11" name="pelindung_diri[]" {{in_array('Sarung tangan kulit', $pds ) ? 'checked' : ''}} value="Sarung tangan kulit" /> Sarung tangan kulit</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri12" name="pelindung_diri[]" {{in_array('Sarung tangan las', $pds ) ? 'checked' : ''}} value="Sarung tangan las" /> Sarung tangan las</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri12" name="pelindung_diri[]" {{in_array('Sarung tangan las', $pds ) ? 'checked' : ''}} value="Sarung tangan las" /> Sarung tangan las</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri13" name="pelindung_diri[]" {{in_array('Sabuk keselamatan' , $pds )? 'checked' : ''}} value="Sabuk keselamatan" /> Sabuk keselamatan</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri13" name="pelindung_diri[]" {{in_array('Sabuk keselamatan' , $pds )? 'checked' : ''}} value="Sabuk keselamatan" /> Sabuk keselamatan</label>
                     </div>
                     <div>
-                        <label class="mb-0"><input type="checkbox" onclick="con1()" id="diri14" name="pelindung_diri[]" {{in_array('Full body harness', $pds ) ? 'checked' : ''}} value="Full body harness" /> Full body harness</label>
+                        <label class="mb-0"><input type="checkbox" onclick="con2()" id="diri14" name="pelindung_diri[]" {{in_array('Full body harness', $pds ) ? 'checked' : ''}} value="Full body harness" /> Full body harness</label>
                     </div>
                 </td>
                 <td width="auto">
@@ -1424,139 +1424,6 @@ clas9.addEventListener('change', () => {
                         </div>
 
 
-                    @if (($detail->izin_validasi->nm_pmhn_granted || $detail->izin_validasi->nm_pmhn_ovtme || $detail->izin_validasi->nm_pmhn_denied) != null)
-                    <div class="row p-0 mb-3">
-                        <b class="px-0">F. Izin Validasi</b> 
-                        <div class="col-sm-auto px-0">
-                                <table class="table-sm table-bordered ">
-                                    <tr align="center" >
-                                        <th style="vertical-align: middle;" colspan="2">Izin Diberikan</th>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <th style="vertical-align: middle;" colspan="2">Izin Lembur</th>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <th style="vertical-align: middle;" colspan="2">Izin Dibatalkan</th>
-                                    @endif
-                                    </tr>
-
-                                    <tr>
-                                        <td>Mulai Jam</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->mulai_granted}}</td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <td>Mulai Jam</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->mulai_ovtme}}</td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <td>Mulai Jam</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->mulai_denied}}</td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Sampai</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->sampai_granted}}</td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <td>Sampai</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->sampai_ovtme}}</td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <td>Sampai</td>
-                                        <td style="text-align: center;">{{$detail->izin_validasi->sampai_denied}}</td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <th>Nama Pemohon</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmhn_granted}} <br>
-                                            {{$detail->izin_validasi->tgl_pmhn_granted != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmhn_granted)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <th>Nama Pemohon</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmhn_ovtme}} <br>
-                                            {{$detail->izin_validasi->tgl_pmhn_ovtme != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmhn_ovtme)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <th>Nama Pemohon</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmhn_denied}} <br>
-                                            {{$detail->izin_validasi->tgl_pmhn_denied != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmhn_denied)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal Permohonan</td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <td>Tanggal Permohonan</td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <td>Tanggal Permohonan</td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <th>Nama Pemeriksa</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmrks_granted}} <br>
-                                            {{$detail->izin_validasi->tgl_pmrks_granted != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmrks_granted)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <th>Nama Pemeriksa</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmrks_ovtme}} <br>
-                                            {{$detail->izin_validasi->tgl_pmrks_ovtme != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmrks_ovtme)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <th>Nama Pemeriksa</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pmrks_denied}} <br>
-                                            {{$detail->izin_validasi->tgl_pmrks_denied != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pmrks_denied)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal Pemeriksaan</td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <td>Tanggal Pemeriksaan</td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <td>Tanggal Pemeriksaan</td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <th>Nama Pengawas</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pngws_granted}} <br>
-                                            {{$detail->izin_validasi->tgl_pngws_granted != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pngws_granted)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <th>Nama Pengawas</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pngws_ovtme}} <br>
-                                            {{$detail->izin_validasi->tgl_pngws_ovtme != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pngws_ovtme)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <th>Nama Pengawas</th>
-                                        <td rowspan="2" style="vertical-align: middle; text-align: center;">
-                                            {{$detail->izin_validasi->nm_pngws_denied}} <br>
-                                            {{$detail->izin_validasi->tgl_pngws_denied != null ? \Carbon\Carbon::parse($detail->izin_validasi->tgl_pngws_denied)->isoFormat("DD MMMM YYYY") : "-"}}
-                                        </td>
-                                    @endif
-                                    </tr>
-                                    <tr>
-                                        <td>Tanggal Pengawasan</td>
-                                    @if($detail->izin_validasi->nm_pmhn_ovtme != null)
-                                        <td>Tanggal Pengawasan</td>
-                                    @endif
-                                    @if($detail->izin_validasi->nm_pmhn_denied != null)
-                                        <td>Tanggal Pengawasan</td>
-                                    @endif
-                                    </tr>
-                                </table>
-                            </div>
-                    </div>
-                    @endif
                     </div>
                 </div>
             </div>
@@ -1629,7 +1496,7 @@ if (diri21.checked) {
     lainlain.name = 'pelindung_diri[]';
     lainlain.required= true;
     lainlain.disabled = false;
-    lainlain.value = '{{Str::substr(end($pds), 8,1000)}}';
+    lainlain.value = '{{Str::substr(end($pds), 10,1000)}}';
 }
 
 diri21.addEventListener('change', () => {
@@ -1657,7 +1524,7 @@ if (pan7.checked) {
     lainlain2.name = 'perlengkapan[]';
     lainlain2.required= true;
     lainlain2.disabled = false;
-    lainlain2.value = '{{Str::substr(end($leng), 8,1000)}}';
+    lainlain2.value = '{{Str::substr(end($leng), 10,1000)}}';
 }
 
 pan7.addEventListener('change', () => {
@@ -1675,7 +1542,7 @@ pan7.addEventListener('change', () => {
   }
 });
 </script>
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 
        var dr1 = document.getElementById("diri1");
        var dr2 = document.getElementById("diri2");
@@ -1732,8 +1599,8 @@ function con(){
          dr6.required = true;
          dr7.required = true;
      }
-</script>
-<script type="text/javascript">
+</script> --}}
+{{-- <script type="text/javascript">
    var dr8 = document.getElementById("diri8");
    var dr9 = document.getElementById("diri9");
    var dr10 = document.getElementById("diri10");
@@ -1788,8 +1655,22 @@ function con(){
         dr13.required = true;
         dr14.required = true;
     }
-</script>
+</script> --}}
 <script type="text/javascript">
+var dr1 = document.getElementById("diri1");
+   var dr2 = document.getElementById("diri2");
+   var dr3 = document.getElementById("diri3");
+   var dr4 = document.getElementById("diri4");
+   var dr5 = document.getElementById("diri5");
+   var dr6 = document.getElementById("diri6");
+   var dr7 = document.getElementById("diri7");
+   var dr8 = document.getElementById("diri8");
+   var dr9 = document.getElementById("diri9");
+   var dr10 = document.getElementById("diri10");
+   var dr11 = document.getElementById("diri11");
+   var dr12 = document.getElementById("diri12");
+   var dr13 = document.getElementById("diri13");
+   var dr14 = document.getElementById("diri14");
    var dr15 = document.getElementById("diri15");
    var dr16 = document.getElementById("diri16");
    var dr17 = document.getElementById("diri17");
@@ -1798,6 +1679,20 @@ function con(){
    var dr20 = document.getElementById("diri20");
    var dr21 = document.getElementById("diri21");
 
+     dr1.required = true;
+     dr2.required = true;
+     dr3.required = true;
+     dr4.required = true;
+     dr5.required = true;
+     dr6.required = true;
+     dr7.required = true;
+     dr8.required = true;
+     dr9.required = true;
+    dr10.required = true;
+    dr11.required = true;
+    dr12.required = true;
+    dr13.required = true;
+    dr14.required = true;
     dr15.required = true;
     dr16.required = true;
     dr17.required = true;
@@ -1807,7 +1702,21 @@ function con(){
     dr21.required = true;
 
     function con2(){
-        if ((dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+        if ((dr1.checked || dr2.checked || dr3.checked || dr4.checked || dr5.checked || dr6.checked || dr7.checked || dr8.checked || dr9.checked || dr10.checked || dr11.checked || dr12.checked || dr13.checked || dr14.checked || dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+         dr1.required = false;
+         dr2.required = false;
+         dr3.required = false;
+         dr4.required = false;
+         dr5.required = false;
+         dr6.required = false;
+         dr7.required = false;
+         dr8.required = false;
+         dr9.required = false;
+        dr10.required = false;
+        dr11.required = false;
+        dr12.required = false;
+        dr13.required = false;
+        dr14.required = false;
         dr15.required = false;
         dr16.required = false;
         dr17.required = false;
@@ -1816,6 +1725,20 @@ function con(){
         dr20.required = false;
         dr21.required = false;
     } else {
+         dr1.required = true;
+         dr2.required = true;
+         dr3.required = true;
+         dr4.required = true;
+         dr5.required = true;
+         dr6.required = true;
+         dr7.required = true;
+         dr8.required = true;
+         dr9.required = true;
+        dr10.required = true;
+        dr11.required = true;
+        dr12.required = true;
+        dr13.required = true;
+        dr14.required = true;
         dr15.required = true;
         dr16.required = true;
         dr17.required = true;
@@ -1826,7 +1749,21 @@ function con(){
     }
 }
 
-        if ((dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+        if ((dr1.checked || dr2.checked || dr3.checked || dr4.checked || dr5.checked || dr6.checked || dr7.checked || dr8.checked || dr9.checked || dr10.checked || dr11.checked || dr12.checked || dr13.checked || dr14.checked || dr15.checked || dr16.checked || dr17.checked || dr18.checked || dr19.checked || dr20.checked || dr21.checked) === true ) {
+         dr1.required = false;
+         dr2.required = false;
+         dr3.required = false;
+         dr4.required = false;
+         dr5.required = false;
+         dr6.required = false;
+         dr7.required = false;
+         dr8.required = false;
+         dr9.required = false;
+        dr10.required = false;
+        dr11.required = false;
+        dr12.required = false;
+        dr13.required = false;
+        dr14.required = false;
         dr15.required = false;
         dr16.required = false;
         dr17.required = false;
@@ -1835,6 +1772,20 @@ function con(){
         dr20.required = false;
         dr21.required = false;
     } else {
+        dr1.required = true;
+         dr2.required = true;
+         dr3.required = true;
+         dr4.required = true;
+         dr5.required = true;
+         dr6.required = true;
+         dr7.required = true;
+         dr8.required = true;
+         dr9.required = true;
+        dr10.required = true;
+        dr11.required = true;
+        dr12.required = true;
+        dr13.required = true;
+        dr14.required = true;
         dr15.required = true;
         dr16.required = true;
         dr17.required = true;

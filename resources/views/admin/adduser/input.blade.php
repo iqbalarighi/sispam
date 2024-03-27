@@ -81,18 +81,18 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="name" id="name" placeholder="Nama" required></td> 
+                        <td><input type="text" class="form-control form-control-sm pb-0 pt-0" name="name" id="name" placeholder="Nama" required></td> 
                     </tr>
                     <tr>
                         <td>Email</td>
                         <td>:</td>
-                        <td><input type="text" class="form-control pb-0 pt-0" name="email" id="email" placeholder="Email" required></td>
+                        <td><input type="text" class="form-control form-control-sm pb-0 pt-0" name="email" id="email" placeholder="Email" required></td>
                     </tr>
                     <tr>
                         <td>Role</td>
                         <td>:</td>
                         <td>
-                            <select class="form-select" name="role" id="role" required>
+                            <select class="form-select form-select-sm" name="role" id="role" required>
                                 <option value="" disabled selected>Pilih Role Akses</option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
@@ -103,7 +103,7 @@
                         <td>Level</td>
                         <td>:</td>
                         <td>
-                            <select class="form-select" name="level" id="level">
+                            <select class="form-select form-select-sm" name="level" id="level">
                                 <option value="" disabled selected>Pilih Level Akses</option>
                                 <option value="koordinator">Koordinator</option>
                                 <option value="danru">Danru</option>
@@ -114,14 +114,33 @@
                         <td>Unit Kerja</td>
                         <td>:</td>
                         <td>
-                            <select class="form-select" name="unit_kerja" id="unit_kerja">
+                            <select class="form-select form-select-sm" name="unit_kerja" id="unit_kerja">
                                 <option value="" disabled selected>Pilih Unit Kerja</option>
                                 <option value="Security Monitoring Center">Security Monitoring Center</option>
                                 <option value="Health, Safety, & Environment">Health, Safety, & Environment</option>
                                 <option value="PAM">PAM</option>
+                                <option value="Teknisi">Teknisi</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
+                            <input class="form-control form-control-sm px-1 mt-1" size="15" type="text" id="uker" name="unit_kerja" hidden disabled placeholder="Unit Kerja" />
                         </td>
                     </tr>
+                    <script type="text/javascript">
+                        $("#unit_kerja").change(function() {
+                        console.log($("#unit_kerja").val())
+                        if ($("#unit_kerja option:selected").val() == "Lainnya") {
+                                $('#unit_kerja').removeAttr("name");
+                                $("#uker").removeAttr('disabled');
+                                $("#uker").prop('required',true);
+                                $("#uker").removeAttr('hidden');
+                           } else {
+                                $('#unit_kerja').prop('name', 'unit_kerja');
+                                $("#uker").prop('disabled', true);
+                                $("#uker").prop('required', false);
+                                $("#uker").prop('hidden', true);
+                           }
+                        }); 
+                    </script>
                     <tr>
                         <td>Lokasi Tugas</td>
                         <td>:</td>
@@ -137,13 +156,13 @@
                     <tr>
                         <td>Password</td>
                         <td>:</td>
-                        <td><input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
+                        <td><input id="password" type="password" class="form-control form-control-sm @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
 
                     </tr>
                     <tr>
                         <td>Ulangi<br/>Password</td>
                         <td>:</td>
-                        <td><input id="password-confirm" type="password" class="form-control passwordx" name="password_confirmation" placeholder="Konfirmasi Password" required autocomplete="new-password" disabled>
+                        <td><input id="password-confirm" type="password" class="form-control form-control-sm passwordx" name="password_confirmation" placeholder="Konfirmasi Password" required autocomplete="new-password" disabled>
                         <div style="margin-top: 0px;" id="CheckPasswordMatch"></div>
                         <div style="margin-top: 0px;" id="CheckPasswordMatchz"></div>
                     </td>

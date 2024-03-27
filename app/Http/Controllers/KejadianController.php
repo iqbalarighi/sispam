@@ -139,11 +139,18 @@ class KejadianController extends Controller
             $data->appends(['date' => $cari]);
 
         } else {
+            if (Auth::user()->unit_kerja == "Health, Safety, & Environment" && Auth::user()->name == 'M. Arizal Kurnia'){
+                $data = KejadianModel::with('site')
+                ->where('user_pelapor','LIKE', '%'.'rizal Kurnia'.'%')
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
+            } else {
+                $data = KejadianModel::with('site')
+                ->where('user_pelapor','=', Auth::user()->name)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(15);
+            }
 
-        $data = KejadianModel::with('site')
-        ->where('user_pelapor','=', Auth::user()->name)
-        ->orderBy('created_at', 'DESC')
-        ->paginate(15);
 
         }
     }

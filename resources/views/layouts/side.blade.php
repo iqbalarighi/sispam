@@ -101,8 +101,7 @@
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
-{{-- user level 1 --}}
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
     @if ( Auth::user()->level === 'superadmin')
         <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
@@ -124,7 +123,7 @@
 {{-- user level 2 --}}
             <a href="{{route('dashboard')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{route('personil')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('personil') ? 'active' : '' }}">Personil</a>
-            <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a>
+            {{-- <a href="{{route('peralatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('peralatan') ? 'active' : '' }}">Inventaris</a> --}}
             <a href="{{route('site')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('site') ? 'active' : '' }}">Site</a>
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
@@ -188,7 +187,7 @@
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading ">SISPAM</div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
 {{--     @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
@@ -247,6 +246,16 @@
         </div>
         </div>
         <!-- /#sidebar-wrapper -->
+        @elseif(Auth::user()->unit_kerja == 'Teknisi')
+        <div class="d-flex " id="wrapper">
+        <!-- Sidebar -->
+        
+        <div class="bg-light border-right " id="sidebar-wrapper">
+        <div class="list-group list-group-flush sticky-top">
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
+        <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+        </div>
+        </div>
 
     @endif
 {{-- user level 3 --}}
@@ -263,7 +272,7 @@
             <button class="navbar-toggler me-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent jam">
             
                         <!-- Authentication Links -->
                         
@@ -298,7 +307,26 @@
     </div>
 </div>
 </body>
-
+    <script type="text/javascript">
+        window.onload = function() { jam(); }
+       
+        function jam() {
+            var e = document.getElementById('jam'),
+            d = new Date(), h, m, s;
+            h = d.getHours();
+            m = set(d.getMinutes());
+            s = set(d.getSeconds());
+       
+            e.innerHTML = h +':'+ m +':'+ s;
+       
+            setTimeout('jam()', 1000);
+        }
+       
+        function set(e) {
+            e = e < 10 ? '0'+ e : e;
+            return e;
+        }
+    </script>
         <!-- /#page-content-wrapper -->
          
         <!-- /#wrapper -->
@@ -543,6 +571,7 @@ function myFunction3() {
 }
 </script>
 @endif
+@if(Auth::user()->role == 'admin' or Auth::user()->level == 'danru')
 <script>
     var z = document.getElementById("ubah");
     var y = document.getElementById("collapseExample");
@@ -559,6 +588,7 @@ function myFunction3() {
   }
 }
 </script>
+
 <script>
     var d = document.getElementById("changeSmc");
     var a = document.getElementById("smc");
@@ -575,6 +605,7 @@ function myFunction3() {
   }
 }
 </script>
+
 <script>
     var d = document.getElementById("changeHSE");
     var a = document.getElementById("hse");
@@ -591,4 +622,5 @@ function myFunction3() {
   }
 }
 </script>
+@endif
 </html>

@@ -104,7 +104,6 @@ foreach($input['images'] as $image)
         $nolap = Helper::IDGenerator(new SmcModel, 'no_lap', 4, $string); /** Generate id */
         $files = $request->file('images');
         $image = [];
-
         $simpan = new SmcModel;
 
         if ($files != null) {

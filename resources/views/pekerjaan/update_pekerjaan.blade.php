@@ -5,10 +5,27 @@
 <style type="text/css">
     .cen {
     height: auto;
-    margin-top: 50%;
+    margin-top: 40%;
 }
 </style>
+<style type="text/css">
+    .custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
 
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
 <div class="container">
 
 @if (session('Open'))
@@ -161,7 +178,16 @@
                 </div>
 
                 <div class="card-body ">
-                    <form action="{{$update == null ? "" : url("update_pekerjaan/".$update->izin_id)}}" onsubmit="{{$update == null ? 'return loads()' : 'return load()'}}">
+                    <form 
+                    action="{{$update == null ? "" : url("update_pekerjaan/".$update->izin_id)}}" 
+                    onsubmit="{{$update == null ? 'return loads()' : 'return load()'}}" 
+                    method="{{$update == null ? "" : "post"}}" 
+                    enctype="multipart/form-data"
+                    >
+                        @csrf
+                        @if($update != null)
+                            @method('PUT')
+                        @endif
                     @if($update == null)
                     <div>
                         Nomor Dokumen
@@ -205,6 +231,15 @@
                             <option value="Continued">Belum Selesai</option>
                         </select>
                     </div>
+                    <div class="input-group custom-file-button mt-1">
+                        {{-- <label for="foto">Upload Foto : </label> --}}
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Foto Pekerjaan</label>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
+                    </div>
+                    <div class="form-floating mt-1">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="ket" style="height: 60px;" name="ket"></textarea>
+                      <label for="ket">Keterangan</label>
+                    </div>
                     @endif
 
 
@@ -223,6 +258,18 @@
 
 <script type="text/javascript">
     function load() {
+
+            var $fileUpload = $("input[type='file']");
+            if (parseInt($fileUpload.get(0).files.length)>2){
+                 Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Maksimal upload 2 foto",
+                });
+
+             return false;
+            };
+
                 Swal.fire({
             title: "Loading . . . ",
             text: "Sedang validasi data",
@@ -257,4 +304,5 @@
       }
   });
 </script>
+
 @endsection

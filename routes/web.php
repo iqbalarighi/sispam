@@ -282,7 +282,7 @@ Route::get('/form-izin', function () {
 
 // Route::get('/form-izin', [IzinvendorController::class, 'form'])->name('form_izin');
 Route::get('/update_pekerjaan', [IzinvendorController::class, 'update_pekerjaan']);
-Route::get('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
+Route::put('/update_pekerjaan/{izinid}', [IzinvendorController::class, 'update_pekerjaan2']);
 
 Route::post('/simpan_izin', [IzinvendorController::class, 'store'])->name('simpan_izin');
 
@@ -309,6 +309,9 @@ Route::controller(IzinvendorController::class)->middleware('auth')->group(functi
     Route::get('/hapus_apk/{id}/{apk}', 'hapus_apk');
     Route::get('/izin-downloadPDF/{id}/{oto}', 'downloadPDF');
     Route::delete('/hapus-izin/{izinid}', 'hapus');
+    Route::get('/izinkerja/{cari}/{start}/{end}', 'izinkerja1');
+    Route::get('/izinkerja/{start}/{end}', 'izinkerja2');
+    Route::get('/izinkerja/{cari}', 'izinkerja3');
     
 });
 

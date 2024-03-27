@@ -5,41 +5,71 @@
     <div class="row justify-content-center" id="target">
         <div class="col-md-8 px-0">
             <div class="card">
-                <div class="card-header"><b>{{ __('PERMINTAAN SURAT IZIN KERJA') }}</b></div>
+                <div class="card-header">
+                    <b>{{ __('PERMINTAAN SURAT IZIN KERJA') }}</b>
+                <div class="col-sm-0 float-end" onclick="quest()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-question-fill" viewBox="0 0 16 16">
+                  <path d="M5.933.87a2.89 2.89 0 0 1 4.134 0l.622.638.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01zM7.002 11a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1.602-2.027c.04-.534.198-.815.846-1.26.674-.475 1.05-1.09 1.05-1.986 0-1.325-.92-2.227-2.262-2.227-1.02 0-1.792.492-2.1 1.29A1.7 1.7 0 0 0 6 5.48c0 .393.203.64.545.64.272 0 .455-.147.564-.51.158-.592.525-.915 1.074-.915.61 0 1.03.446 1.03 1.084 0 .563-.208.885-.822 1.325-.619.433-.926.914-.926 1.64v.111c0 .428.208.745.585.745.336 0 .504-.24.554-.627"></path>
+                </svg>
+                </div>
+                </div>
+<style type="text/css">
+    .custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
 
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
+
+    @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+<script type="text/javascript">
+function quest() {
+        Swal.fire({
+  title: "Hubungi Kami",
+  html: `
+    Jika ada pertanyaa lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
+    <br/>
+    <br/>
+    <a target="_blank" href="https://wa.me/628119809606"><img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" /></a>
+  `,
+  icon: "warning",
+  showCancelButton: false,
+  showConfirmButton: false,
+});
+}
+</script>
+@else
+<script type="text/javascript">
+function quest() {
+        Swal.fire({
+  title: "Hubungi Kami",
+  html: `
+    Jika ada pertanyaa lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
+    <br/>
+    <br/>
+    <a target="_blank" href="https://wa.me/6285223442696"><img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" /></a>
+  `,
+  icon: "warning",
+  showCancelButton: false,
+  showConfirmButton: false,
+});
+}
+</script>
+@endif
                 <div class="card-body px-1 pt-1">
                     @if (session('status'))
-
-                            @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000)
-                                <script>
-                                Swal.fire({
-                                  title: "Berhasil",
-                                  text:  "{{ session('status') }}",
-                                  icon: "success",
-                                  showConfirmButton: false,
-                                  timer: 1500
-                                });
-
-                        setTimeout(function () {
-                               Swal.fire({
-                                      title: "Perhatian",
-                                      icon: "info",
-                                      html: `
-                                        Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
-                                        <br>
-                                        <br>
-                                        <a aria-label="Chat on WhatsApp" href="https://wa.me/628119809606?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{session('izinid')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{session('id')}}">
-                                        <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
-                                        <a />
-                                      `,
-                                  showConfirmButton: false,
-                                  allowOutsideClick: false,
-
-                                        });
-                            }, 1700); 
-                                
-                        </script>
-                            @elseif (Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+                            @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
                                 <script>
                                 Swal.fire({
                                   title: "Berhasil",
@@ -98,7 +128,6 @@
                                 
                         </script>
                             @endif
-                        
                     @endif
             <form action="{{route('simpan_izin')}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return loding(this);">
                 @csrf
@@ -167,17 +196,27 @@
                     <div class="col-md-5">
                         <label class="mb-0">
                                             <input type="checkbox" id="clas9" name="klasifikasi[]" onclick="firm()" value="Lain-lain :" /> Lain-lain</label>
-                         <input class="form-control form-control-sm px-1" size="15" type="text" id="nilain" name="klasifikasi[]" />
+                         <input class="form-control form-control-sm px-1" size="15" type="text" id="nilain" name="klasifikasi[]" hidden disabled/>
                     </div>
                 </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <b>B. Informasi Pekerjaan</b> <br>
             <font size="1" color="red">*Kolom bertanda bintang (*) wajib diisi !</font><br>
             <div class="col pe-0"> 
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
-                    <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required>
+                    {{-- <input type="text" class="form-control form-control-sm px-1" name="perusahaan_pemohon" value="{{ old('perusahaan_pemohon') }}" placeholder="*Perusahaan Pemohon" required> --}}
+
+                    <select class="form-select form-select-sm px-1 text-capitalize" id="perusahaan_pemohon" name="perusahaan_pemohon" required>
+                        <option value="" disabled selected>*Perusahaan Pemohon</option>
+                        <option value="PT. Prima Karya Sarana Sejahtera (PT. PKSS)">PT. Prima Karya Sarana Sejahtera (PT. PKSS)</option>
+                        <option value="PT. Kopojeka Daya Indonesia (PT. KDI)">PT. Kopojeka Daya Indonesia (PT. KDI)</option>
+                        <option value="PT. Swadharma Griyasatya (PT. SGRS)">PT. Swadharma Griyasatya (PT. SGRS)</option>
+                        <option value="PT. Bangun Prestasi Bersama (PT. BPB)">PT. Bangun Prestasi Bersama (PT. BPB)</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                    <input class="form-control form-control-sm px-1 mt-1" size="15" type="text" id="perusahaan" hidden disabled placeholder="*Perusahaan Pemohon" />
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -187,24 +226,24 @@
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     {{-- <input type="text" class="form-control form-control-sm px-1" name="lokasi" value="{{ old('lokasi') }}" placeholder="*Lokasi" required> --}}
                     <select class="form-select form-select-sm px-1 text-capitalize" id="lokasi" name="lokasi" required>
-                                <option value="" disabled selected>*Lokasi</option>
-                                <option value="Gedung Soemitro Djojohadikusumo">Gedung Soemitro Djojohadikusumo</option>
-                                <option value="Gedung Wisma Mulia 2">Gedung Wisma Mulia 2</option>
-                                <option value="Gedung Menara Radius Prawiro">Gedung Menara Radius Prawiro</option>
-                                <option value="Rumah Jabatan DK 1">Rumah Jabatan DK 1</option>
-                                <option value="Rumah Jabatan DK 2">Rumah Jabatan DK 2</option>
-                                <option value="Rumah Jabatan DK 3">Rumah Jabatan DK 3</option>
-                                <option value="Rumah Jabatan DK 4">Rumah Jabatan DK 4</option>
-                                <option value="Rumah Jabatan DK 5">Rumah Jabatan DK 5</option>
-                                <option value="Rumah Jabatan DK 6">Rumah Jabatan DK 6</option>
-                                <option value="Rumah Jabatan DK 7">Rumah Jabatan DK 7</option>
-                                <option value="Rumah Jabatan DK 8">Rumah Jabatan DK 8</option>
-                                <option value="Rumah Jabatan DK 9">Rumah Jabatan DK 9</option>
-                                <option value="Gudang Matraman">Gudang Matraman</option>
-                                <option value="Gudang Bekasi">Gudang Bekasi</option>
-                                <option value="Gudang Salemba">Gudang Salemba</option>
-                                <option value="Gudang Cilandak">Gudang Cilandak</option>
-                            </select>
+                        <option value="" disabled selected>*Lokasi</option>
+                        <option value="Gedung Soemitro Djojohadikusumo">Gedung Soemitro Djojohadikusumo</option>
+                        <option value="Gedung Wisma Mulia 2">Gedung Wisma Mulia 2</option>
+                        <option value="Gedung Menara Radius Prawiro">Gedung Menara Radius Prawiro</option>
+                        <option value="Rumah Jabatan DK 1">Rumah Jabatan DK 1</option>
+                        <option value="Rumah Jabatan DK 2">Rumah Jabatan DK 2</option>
+                        <option value="Rumah Jabatan DK 3">Rumah Jabatan DK 3</option>
+                        <option value="Rumah Jabatan DK 4">Rumah Jabatan DK 4</option>
+                        <option value="Rumah Jabatan DK 5">Rumah Jabatan DK 5</option>
+                        <option value="Rumah Jabatan DK 6">Rumah Jabatan DK 6</option>
+                        <option value="Rumah Jabatan DK 7">Rumah Jabatan DK 7</option>
+                        <option value="Rumah Jabatan DK 8">Rumah Jabatan DK 8</option>
+                        <option value="Rumah Jabatan DK 9">Rumah Jabatan DK 9</option>
+                        <option value="Gudang Matraman">Gudang Matraman</option>
+                        <option value="Gudang Bekasi">Gudang Bekasi</option>
+                        <option value="Gudang Salemba">Gudang Salemba</option>
+                        <option value="Gudang Cilandak">Gudang Cilandak</option>
+                    </select>
                 </div>
                 <div class="form-group mb-1 col-md-12">
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
@@ -293,6 +332,22 @@
                     {{-- <label class="mb-0">Pekerjaan</label> --}}
                     <input type="number" class="form-control form-control-sm px-1" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" name="lainnya" value="{{ old('lainnya') }}" placeholder="Lainnya">
                 </div>
+                <div class="form-group mb-1 col-md-12" hidden id="foto">
+                    {{-- <label class="mb-0">Pekerjaan</label> --}}
+                    
+
+                    <div class="input-group custom-file-button">
+                    <label class="input-group-text p-1" class="form-control form-control-sm" for="inputGroupFile" style="font-size: 10pt;">Upload KTP</label>
+                    <input style="font-size: 10pt;" 
+                    name="images[]" 
+                    class="form-control form-control-sm p-1" 
+                    id="inputGroupFile" 
+                    type="file" 
+                    accept=".jpg, .jpeg, .png, .bnp" 
+                    multiple 
+                    onclick="alarm()" />
+                  </div>
+                </div>
             </div>
         
         </div>
@@ -309,10 +364,10 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="alat[]" placeholder="Alat" onkeypress="return comma(event)" id="alats" class="form-control form-control-sm px-1" autocomplete="off" required />
+                        <input type="text" name="alat[]" placeholder="Alat" onchange="return comma(event)" id="alats" class="form-control form-control-sm px-1" autocomplete="off" required />
                     </td>
                     <td width="30%" class="py-0 align-middle">
-                        <input type="number" name="jml_alat[]" id="jmlalt" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
+                        <input type="number" name="jml_alat[]" id="jmlalt" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
                     </td>
                 </tr>
             </table>
@@ -327,10 +382,10 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="mesin[]" placeholder="Mesin" onkeypress="return comma(event)" id="mesin" class="form-control form-control-sm px-1" autocomplete="off" />
+                        <input type="text" name="mesin[]" placeholder="Mesin" onchange="return comma(event)" id="mesin" class="form-control form-control-sm px-1" autocomplete="off" />
                     </td>
                     <td width="30%" class="py-0 align-middle">
-                        <input type="number" name="jml_mesin[]" id="jmlmsn" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
+                        <input type="number" name="jml_mesin[]" id="jmlmsn" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
                     </td>
                 </tr>
             </table>
@@ -345,10 +400,10 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="material[]" id="mtr" placeholder="Material" onkeypress="return comma(event)" class="form-control form-control-sm px-1" autocomplete="off"/>
+                        <input type="text" name="material[]" id="mtr" placeholder="Material" onchange="return comma(event)" class="form-control form-control-sm px-1" autocomplete="off"/>
                     </td>
                     <td width="30%" class="py-0 align-middle">
-                        <input type="number" name="jml_material[]" id="jmlmtr" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
+                        <input type="number" name="jml_material[]" id="jmlmtr" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
                     </td>
                 </tr>
             </table>
@@ -363,10 +418,10 @@
                 </tr>
                 <tr>
                     <td class="p-0 align-middle">
-                        <input type="text" name="alat_berat[]" placeholder="Alat Berat" onkeypress="return comma(event)" id="berat" class="form-control form-control-sm px-1" autocomplete="off"/>
+                        <input type="text" name="alat_berat[]" placeholder="Alat Berat" onchange="return comma(event)" id="berat" class="form-control form-control-sm px-1" autocomplete="off"/>
                     </td>
                     <td width="30%" class="py-0 align-middle">
-                        <input type="number" name="jml_alber[]" id="jmlbrt" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
+                        <input type="number" name="jml_alber[]" id="jmlbrt" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1">
                     </td>
                 </tr>
             </table>
@@ -571,12 +626,12 @@
 <script>
 const clas9 = document.querySelector('#clas9');
 const nilain = document.querySelector('#nilain');
-nilain.disabled = true;
-nilain.style.visibility = 'hidden';
+// nilain.disabled = true;
+// nilain.style.visibility = 'hidden';
 
 clas9.addEventListener('change', () => {
   if (clas9.checked) {
-    nilain.style.visibility = 'visible';
+    $("#nilain").removeAttr('hidden');
     nilain.value = '';
     nilain.name = 'klasifikasi[]';
     nilain.required= true;
@@ -584,11 +639,60 @@ clas9.addEventListener('change', () => {
   } else {
     nilain.disabled = true;
     nilain.required = false;
-    nilain.style.visibility = 'hidden';
+    $("#nilain").prop('hidden', true);
     nilain.name = '';
   }
 });
 </script>
+
+<script>
+ // $("#perusahaan").prop('disabled',true);
+ // $("#perusahaan").prop('hidden', true);
+    $("#perusahaan_pemohon").change(function() {
+console.log($("#perusahaan_pemohon").val())
+if ($("#perusahaan_pemohon option:selected").val() == "Lainnya") {
+            $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon[]');
+            $("#perusahaan").attr('name', 'perusahaan_pemohon[]');
+            $("#perusahaan").removeAttr('disabled');
+            $("#perusahaan").prop('required',true);
+            $("#perusahaan").removeAttr('hidden');
+            $("#foto").removeAttr('hidden');
+            $("#inputGroupFile").prop('required',true);
+       } else {
+            $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+            $("#perusahaan").removeAttr('name');
+            $("#perusahaan").prop('disabled', true);
+            $("#perusahaan").prop('required', false);
+            $("#perusahaan").prop('hidden', true);
+            $("#inputGroupFile").prop('required', false);
+            $("#foto").prop('hidden', true);
+       }
+    }); 
+
+function alarm() {
+    alert("Upload foto sesuai dengan jumlah pekerja !");
+}
+// const perusahaan_pemohon = document.querySelector('#perusahaan_pemohon');
+// const perusahaan = document.querySelector('#perusahaan');
+// perusahaan.disabled = true;
+// perusahaan.style.visibility = 'hidden';
+
+// perusahaan_pemohon.addEventListener('change', () => {
+//   if (perusahaan_pemohon.selected) {
+//     perusahaan.style.visibility = 'visible';
+//     perusahaan.value = '';
+//     perusahaan.name = 'klasifikasi[]';
+//     perusahaan.required= true;
+//     perusahaan.disabled = false;
+//   } else {
+//     perusahaan.disabled = true;
+//     perusahaan.required = false;
+//     perusahaan.style.visibility = 'hidden';
+//     perusahaan.name = '';
+//   }
+// });
+</script>
+
 <script>
 const diri21 = document.querySelector('#diri21');
 const lainlain = document.querySelector('#lainlain');
@@ -645,9 +749,29 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar4").click(function () {
         ++i;
-        $("#dynamicAddRemove4").append('<tr><td class="p-0 align-middle"><input type="text" name="alat[]" onkeypress="return comma(event)" placeholder="Alat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alat[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove4").append('<tr><td class="p-0 align-middle"><input id="alat'+i+'" type="text" name="alat[]" placeholder="Alat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alat[]" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
+    
+    $("#alat"+i).on('change', function() {
+        if($("#alat"+i).val().includes(",")){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("#alat"+i).val("");
+          
+          }
+      });
+        }
     });
+});
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
     });
@@ -656,8 +780,28 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar3").click(function () {
         ++i;
-        $("#dynamicAddRemove3").append('<tr><td class="p-0 align-middle"><input type="text" name="mesin[]" onkeypress="return comma(event)" placeholder="Mesin" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_mesin[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove3").append('<tr><td class="p-0 align-middle"><input type="text" id="mesin'+i+'" name="mesin[]" placeholder="Mesin" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_mesin[]" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
+
+    $("#mesin"+i).on('change', function() {
+        if($("#mesin"+i).val().includes(",")){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("#mesin"+i).val("");
+          
+          }
+      });
+        }
+    });
     });
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
@@ -667,8 +811,28 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar2").click(function () {
         ++i;
-        $("#dynamicAddRemove2").append('<tr><td class="p-0 align-middle"><input type="text" name="material[]" onkeypress="return comma(event)" placeholder="Material" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_material[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove2").append('<tr><td class="p-0 align-middle"><input type="text" id="materi'+i+'" name="material[]" placeholder="Material" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_material[]" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
+
+        $("#materi"+i).on('change', function() {
+            if($("#materi"+i).val().includes(",")){
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Hindari tanda simbol (koma, titik, dll) !",
+                  showCancelButton: false,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Oke"
+                }).then((result) => {
+              if (result.isConfirmed) {
+                    
+                  $("#materi"+i).val("");
+              
+              }
+          });
+            }
+        });
     });
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
@@ -678,8 +842,28 @@ pan7.addEventListener('change', () => {
     var i = 0;
     $("#dynamic-ar1").click(function () {
         ++i;
-        $("#dynamicAddRemove1").append('<tr><td class="p-0 align-middle"><input type="text" name="alat_berat[]" onkeypress="return comma(event)" placeholder="Alat Berat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alber[]" onkeypress="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
+        $("#dynamicAddRemove1").append('<tr><td class="p-0 align-middle"><input type="text" id="berat'+i+'" name="alat_berat[]" placeholder="Alat Berat" class="form-control form-control-sm px-1" required/></td><td width="30%" class="py-0 align-middle"><input type="number" name="jml_alber[]" onchange="return angka(event)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="3" max="999" min="1" placeholder="Jumlah" class="form-control form-control-sm px-1" required></td><td class="p-0 align-middle" style="width: 0px;"><button type="button" class="bi bi-trash-fill btn bg-danger btn-sm align-self-center remove-input-field"></button></td></tr>'
             );
+
+        $("#berat"+i).on('change', function() {
+            if($("#berat"+i).val().includes(",")){
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Hindari tanda simbol (koma, titik, dll) !",
+                  showCancelButton: false,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Oke"
+                }).then((result) => {
+              if (result.isConfirmed) {
+                    
+                  $("#berat"+i).val("");
+              
+              }
+          });
+            }
+        });
     });
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
@@ -911,7 +1095,6 @@ function con(){
         dr19.required = true;
         dr20.required = true;
         dr21.required = true;
-
     }
 }
 </script>
@@ -955,10 +1138,11 @@ function kap(){
 </script>
 
 <script type="text/javascript">
-    $("#alats").change(function() {
+$("#alats").change(function() {
         if ($("#alats").val().length === 0) {
             $("#jmlalt").prop('required',false);
             $("#alats").prop('required',true);
+
         }  else {
             $("#jmlalt").prop('required',true);
             $("#alats").prop('required',false);
@@ -989,16 +1173,93 @@ function kap(){
         }
     }); 
 </script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
     function comma(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode == 44 || charCode == 46 || charCode == 55 || charCode == 108 ) {
-        return false;
-    }
-    return true;
+
+        if($("#alats").val().includes(',')){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("input[name='alat[]']").val("");
+          
+          }
+      });
+        }
+
+        if($("#mesin").val().includes(',')){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("#mesin").val("");
+          
+          }
+      });
+        }
+
+        if($("#mtr").val().includes(',')){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("#mtr").val("");
+          
+          }
+      });
+        }
+
+        if($("#berat").val().includes(',')){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Hindari tanda simbol (koma, titik, dll) !",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Oke"
+            }).then((result) => {
+          if (result.isConfirmed) {
+                
+              $("#berat").val("");
+          
+          }
+      });
+        }
+
+
+
 }
+</script>
+<script>
+// $(document).ready(function(){
+//     if ($("#:contains(,)")){
+//   $("#:contains(,)").css("background-color", "yellow");
+
+//     }
+// });
 </script>
 
 @endsection

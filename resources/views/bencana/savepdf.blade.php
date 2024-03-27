@@ -4,19 +4,20 @@
         <title>{{ config('app.name', 'SISPAM') }}</title>
         <style type="text/css">
             pre {
-                font-family : Calibri;
-            }
+                    font-family : system-ui;
+                }
             /*table {*/
             /*    page-break-after: always;*/
             /*}*/
                 
             .potong {
-                white-space: pre-line;       /* Internet Explorer 5.5+ */
-                text-align: justify;
+
+                text-align: left;
+                white-space: pre-line;
             }            
-            .potong2 {
-                white-space: pre-line;       /* Internet Explorer 5.5+ */
-            }
+            /*.potong2 {
+                white-space: pre-line;        Internet Explorer 5.5+ 
+            }*/
 
             .narrow {
                       padding: 0px;
@@ -57,7 +58,9 @@
     </h4>
             </div>
             <br>
-                    <table class="table table-responsive" width="100%">
+
+    <div style="page-break-before: auto;">
+                    <table class="table table-responsive" width="100%" style="page-break-before: auto;">
                     <tr>
                         <td width="25%"><b>Nomor Laporan</b></td>
                         <td width="1%">:</td>
@@ -106,7 +109,7 @@
                     </tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr>
-                        <td colspan="3"><b>Kronologi Kejadian</b><br/><pre class="mb-0 potong2">{{$detil->kronologi_bencana}}</pre>
+                        <td colspan="3"><b>Kronologi Kejadian</b><br/><pre class="mb-0 potong">{{$detil->kronologi_bencana}}</pre>
                         </td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
@@ -115,24 +118,11 @@
                             <b>Upaya Penanganan yang Dilakukan</b><br/><pre  class="mb-0 potong">{{$detil->penanganan}}</pre>
                         </td>
                     </tr>
-                    <tr><td>&nbsp;</td></tr>
-                        <tr>
-                        <td align="center" colspan="3"><b>Dokumentasi : </b> <br/>
-                             <br/><br/><br/>
-                            @if ($detil->foto != null)
-                    @foreach(explode('|',$detil->foto) as $item)
-
-                    <img  src="{{ public_path('storage/bencana')}}/{{$detil->no_bencana}}/{{$item}}" style="height:250px;  margin-bottom: 5pt">  &nbsp;
-                    @endforeach
-                        @else 
-                        Harap Upload Foto Dokumentasi
-                        @endif
-
-                        </td>
-                    </tr>
                     </table>
+            </div>
 
-<table width="100%" border="0" style="vertical-align: middle; text-align: center;">
+<div style="page-break-before: auto;">
+<table width="100%" border="0" style="vertical-align: middle; text-align: center; ">
                         <tr>
                             <td width="30%"><pre class="narrow">
 Mengetahui,
@@ -155,6 +145,21 @@ Disusun Oleh,
                         </td>
                         </tr>
 </table>
+</div>
+<div style="page-break-before: auto; margin-top: 100px;">
+    <center>
+    <b>Dokumentasi : </b> <br/>
+    <br/><br/><br/>
+    @if ($detil->foto != null)
+    @foreach(explode('|',$detil->foto) as $item)
+    <img  src="{{ public_path('storage/bencana')}}/{{$detil->no_bencana}}/{{$item}}" style="height:250px;  margin-bottom: 5pt">  &nbsp;
+    @endforeach
+    @else 
+    Harap Upload Foto Dokumentasi
+    @endif
+
+    </center>
+</div>
 
 <div style="position: absolute; right: 0; bottom: 0px;" align="center">
     <img src="data:image/png;base64, {!! $qrcode !!}">

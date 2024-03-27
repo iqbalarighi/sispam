@@ -57,12 +57,20 @@ class Kernel extends ConsoleKernel
             foreach (IzinvalidasiModel::all() as $valid) {
                 if($valid->mulai_granted != null){
                     $expired = Carbon::parse($valid->sampai_granted);
+                    $done = Carbon::parse($valid->mulai_granted)->addDays(4);
                     $status = IzinvendorModel::findorfail($valid->id);
                         
                         if ($status->status == "On Progress") {
                             if (Carbon::now() > $expired) {
-                                 $status->status = "Expired";
-                                 $status->save();
+                                $status->status = "Expired";
+                                $status->save();
+                            }
+                        }
+
+                        if ($status->status == "Expired"){
+                            if (Carbon::now() > $done){
+                                $status->status = "Done";
+                                $status->save();
                             }
                         }
                     }
