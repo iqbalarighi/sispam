@@ -4,6 +4,7 @@ use App\Http\Controllers\AdduserController;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\AtensiController;
 use App\Http\Controllers\BencanaController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\FmController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IzinvendorController;
@@ -319,3 +320,5 @@ Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');
 // Route::get('maintenance', function() {
 //     return view('maintenance');
 // });
+
+Route::get('/side', [Controller::class, 'side'])->name('side');
