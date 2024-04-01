@@ -108,7 +108,7 @@
                 dataContainer2.empty(); // Clear existing data (if any)
                 console.log(notip.coun.count != 0);
 if (notip.coun.count != 0){
-        dataContainer.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-15px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
+        dataContainer.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-3px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
     dataContainer2.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-15px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
     } 
         },
@@ -120,7 +120,7 @@ if (notip.coun.count != 0){
 
     setInterval(function () {
                 notifIzin();
-        }, 1000);
+        }, 10000);
     </script>
     </head>
     <body>
