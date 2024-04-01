@@ -94,6 +94,34 @@
 
 
         </style>    
+    <script type="text/javascript">
+        function notifIzin() {
+        $.ajax({
+            url: '{{ route('side') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (notip) {
+                // Update the view with the new data
+                var dataContainer = $('#stats');
+                var dataContainer2 = $('#stats2');
+                dataContainer.empty(); // Clear existing data (if any)
+                dataContainer2.empty(); // Clear existing data (if any)
+                console.log(notip.coun.count != 0);
+if (notip.coun.count != 0){
+        dataContainer.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-3px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
+    dataContainer2.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-15px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
+    } 
+        },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
+
+    setInterval(function () {
+                notifIzin();
+        }, 10000);
+    </script>
     </head>
     <body>
     @if ( Auth::user()->role === 'admin')
@@ -147,12 +175,15 @@
             <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
+                        <span id="stats"></span>
               </a>
                 <div id="hse" class="collapse {{ Route::is('kejadian')||Route::is('izin_kerja') ? 'show' : '' }}" >
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
                             <a href="{{route('kejadian')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}">Insiden/Kejadian</a>
-                            <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+                            <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja
+                                <span id="stats2"></span>
+                            </a>
                         </div> 
                     </div>
                 </div>
