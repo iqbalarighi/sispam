@@ -5,7 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogistikModel extends Model
+class LayananModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'layanan';
+    // protected $dates = ['tanggal'];
+    protected $fillable = [
+        'layanan_id',
+        'layanan',
+        'tanggal',
+        'detail_kebutuhan',
+        'pic',
+        'kontak',
+        'email',
+        'foto',
+        'status',
+        'puas_layanan',
+        'puas_perilaku',
+        'masukan',
+    ];
 }

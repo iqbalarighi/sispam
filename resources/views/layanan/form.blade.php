@@ -1,11 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+<style type="text/css">
+    .custom-file-button input[type=file] {
+  margin-left: -2px !important;
+}
+
+.custom-file-button input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+.custom-file-button input[type=file]::file-selector-button {
+  display: none;
+}
+
+.custom-file-button:hover label {
+  background-color: #dde0e3;
+  cursor: pointer;
+}
+</style>
+@if (Session::get('sukses'))
+<script type="text/javascript">
+    Swal.fire({
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500,
+});
+</script>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header fw-bold">{{ __('Form Layanan Kelogistikan') }}</div>
+                <div class="card-header fw-bold text-center">{{ __('Form Layanan Kelogistikan') }}</div>
 
                 <div class="card-body">
                     {{-- @if (session('status'))
@@ -13,43 +41,55 @@
                             {{ session('status') }}
                         </div>
                     @endif --}}
-        <form action="" method="post" enctype="multipart/form-data" onsubmit="return loding(this);">
+        <form action="{{route('store_layanan')}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
             @csrf
             <div class="">
                 <div class="fw-bold">Jenis Layanan</div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen1" name="jenis[]" required onclick="check()" value="Izin Loading Barang">
+                    <input type="checkbox" class="form-check-input " id="jen1" name="layanan[]" required onclick="check()" value="Izin Loading Barang">
                     <label for="jen1">Izin Loading Barang</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen2" name="jenis[]" required onclick="check()" value="Pengamanan Kegiatan/Acara">
+                    <input type="checkbox" class="form-check-input " id="jen2" name="layanan[]" required onclick="check()" value="Pengamanan Kegiatan/Acara">
                     <label for="jen2">Pengamanan Kegiatan/Acara</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen3" name="jenis[]" required onclick="check()" value="Pengawalan">
+                    <input type="checkbox" class="form-check-input " id="jen3" name="layanan[]" required onclick="check()" value="Pengawalan">
                     <label for="jen3">Pengawalan</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen4" name="jenis[]" required onclick="check()" value="Parkir">
+                    <input type="checkbox" class="form-check-input " id="jen4" name="layanan[]" required onclick="check()" value="Parkir">
                     <label for="jen4">Parkir</label>
                 </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen5" name="layanan[]" required onclick="check()" value="Peminjaman Mobil">
+                    <label for="jen5">Peminjaman Mobil</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen6" name="layanan[]" required onclick="check()" value="Peminjaman Ruangan">
+                    <label for="jen6">Peminjaman Ruangan</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen7" name="layanan[]" required onclick="check()" value="Permintaan Fasilitas Kerja">
+                    <label for="jen7">Permintaan Fasilitas Kerja</label>
+                </div>
                 <div class="d-flex form-check" style="margin-top: -2px;">
-                    <input type="checkbox" class="form-check-input " id="jen5" name="jenis[]" required onclick="check()" value="Lain-lain :">
-                    <label for="jen5" class="px-2" style="margin-top: 2px;">Lain-lain</label>
-                    <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="jenis[]" />
+                    <input type="checkbox" class="form-check-input " id="jen8" name="layanan[]" required onclick="check()" value="Lain-lain :">
+                    <label for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label>
+                    <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="layanan[]" />
                 </div>
             </div>
             <div class="mt-2">
                 <div>
-                    Uraian
+                    <b> Uraian </b>
                 </div>
                 <div class="form-floating">
-                    <input type="datetime-local" class="form-control" id="mulai" name="" value="" required>
-                    <label for="mulai">Tanggal dan Waktu</label>
+                    <input type="datetime-local" class="form-control form-control-sm" id="waktu" name="waktu" value="" required>
+                    <label for="waktu">Tanggal dan Waktu</label>
                 </div>
                 <div class="form-floating">
-                  <input class="form-control form-control-sm" placeholder="Leave a comment here" id="uraian" name="uraian" required>
-                  <label for="uraian">Tempat</label>
+                  <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="detail" style="height: 100px;" name="detail" required></textarea>
+                  <label for="detail">Detail Kebutuhan</label>
                 </div>
                 {{--<div class="form-floating">
                   <input class="form-control form-control-sm" placeholder="Leave a comment here" id="uraian" name="uraian">
@@ -60,8 +100,8 @@
                 <label for="pic">Nama PIC</label>
             </div>
             <div class="form-floating">
-                <input class="form-control form-control-sm" type="text" name="nmr" onkeypress="return angka(event)" id="nmr" maxlength="14" placeholder="" required>
-                <label for="nmr">Nomor Telepon</label>
+                <input class="form-control form-control-sm" type="text" name="kontak" onkeypress="return angka(event)" id="kontak" maxlength="14" placeholder="" required>
+                <label for="kontak">Nomor Kontak/WhatsApp</label>
             </div>
             <div class="form-floating">
                 <input class="form-control form-control-sm" type="email" name="email" id="mail" placeholder="" pattern=".[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
@@ -69,9 +109,10 @@
             </div>
             </div>
             <div class="mt-2">
-                <div>
-                    <input type="file" name="foto" class="form-control form-control-sm" accept=".jpg, .jpeg, .png" multiple required>
-                </div>
+                    <div class="input-group custom-file-button mt-1">
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
+                    </div>
             </div>
 
             <div class="text-center mt-2">
@@ -114,16 +155,16 @@
  }
 </script>
 <script>
-const jen5 = document.querySelector('#jen5');
+const jen8 = document.querySelector('#jen8');
 const nilain = document.querySelector('#nilain');
 nilain.disabled = true;
 nilain.style.visibility = 'hidden';
 
-jen5.addEventListener('change', () => {
-  if (jen5.checked) {
+jen8.addEventListener('change', () => {
+  if (jen8.checked) {
     nilain.style.visibility = 'visible';
     nilain.value = '';
-    nilain.name = 'jenis[]';
+    nilain.name = 'layanan[]';
     nilain.required= true;
     nilain.disabled = false;
   } else {
@@ -141,6 +182,9 @@ jen5.addEventListener('change', () => {
        var jns3 = document.getElementById("jen3");
        var jns4 = document.getElementById("jen4");
        var jns5 = document.getElementById("jen5");
+       var jns6 = document.getElementById("jen6");
+       var jns7 = document.getElementById("jen7");
+       var jns8 = document.getElementById("jen8");
 
 
 jns1.required = true;
@@ -148,20 +192,29 @@ jns2.required = true;
 jns3.required = true;
 jns4.required = true;
 jns5.required = true;
+jns6.required = true;
+jns7.required = true;
+jns8.required = true;
 
  function check(){
-    if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked) === true) {
+    if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked || jns6.checked || jns7.checked || jns8.checked) === true) {
         jns1.required = false;
         jns2.required = false;
         jns3.required = false;
         jns4.required = false;
         jns5.required = false;
+        jns6.required = false;
+        jns7.required = false;
+        jns8.required = false;
     } else {
         jns1.required = true;
         jns2.required = true;
         jns3.required = true;
         jns4.required = true;
         jns5.required = true;
+        jns6.required = true;
+        jns7.required = true;
+        jns8.required = true;
     }
 
  }
