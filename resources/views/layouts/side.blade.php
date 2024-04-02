@@ -129,7 +129,7 @@ if (notip.coun.count != 0){
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> </div>
     @if ( Auth::user()->level === 'superadmin')
         <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
@@ -211,7 +211,7 @@ if (notip.coun.count != 0){
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; <span id="jam" style="font-size:12"></span></div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
 {{--     @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
@@ -296,7 +296,7 @@ if (notip.coun.count != 0){
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent jam">
-            
+            <span id="jam" style="font-size:12; font-weight: bold;" class="float-start ms-2"></span>&nbsp;<b>WIB</b>
                         <!-- Authentication Links -->
                         
             <div class="nav-link me-5 pe-5 ml-auto">
