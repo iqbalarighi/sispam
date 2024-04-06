@@ -139,13 +139,12 @@ foreach ($files as $file) {
     $image[] = $image_full_name;
     }
     $store->foto = implode('|', $image);
-
-    $store->save();
 }
 
+     $store->save();
 
- return back()
-    ->with('sukses');
+     return back()
+    ->with('sukses', 'berhasil maseh');
     }
 
     /**
@@ -154,9 +153,11 @@ foreach ($files as $file) {
      * @param  \App\Models\LayananModel  $logistikModel
      * @return \Illuminate\Http\Response
      */
-    public function show(LayananModel $layananModel)
+    public function show(LayananModel $layananModel, $id)
     {
-        dd($layananModel);
+        $show = $layananModel->where('layanan_id', '=', $id)->first();
+
+        return view('layanan.detail', compact('show'));
     }
 
     /**
@@ -165,9 +166,11 @@ foreach ($files as $file) {
      * @param  \App\Models\LayananModel  $layananModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(LayananModel $layananModel)
+    public function edit(LayananModel $layananModel, $id)
     {
-        //
+        $edit = $layananModel->where('layanan_id', $id);
+
+        return View('layanan.edit', compact('edit'));
     }
 
     /**
@@ -182,14 +185,26 @@ foreach ($files as $file) {
         //
     }
 
+    public function validasi(LayananModel $layananModel, $id)
+    {
+        $validasi = $layananModel->where('layanan_id', $id);
+
+        return view('layanan.validasi', compact('validasi'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\LayananModel  $layananModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LayananModel $layananModel)
+    public function destroy(LayananModel $layananModel, $id)
     {
-        //
+        $destroy = $layananModel->where('layanan_id', $id);
+        // dd($destroy);
+        $destroy->delete();
+
+        return back()
+        ->with('sukses', 'Data terhapus');
     }
 }

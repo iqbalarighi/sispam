@@ -156,17 +156,17 @@ if (notip.coun.count != 0){
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
-            <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('layanan') ? 'active' : '' }}">Layanan</a>
+            <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Request::is('layanan')||Request::is('layanan/*') ? 'active' : '' }}">Layanan</a>
 
-            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan')||Request::is('giat-detil/*')||Request::is('edit-giat/*')  ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                 Laporan PAM
                         <i id="ubah" class="bi bi-caret-right-fill"></i>
               </a>
-                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan') ? 'show' : '' }}" id="collapseExample">
+                <div class="collapse {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan')||Request::is('giat-detil/*')||Request::is('edit-giat/*')  ? 'show' : '' }}" id="collapseExample">
                     <div class="card card-body">
                         <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') ? 'active' : '' }}">Kegiatan</a>
+                            <a href="{{route('kegiatan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan') || Request::is('giat-detil/*')||Request::is('edit-giat/*') ? 'active' : '' }}">Kegiatan</a>
                             <a href="{{route('tukarjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('tukarjaga') ? 'active' : '' }}">Serah Terima Jaga</a>
                             <a href="{{route('temuan')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('temuan') ? 'active' : '' }}">Temuan Patroli</a>
                         </div> 

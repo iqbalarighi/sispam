@@ -331,7 +331,10 @@ Route::get('/form-layanan', function () {
 
 Route::controller(LayananController::class)->middleware('auth')->group(function () {
     Route::get('/layanan', 'index')->name('layanan');
-    Route::get('/show', 'show')->name('show');
+    Route::get('/layanan/detail/{id}', 'show');
+    Route::get('/layanan/edit/{id}', 'edit');
+    Route::get('/layanan/validasi/{id}', 'validasi');
+    Route::delete('/layanan/destroy/{id}', 'destroy');
     Route::post('/store', 'store')->name('store_layanan');
 
 });

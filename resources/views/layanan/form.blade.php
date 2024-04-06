@@ -23,7 +23,7 @@
 <script type="text/javascript">
     Swal.fire({
   icon: "success",
-  title: "Your work has been saved",
+  title: "{{Session::get('sukses')}}",
   showConfirmButton: false,
   timer: 1500,
 });

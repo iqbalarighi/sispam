@@ -38,7 +38,7 @@ function quest() {
         Swal.fire({
   title: "Hubungi Kami",
   html: `
-    Jika ada pertanyaa lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
+    Jika ada pertanyaan lebih lanjut silahkan hubungi kami di nomor whatsapp berikut 
     <br/>
     <br/>
     <a target="_blank" href="https://wa.me/628119809606"><img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" /></a>
