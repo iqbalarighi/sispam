@@ -171,7 +171,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card cen">
-                <div class="card-header ">{{ __('Update Status Pekerjaan') }}
+                <div class="card-header fw-bold">{{ __('Update Status Pekerjaan') }}
                     @if($update != null)
                     <a href="{{url('update_pekerjaan')}}"><span class="btn btn-primary float-end btn-sm mx-2 py-0">Kembali</span></a>
                     @endif

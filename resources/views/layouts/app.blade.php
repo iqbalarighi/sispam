@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'SISPAM') }}</title>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -25,7 +26,8 @@
 
 {{-- typeahead --}}
 <script src={{asset("/storage/bootstrap3-typeahead.js")}}></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div id="app">
@@ -34,7 +36,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                 {{ __('SISPAM') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -45,37 +47,38 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-{{--                     <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto ">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+                                <a class="nav-link {{ Request::is('login') || Request::is('/') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
-                                </li>
-                            @endif
-                        @else
-
+                        @endif
+                    <li>
                             <div class="dropdown ">
-                              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
+                              <a class="nav-link dropdown-toggle {{ Request::is('form-izin') || Request::is('form-layanan') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Form Permintaan
                               </a>
 
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                                                   onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
-                                                                    {{ __('Logout') }}
-                                                                </a></li>
-                              </ul>
-                                                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                                    @csrf
-                                                                </form>
+                              <ul class="dropdown-menu py-1 m-0">
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-izin') ? 'fw-bold' : '' }}" href="{{ url('form-izin') }}" style="color: black;">{{ __('Izin Kerja') }}</a></li>
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-layanan') ? 'fw-bold' : '' }}" href="{{ url('form-layanan') }}" style="color: black;">{{ __('Layanan Kelogistikan') }}</a></li>
+                                </ul>
                             </div>
-                        @endguest
-                    </ul> --}}
+                    </li>
+                    <li>
+                            <div class="dropdown ">
+                              <a class="nav-link dropdown-toggle {{ Request::is('update_pekerjaan') || Request::is('layanan/status') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Update Status
+                              </a>
+
+                              <ul class="dropdown-menu py-1 m-0">
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('update_pekerjaan') ? 'fw-bold' : '' }}" href="{{ url('update_pekerjaan') }}" style="color: black;">{{ __('Izin Kerja') }}</a></li>
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('layanan/status') ? 'fw-bold' : '' }}" href="{{ url('layanan/status') }}" style="color: black;">{{ __('Layanan Kelogistikan') }}</a></li>
+                                </ul>
+                            </div>
+                    </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -100,4 +103,5 @@
     return true;
 }
 </script> 
+
 </html>

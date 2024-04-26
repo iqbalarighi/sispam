@@ -63,8 +63,8 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
                         $query->where('pelaksana','LIKE', '%'.$cariin.'%')
                             ->whereBetween('tanggal', [$start, $end]);
                     })
-                    ->orderBy('waktu', 'DESC')
-                    ->orderBy('tanggal', 'DESC')
+                    ->orderBy('tanggal', 'ASC')
+                    ->orderBy('waktu', 'ASC')
                     ->paginate(100000)
                     ->appends(request()->input());
                     
@@ -72,8 +72,8 @@ class UnrasExport implements FromView, ShouldAutoSize, WithStyles, WithDrawings
                 
                     $cariin = '';
                 $unras = UnrasModel::whereBetween('tanggal', [$start, $end])
-                    ->orderBy('tanggal', 'DESC')
-                    ->orderBy('waktu', 'DESC')
+                    ->orderBy('tanggal', 'ASC')
+                    ->orderBy('waktu', 'ASC')
                     ->paginate(100000)
                     ->appends(request()->input());
             }

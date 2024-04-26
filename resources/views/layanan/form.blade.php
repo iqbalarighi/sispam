@@ -19,7 +19,7 @@
   cursor: pointer;
 }
 </style>
-@if (Session::get('sukses'))
+{{-- @if (Session::get('sukses'))
 <script type="text/javascript">
     Swal.fire({
   icon: "success",
@@ -28,7 +28,74 @@
   timer: 1500,
 });
 </script>
-@endif
+@endif --}}
+
+        @if (session('sukses'))
+            {{-- @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000) --}}
+                <script>
+                Swal.fire({
+                  title: "Berhasil",
+                  text:  "{{ session('sukses') }}",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+
+        setTimeout(function () {
+               Swal.fire({
+                      title: "Perhatian",
+                      icon: "info",
+                      html: `
+                        Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
+                        <br>
+                        <br>
+                        <a aria-label="Chat on WhatsApp" target="_blank" href="https://wa.me/628119809606?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20dokumen%20{{session('id')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Flayanan%2Fdetail%2F{{session('id')}}">
+                        <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
+                        <a />
+                      `,
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+
+                        });
+            }, 1700); 
+                
+        </script>
+{{--             @else
+               <script>
+                Swal.fire({
+                  title: "Berhasil",
+                  text:  "{{ session('sukses') }}",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+
+        setTimeout(function () {
+               Swal.fire({
+                      title: "Perhatian",
+                      icon: "info",
+                      html: `
+                        Klik Tombol berikut untuk menghubungi petugas agar mendapatkan persetujuan
+                        <br>
+                        <br>
+                        <a aria-label="Chat on WhatsApp" target="_blank" href="https://wa.me/6285223442696?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20dokumen%20{{session('id')}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Flayanan%2Fdetail%2F{{session('id')}}">
+                        <img alt="Chat on WhatsApp" width="225px" src="https://static.xx.fbcdn.net/assets/?revision=947305627097899&name=platform-agnostic-green-medium-en-us&density=1" />
+                        <a />
+                      `,
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+
+                        });
+            }, 1700); 
+                
+        </script>
+            @endif --}}
+    @endif
+
+
+
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -47,35 +114,35 @@
                 <div class="fw-bold">Jenis Layanan</div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen1" name="layanan[]" required onclick="check()" value="Izin Loading Barang">
-                    <label for="jen1">Izin Loading Barang</label>
+                    <label class="m-0" for="jen1">Izin Loading Barang</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen2" name="layanan[]" required onclick="check()" value="Pengamanan Kegiatan/Acara">
-                    <label for="jen2">Pengamanan Kegiatan/Acara</label>
+                    <label class="m-0" for="jen2">Pengamanan Kegiatan/Acara</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen3" name="layanan[]" required onclick="check()" value="Pengawalan">
-                    <label for="jen3">Pengawalan</label>
+                    <label class="m-0" for="jen3">Pengawalan</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen4" name="layanan[]" required onclick="check()" value="Parkir">
-                    <label for="jen4">Parkir</label>
+                    <label class="m-0" for="jen4">Parkir</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen5" name="layanan[]" required onclick="check()" value="Peminjaman Mobil">
-                    <label for="jen5">Peminjaman Mobil</label>
+                    <label class="m-0" for="jen5">Peminjaman Mobil</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen6" name="layanan[]" required onclick="check()" value="Peminjaman Ruangan">
-                    <label for="jen6">Peminjaman Ruangan</label>
+                    <label class="m-0" for="jen6">Peminjaman Ruangan</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen7" name="layanan[]" required onclick="check()" value="Permintaan Fasilitas Kerja">
-                    <label for="jen7">Permintaan Fasilitas Kerja</label>
+                    <label class="m-0" for="jen7">Permintaan Fasilitas Kerja</label>
                 </div>
                 <div class="d-flex form-check" style="margin-top: -2px;">
                     <input type="checkbox" class="form-check-input " id="jen8" name="layanan[]" required onclick="check()" value="Lain-lain :">
-                    <label for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label>
+                    <label class="m-0 pe-2" for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label>
                     <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="layanan[]" />
                 </div>
             </div>
@@ -98,6 +165,10 @@
             <div class="form-floating">
                 <input class="form-control form-control-sm" type="text" name="pic" id="pic" placeholder="" required>
                 <label for="pic">Nama PIC</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control form-control-sm" type="text" name="satker" id="satker" placeholder="" required>
+                <label for="satker">Satker</label>
             </div>
             <div class="form-floating">
                 <input class="form-control form-control-sm" type="text" name="kontak" onkeypress="return angka(event)" id="kontak" maxlength="14" placeholder="" required>

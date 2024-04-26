@@ -1,13 +1,16 @@
 @extends('layouts.side')
 
 @section('content')
+@if(Auth::user()->role == "user")
+ {{abort(403)}}
+@endif
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
                 <div class="card-header fw-bold text-uppercase">{{ __('Layanan Kelogistikan') }}</div>
 
-                <div class="card-body">
+
 @if (Session::get('sukses'))
 <script type="text/javascript">
     Swal.fire({
@@ -23,10 +26,24 @@
     td {
         vertical-align: middle !important;
     }
+    .btn-cancel {
+        background-color : #fd7e14;
+    }
+    .btn-cancel:hover {
+        background-color : #ff851f;
+    }
+    .btn-closed {
+        background-color : #8b0000;
+        color: white;
+    }
+    .btn-closed:hover {
+        background-color : #9b0101;
+    }
+
 </style>
                     
 
-        <div class="card-body overflow pt-0 pb-0" style="overflow-x: auto;">
+        <div class="card-body overflow pt-1 pb-0" style="overflow-x: auto;">
             <table class="table table-striped table-hover text-center ">
             <tr class="font-weight-normal xx ">
                 <th class="align-middle" style="max-width:50px; min-width:30px;">No</th>
@@ -35,7 +52,7 @@
                 <th class="align-middle">Layanan</th>
                 {{-- <th class="align-middle">Detail Kebutuhan</th> --}}
                 <th class="align-middle">Nama PIC</th>
-                {{-- <th class="align-middle">Kontak</th> --}}
+                <th class="align-middle">Satker</th>
                 {{-- <th class="align-middle">Email</th> --}}
                 <th class="align-middle">Status</th>
                 @if (Auth::user()->role === 'admin')
@@ -47,18 +64,35 @@
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layan->firstitem()+$key}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->layanan_id}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->tanggal}}</td>
-                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">
-                    @if ('Lain-lain' == Str::substr($layanan->layanan, 0,9))
-                        {{Str::substr($layanan->layanan, 12,1000)}} 
-                    @else
-                        {{$layanan->layanan}} 
-                    @endif
+                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer; text-align: left !important;">
+                    
+                    @foreach(explode(',',$layanan->layanan) as $item)
+                        @if ('Lain-lain' == Str::substr($item, 0,9))
+                        <li>{{Str::substr($item, 12,1000)}}</li>
+                        @else
+                            <li>{{$item}}</li>
+                        @endif
+                    @endforeach
                 </td>
                 {{-- <td>{{$layanan->detail_kebutuhan}}</td> --}}
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->pic}}</td>
-                {{-- <td>{{$layanan->kontak}}</td> --}}
+                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->satker}}</td>
                 {{-- <td>{{$layanan->email}}</td> --}}
-                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->status}}</td>
+                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">
+                    @if($layanan->status == "Open")
+                        <button class="btn btn-sm p-1 align-middle btn-danger">{{$layanan->status}}</button>
+                    @elseif($layanan->status == "On Progress")
+                        <button class="btn btn-sm p-1 align-middle btn-success">{{$layanan->status}}</button>
+                    @elseif($layanan->status == "Done")
+                        <button class="btn btn-sm p-1 align-middle btn-primary">{{$layanan->status}}</button>
+                    @elseif($layanan->status == "Cancelled")
+                        <button class="btn btn-sm p-1 align-middle btn-cancel">{{$layanan->status}}</button>
+                    @elseif($layanan->status == "Cancelled by user")
+                        <button class="btn btn-sm p-1 align-middle btn-cancel">Cancelled</button>
+                    @elseif($layanan->status == "Closed")
+                        <button class="btn btn-sm p-1 align-middle btn-closed">{{$layanan->status}}</button>
+                    @endif
+                </td>
                 @if (Auth::user()->role === 'admin')
                <td class="p-0">
 
@@ -85,7 +119,7 @@
             </table>
         </div>
 
-                </div>
+
             </div>
         </div>
     </div>

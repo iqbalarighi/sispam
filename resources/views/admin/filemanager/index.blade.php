@@ -14,7 +14,9 @@
     <link href="{{ asset('vendor/file-manager/css/file-manager.css') }}" rel="stylesheet">
 </head>
 
-
+@if(Auth::user()->role == "user")
+    {{abort(403)}}
+@endif
 
 <div class="container">
         <h2>File Manager</h2>

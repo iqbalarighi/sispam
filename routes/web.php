@@ -335,8 +335,19 @@ Route::controller(LayananController::class)->middleware('auth')->group(function 
     Route::get('/layanan/edit/{id}', 'edit');
     Route::get('/layanan/validasi/{id}', 'validasi');
     Route::delete('/layanan/destroy/{id}', 'destroy');
-    Route::post('/store', 'store')->name('store_layanan');
+    Route::post('/layanan/valid/{id}', 'valid');
+    Route::get('/layanan/detail/{id}/{oto}', 'savePDF');
+    Route::get('/layanan/hapus/{foto}/{id}', 'hapusFoto');
+    Route::put('/layanan/update/{id}', 'update');
 
+});
+
+Route::controller(LayananController::class)->group(function () {
+    Route::post('/store', 'store')->name('store_layanan');
+    Route::get('/layanan/status/', 'status');
+    Route::put('/layanan/status/{id}', 'status2');
+    Route::put('/layanan/survei/{id}', 'survei');
+    Route::get('stat', 'stat')->name('stat');
 });
 
 Route::get('/side', [Controller::class, 'side'])->name('side');

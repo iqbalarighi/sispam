@@ -106,7 +106,7 @@
                 var dataContainer2 = $('#stats2');
                 dataContainer.empty(); // Clear existing data (if any)
                 dataContainer2.empty(); // Clear existing data (if any)
-                console.log(notip.coun.count != 0);
+                // console.log(notip.coun.count != 0);
 if (notip.coun.count != 0){
         dataContainer.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-3px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
     dataContainer2.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-15px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
@@ -118,7 +118,27 @@ if (notip.coun.count != 0){
         });
     }
 
+function notifLog() {
+        $.ajax({
+            url: '{{ route('side') }}',
+            method: 'GET',
+            dataType: 'json',
+            success: function (notip) {
+                // Update the view with the new data
+                var dataCon = $('#notipp');
+                dataCon.empty(); // Clear existing data (if any)
+                // console.log(notip.coun.count != 0);
+if (notip.coun.count2 != 0){
+        dataCon.append('<svg xmlns="http://www.w3.org/2000/svg" width="8" style="margin-top:-15px;" height="8" fill="red" class="bi bi-circle-fill" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>');
+    } 
+        },
+            error: function (xhr, status, error) {
+                console.error('Ajax request error:', error);
+            }
+        });
+    }
     setInterval(function () {
+                notifLog();
                 notifIzin();
         }, 10000);
     </script>
@@ -129,7 +149,7 @@ if (notip.coun.count != 0){
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; </div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> </div>
     @if ( Auth::user()->level === 'superadmin')
         <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
@@ -156,7 +176,7 @@ if (notip.coun.count != 0){
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('posjaga') ? 'active' : '' }}">Pos Jaga</a>
             <a href="{{route('parkir')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('parkir') ? 'active' : '' }}">Lot Parkir</a>
             <a href="{{route('arsip')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('arsip') ? 'active' : '' }}">Arsip</a>
-            <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Request::is('layanan')||Request::is('layanan/*') ? 'active' : '' }}">Layanan</a>
+            <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Request::is('layanan')||Request::is('layanan/*') ? 'active' : '' }}">Layanan <span id="notipp"></span></a>
 
             <a onclick="cekDown()" class="list-group-item list-group-item-action bg-light {{ Route::is('kegiatan')||Route::is('tukarjaga')||Route::is('temuan')||Request::is('giat-detil/*')||Request::is('edit-giat/*')  ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 
@@ -218,7 +238,7 @@ if (notip.coun.count != 0){
         
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp;</div>
+        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b></div>
 {{--     @if (Auth::user()->level === 'koordinator')
             <a href="{{route('posjaga')}}" class="list-group-item list-group-item-action bg-light">Pos Jaga</a>
     @endif --}}
@@ -289,7 +309,7 @@ if (notip.coun.count != 0){
         </div>
 
     @endif
-{{-- user level 3 --}}
+{{-- end of user level 3 --}}
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="d-flex flex-column min-vh-100">
@@ -300,22 +320,23 @@ if (notip.coun.count != 0){
                     </path>
                 </svg>
             </button>
+            <div class="float-start ms-3" style="font-size:12pt; font-weight: bold;"><span id="jam" ></span>&nbsp;WIB</div>
             <button class="navbar-toggler me-3" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
                         <!-- Authentication Links -->
-            <span id="jam" style="font-size:12; font-weight: bold;" class="float-start ms-2"></span>&nbsp;<b>WIB</b>
+            
                         
             <div class="nav-link me-5 pe-5 ml-auto">
-            <div class="dropdown">
+            <div class="dropdown float-end">
               <a class="nav-link dropdown-toggle text-white font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ Auth::user()->name }}
               </a>
 
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <ul class=" py-1 dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
-                    <a class="dropdown-item font-weight-bold ps-2" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item font-weight-bold text-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

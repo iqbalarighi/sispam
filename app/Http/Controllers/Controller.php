@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IzinvendorModel;
+use App\Models\LayananModel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,8 +17,10 @@ class Controller extends BaseController
     public function side(Request $request)
     {
         $count = IzinvendorModel::where('status', 'Open')->count();
+        $count2 = LayananModel::where('status', 'Open')->count();
 
-        $coun = ['count' => $count ];
+
+        $coun = ['count' => $count, 'count2' => $count2 ];
         
 
         if($request->ajax()){

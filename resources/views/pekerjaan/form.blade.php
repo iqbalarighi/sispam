@@ -129,6 +129,7 @@ function quest() {
                         </script>
                             @endif
                     @endif
+                    
             <form action="{{route('simpan_izin')}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return loding(this);">
                 @csrf
                 <div class="col-sm-3"> 
@@ -167,8 +168,9 @@ function quest() {
     }); 
 </script>
 
-                <div class="mt-4">
+            <div class="mt-4">
                     <b>A. Klasifikasi Pekerjaan</b>
+                <div class="ms-2">
                     <div>
                         <label class="mb-0"><input id="clas1" type="checkbox" name="klasifikasi[]" onclick="firm()" value="Kerja Panas" /> Kerja Panas</label>
                     </div>
@@ -193,14 +195,16 @@ function quest() {
                     <div>
                         <label class="mb-0"><input id="clas8" type="checkbox" name="klasifikasi[]" onclick="firm()" value="Galian" /> Galian</label>
                     </div>
-                    <div class="col-md-5">
+                </div>    
+                    <div class="col-md-5 ps-2">
                         <label class="mb-0">
-                                            <input type="checkbox" id="clas9" name="klasifikasi[]" onclick="firm()" value="Lain-lain :" /> Lain-lain</label>
+                            <input type="checkbox" id="clas9" name="klasifikasi[]" onclick="firm()" value="Lain-lain :" /> Lain-lain</label>
                          <input class="form-control form-control-sm px-1" size="15" type="text" id="nilain" name="klasifikasi[]" hidden disabled/>
                     </div>
-                </div>
+                
+            </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4 ps-1">
             <b>B. Informasi Pekerjaan</b> <br>
             <font size="1" color="red">*Kolom bertanda bintang (*) wajib diisi !</font><br>
             <div class="col pe-0"> 

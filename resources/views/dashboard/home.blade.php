@@ -18,31 +18,48 @@
                         <script>
                     Swal.fire({
                       title: "Login Sukses",
-                      imageUrl: "{{asset('storage/img/puasa.png')}}",
+                      // imageUrl: "{{asset('storage/img/puasa.png')}}",
                       imageWidth: 400,
+                      allowOutsideClick: false,
                       html: `{{$message}} <br> 
                             <b>{{Auth::user()->name}}</b>`,
                       // icon: "success",
-
-                    });
+                            
+                    }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if ("{{Auth::user()->level}}" === "danru") {
+                              Swal.fire({
+                              icon: "warning",
+                              html: `
+                                    Petugas dihimbau untuk membuat laporan <strong>sebelum</strong> atau <strong>paling lambat</strong> pukul 7 pagi dan pukul 7 malam sesuai shift.<br>
+                                    <br>
+                                    Laporan yang masuk akan dirangkum dan diserahkan kepada KABAG Pengamanan setiap 12 jam.<br>
+                                    <br>
+                                    - Terima Kasih -
+                                    <br>
+                                    <br>
+                                  `,
+                              showConfirmButton: false,
+                              allowOutsideClick: false,
+                              timer: 10000,
+                              timerProgressBar: true,
+                              didOpen: () => {
+                                    Swal.showLoading();
+                                    const timer = Swal.getPopup().querySelector("b");
+                                    timerInterval = setInterval(() => {
+                                      // timer.textContent = `${Swal.getTimerLeft()/1000}`;
+                                    }, 100);
+                                  },
+                                  willClose: () => {
+                                    clearInterval(timerInterval);
+                                  }
+                            });  
+                            }
+                        });
 
             </script>
-        @elseif ($message = Session::get('warning'))
-        <div id="timeout" align="center" class="alert alert-warning alert-block flex flex-col gap-4 md:flex-row md:items-center md:justify-between mx-1" style="width: 80%; margin: 0 auto;" role="alert">
-                <div class="row">
-                    <div class="col">
-        <div class="card-text" align="center">
-                    {{ $message }}
-        </div>
-                    </div>
-                    <div class="col-md-auto">
-        <div style="float: right;">
-        <button type="button" class="btn-close"  data-bs-dismiss="alert" aria-label="Close" align="right"></button>
-        </div>                
-                    </div>
-                </div>
-            </div>
         @endif
+
                     <style>
                         tr, td {
                             padding-left: 0.1rem;
