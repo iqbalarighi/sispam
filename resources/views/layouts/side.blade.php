@@ -144,6 +144,7 @@ if (notip.coun.count2 != 0){
     </script>
     </head>
     <body>
+        {{-- user level 1 --}}
     @if ( Auth::user()->role === 'admin')
         <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
@@ -162,6 +163,7 @@ if (notip.coun.count2 != 0){
                             <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
                             <a href="{{route('otorisasi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('otorisasi') ? 'active' : '' }}">Otorisasi</a>
                             <a href="{{route('filemanager')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('filemanager') ? 'active' : '' }}">File Manager</a>
+                            <a href="{{route('useronline')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('useronline') ? 'active' : '' }}">Users Online</a>
                         </div> 
                     </div>
                 </div>

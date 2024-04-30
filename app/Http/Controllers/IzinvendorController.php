@@ -1262,7 +1262,9 @@ Status Surat: Surat Keluar";
 $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
 $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text2));
         
-        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor'));
+        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor'))->merge();
+
+        $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
 
         return $pdf->stream('Surat Izin Kerja Risiko '.$detail->izin_id.'.pdf');
     }

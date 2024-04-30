@@ -22,6 +22,7 @@ use App\Http\Controllers\SmcController;
 use App\Http\Controllers\TemuanController;
 use App\Http\Controllers\TukarjagaController;
 use App\Http\Controllers\UnrasController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\GrafikUnras;
 use Illuminate\Support\Facades\Route;
 
@@ -352,3 +353,6 @@ Route::controller(LayananController::class)->group(function () {
 
 Route::get('/side', [Controller::class, 'side'])->name('side');
 
+//User Online 
+
+Route::get('/useronline', [UserController::class, 'index'])->middleware('auth')->name('useronline');
