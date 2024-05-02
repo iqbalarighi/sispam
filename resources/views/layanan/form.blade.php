@@ -171,7 +171,7 @@
                 <label for="satker">Satker</label>
             </div>
             <div class="form-floating">
-                <input class="form-control form-control-sm" type="text" name="kontak" onkeypress="return angka(event)" id="kontak" maxlength="14" placeholder="" required>
+                <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" id="kontak" maxlength="14" placeholder="" required>
                 <label for="kontak">Nomor Kontak/WhatsApp</label>
             </div>
             <div class="form-floating">
@@ -196,6 +196,16 @@
         </div>
     </div>
 </div>
+<script>
+$("#kontak").on("input change paste",
+function filterNumericAndDecimal(event) {
+    var formControl;
+    formControl = $(event.target);
+    var newtext = formControl.val().replace(/[^0-9]+/g, "");
+    formControl.val(''); //without this the DOT will not go away on my phone!
+    formControl.val(newtext);
+});
+</script>
 <script type="text/javascript">
  function loding(form){
     Swal.fire({

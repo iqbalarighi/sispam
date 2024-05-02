@@ -136,6 +136,7 @@ class AtensiController extends Controller
 
     if (Auth::user() == true) {
         $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor','qrcode')); 
+        // $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
     } else {
         header('Refresh: 10; URL='.route('dashboard'));
 

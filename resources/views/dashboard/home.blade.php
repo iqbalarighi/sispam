@@ -99,276 +99,8 @@
                             border: 1px black solid;
                         }*/
                     </style>
-@push('js')
-<script>
-    function updateGiat() {
-        $.ajax({
-            url: '{{ route('dashboard') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-giat');
-                dataContainer.empty(); // Clear existing data (if any)
 
-if (data.datas.giats.length == 0){
-        dataContainer.append('<tr> <td colspan="5" align="center">Tidak ada laporan</td></tr>');
-    } else {
-                // Append the updated data to the container
-
-                data.datas.giats.forEach(function (item) {
-                    var urel = "/izin-detail/";
-                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-
-                if (item.status == 'Open'){
-                    let text = item.nm_pt;
-                    if('Lainnya' == text.substring(0, 7)){
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + text.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: red; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
-                    } else {
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: red; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
-                    }
-               } else if (item.status == 'On Progress'){
-                    let texts = item.nm_pt;
-                    if('Lainnya' == texts.substring(0, 7)){
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + texts.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
-                    } else {
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: green; font-weight: bold;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display    
-                    }
-               } else if(item.status == 'Expired') {
-                    let textx = item.nm_pt;
-                    if('Lainnya' == textx.substring(0, 7)){
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + textx.substring(8, 1000) + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold; text-shadow: 1px 1px 3px #000000;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
-                    } else {
-                    dataContainer.append('<tr><td><a href="'+urel + item.id +'">' + item.izin_id + '</a></td><td>' + item.nm_pt + '</td><td>' + item.pemohon + '</td><td>' + item.tgl + '</td><td style="color: #ffc107; font-weight: bold; text-shadow: 1px 1px 3px #000000;">' + item.status + '</td></tr>'); // Replace 'name' with the property you want to display
-                    }
-               }
-
-                              });
-
-            }
-        },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
-
-    // Call the function initially to load the data
-    updateGiat();
-
-    // function updateTime() {
-    // $.ajax({
-    //         url: '{{ route('grafik') }}',
-    //         method: 'GET',
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             // Update the view with the new data
-    //             var dataContainer = $('#data-time');
-    //             dataContainer.empty(); // Clear existing data (if any)
-
-    //             data.datas.time.forEach(function (tes) {
-    //                dataContainer.append('<tr><td>' + tes + '</td></tr>'); // Replace 'name' with the property you want to display
-    //             });
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('Ajax request error:', error);
-    //         }
-    //     });
-    // }
-
-    // // Call the function initially to load the data
-    // updateTime();
-
-    function updateJadi() {
-        $.ajax({
-            url: '{{ route('dashboard') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-jadi');
-                dataContainer.empty(); // Clear existing data (if any)
-
-if (data.datax.jadi.length == 0){
-        dataContainer.append('<tr> <td colspan="5" align="center"> Tidak ada laporan </td></tr>');
-    } else {
-                // Append the updated data to the container
-                const nolap = data.datax.jadi;
-            // 
-                nolap.forEach(function (item) {
-                    var urel = "/kejadian-detil/" + item.no_lap;
-                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-
-            if (item.jenis_potensi.includes('Lain-lain')){
-                    if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi.slice(12, 1000) +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
-                    } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi.slice(12, 1000) +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
-                    }
-            } else {
-                        if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red;"><b>' + item.status +'</b></span></td></tr>');
-                    } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.user_pelapor +'</a></td><td>' + item.jenis_potensi +'</td><td>' + item.waktu_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
-                    }
-            }
-
-
-                });
-            }
-        },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
-    
-    // Call the function initially to load the data
-    updateJadi();
-
-
-    function updateGawat() {
-        $.ajax({
-            url: '{{ route('dashboard') }}',
-            method: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                // Update the view with the new data
-                var dataContainer = $('#data-gawat');
-                dataContainer.empty(); // Clear existing data (if any)
-
-
-    if (data.datay.gawat.length == 0){
-        dataContainer.append('<tr> <td colspan="5" >Tidak ada laporan </td></tr>');
-    } else {
-                // Append the updated data to the container
-                const nolaps = data.datay.gawat;
-            // console.log(nolaps);
-                nolaps.forEach(function (item) {
-                    var urel = "/bencana-detil/" + item.id;
-                    urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-
-            if (item.jenis_bencana.includes('Man-made Hazard')){
-                    if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana.slice(18, 1000) +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red; text-shadow: 1px 1px 5px #000000;"><b>' + item.status +'</b></span></td></tr>');
-                    } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana.slice(18, 1000) +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
-                    }
-            } else {
-                        if (item.status == 'Open'){
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: red; text-shadow: 1px 1px 5px #000000;"><b>' + item.status +'</b></span></td></tr>');
-                    } else {
-                        dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.no_bencana +'</a></td><td>' + item.jenis_bencana +'</td><td>' + item.tanggal_kejadian +'</td><td>' + item.updated_at +'</td><td><span style="color: green;"><b>' + item.status +'</b></span></td></tr>');
-                    }
-            }
-
-
-                });
-
-    }
-            },
-            error: function (xhr, status, error) {
-                console.error('Ajax request error:', error);
-            }
-        });
-    }
-    
-    // Call the function initially to load the data
-    updateGawat();
-
-    // function updateTimex() {
-    // $.ajax({
-    //         url: '{{ route('grafik') }}',
-    //         method: 'GET',
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             // Update the view with the new data
-    //             var dataContainer = $('#data-timex');
-    //             dataContainer.empty(); // Clear existing data (if any)
-
-    //             data.datax.times.forEach(function (time) {
-    //                dataContainer.append('<tr><td width="100px">' + time + '</td></tr>'); // Replace 'name' with the property you want to display
-                    
-    //             });
-
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('Ajax request error:', error);
-    //         }
-    //     });
-    // }
-
-    // // Call the function initially to load the data
-    // updateTimex();
-
-    // function updateJaga() {
-    //     $.ajax({
-    //         url: '{{ route('grafik') }}',
-    //         method: 'GET',
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             // Update the view with the new data
-    //             var dataContainer = $('#data-jaga');
-    //             dataContainer.empty(); // Clear existing data (if any)
-
-    //             // Append the updated data to the container
-    //             const nolap = data.dataz.jaga;
-                
-    //             nolap.forEach(function (item) {
-    //                 var urel = "/trj-detil/" + item.no_trj +'/'+ item.id;
-    //                 urls = urel.replace(/\/?(\?|#|$)/, '/$1');
-    //                 dataContainer.append('<tr> <td><a href="'+ urel +'">' + item.danru + '</a></td></tr>'); // Replace 'name' with the property you want to display
-    //             });
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('Ajax request error:', error);
-    //         }
-    //     });
-    // }
-
-    // // Call the function initially to load the data
-    // updateJaga();
-
-    // function updateTimej() {
-    // $.ajax({
-    //         url: '{{ route('grafik') }}',
-    //         method: 'GET',
-    //         dataType: 'json',
-    //         success: function (data) {
-    //             // Update the view with the new data
-    //             var dataContainer = $('#data-timej');
-    //             dataContainer.empty(); // Clear existing data (if any)
-
-    //             data.dataz.timej.forEach(function (time) {
-    //                dataContainer.append('<tr><td>' + time + '</td></tr>'); // Replace 'name' with the property you want to display
-                    
-    //             });
-
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('Ajax request error:', error);
-    //         }
-    //     });
-    // }
-
-    // // Call the function initially to load the data
-    // updateTimej();
-
-
-
-    setInterval(function () {
-                updateGiat();
-                // updateTime();
-                updateJadi();
-                updateGawat();
-                // updateJaga();
-                // updateTimej();
-        }, 30000);
-
-
-</script>
-    <livewire:grafik-unras/>
-@endpush
+    <livewire:grafik-unras></livewire:grafik-unras>
 <div class="card-body overflow px-3 pt-1" style="overflow-x: auto;">
 
 <div class="row">
@@ -389,21 +121,13 @@ if (data.datax.jadi.length == 0){
 
 
 <div class="col col-sm-5 px-1">
+
     <div class="mt-2">
     <div class="card" style="background-color:rgba(0, 230, 64, 0.5);">
-      <div class="card-body overflow" style="overflow-x: auto;">
+      <div class="card-body overflow py-2 px-3" style="overflow-x: auto;">
         <h5 class="card-title">Data Izin Pekerjaan</h5>
         <div class="row ">
-                <table class="col">
-                    <tr align="center">
-                        <th>Nomor<br/>Dokumen</th>
-                        <th>Perusahaan</th>
-                        <th>Pemohon</th>
-                        <th>Tanggal<br/>Permohonan</th>
-                        <th>Status</th>
-                    </tr>
-                    <tbody align="center" id="data-giat"></tbody>
-                </table>
+                @livewire('pekerjaan')
         </div>
       </div>
     </div>
@@ -412,52 +136,22 @@ if (data.datax.jadi.length == 0){
 
   <div class="mt-2">
     <div class="card" style="background-color:rgba(255, 240, 0, 0.5);">
-      <div class="card-body">
+        <div class="card-body overflow py-2 px-3" style="overflow-x: auto;">
         <h5 class="card-title">Data Laporan Kejadian</h5>
-        <div class="card-body overflow" style="overflow-x: auto;">
             <div class="row">
-                <table class="col">
-                    <tr align="center">
-                        <th>Dibuat Oleh</th>
-                        <th>Jenis<br/>Potensi</th>
-                        <th>Tanggal<br/>Kejadian</th>
-                        <th>Terakhir<br/>Diperbarui</th>
-                        <th>Status</th>
-                    </tr>
-                    <tbody align="center" id="data-jadi">
-                        
-                    </tbody>
-
-                    {{-- <tbody align="center" id="data-timex"></tbody> --}}
-                </table>
+                @livewire('kejadian')
             </div>
         </div>
-      </div>
     </div>
   </div>
 
  <div class="mt-2">
     <div class="card" style="background-color:rgba(207, 0, 15, 0.5);">
-      <div class="card-body">
+        <div class="card-body overflow py-2 px-3" style="overflow-x: auto;">
         <h5 class="card-title">Data Laporan Kegawatdaruratan</h5>
-        <div class="card-body overflow" style="overflow-x: auto;">
             <div class="row">
-                <table class="col">
-                    <tr align="center">
-                        <th>Nomor<br/>Laporan</th>
-                        <th>Jenis<br/>Kegawatdaruratan</th>
-                        <th>Tanggal<br/>Kejadian</th>
-                        <th>Terakhir<br/>Diperbarui</th>
-                        <th>Status</th>
-                    </tr>
-                    <tbody align="center" id="data-gawat">
-                        
-                    </tbody>
-
-                    {{-- <tbody align="center" id="data-timex"></tbody> --}}
-                </table>
+                @livewire('gawatdarurat')
             </div>
-        </div>
       </div>
     </div>
   </div>
@@ -495,9 +189,5 @@ if (data.datax.jadi.length == 0){
         </div>
     </div>
 </div>
-{{-- @elseif (Auth::user()->role === 'user')
-    <meta content="0; url={{ route('kegiatan') }}" http-equiv="refresh">
-@endif --}}
-
 
 @endsection

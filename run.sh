@@ -1,0 +1,1 @@
+cd /home/n1573881/pengamanan/ && php artisan schedule:run;  >> /home/n1573881/logs/cron.log 2>&1 

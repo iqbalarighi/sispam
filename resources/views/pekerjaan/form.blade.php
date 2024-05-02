@@ -543,10 +543,10 @@ function quest() {
                     {{-- <div>
                         <label class="mb-0"><input type="checkbox" name="pelindung_diri[]" value="Lainnya" />Lainnya</label>
                     </div> --}}
-                    <div class="">
-                        <div class="col-auto"><label class="mb-0 "><input type="checkbox" onclick="con2()" id="diri21" name="pelindung_diri[]" value="Lainnya" /> Lainnya</label>
-                            <input class="form-control form-control-sm px-0 py-0" size="7" type="text" id="lainlain" name="pelindung_diri[]" /></div>
+                    <div class="col-auto px-0"><label class="mb-0 "><input type="checkbox" onclick="con2()" id="diri21" name="pelindung_diri[]" value="Lainnya" /> Lainnya</label>
+                        <input class="form-control form-control-sm px-0 py-0" size="7" type="text" id="lainlain" name="pelindung_diri[]" hidden />
                     </div>
+
                 </td>
 
             </tr>
@@ -577,9 +577,9 @@ function quest() {
                         <label class="mb-0"><input type="checkbox" name="perlengkapan[]" value="Lainnya" /> Lainnya</label>
                     </div> --}}
 
-                    <div class="d-flex">
+                    <div class="">
                         <label class="mb-0 pe-2"><input type="checkbox" id="pan7" name="perlengkapan[]" onclick="kap()" value="Lainnya" /> Lainnya </label>
-                        <div class="col-auto col-md-7"><input class="form-control form-control-sm px-0 py-0" type="text" id="lainlain2" name="perlengkapan[]" /></div>
+                        <div class="col-auto col-md-4"><input class="form-control form-control-sm px-0 py-0" type="text" id="lainlain2" name="perlengkapan[]" hidden /></div>
                     </div>
                 </td>
             </tr>
@@ -648,13 +648,62 @@ clas9.addEventListener('change', () => {
   }
 });
 </script>
+<script type="text/javascript">
+    $("#perusahaan").on('change', function() {
 
+    if ($("#perusahaan").val().toLowerCase().indexOf("pkss") != -1) {
+        $('#perusahaan_pemohon option[value="PT. Prima Karya Sarana Sejahtera (PT. PKSS)"]').prop("selected", true);
+        $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+        $("#perusahaan").removeAttr('name');
+        $("#perusahaan").prop('disabled', true);
+        $("#perusahaan").prop('required', false);
+        $("#perusahaan").prop('hidden', true);
+        $("#inputGroupFile").prop('required', false);
+        $("#foto").prop('hidden', true);
+    } else if ($("#perusahaan").val().toLowerCase().indexOf("kdi") != -1) {
+        $('#perusahaan_pemohon option[value="PT. Kopojeka Daya Indonesia (PT. KDI)"]').prop("selected", true);
+        $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+        $("#perusahaan").removeAttr('name');
+        $("#perusahaan").prop('disabled', true);
+        $("#perusahaan").prop('required', false);
+        $("#perusahaan").prop('hidden', true);
+        $("#inputGroupFile").prop('required', false);
+        $("#foto").prop('hidden', true);
+    } else if ($("#perusahaan").val().toLowerCase().indexOf("sgrs") != -1) {
+        $('#perusahaan_pemohon option[value="PT. Swadharma Griyasatya (PT. SGRS)"]').prop("selected", true);
+        $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+        $("#perusahaan").removeAttr('name');
+        $("#perusahaan").prop('disabled', true);
+        $("#perusahaan").prop('required', false);
+        $("#perusahaan").prop('hidden', true);
+        $("#inputGroupFile").prop('required', false);
+        $("#foto").prop('hidden', true);
+    } else if ($("#perusahaan").val().toLowerCase().indexOf("bpb") != -1) {
+        $('#perusahaan_pemohon option[value="PT. Bangun Prestasi Bersama (PT. BPB)"]').prop("selected", true);
+        $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
+        $("#perusahaan").removeAttr('name');
+        $("#perusahaan").prop('disabled', true);
+        $("#perusahaan").prop('required', false);
+        $("#perusahaan").prop('hidden', true);
+        $("#inputGroupFile").prop('required', false);
+        $("#foto").prop('hidden', true);
+    } else {
+        $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon[]');
+            $("#perusahaan").attr('name', 'perusahaan_pemohon[]');
+            $("#perusahaan").removeAttr('disabled');
+            $("#perusahaan").prop('required',true);
+            $("#perusahaan").removeAttr('hidden');
+            $("#foto").removeAttr('hidden');
+            $("#inputGroupFile").prop('required',true);
+    }
+  }); 
+</script>
 <script>
  // $("#perusahaan").prop('disabled',true);
  // $("#perusahaan").prop('hidden', true);
     $("#perusahaan_pemohon").change(function() {
-console.log($("#perusahaan_pemohon").val())
 if ($("#perusahaan_pemohon option:selected").val() == "Lainnya") {
+            $("#perusahaan").val('');
             $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon[]');
             $("#perusahaan").attr('name', 'perusahaan_pemohon[]');
             $("#perusahaan").removeAttr('disabled');
@@ -662,6 +711,7 @@ if ($("#perusahaan_pemohon option:selected").val() == "Lainnya") {
             $("#perusahaan").removeAttr('hidden');
             $("#foto").removeAttr('hidden');
             $("#inputGroupFile").prop('required',true);
+
        } else {
             $("#perusahaan_pemohon").attr('name', 'perusahaan_pemohon');
             $("#perusahaan").removeAttr('name');
@@ -701,11 +751,11 @@ function alarm() {
 const diri21 = document.querySelector('#diri21');
 const lainlain = document.querySelector('#lainlain');
 lainlain.disabled = true;
-lainlain.style.visibility = 'hidden';
 
 diri21.addEventListener('change', () => {
   if (diri21.checked) {
-    lainlain.style.visibility = 'visible';
+    // lainlain.style.visibility = 'visible';
+    $("#lainlain").removeAttr('hidden');
     lainlain.value = '';
     lainlain.name = 'pelindung_diri[]';
     lainlain.required= true;
@@ -713,7 +763,7 @@ diri21.addEventListener('change', () => {
   } else {
     lainlain.disabled = true;
     lainlain.required = false;
-    lainlain.style.visibility = 'hidden';
+    $("#lainlain").prop('hidden', true);
     lainlain.name = '';
   }
 });
@@ -722,19 +772,18 @@ diri21.addEventListener('change', () => {
 const pan7 = document.querySelector('#pan7');
 const lainlain2 = document.querySelector('#lainlain2');
 lainlain2.disabled = true;
-lainlain2.style.visibility = 'hidden';
 
 pan7.addEventListener('change', () => {
   if (pan7.checked) {
-    lainlain2.style.visibility = 'visible';
+    $("#lainlain2").removeAttr('hidden');
     lainlain2.value = '';
     lainlain2.name = 'perlengkapan[]';
     lainlain2.required= true;
     lainlain2.disabled = false;
   } else {
+    $("#lainlain2").prop('hidden', true);
     lainlain2.disabled = true;
     lainlain2.required = false;
-    lainlain2.style.visibility = 'hidden';
     lainlain2.name = '';
   }
 });
