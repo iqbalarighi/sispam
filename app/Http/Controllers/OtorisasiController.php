@@ -20,6 +20,7 @@ class OtorisasiController extends Controller
         $simpan->nama = $request->nama;
         $simpan->jabatan = $request->jabatan;
         $simpan->nip = $request->nip;
+        $simpan->unit_kerja = $request->uker;
         $simpan->save();
 
         return back()
@@ -33,6 +34,7 @@ class OtorisasiController extends Controller
         $update->nama = $request->nama;
         $update->jabatan = $request->jabatan;
         $update->nip = $request->nip;
+        $update->unit_kerja = $request->uker;
         $update->save();
 
         return back()

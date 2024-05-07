@@ -44,19 +44,19 @@
                     </span>
 
                     @if ($detil->foto != null)
-                <div style="page-break-after: inherit;" >
+                <div style="page-break-after: auto;" >
                     <b>Dokumentasi : </b>
-                     <br><br><br><br><br>
-                     <div align="center">
+                     <br><br><br><br>
+                <center>
                             @if ($detil->foto != null)
                     @foreach(explode('|',$detil->foto) as $item)
 
-                    <img  src="{{ public_path('storage/smc')}}/{{$detil->no_lap}}/{{$item}}" style="height:250px;  margin-bottom: 5pt">  &nbsp;
+                    <img  src="{{ public_path('storage/smc')}}/{{$detil->no_lap}}/{{$item}}" style="height:230px;  margin-bottom: 5pt">  &nbsp;
                     @endforeach
                         @else 
                         Harap Upload Foto Dokumentasi
                         @endif
-                    </div>
+                </center>
                 </div>
                 @endif
 {{-- <div style="position: absolute; right: 0; bottom: 0px;" align="center">

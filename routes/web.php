@@ -310,11 +310,12 @@ Route::controller(IzinvendorController::class)->middleware('auth')->group(functi
     Route::get('/hapus_apd/{id}/{apd}', 'hapus_apd');
     Route::get('/hapus_apk/{id}/{apk}', 'hapus_apk');
     Route::get('/izin-downloadPDF/{id}/{oto}', 'downloadPDF');
+    Route::get('/izin-downloadPDF/{id}/{oto}/{val}', 'downloadPDF2');
     Route::delete('/hapus-izin/{izinid}', 'hapus');
     Route::get('/izinkerja/{cari}/{start}/{end}', 'izinkerja1');
     Route::get('/izinkerja/{start}/{end}', 'izinkerja2');
     Route::get('/izinkerja/{cari}', 'izinkerja3');
-    
+    Route::get('/otorisasi/{id}/{otoid}', 'otorisasi');
 });
 
 Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');

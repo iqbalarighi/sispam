@@ -14,5 +14,6 @@ class OtorisasiModel extends Model
         'nama', 
         'jabatan', 
         'nip', 
+        'unit_kerja', 
     ];
 }

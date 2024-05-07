@@ -1,6 +1,6 @@
 <div >
     {{-- Care about people's approval and you will be their prisoner. --}}
-<div class="card-body" wire:poll.2s style="overflow-x: auto;">
+<div class="card-body"  style="overflow-x: auto;" wire:poll>
     <center>
                     <table class="table-striped table-hover table-sm text-center mt-3" width="100%">
 

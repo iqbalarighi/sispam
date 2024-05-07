@@ -79,7 +79,7 @@
                             margin: 0em;
                         }
                         .modal {
-                        --bs-modal-width: 50% !important;
+                        --bs-modal-width: 80% !important;
                         --bs-modal-padding: 0.1rem !important;
                     }
                     </style>
@@ -95,7 +95,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <!-- Add image inside the body of modal -->
-                                <div align="center" class="modal-body center">
+                                <div align="center" class="modal-body center" style="overflow-x: auto;">
                                     <form action="{{url('simpan_otorisasi')}}" method="POST" id="form" enctype="form-data">
                                 @csrf
                                         <h4>Tambah Data Otorisasi</h4>
@@ -111,11 +111,16 @@
                                     NIP 
                                     <input type="text" onkeypress="return angka(event)" class="form-control width-50" autocomplete="off" name="nip" required />
                                 </label>
+                                <label>
+                                    Unit Kerja 
+                                    <input type="text" class="form-control width-50" autocomplete="off" name="uker" required />
+                                </label>
                                 <br>
-                                <input type="submit" class="btn btn-primary btn-sm mt-2" value="Submit">
+                                <input type="submit" id="submit" class="btn btn-primary btn-sm mt-2" value="Submit" hidden>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
+                                    <span class="btn btn-primary btn-sm mt-2">Submit</span>
                                 <button type="button"
                                         class="btn btn-secondary btn-sm"
                                         data-dismiss="modal">
@@ -134,6 +139,7 @@
                         <th scope="col" class="align-middle">NIP</th>
                         <th scope="col" class="align-middle">Nama</th>
                         <th scope="col" class="align-middle">Jabatan</th>
+                        <th scope="col" class="align-middle">Unit Kerja</th>
                        <th class="align-middle" style="width:72px">Option</th>
 
                     </tr>
@@ -143,6 +149,7 @@
                     <td>{{$oto->nip}}</td>
                     <td>{{$oto->nama}}</td>
                     <td>{{$oto->jabatan}}</td>
+                    <td>{{$oto->unit_kerja}}</td>
                     <td class="d-flex justify-content-between"> 
                         <label style="vertical-align: middle;"  data-toggle="modal" data-target="#otorisasi{{$otor->firstitem()+$key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center">
 
@@ -158,10 +165,11 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <!-- Add image inside the body of modal -->
-                                <div align="center" class="modal-body center">
-                                    <form action="{{url('update-otorisasi').'/'.$oto->id}}" method="POST" id="form">
+                                <div align="center" class="modal-body center" >
+                                    <form action="{{url('update-otorisasi').'/'.$oto->id}}" method="POST" id="form" >
                                 @csrf
                                 @method('PUT')
+                                <div style="overflow-x: auto;">
                                         <h4>Tambah Data Otorisasi</h4>
                                 <label>
                                     Nama
@@ -175,11 +183,17 @@
                                     NIP 
                                     <input type="text" onkeypress="return angka(event)" class="form-control width-50"  name="nip" value="{{$oto->nip}}" />
                                 </label>
+                                <label>
+                                    Unit Kerja 
+                                    <input type="text" class="form-control width-50" name="uker" value="{{$oto->unit_kerja}}" />
+                                </label>
                                 <br>
-                                <input type="submit" class="btn btn-primary btn-sm mt-2" value="Update">
-                                    </form>
+                                <input type="submit" id="update{{$oto->id}}" class="btn btn-primary btn-sm mt-2" value="Update" hidden>
                                 </div>
+                                    </form>
+                            </div>
                                 <div class="modal-footer">
+                                <label for="update{{$oto->id}}" class="btn btn-primary btn-sm mt-2" value="Update">Update</label >
                                 <button type="button"
                                         class="btn btn-secondary btn-sm"
                                         data-dismiss="modal">

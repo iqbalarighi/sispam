@@ -8,7 +8,33 @@
                 <div class="card-header fw-bold text-uppercase">{{ __('SURAT IZIN PEKERJAAN RISIKO '.$detail->risiko) }}
                     <a href="{{ route('izin_kerja') }}"><span class="btn btn-primary float-right btn-sm mx-2">Kembali</span></a>
                     @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
-                    <span class="btn btn-sm btn-success float-end p-1" onclick="window.location='{{url('izin-validasi')}}/{{$detail->izin_id}}'" style="cursor: pointer;">Validasi</span>
+                        @if($otorized != null)
+                            @if($detail->otorizedby != null && $detail->validatedby != null)
+                            @elseif($detail->validatedby != null)
+                                <span class="btn btn-sm btn-success float-end p-1" onclick="return oto()" style="cursor: pointer;">Otorisasi</span>
+                                <script>
+                                    function oto() {                              
+                                        Swal.fire({
+                                              title: "Otorisasi Dokumen",
+                                              icon: "warning",
+                                              showCancelButton: true,
+                                              confirmButtonColor: "#3085d6",
+                                              cancelButtonColor: "#d33",
+                                              confirmButtonText: "Otorisasi",
+                                              cancelButtonText: "Batal"
+                                            }).then((result) => {
+                                              if (result.isConfirmed) {
+                                                window.location='{{url('/otorisasi/'.$detail->izin_id.'/'.$otorized->id)}}'
+                                              }
+                                            });
+                                        }
+                                </script>
+                            @endif
+                        @else
+                            @if($detail->validatedby == null)
+                            <span class="btn btn-sm btn-success float-end p-1" onclick="window.location='{{url('izin-validasi')}}/{{$detail->izin_id}}'" style="cursor: pointer;">Validasi</span>
+                            @endif
+                        @endif
                     @endif
                 </div>
 @if (session('abort'))
@@ -20,9 +46,20 @@
 });
 </script>
 @endif
+
+@if (session('sukses'))
+    <script type="text/javascript">
+        Swal.fire({
+          icon: "success",
+          title: "{{ session('sukses') }}",
+          showConfirmButton: false,
+          timer: 1500
+        });
+    </script>
+@endif
                 <div class="card-body">
                     Nomor Dokumen : {{$detail->izin_id}} <br>
-                    {{-- Nomor : {{$detail->no_dok}}/IK/{{$detail->izin_informasi->perusahaan_pemohon}}/{{$romawi}}/{{Carbon\Carbon::parse($detail->created_at)->isoFormat('YYYY')}} --}}
+
 
 <style type="text/css">
     table, th, tr, td {
@@ -33,7 +70,7 @@
         white-space: nowrap;
     }
 </style>
-                    <div class="col" style="overflow: auto;">
+                    <div class="col" style="overflow-y: none;overflow-x: auto;">
                         <div class="row p-0 mb-3">
                             <div class="col px-0">
                            <b> A. Klasifikasi Pekerjaan </b>
@@ -492,30 +529,107 @@
                     </div>
                 </div>
 @endif
-
+{{-- {{dd( 214800 <= 220000 )}} --}}
     @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
-                                <div align="center">
-                                    <select id="otorisasi"  required>
-                                        <option value="" selected>:: Pilih Otorisasi ::</option>
-                                        @foreach ($otor as $key => $oto)
-                                        <option value="{{$oto->id}}">{{$oto->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                <a id="link" target="_blank"><button id="unduh" class="btn btn-primary btn-sm float-center ml-2" disabled>Download PDF</button></a>
-                                </div>
-        <script>
-            $("#otorisasi").change(function() {
-                console.log($("#otorisasi option:selected").val());
-                if ($("#otorisasi option:selected").val() == '') {
-                    $("#unduh").prop("disabled", true);
-                    $('#link').removeAttr("href");
-                } else {
-                    $('#link').attr("href", "/izin-downloadPDF/{{$detail->id}}/"+this.value);
-                    $("#unduh").prop("disabled", false); 
-                }
-        });
-        </script>
+        {{-- @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 235959 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 90000) --}}
+{{-- yang ini buat jam 00.00 sampai 9 pagi --}}
+        @if (Carbon\Carbon::now()->isoFormat('HHmmss') <= 90000) {{-- 23.59 - jam 09.00--}}
+
+            @if($detail->otorizedby != null && $detail->validatedby != null)
+                <div align="center" >
+                    <a target="_blank" href="/izin-downloadPDF/{{$detail->id}}/{{$detail->otorizedby}}/{{$detail->validatedby}}"><button class="btn btn-primary btn-sm float-center">Download PDF</button></a>
+                </div>
+            @elseif($detail->otorizedby == null && $detail->validatedby == null)
+                <div align="center" class="mb-2">
+                    <span class="bg-danger text-white rounded fw-bold py-1 px-2">Dokumen belum di Otorisasi dan di Validasi</span>
+                </div>
+            @elseif($detail->validatedby != null && $otorized == true)
+                <div align="center" class="mb-2">
+                   <span class="bg-success text-white rounded fw-bold py-1 px-2">Dokumen telah di Validasi</span>
+                </div>
+           {{-- @elseif($detail->validatedby != null)
+                <div align="center" class="mb-2">
+                   <a target="_blank" href="https://wa.me/62811163361?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Nanang Ariantox</span></a>
+                   <a target="_blank" href="https://wa.me/628128051226?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Tomi Hartonox</span></a>
+                   <a target="_blank" href="https://wa.me/6281253005354?text=Halo%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20terkait%20dokumen%20kami%20dengan%20nomor%20laporan%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttp%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Budi Murtopox</span></a>
+                </div> --}}
+
+              {{--    <div align="center">
+                        <select id="otorisasi"  required>
+                            <option value="" selected>:: Pilih Otorisasi ::</option>
+                            @foreach ($otor as $key => $oto)
+                            <option value="{{$oto->id}}">{{$oto->nama}}</option>
+                            @endforeach
+                        </select>
+                    <a id="link" target="_blank"><button id="unduh" class="btn btn-primary btn-sm float-center ml-2" disabled>Download PDF</button></a>
+                </div>
+                <script>
+                    $("#otorisasi").change(function() {
+                        console.log($("#otorisasi option:selected").val());
+                        if ($("#otorisasi option:selected").val() == '') {
+                            $("#unduh").prop("disabled", true);
+                            $('#link').removeAttr("href");
+                        } else {
+                            $('#link').attr("href", "/izin-downloadPDF/{{$detail->id}}/"+this.value);
+                            $("#unduh").prop("disabled", false); 
+                        }
+
+                        $("#unduh").on('click', function() {
+                             setTimeout(function(){
+                               window.location.reload(1);
+                            }, 3000);
+                        })
+                });
+                </script>  --}}
+
+            @endif
+
+        @else 
+{{-- yang ini buat jam 9 pagi sampe jam 12 malam --}}
+            @if($detail->otorizedby != null && $detail->validatedby != null)
+                <div align="center">
+                    <a target="_blank" href="/izin-downloadPDF/{{$detail->id}}/{{$detail->otorizedby}}/{{$detail->validatedby}}"><button class="btn btn-primary btn-sm float-center ml-2">Download PDF</button></a>
+                </div>{{-- 
+            @elseif($detail->otorizedby)
+                <div align="center" class="mb-2">
+                   <span class="bg-success text-white rounded fw-bold py-1 px-2">Dokumen telah di Otorisasi</span>
+                </div> --}}
+            @elseif($detail->validatedby != null)
+                @if($otorized == true)
+                <div align="center" class="mb-2">
+                   <span class="bg-success text-white rounded fw-bold py-1 px-2">Dokumen telah di Validasi</span>
+                </div>
+                @else
+                    @if(Carbon\Carbon::now()->isoFormat('HHmmss') <= 160000)
+                        <div align="center" class="mb-2">
+                           <a target="_blank" href="https://wa.me/62811163361?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Nanang Arianto</span></a>
+                           <a target="_blank" href="https://wa.me/628128051226?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Tomi Hartono</span></a>
+                           <a target="_blank" href="https://wa.me/6281253005354?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Budi Murtopo</span></a>
+                        </div>
+                    @elseif(Carbon\Carbon::now()->isoFormat('HHmmss') >= 160001)
+                        <div align="center" class="mb-2">
+
+                           <a target="_blank" href="https://wa.me/628128051226?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Tomi Hartono</span></a>
+
+                        </div>
+                    @endif
                 @endif
+            @elseif($detail->otorizedby == null && $detail->validatedby == null)
+                <div align="center" class="mb-2">
+                    <span class="bg-danger text-white rounded fw-bold py-1 px-2">Dokumen belum di Otorisasi dan di Validasi</span>
+                </div>
+{{--             @elseif($detail->otorizedby == null)
+                <div align="center" class="mb-2">
+                   <span class="bg-danger text-white rounded fw-bold py-1 px-2">Dokumen belum di Otorisasi</span>
+                </div>
+            @elseif($detail->validatedby == null)
+                <div align="center" class="mb-2">
+                   <span class="bg-danger text-white rounded fw-bold py-1 px-2">Dokumen belum di Validasi</span>
+                </div> --}}
+            @endif
+
+        @endif
+    @endif
                     </div>
                 </div>
                  {{-- <div align="center" class="my-2"> <a href="{{url('izin-downloadPDF')}}/{{$detail->id}}" target="_blank"> <span class="btn btn-primary">Download Dokumen</span></a></div> --}}

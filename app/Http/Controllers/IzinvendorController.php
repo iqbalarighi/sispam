@@ -95,7 +95,7 @@ class IzinvendorController extends Controller
         $th = Str::substr($year, -2);
         $string = 'SIPR-'.$th.$month.'-';
         $izin_id = Helper::IDGenerator($izin, 'izin_id', 4, $string); /** Generate id */
-        $nodok = Helper::IDGenerator($izin, 'no_dok', 4,""); /** Generate id */
+        /** $nodok = Helper::IDGenerator($izin, 'no_dok', 4,"");  Generate id */
 
 // ---------------------klasifikasi---------------------------------------------------------
 
@@ -136,7 +136,6 @@ class IzinvendorController extends Controller
 
         $izin->izin_id = $izin_id;
         $izin->klasifikasi = $klas;
-        $izin->no_dok = $nodok;
         $izin->biaya = $request->biaya;
         $izin->risiko = $request->risiko;
         
@@ -423,6 +422,8 @@ public function detail($id)
     $selamat = IzinkeselamatanModel::where('izin_id', $detail->izin_id)->get();
     $otor = OtorisasiModel::all();
 
+    $otorized = $otor->where('nama', Auth::user()->name)->first();
+
 $alt = explode(',',$detail->izin_perlengkapan->alat);
 $jml_alt = explode(',',$detail->izin_perlengkapan->jml_alat);
 
@@ -440,34 +441,21 @@ $mesin = array_merge_recursive(array($msn,$jml_msn));
 $material = array_merge_recursive(array($materi,$jml_materi));
 $alat_berat = array_merge_recursive(array($brt,$jml_brt));
 
-$bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
-                  if ($bulan == '01') {
-                $romawi = 'I';
-            } elseif ($bulan == '02'){
-                $romawi = 'II';
-            } elseif ($bulan == '03'){
-                $romawi = 'III';
-            } elseif ($bulan == '04'){
-                $romawi = 'IV';
-            } elseif ($bulan == '05'){
-                $romawi = 'V';
-            } elseif ($bulan == '06'){
-                $romawi = 'VI';
-            } elseif ($bulan == '07'){
-                $romawi = 'VII';
-            } elseif ($bulan == '08'){
-                $romawi = 'VIII';
-            } elseif ($bulan == '09'){
-                $romawi = 'IX';
-            } elseif ($bulan == '10'){
-                $romawi = 'X';
-            } elseif ($bulan == '11'){
-                $romawi = 'XI';
-            } elseif ($bulan == '12'){
-                $romawi = 'XII';
-            } 
+    return view('pekerjaan.detail', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','otor','otorized'));
 
-    return view('pekerjaan.detail', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','otor'));
+}
+
+public function otorisasi($id, $otoid)
+{
+   // dd($id, $otoid);
+
+   $save = IzinvendorModel::where('izin_id', $id)->first();
+
+   $save->otorizedby = $otoid;
+   $save->save();
+
+   return back()
+   ->with('sukses', 'Otorisasi berhasil');
 }
 
     public function valid($izinid)
@@ -490,14 +478,23 @@ $bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
 }
 
 public function validasi(Request $request, $izinid)
-{
-     // dd($request->mulai_granted);
+{   
     $simpan = IzinvalidasiModel::where('izin_id', $izinid)->first();
-
-$expired = Carbon::parse($request->mulai_granted)->addHours(12);
-// $expired = Carbon::parse($simpan->sampai_granted);
     $status = IzinvendorModel::findOrFail($simpan->id);
-// dd($expired, "test");
+    $user = Auth::user()->id;
+    $expired = Carbon::parse($request->mulai_granted)->addHours(12);
+
+if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
+    $otor = OtorisasiModel::all();
+    $perusahaan = IzininformasiModel::where('izin_id', $izinid)->first();
+    // dd($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)');
+    if ($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)' || $perusahaan->perusahaan_pemohon == 'PT. Kopojeka Daya Indonesia (PT. KDI)' || $perusahaan->perusahaan_pemohon == 'PT. Swadharma Griyasatya (PT. SGRS)' || $perusahaan->perusahaan_pemohon == 'PT. Bangun Prestasi Bersama (PT. BPB)'){
+         $status->otorizedby = '2';
+    } else {
+        $status->otorizedby = '1';
+    }
+}
+
     if ($request->mulai_granted != null) {
         $simpan->mulai_granted = $request->mulai_granted;
         $simpan->sampai_granted = $expired;
@@ -520,6 +517,7 @@ $expired = Carbon::parse($request->mulai_granted)->addHours(12);
 
 
     $status->status = "On Progress";
+    $status->validatedby = $user;
     $status->save();
     } 
 
@@ -543,6 +541,7 @@ $expired = Carbon::parse($request->mulai_granted)->addHours(12);
             $simpan->tgl_pngws_granted = null;
         }
     $status->status = "Canceled";
+    $status->validatedby = $user;
     $status->save();
     }
 
@@ -584,34 +583,7 @@ foreach (explode(',', $detail->izin_peralatan->perlengkapan) as $lngkp) {
     $leng[] = $lngkp;
 }
 
-$bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
-                  if ($bulan == '01') {
-                $romawi = 'I';
-            } elseif ($bulan == '02'){
-                $romawi = 'II';
-            } elseif ($bulan == '03'){
-                $romawi = 'III';
-            } elseif ($bulan == '04'){
-                $romawi = 'IV';
-            } elseif ($bulan == '05'){
-                $romawi = 'V';
-            } elseif ($bulan == '06'){
-                $romawi = 'VI';
-            } elseif ($bulan == '07'){
-                $romawi = 'VII';
-            } elseif ($bulan == '08'){
-                $romawi = 'VIII';
-            } elseif ($bulan == '09'){
-                $romawi = 'IX';
-            } elseif ($bulan == '10'){
-                $romawi = 'X';
-            } elseif ($bulan == '11'){
-                $romawi = 'XI';
-            } elseif ($bulan == '12'){
-                $romawi = 'XII';
-            } 
-
-    return view('pekerjaan.edit', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng'));
+    return view('pekerjaan.edit', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng'));
 }
 
 public function hapus_slmt($id)
@@ -1192,6 +1164,9 @@ if(($detail->izin_validasi->mulai_granted || $detail->izin_validasi->mulai_denie
     ->with('abort', 'Mohon validasi terlebih dahulu!');
 }
 
+        $detail->otorizedby = $oto;
+        $detail->save();
+
 $alt = explode(',',$detail->izin_perlengkapan->alat);
 $jml_alt = explode(',',$detail->izin_perlengkapan->jml_alat);
 
@@ -1216,32 +1191,6 @@ foreach (explode(',', $detail->izin_peralatan->perlengkapan) as $lngkp) {
     $leng[] = $lngkp;
 }
 
-$bulan = Carbon::parse($detail->created_at)->isoFormat('MM');
-                  if ($bulan == '01') {
-                $romawi = 'I';
-            } elseif ($bulan == '02'){
-                $romawi = 'II';
-            } elseif ($bulan == '03'){
-                $romawi = 'III';
-            } elseif ($bulan == '04'){
-                $romawi = 'IV';
-            } elseif ($bulan == '05'){
-                $romawi = 'V';
-            } elseif ($bulan == '06'){
-                $romawi = 'VI';
-            } elseif ($bulan == '07'){
-                $romawi = 'VII';
-            } elseif ($bulan == '08'){
-                $romawi = 'VIII';
-            } elseif ($bulan == '09'){
-                $romawi = 'IX';
-            } elseif ($bulan == '10'){
-                $romawi = 'X';
-            } elseif ($bulan == '11'){
-                $romawi = 'XI';
-            } elseif ($bulan == '12'){
-                $romawi = 'XII';
-            } 
 $expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
 
 $text = 
@@ -1261,10 +1210,82 @@ Status Surat: Surat Keluar";
 // dd($text2);
 $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
 $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text2));
-        
-        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','romawi','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor'))->merge();
 
-        $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
+$valid = null;
+
+        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor','valid'));
+
+        // $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
+
+        return $pdf->stream('Surat Izin Kerja Risiko '.$detail->izin_id.'.pdf');
+    }
+
+
+public function downloadPDF2($id, $oto, $val)
+    {   
+if (Auth::user()->unit_kerja != "Health, Safety, & Environment" && Auth::user()->unit_kerja != "Security Monitoring Center" && Auth::user()->role != "admin") {
+    header( "refresh:5;url=/dashboard" );
+    return abort(401);
+}
+
+        // dd($id);
+        $detail = IzinvendorModel::with('izin_informasi','izin_perlengkapan','izin_peralatan','izin_validasi')->findOrFail($id);
+        $selamat = IzinkeselamatanModel::where('izin_id', $detail->izin_id)->get();
+        $otor = OtorisasiModel::findOrFail($oto);
+        $valid = User::findOrFail($val);
+
+if(($detail->izin_validasi->mulai_granted || $detail->izin_validasi->mulai_denied) == null){
+    return back()
+    ->with('abort', 'Mohon validasi terlebih dahulu!');
+}
+
+$alt = explode(',',$detail->izin_perlengkapan->alat);
+$jml_alt = explode(',',$detail->izin_perlengkapan->jml_alat);
+
+$msn = explode(',',$detail->izin_perlengkapan->mesin);
+$jml_msn = explode(',',$detail->izin_perlengkapan->jml_mesin);
+
+$materi = explode(',',$detail->izin_perlengkapan->material);
+$jml_materi = explode(',',$detail->izin_perlengkapan->jml_material);
+
+$brt = explode(',',$detail->izin_perlengkapan->alat_berat);
+$jml_brt = explode(',',$detail->izin_perlengkapan->jml_alat_berat);
+
+$alat = array_merge_recursive(array($alt,$jml_alt));
+$mesin = array_merge_recursive(array($msn,$jml_msn));
+$material = array_merge_recursive(array($materi,$jml_materi));
+$alat_berat = array_merge_recursive(array($brt,$jml_brt));
+
+foreach (explode(',', $detail->izin_peralatan->pelindung_diri) as $pd) {
+    $pds[] = $pd;
+}
+foreach (explode(',', $detail->izin_peralatan->perlengkapan) as $lngkp) {
+    $leng[] = $lngkp;
+}
+
+$expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
+
+$text = 
+"Nama: ".$otor->nama."
+Jabatan : ".$otor->jabatan."
+NIP : ".$otor->nip."
+Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Status Surat: Surat Keluar";
+// dd($text);
+$text2 = 
+"Nama: ".$valid->name."
+Jabatan : ".$valid->unit_kerja."
+Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Status Surat: Surat Keluar";
+// dd($text2);
+$qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
+$qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text2));
+        
+        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor','valid'));
+
+        // $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
 
         return $pdf->stream('Surat Izin Kerja Risiko '.$detail->izin_id.'.pdf');
     }

@@ -189,5 +189,10 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">
+    setTimeout(function() {
+    // window.location.reload();
+        window.location.replace("https://www.sispam.id");
+}, 600000);
+</script>
 @endsection

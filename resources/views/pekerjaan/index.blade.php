@@ -148,7 +148,7 @@
                                 @if($izin->status == "Open")
                                 <button class="btn btn-sm p-1 align-middle btn-danger">{{$izin->status}}</button>
                                 @elseif($izin->status == "On Progress")
-                                <button class="btn btn-sm p-1 align-middle btn-success">{{$izin->status}}</button>
+                                <button class="btn btn-sm p-1 align-middle btn-success" style="text-wrap: nowrap;">{{$izin->status}}</button>
                                 @elseif($izin->status == "Expired")
                                 <button class="btn btn-sm p-1 align-middle btn-warning">{{$izin->status}}</button>
                                 @elseif($izin->status == "Done")
@@ -168,8 +168,8 @@
                                 </a>
                                 <label for="{{$index->firstitem() + $key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center py-1" style="cursor: pointer; z-index: 0;"></label> 
 
-
-                                <span class="btn btn-sm btn-primary py-1 align-self-center" onclick="window.location='{{url('izin-validasi')}}/{{$izin->izin_id}}'" style="cursor: pointer; z-index: 0;">Validasi</span>
+                                &nbsp;
+                            {{-- <span class="btn btn-sm btn-primary py-1 align-self-center" onclick="window.location='{{url('izin-validasi')}}/{{$izin->izin_id}}'" style="cursor: pointer; z-index: 0;">Validasi</span> --}}
 
 
                                 <form action="hapus-izin/{{ $izin->izin_id }}" method="post" class="align-self-center" style="z-index: 0;">

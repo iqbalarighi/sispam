@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('no_dok');
             $table->string('biaya');
             $table->string('status')->default('open');
+            $table->string('otorizedby', 50)->nullable();
+            $table->string('validatedby', 50)->nullable();
             $table->timestamps();
         });
     }

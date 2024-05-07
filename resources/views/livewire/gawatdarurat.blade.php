@@ -1,4 +1,4 @@
-<div wire:poll.2s>
+<div wire:poll>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <table class="table-striped table-hover" width="100%">
         <tr>

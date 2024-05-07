@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('jabatan');
             $table->string('nip');
+            $table->string('unit_kerja');
             $table->timestamps();
         });
     }

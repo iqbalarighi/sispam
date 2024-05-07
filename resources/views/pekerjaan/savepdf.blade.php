@@ -622,8 +622,8 @@ Divalidasi Oleh,
 
 
 <img src="data:image/png;base64, {!! $qrcode2 !!}" >
-<b>{{Auth::user()->name}}</b>
-<font style="font-size: 10pt;"><i>{{Auth::user()->unit_kerja}}</i></font></pre>
+<b>{{$valid == null ? Auth::user()->name : $valid->name}}</b>
+<font style="font-size: 10pt;"><i>{{$valid == null ? Auth::user()->unit_kerja : $valid->unit_kerja}}</i></font></pre>
                         </td>
                         </tr>
                     </table>
