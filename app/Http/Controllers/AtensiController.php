@@ -135,8 +135,9 @@ class AtensiController extends Controller
         $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->style('round')->generate(url('/atensiPDF/'.$detil->id.'/'.$oto)));
 
     if (Auth::user() == true) {
-        $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor','qrcode')); 
-        // $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
+        $pdf = PDF::loadView('atensi.savepdf', compact('detil','otor','qrcode'))->setPaper('a4', 'potrait'); 
+        $pdf->render();
+        $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
     } else {
         header('Refresh: 10; URL='.route('dashboard'));
 

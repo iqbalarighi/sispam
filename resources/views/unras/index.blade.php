@@ -491,7 +491,7 @@ if ($unras->count() == 0) {
                         </td>
                     </tr>
                <tr>
-                        <td>
+                        <td id="statgiat{{$unras->firstitem()+$key}}">
                             <select class="form-select pb-0 pt-0" id="status{{$unras->firstitem()+$key}}" name="status" aria-label="Default select example" required>
                                 <option value="" selected style="color: grey;">Status Kegiatan</option>
                                 <option value="Rencana" >Rencana</option>
@@ -501,6 +501,17 @@ if ($unras->count() == 0) {
                                 <option value="Lain-lain :" {{ 'Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11) ? 'selected' : '' }}>Lain-lain</option>
                             </select>
                             <input type="text" id="stat{{$unras->firstitem()+$key}}" class="form-control form-control-sm px-1 mt-1" autocomplete="off" name="" value="{{$sta}}" hidden>
+                        </td>
+                        <td id="stataudi{{$unras->firstitem()+$key}}" hidden>
+                            <select class="form-select pb-0 pt-0" id="statusx{{$unras->firstitem()+$key}}" name="status" aria-label="Default select example" required>
+                                <option value="" selected style="color: grey;">Status Kegiatan</option>
+                                <option value="Rencana" >Rencana</option>
+                                <option value="Terfasilitasi" {{ 'Terfasilitasi' == $rasa->status_kegiatan ? 'selected' : '' }}>Terfasilitasi</option>
+                                <option value="Tidak Terfasilitasi" {{ 'Tidak Terfasilitasi' == $rasa->status_kegiatan ? 'selected' : '' }}>Tidak Terfasilitasi</option>
+                                <option value="Batal" {{ 'Batal' == $rasa->status_kegiatan ? 'selected' : '' }}>Batal</option>
+                                <option value="Lain-lain :" {{ 'Lain-lain :' == Str::substr($rasa->status_kegiatan, 0,11) ? 'selected' : '' }}>Lain-lain</option>
+                            </select>
+                            <input type="text" id="statx{{$unras->firstitem()+$key}}" class="form-control form-control-sm px-1 mt-1" autocomplete="off" name="" value="{{$sta}}" hidden>
                         </td>
                     </tr>
                     <tr>
@@ -598,6 +609,18 @@ if ($unras->count() == 0) {
             document.getElementById("status{{$unras->firstitem()+$key}}").style.backgroundColor  = ''
         }
         });
+
+    if ($("#statusx{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("statusx{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        }
+
+    $("#statusx{{$unras->firstitem()+$key}}").change(function() {
+                if ($("#statusx{{$unras->firstitem()+$key}} option:selected").val() == '') {
+        document.getElementById("statusx{{$unras->firstitem()+$key}}").style.backgroundColor  = 'lightgray';
+        } else {
+            document.getElementById("statusx{{$unras->firstitem()+$key}}").style.backgroundColor  = ''
+        }
+        });
 </script>
     </div>
 {{-- end of modal   --}}
@@ -657,7 +680,15 @@ if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-l
         $("#kegiatan2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
         $("#jenis2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
 
-};
+} else if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Audiensi'){
+                $("#stataudi{{$unras->firstitem()+$key}}").prop('hidden', false); 
+                $("#statgiat{{$unras->firstitem()+$key}}").prop('hidden', true); 
+                $("#status{{$unras->firstitem()+$key}}").prop('required', false);
+                $("#status{{$unras->firstitem()+$key}}").prop("disabled", true);
+                $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+                $("#statusx{{$unras->firstitem()+$key}}").prop("disabled", false);
+
+          };
 
     $(window).on('load', function(){
         $("#kegiatan2{{$unras->firstitem()+$key}}").change(function() {
@@ -670,6 +701,14 @@ if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-l
                 $("#kegiatan2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
                 $("#jenis2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
                 $("#jenis2{{$unras->firstitem()+$key}}").attr("value", "");
+          } else if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Audiensi'){
+                $("#stataudi{{$unras->firstitem()+$key}}").prop('hidden', false); 
+                $("#statgiat{{$unras->firstitem()+$key}}").prop('hidden', true); 
+                $("#status{{$unras->firstitem()+$key}}").prop('required', false);
+                $("#status{{$unras->firstitem()+$key}}").prop("disabled", true);
+                $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+                $("#statusx{{$unras->firstitem()+$key}}").prop("disabled", false);
+
           } else {
             $("#jenis2{{$unras->firstitem()+$key}}").prop("disabled", true);
             $('#jenis2{{$unras->firstitem()+$key}}').prop('hidden', true);
@@ -677,6 +716,13 @@ if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-l
             $("#jenis2{{$unras->firstitem()+$key}}").attr("name", '');
             $("#kegiatan2{{$unras->firstitem()+$key}}").prop('required', true);
             $("#kegiatan2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2");
+
+                $("#stataudi{{$unras->firstitem()+$key}}").prop('hidden', true); 
+                $("#statgiat{{$unras->firstitem()+$key}}").prop('hidden', false); 
+                $("#status{{$unras->firstitem()+$key}}").prop('required', true);
+                $("#status{{$unras->firstitem()+$key}}").prop("disabled", false);
+                $("#statusx{{$unras->firstitem()+$key}}").prop('required', false);
+                $("#statusx{{$unras->firstitem()+$key}}").prop("disabled", true);
           }
         }
 );
@@ -698,7 +744,7 @@ if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain
 
     $(window).on('load', function(){
         $("#status{{$unras->firstitem()+$key}}").change(function() {
-          console.log($("#status{{$unras->firstitem()+$key}} option:selected").val());
+
           if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain :') {
                 $("#stat{{$unras->firstitem()+$key}}").prop("disabled", false);
                 $('#stat{{$unras->firstitem()+$key}}').prop('hidden', false); 
@@ -714,6 +760,42 @@ if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain
             $("#stat{{$unras->firstitem()+$key}}").attr("name", '');
             $("#status{{$unras->firstitem()+$key}}").prop('required', true);
             $("#status{{$unras->firstitem()+$key}}").attr("name", "status");
+          }
+        }
+);
+});
+</script>
+<script type="text/javascript">
+$("#statx{{$unras->firstitem()+$key}}").prop("disabled", true);
+
+if ($("#statusx{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain :') {
+        $("#statx{{$unras->firstitem()+$key}}").prop("disabled", false);
+        $('#statx{{$unras->firstitem()+$key}}').prop('hidden', false); 
+        $("#statx{{$unras->firstitem()+$key}}").prop('required', true);
+        $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+        $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status[]");
+        $("#statx{{$unras->firstitem()+$key}}").attr("name", "status[]");
+
+};
+
+    $(window).on('load', function(){
+        $("#statusx{{$unras->firstitem()+$key}}").change(function() {
+
+          if ($("#statusx{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain :') {
+                $("#statx{{$unras->firstitem()+$key}}").prop("disabled", false);
+                $('#statx{{$unras->firstitem()+$key}}').prop('hidden', false); 
+                $("#statx{{$unras->firstitem()+$key}}").prop('required', true);
+                $("#statusx{{$unras->firstitem()+$key}}").prop('required', false);
+                $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status[]");
+                $("#statx{{$unras->firstitem()+$key}}").attr("name", "status[]");
+                $("#statx{{$unras->firstitem()+$key}}").attr("value", "");
+          } else {
+            $("#statx{{$unras->firstitem()+$key}}").prop("disabled", true);
+            $('#statx{{$unras->firstitem()+$key}}').prop('hidden', true);
+            $("#statx{{$unras->firstitem()+$key}}").prop('required', false);
+            $("#statx{{$unras->firstitem()+$key}}").attr("name", '');
+            $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+            $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status");
           }
         }
 );

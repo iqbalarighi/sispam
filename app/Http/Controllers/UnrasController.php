@@ -67,7 +67,9 @@ class UnrasController extends Controller
                 $cektest = UnrasModel::whereNull('editor')
                 ->whereBetween('tanggal', [$start, $end])
                 ->get();
+
                 return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
+                
                 } else {
                     $unras = UnrasModel::orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
@@ -75,6 +77,7 @@ class UnrasController extends Controller
 
                 return view('unras.index', compact('unras','start','end','cari','cariin'));
                 }
+
         } else {
             if ($cari != null) {
                 $unras = UnrasModel::where('tanggal','LIKE', '%'.$cari.'%')
@@ -83,6 +86,7 @@ class UnrasController extends Controller
                         ->paginate(25);
                     $unras->appends(['date' => $cari]);
 
+                    return view('unras.index', compact('unras','cari'));
                 } else {
                 $unras = UnrasModel::orderBy('tanggal', 'DESC')
                 ->orderBy('waktu', 'DESC')
@@ -289,11 +293,13 @@ public function unrasPDF($start, $end)
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
 
+            $pdf->render();
+            $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
-        return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
+            return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');
         } else {
-        return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
+            return $pdf->stream('Rekap dan Rengiat UNRAS '.Carbon::parse($start)->isoFormat('D MMMM Y').'-'.Carbon::parse($end)->isoFormat('D MMMM Y').'.pdf');
         }
     }
 
@@ -352,6 +358,8 @@ public function unrasOJK($start, $end, $cariin)
 
         $pdf = PDF::loadView('unras.savepdf', compact('unras','start','end','cariin','result'))->setPaper('a4', 'landscape');
         
+            $pdf->render();
+            $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
         // return $pdf->download('Laporan Kejadian/Insiden '.$detil->no_lap.'.pdf');
         if ($start == $end) {
         return $pdf->stream('Rengiat OJK '.Carbon::parse($start)->isoFormat('D MMMM Y').'.pdf');

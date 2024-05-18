@@ -60,6 +60,17 @@
             </script>
         @endif
 
+        @if ($message = Session::get('forbidden'))
+            <script type="text/javascript">
+                Swal.fire({
+                      icon: "error",
+                      title: "Oops... ",
+                      text: "{{$message}}",
+                      
+                    });
+            </script>
+        @endif
+
                     <style>
                         tr, td {
                             padding-left: 0.1rem;
@@ -189,10 +200,11 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    setTimeout(function() {
-    // window.location.reload();
-        window.location.replace("https://www.sispam.id");
-}, 600000);
-</script>
+    <script>
+        // Set the interval to 3600000 milliseconds (1 hour)
+        setInterval(function() {
+            // window.location.reload();
+            location.href = location.href.split('?')[0] + '?' + new Date().getTime();
+        }, 3600000); // 3600000ms = 1 hour
+    </script>
 @endsection

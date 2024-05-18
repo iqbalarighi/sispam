@@ -262,7 +262,9 @@ public function savePDF($id, $oto)
         $otor = OtorisasiModel::findOrFail($oto);
         $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/savePDF/'.$detil->id.'/'.$oto)));
 
-        $pdf = PDF::loadView('bencana.savepdf', compact('detil','otor','qrcode'));
+        $pdf = PDF::loadView('bencana.savepdf', compact('detil','otor','qrcode'))->setPaper('a4', 'potrait');
+        $pdf->render();
+        $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
 
         return $pdf->stream('Laporan Bencana '.$detil->no_bencana.'.pdf');
     }

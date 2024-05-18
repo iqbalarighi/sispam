@@ -227,7 +227,7 @@
 </div>
 @elseif (Auth::user()->role === 'user' || Auth::user()->role === 'admin' )
     {{-- <meta content="0; url={{ route('dashboard') }}" http-equiv="refresh"> --}}
-    {{abort(403)}}
+    {{abort(401)}}
 @endif
 
 

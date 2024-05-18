@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="article">
-<h1 class="text-uppsercase">Under Construction</h1>
+<h1 class="text-uppsercase">Under Maintenance</h1>
 <div>
 <p>Mohon maaf Website <b>SISPAM</b> sedang dalam pemeliharaan, jika butuh bantuan silahkan <a href="https://wa.me/6289657887908" target="_blank">hubungi kami</a>. Kami akan segera online kembali secepatnya. Terima Kasih</p>
 <center><p>— Security Monitoring Center —</p></center>

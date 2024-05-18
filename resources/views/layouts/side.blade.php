@@ -202,7 +202,7 @@ if (notip.coun.count2 != 0){
                         </div> 
                     </div>
                 </div>
-            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') || Route::is('izin_kerja') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
                         <span id="stats"></span>
@@ -370,6 +370,11 @@ if (notip.coun.count2 != 0){
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    function keluar() {
+        document.getElementById('logout-form').submit();
+    }
+</script>
     <script type="text/javascript">
         window.onload = function() { jam(); }
        

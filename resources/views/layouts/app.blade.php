@@ -29,7 +29,7 @@
 <script src="{{asset("/storage/bootstrap.bundle.min.js")}}"></script>
 <link rel="stylesheet" type="text/css" href='{{asset("/storage/bootstrap.min.css")}}'>
 
-
+@vite(['resources/sass/app.scss'])
 
 
 {{-- select2 --}}

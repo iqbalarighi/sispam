@@ -51,7 +51,7 @@
                             @if ($detil->foto != null)
                     @foreach(explode('|',$detil->foto) as $item)
 
-                    <img  src="{{ public_path('storage/smc')}}/{{$detil->no_lap}}/{{$item}}" style="height:230px;  margin-bottom: 5pt">  &nbsp;
+                    <img  src="{{ public_path('storage/smc')}}/{{$detil->no_lap}}/{{$item}}" style="height:210px;  margin-bottom: 5pt">  &nbsp;
                     @endforeach
                         @else 
                         Harap Upload Foto Dokumentasi

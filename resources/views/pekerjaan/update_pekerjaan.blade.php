@@ -234,7 +234,7 @@
                     <div class="input-group custom-file-button mt-1">
                         {{-- <label for="foto">Upload Foto : </label> --}}
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Foto Pekerjaan</label>
-                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple required>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
                     </div>
                     <div class="form-floating mt-1">
                       <textarea class="form-control" placeholder="Leave a comment here" id="ket" style="height: 60px;" name="ket"></textarea>

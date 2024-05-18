@@ -2,7 +2,7 @@
 
 @section('content')
 @if(Auth::user()->level != 'superadmin')
-{{abort(403)}}
+{{abort(401)}}
 @endif
 
 <div class="container mw-100">

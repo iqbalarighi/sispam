@@ -448,8 +448,16 @@ $alat_berat = array_merge_recursive(array($brt,$jml_brt));
 public function otorisasi($id, $otoid)
 {
    // dd($id, $otoid);
-
    $save = IzinvendorModel::where('izin_id', $id)->first();
+   $simpan = IzinvalidasiModel::where('izin_id', $id)->first();
+
+   if($simpan->mulai_granted != null){
+        $save->status = "On Progress";
+    } 
+
+    if ($simpan->mulai_denied != null) {
+        $save->status = "Canceled";
+    }
 
    $save->otorizedby = $otoid;
    $save->save();
@@ -490,8 +498,24 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
     // dd($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)');
     if ($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)' || $perusahaan->perusahaan_pemohon == 'PT. Kopojeka Daya Indonesia (PT. KDI)' || $perusahaan->perusahaan_pemohon == 'PT. Swadharma Griyasatya (PT. SGRS)' || $perusahaan->perusahaan_pemohon == 'PT. Bangun Prestasi Bersama (PT. BPB)'){
          $status->otorizedby = '2';
+         
+         if($request->mulai_granted != null){
+        $status->status = "On Progress";
+    } 
+
+    if ($request->mulai_denied != null) {
+        $status->status = "Canceled";
+    }
     } else {
         $status->otorizedby = '1';
+        
+        if($request->mulai_granted != null){
+        $status->status = "On Progress";
+    } 
+
+    if ($request->mulai_denied != null) {
+        $status->status = "Canceled";
+    }
     }
 }
 
@@ -516,7 +540,7 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
         }
 
 
-    $status->status = "On Progress";
+    // $status->status = "On Progress";
     $status->validatedby = $user;
     $status->save();
     } 
@@ -540,7 +564,7 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
             $simpan->nm_pngws_granted = null;
             $simpan->tgl_pngws_granted = null;
         }
-    $status->status = "Canceled";
+    // $status->status = "Canceled";
     $status->validatedby = $user;
     $status->save();
     }
@@ -1213,9 +1237,9 @@ $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->
 
 $valid = null;
 
-        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor','valid'));
-
-        // $pdf->get_canvas()->get_cpdf()->setEncryption('smcojk','smcojk2020');
+        $pdf = PDF::loadView('pekerjaan.savepdf', compact('detail','selamat','alat','mesin','material','alat_berat','alt','msn','materi','brt','pds','leng','qrcode','qrcode2','otor','valid'))->setPaper('a4', 'potrait');
+        $pdf->render();
+        $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
 
         return $pdf->stream('Surat Izin Kerja Risiko '.$detail->izin_id.'.pdf');
     }

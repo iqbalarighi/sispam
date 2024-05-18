@@ -7,10 +7,11 @@
 @endif
         @if ($errors->any())
                         @foreach ($errors->all() as $error)
+                            
                             <script>
                                 Swal.fire({
                                         title: "Oops . . .",
-                                        text:  "Email atau password yang anda masukkan salah !",
+                                        text:  "{{$error}}",
                                         icon: "error",
                                         showConfirmButton: true,
                                     });
