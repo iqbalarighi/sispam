@@ -1,8 +1,12 @@
 @extends('layouts.side')
 
 @section('content')
-@if(Auth::user()->role == "user")
- {{abort(403)}}
+@if(Auth::user()->role == 'admin')
+
+@elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+
+@else 
+{{abort(403)}}
 @endif
 <style type="text/css">
     .custom-file-button input[type=file] {
@@ -82,7 +86,7 @@
 
                 <div class="card-body">
 <div class="col-md-8">
-<form action="{{url('layanan/update')}}/{{$edit->layanan_id}}" method="post" enctype="multipart/form-data" onsubmit="return loding(this);">
+<form action="{{url('layanan/update')}}/{{$edit->layanan_id}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="">
@@ -121,6 +125,19 @@
                     <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="layanan[]" />
                 </div>
             </div>
+            
+            <div class="mt-2">
+                <div class="form-floating">
+                    <select type="datetime-local" class="form-select form-select-sm" id="gedung" name="gedung" placeholder="" required> 
+                           <option value="{{$edit->lokasi}}">{{$edit->lokasi}}</option>
+                            @foreach($sites as $site)
+                            <option value="{{$site->nama_gd}}">{{$site->nama_gd}}</option>
+                            @endforeach
+                    </select>
+                    <label for="gedung">Pilih Gedung</label>
+                </div>
+            </div>
+
             <div class="mt-2">
                 <div>
                     <b> Uraian </b>

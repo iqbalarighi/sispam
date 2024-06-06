@@ -1,7 +1,7 @@
 @extends('layouts.side')
 
 @section('content')
-@if(Auth::user()->role == "user")
+@if(Auth::user()->unit_kerja != "Fasilitas Kerja" || Auth::user()->role == 'admin')
  {{abort(403)}}
 @endif
 <div class="container mw-100">
