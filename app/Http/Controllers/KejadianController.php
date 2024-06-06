@@ -422,11 +422,8 @@ public function kejadianPDF($id, $oto)
         if (Auth::user() == true) {
         $shift = Str::substr($detil->shift, 0,7);
         $pdf = PDF::loadView('kejadian.savepdf', compact('detil','qrcode','otor')); 
-<<<<<<< HEAD
         $pdf->render();
         $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
-=======
->>>>>>> 028af2b4f49e203c2ac3fb346401bbe0223205f6
     } else {
         header('Refresh: 10; URL='.route('dashboard'));
 

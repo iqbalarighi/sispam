@@ -104,7 +104,7 @@ class KegiatanController extends Controller
                     }
                 } else {
                     if ($start != null){
-                        $[] = null;
+                        $gg[] = null;
 
                 $giats = kegiatanModel::with('site')
                             ->whereBetween('tanggal', [$start, $end])
