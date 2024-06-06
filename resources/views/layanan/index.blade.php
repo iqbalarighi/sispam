@@ -1,9 +1,15 @@
 @extends('layouts.side')
 
 @section('content')
-@if(Auth::user()->role == "user")
- {{abort(403)}}
+
+@if(Auth::user()->role == 'admin')
+
+@elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+
+@else 
+{{abort(403)}}
 @endif
+
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
@@ -50,12 +56,12 @@
                 <th class="align-middle">ID Layanan</th>
                 <th class="align-middle">Waktu</th>
                 <th class="align-middle">Layanan</th>
-                {{-- <th class="align-middle">Detail Kebutuhan</th> --}}
+                <th class="align-middle">Lokasi</th>
                 <th class="align-middle">Nama PIC</th>
                 <th class="align-middle">Satker</th>
                 {{-- <th class="align-middle">Email</th> --}}
                 <th class="align-middle">Status</th>
-                @if (Auth::user()->role === 'admin')
+                @if (Auth::user()->role === 'admin' || Auth::user()->unit_kerja === 'Fasilitas Kerja')
                <th class="align-middle" style="width:72px; ">Option</th>
                @endif
             </tr>
@@ -74,7 +80,7 @@
                         @endif
                     @endforeach
                 </td>
-                {{-- <td>{{$layanan->detail_kebutuhan}}</td> --}}
+                <td>{{$layanan->lokasi}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->pic}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->satker}}</td>
                 {{-- <td>{{$layanan->email}}</td> --}}
@@ -93,7 +99,7 @@
                         <button class="btn btn-sm p-1 align-middle btn-closed">{{$layanan->status}}</button>
                     @endif
                 </td>
-                @if (Auth::user()->role === 'admin')
+                @if (Auth::user()->role === 'admin' || Auth::user()->unit_kerja === 'Fasilitas Kerja')
                <td class="p-0">
 
             <div class="d-flex justify-content-sm-around" style="height: 30px;">

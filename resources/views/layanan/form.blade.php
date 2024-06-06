@@ -19,6 +19,39 @@
   cursor: pointer;
 }
 </style>
+<style>
+.tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  left: 40%;
+  bottom: 110%;
+}
+
+.toolt .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+
+.toolt:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
 {{-- @if (Session::get('sukses'))
 <script type="text/javascript">
     Swal.fire({
@@ -145,44 +178,67 @@
                     <label class="m-0 pe-2" for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label>
                     <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="layanan[]" />
                 </div>
+                
+            </div>
+            <div class="mt-2">
+                <div>
+                    <b> Lokasi </b>
+                </div>
+                <div class="form-floating ">
+                    <select type="datetime-local" class="form-select form-select-sm" id="gedung" name="gedung" value="" required> 
+                       <option selected disabled></option>
+                        @foreach($sites as $site)
+                        <option value="{{$site->nama_gd}}">{{$site->nama_gd}}</option>
+                        @endforeach
+                    </select>
+                    <label for="gedung">Pilih Gedung</label>
+                    
+                </div>
             </div>
             <div class="mt-2">
                 <div>
                     <b> Uraian </b>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating toolt">
                     <input type="datetime-local" class="form-control form-control-sm" id="waktu" name="waktu" value="" required>
                     <label for="waktu">Tanggal dan Waktu</label>
+                    <span class="tooltiptext">Isi tanggal dan waktu permintaan layanan </span>
                 </div>
-                <div class="form-floating">
+                <div class="form-floating toolt">
                   <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="detail" style="height: 100px;" name="detail" required></textarea>
                   <label for="detail">Detail Kebutuhan</label>
+                  <span class="tooltiptext">Uraikan kebutuhan layanan dengan jelas sesuai jenis layanan</span>
                 </div>
                 {{--<div class="form-floating">
                   <input class="form-control form-control-sm" placeholder="Leave a comment here" id="uraian" name="uraian">
                   <label for="uraian">Tempat</label>
                 </div> --}}
-            <div class="form-floating">
-                <input class="form-control form-control-sm" type="text" name="pic" id="pic" placeholder="" required>
+            <div class="form-floating toolt">
+                <input class="form-control form-control-sm" type="text" name="pic" id="pic" placeholder="" autocomplete="off" required>
                 <label for="pic">Nama PIC</label>
+                <span class="tooltiptext">Nama orang yang bertanggungjawab </span>
             </div>
-            <div class="form-floating">
-                <input class="form-control form-control-sm" type="text" name="satker" id="satker" placeholder="" required>
+            <div class="form-floating toolt">
+                <input class="form-control form-control-sm" type="text" name="satker" id="satker" placeholder="" autocomplete="off" required>
                 <label for="satker">Satker</label>
+                <span class="tooltiptext">Satuan Kerja</span>
             </div>
-            <div class="form-floating">
-                <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" id="kontak" maxlength="14" placeholder="" required>
+            <div class="form-floating toolt">
+                <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" autocomplete="off" id="kontak" maxlength="14" placeholder="" required>
                 <label for="kontak">Nomor Kontak/WhatsApp</label>
+                <span class="tooltiptext">Nomor Whatsapp PIC</span>
             </div>
-            <div class="form-floating">
+            <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="email" name="email" id="mail" placeholder="" pattern=".[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
                 <label for="mail">Email</label>
+                <span class="tooltiptext">Masukkan email kerja</span>
             </div>
             </div>
             <div class="mt-2">
-                    <div class="input-group custom-file-button mt-1">
+                    <div class="input-group custom-file-button mt-1 toolt">
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
                         <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
+                <span class="tooltiptext">Upload foto</span>
                     </div>
             </div>
 

@@ -1,16 +1,20 @@
 @extends('layouts.side')
 
 @section('content')
-@if(Auth::user()->role == "user")
- {{abort(403)}}
+
+@if(Auth::user()->role == 'admin')
+@elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+@else 
+{{abort(403)}}
 @endif
+
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
                 <div class="card-header fw-bold text-uppercase">{{ __('Detail Layanan Kelogistikan') }}
                     <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
-                    @if(Auth::user()->role == 'admin')
+                    @if(Auth::user()->unit_kerja == 'Fasilitas Kerja')
                     <span class="btn btn-sm btn-primary align-self-center float-right" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
                     @endif
                 </div>
@@ -52,6 +56,12 @@
                                 @endif
                             @endforeach
                             
+                        </div>
+                    </div>
+                    <div>
+                        <b>Lokasi</b>
+                        <div>
+                            {{$show->lokasi}}
                         </div>
                     </div>
                     <div class="mt-2">
@@ -104,7 +114,7 @@
                 </div>
                     </div>
 
-                @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
+                {{-- @if(Auth::user()->unit_kerja != "Health, Safety, & Environment" || Auth::user()->unit_kerja != "Security Monitoring Center" || Auth::user()->role != "admin") --}}
                         <div align="center" class="mt-4">
                             <select id="otorisasi"  required>
                                 <option value="" selected>:: Pilih Otorisasi ::</option>
@@ -126,7 +136,7 @@
                             }
                     });
                     </script>
-                @endif
+                {{-- @endif --}}
 
                 </div>
             </div>

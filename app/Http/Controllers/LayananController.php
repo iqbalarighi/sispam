@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
-use Carbon\Carbon;
 use App\Helpers\Helper;
-use Illuminate\Support\Str;
 use App\Models\LayananModel;
-use Illuminate\Http\Request;
 use App\Models\OtorisasiModel;
+use App\Models\SiteModel;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ResizeImage;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LayananController extends Controller
 {
@@ -35,7 +36,8 @@ class LayananController extends Controller
      */
     public function create()
     {
-        //
+        $sites = SiteModel::get();
+        return view('layanan.form', compact('sites'));
     }
 
     /**
@@ -118,6 +120,7 @@ if ($request->images != null) {
 
     $store->layanan_id = $layananid;
     $store->layanan = $layanan;
+    $store->lokasi = $request->gedung;
     $store->tanggal = $request->waktu;
     $store->detail_kebutuhan = $request->detail;
     $store->pic = $request->pic;
@@ -177,7 +180,9 @@ foreach ($files as $file) {
     {
         $edit = $layananModel->where('layanan_id', $id)->first();
         $jenis = explode(',', $edit->layanan);
-        return View('layanan.edit', compact('edit','jenis'));
+        $sites = SiteModel::where('nama_gd', '!=', $edit->lokasi)->get('nama_gd');
+// dd($sites);
+        return View('layanan.edit', compact('edit', 'jenis', 'sites'));
     }
 
     /**
@@ -253,6 +258,7 @@ if ($request->images != null) {
 }
 
     $update->layanan = $layanan;
+    $update->lokasi = $request->gedung;
     $update->tanggal = $request->waktu;
     $update->detail_kebutuhan = $request->detail;
     $update->pic = $request->pic;
@@ -286,8 +292,9 @@ foreach ($files as $file) {
     } else {
         $tambah = $update->foto.'|'.implode('|', $image);
     }
-}
+    
     $update->foto = $tambah;
+}
 
      $update->save();
 
