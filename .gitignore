@@ -15,6 +15,8 @@ Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
+bash.bat
+start_ssh.sh
 /.fleet
 /.idea
 /.vscode
