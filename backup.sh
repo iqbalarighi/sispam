@@ -1,0 +1,2 @@
+# mysqldump --user=n1573881_sispam --password=gPw3y4Fw5meJVhE@ n1573881_sispam > /home/n1573881/pengamanan/storage/app/backup/backup-`date '+%d-%m-%Y'`.sql
+mysqldump --user=n1573881_sispam --password=gPw3y4Fw5meJVhE@ n1573881_sispam > /home/n1573881/pengamanan/storage/app/backup/backup-sispam.sql

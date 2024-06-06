@@ -6,6 +6,10 @@
  <script type="text/javascript">
      window.location.href = '{{route('izin_kerja')}}';
  </script>
+ @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+ <script type="text/javascript">
+     window.location.href = '{{route('layanan')}}';
+ </script>
 @endif
 <div class="container mw-100">
     <div class="row justify-content-center">
@@ -128,6 +132,17 @@
       </div>
     </div>
   </div>  
+
+    <div class="mt-2">
+    <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
+      <div class="card-body overflow py-2 px-3" style="overflow-x: auto;">
+        <h5 class="card-title">Data Tamu Gd. Soemitro {{Carbon\Carbon::now()->parse()->isoFormat('DD MMMM YYYY')}}</h5>
+            <div class="row">
+                @livewire('resepsionis')
+            </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -170,27 +185,7 @@
 </div>
 
   
-{{--   <div class="col-sm-6 mt-2">
-    <div class="card" style="background-color:rgba(153, 255, 255, 0.5);">
-      <div class="card-body">
-        <h5 class="card-title">Data Terakhir Laporan Serah Terima Jaga</h5>
-            <div class="row">
-                <table class="col">
-                    <tr>
-                        <th>Dibuat Oleh</th>
-                    </tr>
-                    <tr id="data-jaga"></tr>
-                </table>
-                <table class="col">
-                    <tr>
-                        <th>Terakhir Di Buat</th>
-                    </tr>
-                    <tr id="data-timej"></tr>
-                </table>
-            </div>
-      </div>
-    </div>
-  </div> --}}
+
 
 </div>
 

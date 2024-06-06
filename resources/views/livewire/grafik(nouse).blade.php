@@ -1,7 +1,9 @@
 
 <div>
 
-
+<div id="charBox">
+    <canvas  id="myChart"></canvas>
+</div>
   
 
 @push('js')
@@ -11,10 +13,10 @@
 <script> 
 
 $(function() {
-    
-    setInterval(() =>  Livewire.emit('ubahData'),10000);
 
-var chartData = JSON.parse('{!! $unras !!}');
+    setInterval(() =>  Livewire.emit('ubahData'),30000);
+
+var chartData = JSON.parse('<?php echo $unras ?>');
 const ctx = document.getElementById('myChart').getContext('2d');
 
    const data = {

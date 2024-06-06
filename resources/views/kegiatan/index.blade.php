@@ -90,6 +90,7 @@
                         <td colspan="8"> Data Tidak Ditemukan</td>
                     </tr>
                     @else
+
 {{-- {{dd($gg)}} --}}
                     @foreach($giats as $key => $giat)
                     <tr style="cursor: pointer; user-select: none;" class="bg-{{in_array($giat->no_lap, $gg )? 'info' : '' }}"  >

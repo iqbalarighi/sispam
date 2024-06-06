@@ -352,6 +352,7 @@ Route::controller(LayananController::class)->group(function () {
     Route::get('stat', 'stat')->name('stat');
 });
 
+
 Route::get('/side', [Controller::class, 'side'])->name('side')->middleware('auth');
 
 //User Online 

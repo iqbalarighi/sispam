@@ -16,6 +16,7 @@ class Useronline extends Component
     {
 
         $users = User::orderBy('last_seen', 'DESC')
+
         ->paginate(15);
 
         return view('livewire.useronline', compact('users'));

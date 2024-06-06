@@ -53,8 +53,9 @@ class Handler extends ExceptionHandler
                     // dd($e);
 // $text = "SQLSTATE[HY000] [1130] Host 'localhost' is not allowed to connect to this MariaDB server (SQL: select * from `users` where `id` = 1 limit 1)";
                 
+            
 
-		      if ($e->getCode() === 1130) {
+              if ($e->getCode() === 1130) {
                     // dd($e);
                     // header("Location: https://www.sispam.id");
                 // return redirect()->action([HomeController::class, 'index']);
@@ -64,21 +65,37 @@ class Handler extends ExceptionHandler
                         ]);
                     // dd($response);
                    return response()->json(compact('response'), 200);
+                } else {
+                    report($e);
+
+            return false;
                 }
 
                 if($e->getMessage() === "Unauthenticated."){
                     return redirect('login');
-                } 
+                } else {
+                    report($e);
+
+            return false;
+                }
 
                 if ($e->getMessage() === "CSRF token mismatch."){
                         return to_route('login');
+                } else {
+                    report($e);
+
+            return false;
                 }
 
                 if ($e->getMessage() === 'These credentials do not match our records.'){
                         // $errors = $e->getMessage();
                         return back()->withErrors(['msg' => 'Email atau password yang anda masukkan salah !']);
+                    } else {
+                        report($e);
+
+            return false;
                     }
-		
+        
                 // dd($e->getStatusCode());
                 
 
@@ -95,28 +112,53 @@ class Handler extends ExceptionHandler
                         ]);
                     // dd($response);
                    return response()->json(compact('response'), 200);
+                } else {
+                    report($e);
+
+            return false;
                 }
+
                 if ($e->getStatusCode() === 500){
                         return redirect()->action([HomeController::class, 'index']);
-                    } 
+                    } else {
+                        report($e);
+
+            return false;
+                    }
                  
                 if ($e->getStatusCode() === 401){
                         return redirect('dashboard')->with('forbidden', 'Akses ditolak');
+                    } else {
+                        report($e);
+
+            return false;
                     }
                 
                 if ($e->getMessage() === "CSRF token mismatch."){
                         return to_route('login');
+                    } else {
+                        report($e);
+
+            return false;
                     }
 
                 if ($e->getStatusCode() === 404){
                         return back();
                     // return Http::post(url()->current());
+                    } else {
+                        report($e);
+
+            return false;
                     }
 
             }
 
             if ($e->getStatusCode() === 404){
                         return redirect()->action([HomeController::class, 'index']);
+                    } else {
+                        report($e);
+
+            return false;
                     }
             
             if ($e->getStatusCode() === 500){
@@ -124,8 +166,12 @@ class Handler extends ExceptionHandler
                    //  // dd($response);
                    // return response()->json(compact('response'));
                 return redirect()->action([HomeController::class, 'index']);
-                    } 
-            
+                    }  else {
+                        report($e);
+
+            return false;
+                    }
+
         });
     }
 }

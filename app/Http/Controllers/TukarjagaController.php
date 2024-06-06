@@ -225,7 +225,9 @@ public function generatePDF($id)
         $urai = TukargiatModel::where('no_trj', '=', $detilx->no_trj)->get();
         $data = ['title' => 'Laporan Serah Terima Jaga'];
         $pdf = PDF::loadView('tukarjaga.savepdf', ['data' => $data, 'detil' => $detil, 'bar' => $bar, 'urai' => $urai, 'detilx' => $detilx]);
+
         return $pdf->stream('Laporan Serah Terima Jaga '.$detilx->no_trj.'.pdf');
+
     }
 
 public function addshiftlama(Request $request, $trj, $id)
