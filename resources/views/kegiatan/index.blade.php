@@ -90,10 +90,9 @@
                         <td colspan="8"> Data Tidak Ditemukan</td>
                     </tr>
                     @else
-
 {{-- {{dd($gg)}} --}}
                     @foreach($giats as $key => $giat)
-                    <tr style="cursor: pointer; user-select: none;" class="bg-{{in_array($giat->no_lap, $gg )? 'info' : '' }}"  >
+                    <tr style="cursor: pointer; user-select: none;" class="bg-{{in_array($giat->no_lap, $gg )? 'info' : '' }}"  > 
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giats->firstitem() + $key}}</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{$giat->no_lap}}</td>
                          @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')

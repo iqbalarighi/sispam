@@ -159,23 +159,23 @@ if (notip.coun.count2 != 0){
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
         <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> </div>
-    @if ( Auth::user()->level === 'superadmin')
-        <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
+        @if ( Auth::user()->level === 'superadmin')
+            <a onclick="cekDowns()" class="list-group-item list-group-item-action bg-light {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#collapseExamples" role="button" aria-expanded="false" aria-controls="collapseExamples">
 
-                Superadmin Area 
-                        <i id="rubah" class="bi bi-caret-right-fill"></i>
-              </a>
-                <div class="collapse {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'show' : '' }}" id="collapseExamples">
-                    <div class="card card-body">
-                        <div class="list-group list-group-flush" style="width: 100%;">
-                            <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
-                            <a href="{{route('otorisasi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('otorisasi') ? 'active' : '' }}">Otorisasi</a>
-                            <a href="{{route('filemanager')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('filemanager') ? 'active' : '' }}">File Manager</a>
-                            <a href="{{route('useronline')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('useronline') ? 'active' : '' }}">Users Online</a>
-                        </div> 
+                    Superadmin Area 
+                            <i id="rubah" class="bi bi-caret-right-fill"></i>
+                  </a>
+                    <div class="collapse {{ Route::is('users')||Route::is('otorisasi')||Route::is('filemanager') ? 'show' : '' }}" id="collapseExamples">
+                        <div class="card card-body">
+                            <div class="list-group list-group-flush" style="width: 100%;">
+                                <a href="{{route('users')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('users') ? 'active' : '' }}">Manage User</a>
+                                <a href="{{route('otorisasi')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('otorisasi') ? 'active' : '' }}">Otorisasi</a>
+                                <a href="{{route('filemanager')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('filemanager') ? 'active' : '' }}">File Manager</a>
+                                <a href="{{route('useronline')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('useronline') ? 'active' : '' }}">Users Online</a>
+                            </div> 
+                        </div>
                     </div>
-                </div>
-    @endif 
+        @endif 
 {{-- user level 1 --}}
 
 {{-- user level 2 --}}
@@ -202,7 +202,6 @@ if (notip.coun.count2 != 0){
                         </div> 
                     </div>
                 </div>
-
             <a onclick="cekHse()" class="list-group-item list-group-item-action bg-light {{ Route::is('kejadian') || Route::is('izin_kerja') ? 'active' : '' }}" data-bs-toggle="collapse"  href="#hse" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Laporan HSE
                         <i id="changeHSE" class="bi bi-caret-right-fill"></i>
@@ -243,7 +242,7 @@ if (notip.coun.count2 != 0){
 {{-- user level 2 --}}
 
 {{-- user level 3 --}}
-    @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
+        @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
             <div class="d-flex " id="wrapper">
         <!-- Sidebar -->
         
@@ -310,14 +309,28 @@ if (notip.coun.count2 != 0){
         <!-- /#sidebar-wrapper -->
         @elseif(Auth::user()->unit_kerja == 'Teknisi')
         <div class="d-flex " id="wrapper">
-        <!-- Sidebar -->
-        
-        <div class="bg-light border-right " id="sidebar-wrapper">
-        <div class="list-group list-group-flush sticky-top">
-        <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; </div>
-        <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+            <!-- Sidebar -->
+            
+            <div class="bg-light border-right " id="sidebar-wrapper">
+            <div class="list-group list-group-flush sticky-top">
+            <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; </div>
+            <a href="{{route('izin_kerja')}}" class="list-group-item list-group-item-action bg-light {{ Route::is('izin_kerja') ? 'active' : '' }}">Izin Kerja</a>
+            </div>
         </div>
-        </div>
+   
+
+        @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+         </div>
+         <div class="d-flex " id="wrapper">
+            <!-- Sidebar -->
+            
+            <div class="bg-light border-right " id="sidebar-wrapper">
+            <div class="list-group list-group-flush sticky-top">
+            <div class="sidebar-heading " style="background-color: #0dcaf0;"><b>SISPAM</b> &nbsp; </div>
+                <a href="{{route('layanan')}}" class="list-group-item list-group-item-action bg-light {{ Request::is('layanan')||Request::is('layanan/*') ? 'active' : '' }}">Layanan <span id="notipp"></span></a>
+            </div>
+            </div>
+        {{-- </div> --}}
 
     @endif
 {{-- end of user level 3 --}}
@@ -371,13 +384,11 @@ if (notip.coun.count2 != 0){
     </div>
 </div>
 </body>
-
 <script type="text/javascript">
     function keluar() {
         document.getElementById('logout-form').submit();
     }
 </script>
-
     <script type="text/javascript">
         window.onload = function() { jam(); }
        

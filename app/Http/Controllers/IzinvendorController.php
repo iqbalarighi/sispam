@@ -498,7 +498,6 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
     // dd($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)');
     if ($perusahaan->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)' || $perusahaan->perusahaan_pemohon == 'PT. Kopojeka Daya Indonesia (PT. KDI)' || $perusahaan->perusahaan_pemohon == 'PT. Swadharma Griyasatya (PT. SGRS)' || $perusahaan->perusahaan_pemohon == 'PT. Bangun Prestasi Bersama (PT. BPB)'){
          $status->otorizedby = '2';
-
          
          if($request->mulai_granted != null){
         $status->status = "On Progress";
@@ -565,7 +564,6 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
             $simpan->nm_pngws_granted = null;
             $simpan->tgl_pngws_granted = null;
         }
-
     // $status->status = "Canceled";
     $status->validatedby = $user;
     $status->save();

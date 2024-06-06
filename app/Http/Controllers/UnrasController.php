@@ -68,8 +68,8 @@ class UnrasController extends Controller
                 ->whereBetween('tanggal', [$start, $end])
                 ->get();
 
-
                 return view('unras.index', compact('unras','start','end','cari','cektest','cariin'));
+                
                 } else {
                     $unras = UnrasModel::orderBy('tanggal', 'DESC')
                     ->orderBy('waktu', 'DESC')
@@ -85,7 +85,6 @@ class UnrasController extends Controller
                     ->orderBy('waktu', 'DESC')
                         ->paginate(25);
                     $unras->appends(['date' => $cari]);
-
 
                     return view('unras.index', compact('unras','cari'));
                 } else {

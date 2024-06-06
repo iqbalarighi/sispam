@@ -250,11 +250,9 @@ public function smcPDF($id)
     //     abort(403);
     // }
         $shift = Str::substr($detil->shift, 0,7);
-
         $pdf = PDF::loadView('smc.savepdf', compact('detil'))->setPaper('a4', 'potrait'); 
         $pdf->render();
         $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
-
         return $pdf->stream('Laporan Kegiatan '.$shift.' '.$detil->no_lap.'.pdf');
     }
 }

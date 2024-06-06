@@ -327,9 +327,11 @@ Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');
 
 //Kelogistikan
 
-Route::get('/form-layanan', function () {
-    return view('layanan.form');
-})->name('form_layanan');
+// Route::get('/form-layanan', function () {
+//     return view('layanan.form');
+// })->name('form_layanan');
+
+Route::get('/form-layanan', [LayananController::class, 'create']);
 
 Route::controller(LayananController::class)->middleware('auth')->group(function () {
     Route::get('/layanan', 'index')->name('layanan');
@@ -351,7 +353,6 @@ Route::controller(LayananController::class)->group(function () {
     Route::put('/layanan/survei/{id}', 'survei');
     Route::get('stat', 'stat')->name('stat');
 });
-
 
 Route::get('/side', [Controller::class, 'side'])->name('side')->middleware('auth');
 

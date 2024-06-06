@@ -11,7 +11,7 @@
 <script> 
 
 $(function() {
-    
+
     setInterval(() =>  Livewire.emit('ubahData'),10000);
 
 var chartData = JSON.parse('{!! $unras !!}');

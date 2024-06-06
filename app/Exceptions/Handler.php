@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
                 
             
 
-              if ($e->getCode() === 1130) {
+		      if ($e->getCode() === 1130) {
                     // dd($e);
                     // header("Location: https://www.sispam.id");
                 // return redirect()->action([HomeController::class, 'index']);
@@ -95,7 +95,7 @@ class Handler extends ExceptionHandler
 
             return false;
                     }
-        
+		
                 // dd($e->getStatusCode());
                 
 
