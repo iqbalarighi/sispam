@@ -24,7 +24,7 @@
                                               cancelButtonText: "Batal"
                                             }).then((result) => {
                                               if (result.isConfirmed) {
-                                                window.location='{{url('/layanan/detail/otorisasi/'.$detail->izin_id.'/'.$otorized->id)}}'
+                                                window.location='{{url('/otorisasi/'.$detail->izin_id.'/'.$otorized->id)}}'
                                               }
                                             });
                                         }
