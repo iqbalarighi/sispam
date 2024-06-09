@@ -215,8 +215,8 @@
                 </div> --}}
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="text" name="pic" id="pic" placeholder="" autocomplete="off" required>
-                <label for="pic">Nama PIC</label>
-                <span class="tooltiptext">Nama orang yang bertanggungjawab </span>
+                <label for="pic">Nama Pemohon</label>
+                <span class="tooltiptext">Nama pemohon </span>
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="text" name="satker" id="satker" placeholder="" autocomplete="off" required>
@@ -226,7 +226,7 @@
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" autocomplete="off" id="kontak" maxlength="14" placeholder="" required>
                 <label for="kontak">Nomor Kontak/WhatsApp</label>
-                <span class="tooltiptext">Nomor Whatsapp PIC</span>
+                <span class="tooltiptext">Nomor Whatsapp Pemohon</span>
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="email" name="email" id="mail" placeholder="" pattern=".[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>

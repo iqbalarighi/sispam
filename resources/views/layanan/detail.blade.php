@@ -14,8 +14,35 @@
             <div class="card">
                 <div class="card-header fw-bold text-uppercase">{{ __('Detail Layanan Kelogistikan') }}
                     <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
-                    @if(Auth::user()->unit_kerja == 'Fasilitas Kerja')
-                    <span class="btn btn-sm btn-primary align-self-center float-right" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                    @if(Auth::user()->name == 'Superadmin')
+                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>
+                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                    @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja' || Auth::user()->role == 'admin')
+                        @if($otorized == null) 
+                            @if($show->validatedby == null)
+                            <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                            @endif
+                        @else 
+                            <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return oto()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>
+                            <script type="text/javascript">
+                                function oto() {                              
+                                        Swal.fire({
+                                              title: "Otorisasi Dokumen",
+                                              icon: "warning",
+                                              showCancelButton: true,
+                                              confirmButtonColor: "#3085d6",
+                                              cancelButtonColor: "#d33",
+                                              confirmButtonText: "Otorisasi",
+                                              cancelButtonText: "Batal"
+                                            }).then((result) => {
+                                              if (result.isConfirmed) {
+                                                window.location='{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}'
+                                              }
+                                            });
+                                        }
+
+                            </script>
+                        @endif
                     @endif
                 </div>
 @if (session('abort'))
@@ -32,6 +59,18 @@
   }
 });
 </script>
+@endif
+@if (session('success'))
+        <script type="text/javascript">
+
+            Swal.fire({
+              icon: "success",
+              title: "{{ session('success') }}",
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+        </script>
 @endif
                 <div class="card-body">
                     @if (session('status'))
@@ -114,7 +153,27 @@
                 </div>
                     </div>
 
-                {{-- @if(Auth::user()->unit_kerja != "Health, Safety, & Environment" || Auth::user()->unit_kerja != "Security Monitoring Center" || Auth::user()->role != "admin") --}}
+                    @if($show->otorizedby != null && $show->validatedby != null)
+                <div align="center">
+                    <a target="_blank" href="{{url('layanan/detail')}}/{{$show->id}}/{{$show->otorizedby}}/{{$show->validatedby}}"><button class="btn btn-primary btn-sm float-center ml-2">Download PDF</button></a>
+                </div>
+                @endif
+
+                @if($show->validatedby != null && $show->otorizedby == null)
+                <div align="center" class="my-3">
+                   <span class="bg-success text-white rounded fw-bold py-1 px-2">Dokumen telah di Validasi</span>
+                </div>
+                @endif
+
+                @if($show->otorizedby == null && $show->validatedby == null)
+                <div align="center" class="my-2">
+                    <span class="bg-danger text-white rounded fw-bold py-1 px-2">Dokumen belum di Otorisasi dan di Validasi</span>
+                </div>
+                @endif
+
+
+
+                {{-- @if(Auth::user()->unit_kerja != "Health, Safety, & Environment" || Auth::user()->unit_kerja != "Security Monitoring Center" || Auth::user()->role != "admin") 
                         <div align="center" class="mt-4">
                             <select id="otorisasi"  required>
                                 <option value="" selected>:: Pilih Otorisasi ::</option>
@@ -136,7 +195,7 @@
                             }
                     });
                     </script>
-                {{-- @endif --}}
+                 @endif --}}
 
                 </div>
             </div>

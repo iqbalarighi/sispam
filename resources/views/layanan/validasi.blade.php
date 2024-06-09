@@ -1,15 +1,17 @@
 @extends('layouts.side')
 
 @section('content')
-@if(Auth::user()->unit_kerja != "Fasilitas Kerja" || Auth::user()->role == 'admin')
- {{abort(403)}}
+@if(Auth::user()->role == 'admin')
+@elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
+@else 
+{{abort(403)}}
 @endif
 <div class="container mw-100">
     <div class="row justify-content-center">
         <div class="col mw-100">
             <div class="card">
                 <div class="card-header fw-bold text-uppercase">{{ __('Halaman Validasi') }}
-                    <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
+                    <a href="{{ route('layanan') }}/detail/PLKG-2405-0010"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
                 </div>
 @if (session('success'))
         <script type="text/javascript">

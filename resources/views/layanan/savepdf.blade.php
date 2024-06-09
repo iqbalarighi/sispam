@@ -33,7 +33,7 @@
                 <body>
             <div class="mb-5">
                     <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 0px; width: 150px; position: fixed;">
-                        <center class="text-uppercase mt-3 xxxx"> <b>{{ __('IZIN LAYANAN KELOGISTIKAN ') }}</b></center>
+                        <center class="text-uppercase mt-3 xxxx"> <b>{{ __('FORM LAYANAN KELOGISTIKAN ') }}</b></center>
              </div>
 
              <div class="pl-4 xxxx">

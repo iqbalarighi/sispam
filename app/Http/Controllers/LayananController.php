@@ -167,7 +167,9 @@ foreach ($files as $file) {
     {
         $show = $layananModel->where('layanan_id', '=', $id)->first();
         $otor = OtorisasiModel::all();
-        return view('layanan.detail', compact('show','otor'));
+
+        $otorized = $otor->where('nama', Auth::user()->name)->first();
+        return view('layanan.detail', compact('show','otor', 'otorized'));
     }
 
     /**
@@ -315,11 +317,13 @@ foreach ($files as $file) {
 
         $expired = Carbon::parse($valid->tanggal)->addHours(24);
         $periksa = Auth::user()->name;
+        $validator = Auth::user()->id;
 
         $valid->expired = $expired;
         $valid->status = $request->izin;
         $valid->pemeriksa = $periksa;
         $valid->keterangan = $request->ket;
+        $valid->validatedby = $validator;
 
         $valid->save();
 
@@ -513,5 +517,19 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
 
         return redirect('layanan/status')
         ->with('selesai', 'Terima kasih telah memberikan penilaian kepada kami');
+    }
+
+    public function otor(Request $request, LayananModel $layananModel, $id, $oto)
+    {
+
+        $otor = $layananModel->where('layanan_id', $id)->first();
+
+        // dd($id, $otor);
+        $otor->otorizedby = $oto;
+
+        $otor->save();
+
+        return back()
+        ->with('success', 'Otorisasi Dokumen Berhasil');
     }
 }
