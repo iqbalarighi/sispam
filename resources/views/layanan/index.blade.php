@@ -80,7 +80,7 @@
                         @endif
                     @endforeach
                 </td>
-                <td>{{$layanan->lokasi}}</td>
+                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->lokasi}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->pic}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->satker}}</td>
                 {{-- <td>{{$layanan->email}}</td> --}}
@@ -108,8 +108,8 @@
                 </a>
                 <label for="{{$layan->firstitem() + $key}}" title="klik untuk edit laporan" class="bi bi-pencil-fill bg-warning btn-sm align-self-center py-1" style="cursor: pointer; z-index: 0; margin-bottom: -1px;"></label> 
                 &nbsp;
-                <span class="btn btn-sm btn-primary align-self-center" onclick="window.location='{{route('layanan')}}/validasi/{{$layanan->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; font-size: 12.5px; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
-                &nbsp;
+                <!-- <span class="btn btn-sm btn-primary align-self-center" onclick="window.location='{{route('layanan')}}/validasi/{{$layanan->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; font-size: 12.5px; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                &nbsp; -->
                 <form action="{{route('layanan')}}/destroy/{{$layanan->layanan_id}}" method="post" class="align-self-center" style="z-index: 0;" onsubmit="return loding(this);">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}

@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('layanan', function (Blueprint $table) {
-            $table->string('validatedby',100)->nullable()->after('masukan');
-            $table->string('otorizedby',100)->nullable()->after('masukan');
+            $table->string('lantai')->after('lokasi');
         });
     }
 
@@ -27,8 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('layanan', function (Blueprint $table) {
-            $table->dropColumn('validatedby');
-            $table->dropColumn('otorizedby');
+            $table->dropColumn('lantai');
         });
     }
 };

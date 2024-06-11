@@ -15,7 +15,7 @@
                 <div class="card-header fw-bold text-uppercase">{{ __('Detail Layanan Kelogistikan') }}
                     <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
                     @if(Auth::user()->name == 'Superadmin')
-                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>
+                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;" onclick>Otorisasi</span>
                         <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
                     @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja' || Auth::user()->role == 'admin')
                         @if($otorized == null) 
@@ -24,7 +24,7 @@
                             @endif
                         @else 
                             <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return oto()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>
-                            <script type="text/javascript">
+                            <!-- <script type="text/javascript">
                                 function oto() {                              
                                         Swal.fire({
                                               title: "Otorisasi Dokumen",
@@ -41,7 +41,46 @@
                                             });
                                         }
 
-                            </script>
+                            </script> -->
+                            <script>    
+function oto(){
+  
+Swal.fire({
+    title: "Otorisasi Dokumen",
+    text: "Tambahkan catatan",
+    input: 'textarea',
+    inputPlaceholder: "Type your message here...",
+  inputAttributes: {
+    "aria-label": "Type your message here"
+  },
+  confirmButtonText: 'Otorisasi',
+    showCancelButton: true        
+}).then((result) => {
+    if (result.isConfirmed) {
+            Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang validasi data",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });  
+    if (!result.value) {
+      window.location="{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}"
+    }
+
+    if (result.value) {
+     window.location="{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}/"+result.value
+        }
+  }
+
+
+    });
+}
+</script>
+
                         @endif
                     @endif
                 </div>

@@ -11,7 +11,7 @@
         <div class="col mw-100">
             <div class="card">
                 <div class="card-header fw-bold text-uppercase">{{ __('Halaman Validasi') }}
-                    <a href="{{ route('layanan') }}/detail/PLKG-2405-0010"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
+                    <a href="{{ route('layanan') }}/detail/{{$validasi->layanan_id}}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
                 </div>
 @if (session('success'))
         <script type="text/javascript">

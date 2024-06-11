@@ -121,6 +121,7 @@ if ($request->images != null) {
     $store->layanan_id = $layananid;
     $store->layanan = $layanan;
     $store->lokasi = $request->gedung;
+    $store->lantai = $request->lantai;
     $store->tanggal = $request->waktu;
     $store->detail_kebutuhan = $request->detail;
     $store->pic = $request->pic;
@@ -261,6 +262,7 @@ if ($request->images != null) {
 
     $update->layanan = $layanan;
     $update->lokasi = $request->gedung;
+    $update->lantai = $request->lantai;
     $update->tanggal = $request->waktu;
     $update->detail_kebutuhan = $request->detail;
     $update->pic = $request->pic;
@@ -519,13 +521,39 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
         ->with('selesai', 'Terima kasih telah memberikan penilaian kepada kami');
     }
 
-    public function otor(Request $request, LayananModel $layananModel, $id, $oto)
+    public function otor(LayananModel $layananModel, $id, $oto)
     {
+        // dd($id, $oto, $note);
 
         $otor = $layananModel->where('layanan_id', $id)->first();
 
-        // dd($id, $otor);
+        if ($otor->validatedby == null) {
+            return back()
+        ->with('abort', 'Dokumen Belum di validasi');
+        }
+
+        dd($id, $otor);
         $otor->otorizedby = $oto;
+
+        $otor->save();
+
+        return back()
+        ->with('success', 'Otorisasi Dokumen Berhasil');
+    }
+
+        public function otori(LayananModel $layananModel, $id, $oto, $note)
+    {
+
+        // dd($id, $oto, $note);
+        $otor = $layananModel->where('layanan_id', $id)->first();
+
+        if ($otor->validatedby == null) {
+            return back()
+        ->with('abort', 'Dokumen Belum di validasi');
+        }
+
+        $otor->otorizedby = $oto;
+        $otor->note = $note;
 
         $otor->save();
 
