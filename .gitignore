@@ -20,3 +20,6 @@ start_ssh.sh
 /.fleet
 /.idea
 /.vscode
+keygit
+keygit.pub
+pull.sh
