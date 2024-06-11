@@ -237,8 +237,8 @@
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="email" name="email" id="mail" placeholder="" pattern=".[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
-                <label for="mail">Email <font size="2" color="red">*</font></label>
-                <span class="tooltiptext">Masukkan email kerja</span>
+                <label for="mail">E-mail <font size="2" color="red">*</font></label>
+                <span class="tooltiptext">Masukkan e-mail kerja</span>
             </div>
             </div>
             <div class="mt-2">
