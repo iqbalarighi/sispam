@@ -100,7 +100,7 @@
         @method('PUT')
 <div >
     <center>
-    <div class="fw-bold">Kecepatan Pelayanan</div>
+    <div class="fw-bold">Response Time</div>
     
     <div>
         <table style="text-align: center;" width="100%">
@@ -124,7 +124,7 @@
 </div>
 <div class="mt-2">
     <center>
-    <div class="fw-bold">Perilaku</div>
+    <div class="fw-bold">Hasil Pekerjaan</div>
     <div>
         <table style="text-align: center;" width="100%">
             <tr>

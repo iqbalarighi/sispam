@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\LayananModel;
 use App\Models\OtorisasiModel;
+use App\Models\User;
 use App\Models\SiteModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -349,11 +350,12 @@ foreach ($files as $file) {
         ->with('sukses', 'Data terhapus');
     }
 
-    public function savePDF(LayananModel $layananModel, $id, $oto)
+    public function savePDF(LayananModel $layananModel, $id, $oto, $val)
     {
-        // dd($oto);
+        // dd($val);
         $show = $layananModel->where('layanan_id', '=', $id)->first();
         $otor = OtorisasiModel::findOrFail($oto);
+        $valid = User::findOrFail($val);
 
 if(($show->expired) == null){
     return back()
@@ -376,8 +378,8 @@ Berlaku Sampai : ".carbon::parse($show->expired)->isoFormat('DD/MM/YYYY HH:mm:ss
 Status : ".$status;
 
         $text2 = 
-"Nama: ".Auth::user()->name."
-Unit Kerja : ".Auth::user()->unit_kerja."
+"Nama: ".$valid->name."
+Unit Kerja : ".$valid->unit_kerja."
 Tanggal Validasi ".Carbon::parse($show->tanggal)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Berlaku Sampai : ".carbon::parse($show->expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status :".$status;
@@ -559,5 +561,10 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
 
         return back()
         ->with('success', 'Otorisasi Dokumen Berhasil');
+    }
+
+    public function superoto(LayananModel $layananModel, $id)
+    {
+       dd($id);
     }
 }

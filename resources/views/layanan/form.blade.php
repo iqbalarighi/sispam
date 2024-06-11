@@ -143,8 +143,9 @@
                     @endif --}}
         <form action="{{route('store_layanan')}}" method="POST" enctype="multipart/form-data" onsubmit="return loding(this);">
             @csrf
+                <font size="1" color="red">*Kolom bertanda bintang (*) wajib diisi !</font><br>
             <div class="">
-                <div class="fw-bold">Jenis Layanan</div>
+                <div class="fw-bold">Jenis Layanan <font size="2" color="red">*</font></div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen1" name="layanan[]" required onclick="check()" value="Izin Loading Barang">
                     <label class="m-0" for="jen1">Izin Loading Barang</label>
@@ -182,7 +183,7 @@
             </div>
             <div class="mt-2">
                 <div>
-                    <b> Lokasi </b>
+                    <b> Lokasi <font size="2" color="red">*</font></b>
                 </div>
                 <div class="form-floating ">
                     <select type="datetime-local" class="form-select form-select-sm" id="gedung" name="gedung" value="" required> 
@@ -195,7 +196,7 @@
                     
                 </div>
                 <div class="form-floating mt-1" >
-                        <select id="lantai" type="text" class="form-select form-select-sm" name="lantai">
+                        <select id="lantai" type="text" class="form-select form-select-sm" name="lantai" required>
                             <option value="" selected></option>
                         </select>
                     <label for="lantai">Pilih Lantai</label>
@@ -207,12 +208,12 @@
                 </div>
                 <div class="form-floating toolt">
                     <input type="datetime-local" class="form-control form-control-sm" id="waktu" name="waktu" value="" required>
-                    <label for="waktu">Tanggal dan Waktu</label>
+                    <label for="waktu">Tanggal dan Waktu <font size="2" color="red">*</font></label>
                     <span class="tooltiptext">Isi tanggal dan waktu permintaan layanan </span>
                 </div>
                 <div class="form-floating toolt">
                   <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="detail" style="height: 100px;" name="detail" required></textarea>
-                  <label for="detail">Detail Kebutuhan</label>
+                  <label for="detail">Detail Kebutuhan <font size="2" color="red">*</font></label>
                   <span class="tooltiptext">Uraikan kebutuhan layanan dengan jelas sesuai jenis layanan</span>
                 </div>
                 {{--<div class="form-floating">
@@ -221,30 +222,30 @@
                 </div> --}}
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="text" name="pic" id="pic" placeholder="" autocomplete="off" required>
-                <label for="pic">Nama Pemohon</label>
+                <label for="pic">Nama Pemohon <font size="2" color="red">*</font></label>
                 <span class="tooltiptext">Nama pemohon </span>
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="text" name="satker" id="satker" placeholder="" autocomplete="off" required>
-                <label for="satker">Satker</label>
+                <label for="satker">Satker <font size="2" color="red">*</font></label>
                 <span class="tooltiptext">Satuan Kerja</span>
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" autocomplete="off" id="kontak" maxlength="14" placeholder="" required>
-                <label for="kontak">Nomor Kontak/WhatsApp</label>
+                <label for="kontak">Nomor Kontak/WhatsApp <font size="2" color="red">*</font></label>
                 <span class="tooltiptext">Nomor Whatsapp Pemohon</span>
             </div>
             <div class="form-floating toolt">
                 <input class="form-control form-control-sm" type="email" name="email" id="mail" placeholder="" pattern=".[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="off" required>
-                <label for="mail">Email</label>
+                <label for="mail">Email <font size="2" color="red">*</font></label>
                 <span class="tooltiptext">Masukkan email kerja</span>
             </div>
             </div>
             <div class="mt-2">
                     <div class="input-group custom-file-button mt-1 toolt">
-                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Dokumen</label>
                         <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
-                <span class="tooltiptext">Upload foto</span>
+                <span class="tooltiptext">Upload Dokumen Pendukung</span>
                     </div>
             </div>
 

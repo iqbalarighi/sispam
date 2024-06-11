@@ -340,11 +340,12 @@ Route::controller(LayananController::class)->middleware('auth')->group(function 
     Route::get('/layanan/validasi/{id}', 'validasi');
     Route::delete('/layanan/destroy/{id}', 'destroy');
     Route::post('/layanan/valid/{id}', 'valid');
-    Route::get('/layanan/detail/{id}/{oto}', 'savePDF');
+    Route::get('/layanan/detail/{id}/{oto}/{val}', 'savePDF');
     Route::get('/layanan/detail/otorisasi/{id}/{oto}', 'otor');
     Route::get('/layanan/detail/otorisasi/{id}/{oto}/{note}', 'otori');
     Route::get('/layanan/hapus/{foto}/{id}', 'hapusFoto');
     Route::put('/layanan/update/{id}', 'update');
+    Route::get('/layanan/otorisasi/{id}', 'superoto');
 
 });
 

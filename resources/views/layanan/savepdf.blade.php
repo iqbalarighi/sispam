@@ -27,7 +27,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.x/dist/alpine.min.js" defer></script>
         {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     </head>
                 <body>
@@ -37,10 +37,10 @@
              </div>
 
              <div class="pl-4 xxxx">
-             <div class="mt-3">
+             <div class="mt-2">
                 <b>Nomor Layanan </b>: {{$show->layanan_id}}
              </div>
-            <div class="mt-3">
+            <div class="mt-2">
                 <b>Jenis Layanan</b>
                 <div class="ml-1">
                     @foreach(explode(',',$show->layanan) as $item)
@@ -52,7 +52,16 @@
                     @endforeach
                 </div>
             </div>
-                <div class="mt-3">
+            <div class="mt-2">
+                <b>Lokasi</b>
+                <div>
+                    {{$show->lokasi}}
+                </div>
+                <div>
+                    {{$show->lantai}}
+                </div>
+            </div>
+                <div class="mt-2">
                      <b>Uraian</b>
                     <table width="75%" class="ml-3">
                         <tr>
@@ -62,7 +71,7 @@
                         Pukul {{Carbon\Carbon::parse($show->tanggal)->isoFormat('HH:mm:ss')}}</td>
                         </tr>
                         <tr>
-                            <td style="width: 130px;">Nama PIC</td>
+                            <td style="width: 130px;">Nama Pemohon</td>
                             <td style="width: 10px;">:</td>
                             <td>{{$show->pic}}</td>
                         </tr>
@@ -88,7 +97,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="mt-3">
+                <div class="mt-2">
                     <table class="">
                     <tr>
                             <td style="width: 146px;"><b>Status</b></td>
@@ -104,19 +113,10 @@
                     </table>
                 </div>
 
-                    @if($show->foto != null) 
-                    <div class="mt-3">
-                        <div>
-                        <b>Dokumentasi</b> 
-                        </div>
-                        @foreach(explode('|', $show->foto) as $foto)
-                        <img src="{{public_path('storage/layanan/'.$show->layanan_id.'/'.$foto)}}" width="200px">
-                        @endforeach
-                    </div>
-                    @endif
+
             </div>
                 
-                <div class="px-0 mt-4" style="page-break-before: auto; page-break-inside:avoid;">
+                <div class="px-0 mt-3" style="page-break-before: auto; page-break-inside:avoid;">
                     <table width="98%" border="0" style="vertical-align: middle; text-align: center;">
                         <tr>
                             <td width="30%"><pre class="narrow">
@@ -139,5 +139,106 @@ Divalidasi Oleh,
                         </tr>
                     </table>
 </div>
+<style type="text/css">
+    .div2 {
+  width: 450px;
+  height: auto;  
+  padding: 5px;
+  border: 1px solid black;
+  font-size: 11pt;
+}
+.note {
+    width: auto;
+  height: auto;  
+  border: 1px solid black;
+  font-size: 11pt;
+}
+</style>
+<div class="note mt-4 px-1">
+   <b>Catatan  {{$otor->jabatan}}:</b> <br>
+    {{$show->note}}
+</div>
+
+<div class="row" style="page-break-before: always;">
+    <div class="mt-2">
+                <b>Nomor Layanan </b>: {{$show->layanan_id}}
+             </div>
+    <center><font class="fw-bold">Kuesioner</font></center>
+    <div class="div2 col mt-1" style="display:inline-block; vertical-align: top;">
+        <div class="">
+            <center>
+            <div class="fw-bold">Waktu Respon</div>
+            
+            <div>
+                <table style="text-align: center;" width="100%">
+                    <tr>
+                        <td width="10px"><label for="1">Tidak Puas</label></td>
+                        <td width="10px"><label for="2">Kurang Puas</label></td>
+                        <td width="10px"><label for="3">Puas </label></td>
+                        <td width="10px"><label for="4">Cukup Puas</label></td>
+                        <td width="10px"><label for="5">Sangat Puas</label></td>
+                    </tr>
+                    <tr>
+                        <td class="px-1"><input type="radio" name="cepat" id="1" value="Tidak Puas" title="Tidak Puas" required></td>
+                        <td class="px-1"><input type="radio" name="cepat" id="2" value="Kurang Puas" title="Kurang Puas" required></td>
+                        <td class="px-1"><input type="radio" name="cepat" id="3" value="Puas" title="Puas" required></td>
+                        <td class="px-1"><input type="radio" name="cepat" id="4" value="Cukup Puas" title="Cukup Puas" required></td>
+                        <td class="px-1"><input type="radio" name="cepat" id="5" value="Sangat Puas" title="Sangat Puas" required></td>
+                    </tr>
+                </table>
+            </div>
+            </center>
+        </div>
+        <div class="mt-2">
+            <center>
+            <div class="fw-bold">Hasil Pekerjaan</div>
+            <div>
+                <table style="text-align: center;" width="100%">
+                    <tr>
+                        <td width="10px"><label for="a">Tidak Puas</label></td>
+                        <td width="10px"><label for="b">Kurang Puas</label></td>
+                        <td width="10px"><label for="c">Puas </label></td>
+                        <td width="10px"><label for="d">Cukup Puas</label></td>
+                        <td width="10px"><label for="e">Sangat Puas</label></td>
+                    </tr>
+                    <tr>
+                        <td class="px-1"><input type="radio" name="perilaku" id="a" value="Tidak Puas" title="Tidak Puas" required></td>
+                        <td class="px-1"><input type="radio" name="perilaku" id="b" value="Kurang Puas" title="Kurang Puas" required></td>
+                        <td class="px-1"><input type="radio" name="perilaku" id="c" value="Puas" title="Puas" required></td>
+                        <td class="px-1"><input type="radio" name="perilaku" id="d" value="Cukup Puas" title="Cukup Puas" required></td>
+                        <td class="px-1"><input type="radio" name="perilaku" id="e" value="Sangat Puas" title="Sangat Puas" required></td>
+                    </tr>
+                </table>
+            </div>
+            </center>
+        </div>
+    </div>
+    <div class="col text-center float-end" style="width:auto; display:inline-block; vertical-align: bottom; ">
+        <div class="ml-5" style="text-align: right;">
+        
+        ...........................<br>
+        NIP. ..................
+        <br>
+        <br>
+    </div>
+    </div>
+</div>
+
+
+                    @if($show->foto != null) 
+                    <div class="mt-2" style="page-break-before: always;">
+                        <div class="mt-2">
+                <b>Nomor Layanan </b>: {{$show->layanan_id}}
+             </div>
+                        <div class="mb-2">
+                        <b>Dokumen Pendukung</b> 
+                        </div>
+                        @foreach(explode('|', $show->foto) as $foto)
+                        <img src="{{public_path('storage/layanan/'.$show->layanan_id.'/'.$foto)}}" width="200px">
+                        @endforeach
+                    </div>
+                    @endif
+
+
             </body>
     </html>

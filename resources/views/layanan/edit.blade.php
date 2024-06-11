@@ -136,6 +136,25 @@
                     </select>
                     <label for="gedung">Pilih Gedung</label>
                 </div>
+                <div class="form-floating mt-1" >
+                        <select id="lantai" type="text" class="form-select form-select-sm" name="lantai">
+                            <option value="{{$edit->lantai}}" selected>{{$edit->lantai}}</option>
+                        </select>
+                    <label for="lantai">Pilih Lantai</label>
+                </div>
+                <script type="text/javascript">
+(function() {
+    var elm = document.getElementById('lantai'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= 16; i++) {
+        var option = document.createElement('option');
+        option.value = "Lantai " + i;
+        option.appendChild(document.createTextNode("Lantai " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+</script>
             </div>
 
             <div class="mt-2">
@@ -181,7 +200,7 @@
                     </div>
                     @else
                     <div>
-                        <td colspan="3"><b>Dokumentasi</b>: <br> <p></p>
+                        <td colspan="3"><b>Dokumen Pendukung</b>: <br> <p></p>
                         <div class="row" style="vertical-align: middle;">
 
                             @foreach(explode('|',$edit->foto) as $foto)
@@ -195,6 +214,8 @@
                             </div>
                           </div>
                             </div>
+
+
 <script>
     function ceks() {
         Swal.fire({
