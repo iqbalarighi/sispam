@@ -342,6 +342,7 @@ Route::controller(LayananController::class)->middleware('auth')->group(function 
     Route::post('/layanan/valid/{id}', 'valid');
     Route::get('/layanan/detail/{id}/{oto}', 'savePDF');
     Route::get('/layanan/detail/otorisasi/{id}/{oto}', 'otor');
+    Route::get('/layanan/detail/otorisasi/{id}/{oto}/{note}', 'otori');
     Route::get('/layanan/hapus/{foto}/{id}', 'hapusFoto');
     Route::put('/layanan/update/{id}', 'update');
 

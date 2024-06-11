@@ -194,6 +194,12 @@
                     <label for="gedung">Pilih Gedung</label>
                     
                 </div>
+                <div class="form-floating mt-1" >
+                        <select id="lantai" type="text" class="form-select form-select-sm" name="lantai">
+                            <option value="" selected></option>
+                        </select>
+                    <label for="lantai">Pilih Lantai</label>
+                </div>
             </div>
             <div class="mt-2">
                 <div>
@@ -252,6 +258,19 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+(function() {
+    var elm = document.getElementById('lantai'),
+        df = document.createDocumentFragment();
+    for (var i = 1; i <= 16; i++) {
+        var option = document.createElement('option');
+        option.value = "Lantai " + i;
+        option.appendChild(document.createTextNode("Lantai " + i));
+        df.appendChild(option);
+    }
+    elm.appendChild(df);
+}());
+</script>
 <script>
 $("#kontak").on("input change paste",
 function filterNumericAndDecimal(event) {
