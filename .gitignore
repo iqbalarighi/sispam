@@ -22,4 +22,3 @@ start_ssh.sh
 /.vscode
 keygit
 keygit.pub
-pull.sh
