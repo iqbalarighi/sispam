@@ -310,20 +310,36 @@ foreach ($files as $file) {
     public function validasi(LayananModel $layananModel, $id)
     {
         $validasi = $layananModel->where('layanan_id', $id)->first();
+        $validator = User::where('unit_kerja', 'Security Monitoring Center')
+        ->orWhere('unit_kerja', 'Fasilitas Kerja')->get();
 
-        return view('layanan.validasi', compact('validasi'));
+        return view('layanan.validasi', compact('validasi', 'validator'));
     }
 
     public function valid(Request $request, LayananModel $layananModel, $id)
     {
         $valid = $layananModel->findOrFail($id);
-
         $expired = Carbon::parse($valid->tanggal)->addHours(24);
-        $periksa = Auth::user()->name;
-        $validator = Auth::user()->id;
+        
 
+        if (Auth::user()->level == "superadmin") {
+            $user = User::findOrFail($request->periksa);
+            $periksa = $user->name;
+            $validator = $user->id;
+        } else {
+            $periksa = Auth::user()->name;
+            $validator = Auth::user()->id;
+        }
+
+
+        if ($request->izin == 1) {
+            $status = "Waiting";
+        } elseif ($request->izin == 2) {
+            $status = "Cancelled";
+        }
+// dd($status);
         $valid->expired = $expired;
-        $valid->status = $request->izin;
+        $valid->status = $status;
         $valid->pemeriksa = $periksa;
         $valid->keterangan = $request->ket;
         $valid->validatedby = $validator;
@@ -352,12 +368,13 @@ foreach ($files as $file) {
 
     public function savePDF(LayananModel $layananModel, $id, $oto, $val)
     {
-        // dd($val);
-        $show = $layananModel->where('layanan_id', '=', $id)->first();
+        // dd($layananModel);
+        $show = $layananModel->where('layanan_id', $id)->first();
         $otor = OtorisasiModel::findOrFail($oto);
         $valid = User::findOrFail($val);
+// dd($show);
 
-if(($show->expired) == null){
+if($show->expired == null){
     return back()
     ->with('abort', 'Dokumen belum di validasi !');
 }
@@ -387,7 +404,7 @@ Status :".$status;
         $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
         $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text2));
 
-        $pdf = PDF::loadView('layanan.savepdf', compact('show','qrcode','qrcode2','otor'));
+        $pdf = PDF::loadView('layanan.savepdf', compact('show','qrcode','qrcode2','otor', 'valid'));
         
         return $pdf->stream('Izin Layanan Kelogistikan '.$show->layanan_id.'.pdf');
     }
@@ -525,17 +542,15 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
 
     public function otor(LayananModel $layananModel, $id, $oto)
     {
-        // dd($id, $oto, $note);
-
         $otor = $layananModel->where('layanan_id', $id)->first();
-
+        
         if ($otor->validatedby == null) {
             return back()
         ->with('abort', 'Dokumen Belum di validasi');
         }
 
-        dd($id, $otor);
         $otor->otorizedby = $oto;
+        $otor->status = "On Progress";
 
         $otor->save();
 
@@ -555,6 +570,7 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
         }
 
         $otor->otorizedby = $oto;
+        $otor->status = "On Progress";
         $otor->note = $note;
 
         $otor->save();
@@ -563,8 +579,5 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
         ->with('success', 'Otorisasi Dokumen Berhasil');
     }
 
-    public function superoto(LayananModel $layananModel, $id)
-    {
-       dd($id);
-    }
+
 }

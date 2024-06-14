@@ -32,7 +32,7 @@
     </head>
                 <body>
             <div class="mb-5">
-                    <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: 0px; width: 150px; position: fixed;">
+                    <img src="{{public_path('storage/img/logo-ojk.png')}}" style="margin-top: -5px; width: 150px; position: fixed;">
                         <center class="text-uppercase mt-3 xxxx"> <b>{{ __('FORM LAYANAN KELOGISTIKAN ') }}</b></center>
              </div>
 
@@ -54,10 +54,10 @@
             </div>
             <div class="mt-2">
                 <b>Lokasi</b>
-                <div>
+                <div class="ml-3">
                     {{$show->lokasi}}
                 </div>
-                <div>
+                <div class="ml-3">
                     {{$show->lantai}}
                 </div>
             </div>
@@ -101,12 +101,12 @@
                     <table class="">
                     <tr>
                             <td style="width: 146px;"><b>Status</b></td>
-                            <td style="width: 10px;">:</td>
+                            <td style="width: 10px;"><b>:</b></td>
                             <td>
                                 @if($show->status == "Cancelled" || $show->status == "Cancelled by user")
-                                    Permohonan Ditolak
+                                    <b>Permohonan Ditolak</b>
                                 @else 
-                                    Permohonan Diproses
+                                    <b>Permohonan Diterima</b>
                                 @endif
                             </td>
                         </tr>
@@ -133,8 +133,8 @@ Divalidasi Oleh,
 
 
 <img src="data:image/png;base64, {!! $qrcode2 !!}" >
-<b>{{Auth::user()->name}}</b>
-<font style="font-size: 10pt;"><i>{{Auth::user()->unit_kerja}}</i></font></pre>
+<b>{{$valid->name}}</b>
+<font style="font-size: 10pt;"><i>{{$valid->unit_kerja}}</i></font></pre>
                         </td>
                         </tr>
                     </table>
@@ -154,11 +154,12 @@ Divalidasi Oleh,
   font-size: 11pt;
 }
 </style>
+@if($show->note != null)
 <div class="note mt-4 px-1">
    <b>Catatan  {{$otor->jabatan}}:</b> <br>
     {{$show->note}}
 </div>
-
+@endif
 <div class="row" style="page-break-before: always;">
     <div class="mt-2">
                 <b>Nomor Layanan </b>: {{$show->layanan_id}}

@@ -87,6 +87,8 @@
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">
                     @if($layanan->status == "Open")
                         <button class="btn btn-sm p-1 align-middle btn-danger">{{$layanan->status}}</button>
+                    @elseif($layanan->status == "Waiting")
+                        <button class="btn btn-sm p-1 align-middle btn-danger">{{$layanan->status}}</button>
                     @elseif($layanan->status == "On Progress")
                         <button class="btn btn-sm p-1 align-middle btn-success">{{$layanan->status}}</button>
                     @elseif($layanan->status == "Done")

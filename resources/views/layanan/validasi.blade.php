@@ -37,11 +37,24 @@
                         <div class="form-floating">
                             <select class="form-select form-select-sm" name="izin" id="izin" required>
                                 <option></option>
-                                <option value="On Progress">Permohonan diproses</option>
-                                <option value="Cancelled">Permohonan ditolak</option>
+                                <option value="1">Permohonan diproses</option>
+                                <option value="2">Permohonan ditolak</option>
                             </select>
                             <label for="izin">Status Permohonan</label>
                         </div>
+
+{{--                     @if(Auth::user()->level == "superadmin")
+                        <div class="form-floating">
+                            <select class="form-select form-select-sm" name="valid" id="valid" required>
+                                <option></option>
+                                @foreach($validator as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            <label for="valid">Validator</label>
+                        </div>
+                    @endif --}}
+
                         <div class="form-floating" >
                             <div class="fw-bold">Jenis Layanan </div>
                                 @foreach(explode(',',$validasi->layanan) as $item)
@@ -60,10 +73,23 @@
                             <input type="text" class="form-control" id="satker" placeholder="Leave a comment here" name="satker" value="{{$validasi->satker}}" disabled readonly>
                             <label for="satker">Satker</label>
                         </div>
+
+                    @if(Auth::user()->level == "superadmin")
+                        <div class="form-floating">
+                            <select class="form-select form-select-sm" name="periksa" id="periksa" required>
+                                <option></option>
+                                @foreach($validator as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                            <label for="periksa">Pemeriksa</label>
+                        </div>
+                    @else
                         <div class="form-floating">
                             <input type="text" name="periksa" id="periksa" value="{{Auth::user()->name}}" placeholder="Leave a comment here" class="form-control" disabled readonly>
                             <label for="periksa">Pemeriksa</label>
                         </div>
+                        @endif
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Leave a comment here" id="ket" style="height: 75px;" name="ket">{{$validasi->ket}}</textarea>
                             <label for="ket">Keterangan</label>

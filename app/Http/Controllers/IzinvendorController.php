@@ -564,7 +564,7 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
             $simpan->nm_pngws_granted = null;
             $simpan->tgl_pngws_granted = null;
         }
-    // $status->status = "Canceled";
+    $status->status = "Canceled";
     $status->validatedby = $user;
     $status->save();
     }

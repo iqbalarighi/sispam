@@ -15,60 +15,95 @@
                 <div class="card-header fw-bold text-uppercase">{{ __('Detail Layanan Kelogistikan') }}
                     <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
                     @if(Auth::user()->name == 'Superadmin')
-                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/otorisasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;" onclick>Otorisasi</span>
+                        <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return sup()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;" onclick>Otorisasi</span>
                         <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                    <script type="text/javascript">
+                        async function sup(){
+
+                        const { value: oto } = await Swal.fire({
+                              title: "Otorisasi",
+                              input: "select",
+                              inputOptions: {
+                                @foreach($otor as $item)
+                                {{$item->id}}: "{{$item->nama}}",
+                                @endforeach
+                              },
+                              inputPlaceholder: "Otorisator",
+                              showCancelButton: true,
+                            });
+                            if (oto) {
+                              window.location="{{url('/layanan/otorisasi/'.$show->layanan_id)}}/"+oto
+                            }
+                        }
+                    </script>
+
                     @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja' || Auth::user()->role == 'admin')
                         @if($otorized == null) 
                             @if($show->validatedby == null)
                             <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
                             @endif
-                        @else 
-                            @if($show->validatedby == null)
+                        @elseif($show->otorizedby == null) 
                             <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return oto()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>
-                            @endif
-            <script>    
-            function oto(){
-              
+                            <!-- <script type="text/javascript">
+                                function oto() {                              
+                                        Swal.fire({
+                                              title: "Otorisasi Dokumen",
+                                              icon: "warning",
+                                              showCancelButton: true,
+                                              confirmButtonColor: "#3085d6",
+                                              cancelButtonColor: "#d33",
+                                              confirmButtonText: "Otorisasi",
+                                              cancelButtonText: "Batal"
+                                            }).then((result) => {
+                                              if (result.isConfirmed) {
+                                                window.location='{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}'
+                                              }
+                                            });
+                                        }
+
+                            </script> -->
+                            <script>    
+function oto(){
+  
+Swal.fire({
+    title: "Otorisasi Dokumen",
+    text: "Tambahkan catatan",
+    input: 'textarea',
+    inputPlaceholder: "Type your message here...",
+  inputAttributes: {
+    "aria-label": "Type your message here"
+  },
+  confirmButtonText: 'Otorisasi',
+    showCancelButton: true        
+}).then((result) => {
+    if (result.isConfirmed) {
             Swal.fire({
-                title: "Otorisasi Dokumen",
-                text: "Tambahkan catatan",
-                input: 'textarea',
-                inputPlaceholder: "Type your message here...",
-              inputAttributes: {
-                "aria-label": "Type your message here"
-              },
-              confirmButtonText: 'Otorisasi',
-                showCancelButton: true        
-            }).then((result) => {
-                if (result.isConfirmed) {
-                        Swal.fire({
-                        title: "Loading . . . ",
-                        text: "Sedang validasi data",
-                        showConfirmButton: false, 
-                        allowOutsideClick: false,
-                          didOpen: () => {
-                            Swal.showLoading();
-                            target.style.opacity = '0'
-                        }
-                        });  
-                if (!result.value) {
-                  window.location="{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}"
-                }
-
-                if (result.value) {
-                 window.location="{{url('/layanan/detail/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}/"+result.value
-                    }
-              }
-
-
-                });
+            title: "Loading . . . ",
+            text: "Sedang validasi data",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
             }
-            </script>
+            });  
+    if (!result.value) {
+      window.location="{{url('/layanan/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}"
+    }
+
+    if (result.value) {
+     window.location="{{url('/layanan/otorisasi/'.$show->layanan_id.'/'.$otorized->id)}}/"+result.value
+        }
+  }
+
+
+    });
+}
+</script>
 
                         @endif
                     @endif
                 </div>
-
 @if (session('abort'))
 <script type="text/javascript">
     Swal.fire({
@@ -126,9 +161,6 @@
                         <div>
                             {{$show->lokasi}}
                         </div>
-                        <div>
-                            {{$show->lantai}}
-                        </div>
                     </div>
                     <div class="mt-2">
                         <b>Uraian</b>
@@ -140,7 +172,7 @@
                         Pukul {{Carbon\Carbon::parse($show->tanggal)->isoFormat('HH:mm:ss')}}</td>
                         </tr>
                         <tr>
-                            <td style="width: 130px;">Nama Pemohon</td>
+                            <td style="width: 130px;">Nama PIC</td>
                             <td style="width: 10px;">:</td>
                             <td>{{$show->pic}}</td>
                         </tr>
@@ -167,11 +199,10 @@
                     </table>
 
                     </div>
-
                     @if($show->foto != null) 
                     <div class="mt-4">
                         <div>
-                        <b>Dokumen Pendukung</b> 
+                        <b>Dokumentasi</b> 
                         </div>
                         @foreach(explode('|', $show->foto) as $foto)
                         <img src="{{asset('storage/layanan/'.$show->layanan_id.'/'.$foto)}}" width="200px">
@@ -182,7 +213,7 @@
                     </div>
 
                     @if($show->otorizedby != null && $show->validatedby != null)
-                <div align="center" class="my-3">
+                <div align="center">
                     <a target="_blank" href="{{url('layanan/detail')}}/{{$show->layanan_id}}/{{$show->otorizedby}}/{{$show->validatedby}}"><button class="btn btn-primary btn-sm float-center ml-2">Download PDF</button></a>
                 </div>
                 @endif
