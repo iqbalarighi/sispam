@@ -36,7 +36,11 @@
                 <div class="card-body">
                     <center>
                     <div class="form-group col-sm-5">
-                        <div class="form-floating">
+
+                        <form action="{{url('simpan_validasi')}}/{{$izinid}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return cek()">
+                            @csrf
+                            @method('PUT')
+                        <div class="form-floating mb-1">
                           <select class="form-select" id="izin" aria-label="Floating label select example" required>
                             <option selected></option>
                             <option value="1">Izin Diberikan</option>
@@ -44,23 +48,42 @@
                           </select>
                           <label for="izin">Pilih Izin</label>
                         </div>
-
-                        <form action="{{url('simpan_validasi')}}/{{$izinid}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return cek()">
-                            @csrf
-                            @method('PUT')
-                            <div class="row g-2">
+                            <div class="row g-2 mb-1">
 
                                     <div class="form-floating">
-                                      <input type="datetime-local" class="form-control" id="mulai" name="" value="">
+                                      <input type="datetime-local" class="form-control" id="mulai" name="" value="" required>
                                       <label for="mulai">Mulai Jam</label>
                                     </div>
-
-                                {{-- <div class="col-md-6">
+                            <font size="1" color="red" class="float-start">Masa berlaku standar 12 jam jika kolom jumlah hari/jam dibiarkan kosong</font><br>
+                                <div class="col-md-6">
                                     <div class="form-floating">
-                                      <input type="datetime-local" class="form-control" id="sampai" name="" value="">
-                                      <label for="sampai">Sampai Jam</label>
+                                      <input type="number" class="form-control" id="berlaku" min="1" name="berlaku" value="" placeholder="Leave a comment here" >
+                                      <label for="berlaku"><font color="grey">Jumlah Hari/Jam:</font> </label>
                                     </div>
-                                </div> --}}
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                      <select type="text" class="form-select" id="waktu" name="waktu" value="" placeholder="Leave a comment here" >
+                                        <option value="" selected></option>
+                                        <option value="addHours">Jam</option>
+                                        <option value="addDays">Hari</option>
+                                      </select>
+                                      <label for="waktu">Hari/Jam</label>
+                                    </div>
+                                </div>
+<script type="text/javascript">
+    $("#berlaku").change(function() {
+        if ($("#berlaku").val().length === 0) {
+            $("#waktu").prop('required',false);
+            $("#berlaku").prop('required',true);
+
+        }  else {
+            $("#waktu").prop('required',true);
+            $("#berlaku").prop('required',false);
+        }
+    }); 
+</script>
+
                             </div>
 
                             <div class="form-floating">
@@ -129,7 +152,31 @@ function cek() {
     });
     return false;
 } else {
-    form.submit();
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Pastikan seluruh data benar dan lengkap",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Batal",
+          confirmButtonText: "Kirim"
+        }).then((result) => {
+          if (result.isConfirmed) {
+        form.submit();
+        Swal.fire({
+            title: "Loading . . . ",
+            text: "Sedang validasi data",
+            showConfirmButton: false, 
+            allowOutsideClick: false,
+              didOpen: () => {
+                Swal.showLoading();
+                target.style.opacity = '0'
+            }
+            });  
+          }
+        });
+    return false;
 }
 
 }

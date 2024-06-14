@@ -487,10 +487,24 @@ public function otorisasi($id, $otoid)
 
 public function validasi(Request $request, $izinid)
 {   
+
     $simpan = IzinvalidasiModel::where('izin_id', $izinid)->first();
     $status = IzinvendorModel::findOrFail($simpan->id);
     $user = Auth::user()->id;
-    $expired = Carbon::parse($request->mulai_granted)->addHours(12);
+    $berlaku = $request->berlaku;
+    $waktu = $request->waktu;
+
+
+    if ($waktu == "addHours") {
+    $expired = Carbon::parse($request->mulai_granted)->addHours($berlaku);
+    } elseif ($waktu == "addDays") {
+    $expired = Carbon::parse($request->mulai_granted)->addDays($berlaku);
+    } elseif ($waktu == null) {
+      $expired = Carbon::parse($request->mulai_granted)->addHours(12);
+    }
+
+    // dd($expired, $waktu);
+
 
 if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
     $otor = OtorisasiModel::all();
@@ -540,7 +554,7 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
         }
 
 
-    // $status->status = "On Progress";
+    $status->status = "Waiting";
     $status->validatedby = $user;
     $status->save();
     } 
@@ -1215,21 +1229,21 @@ foreach (explode(',', $detail->izin_peralatan->perlengkapan) as $lngkp) {
     $leng[] = $lngkp;
 }
 
-$expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
+// $expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
 
 $text = 
 "Nama: ".$otor->nama."
 Jabatan : ".$otor->jabatan."
 NIP : ".$otor->nip."
 Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
-Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".Carbon::parse($detail->izin_validasi->sampai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text);
 $text2 = 
 "Nama: ".Auth::user()->name."
 Jabatan : ".Auth::user()->unit_kerja."
 Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
-Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".Carbon::parse($detail->izin_validasi->sampai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text2);
 $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
@@ -1287,21 +1301,21 @@ foreach (explode(',', $detail->izin_peralatan->perlengkapan) as $lngkp) {
     $leng[] = $lngkp;
 }
 
-$expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
+// $expired = Carbon::parse($detail->izin_validasi->mulai_granted)->addHours(12);
 
 $text = 
 "Nama: ".$otor->nama."
 Jabatan : ".$otor->jabatan."
 NIP : ".$otor->nip."
 Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
-Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".Carbon::parse($detail->izin_validasi->sampai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text);
 $text2 = 
 "Nama: ".$valid->name."
 Jabatan : ".$valid->unit_kerja."
 Tanggal Validasi ".Carbon::parse($detail->izin_validasi->mulai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
-Berlaku Sampai : ".carbon::parse($expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Berlaku Sampai : ".Carbon::parse($detail->izin_validasi->sampai_granted)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status Surat: Surat Keluar";
 // dd($text2);
 $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));

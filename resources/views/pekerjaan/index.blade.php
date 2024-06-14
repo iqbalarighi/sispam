@@ -102,7 +102,7 @@
                             <th scope="col">PIC</th>
                             <th scope="col">Tanggal Permintaan</th>
                             <th scope="col">Risiko</th>
-                            <th scope="col">Validasi</th>
+                            {{-- <th scope="col">Validasi</th> --}}
                             <th scope="col">Status</th>
                     @if(Auth::user()->unit_kerja == "Health, Safety, & Environment" || Auth::user()->unit_kerja == "Security Monitoring Center" || Auth::user()->role == "admin")
                             <th scope="col">Option</th>
@@ -135,7 +135,7 @@
                                 <font style="color: darkred; font-weight: bold;">{{$izin->risiko}}</font>
                                 @endif
                             </td>
-                            <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">
+                            {{-- <td onclick="window.location='{{url('izin-detail')}}/{{$izin->id}}'" style="cursor: pointer;">
                                     @if ($izin->izin_validasi->mulai_granted != null)
                                     {{__('Izin Diberikan')}}
                                 @elseif ($izin->izin_validasi->mulai_denied != null)
@@ -143,9 +143,11 @@
                                 @else 
                                     {{__('Izin Belum Diberikan')}}
                                 @endif
-                            </td>
+                            </td> --}}
                             <td align="center">
                                 @if($izin->status == "Open")
+                                <button class="btn btn-sm p-1 align-middle btn-danger">{{$izin->status}}</button>
+                                @elseif($izin->status == "Waiting")
                                 <button class="btn btn-sm p-1 align-middle btn-danger">{{$izin->status}}</button>
                                 @elseif($izin->status == "On Progress")
                                 <button class="btn btn-sm p-1 align-middle btn-success" style="text-wrap: nowrap;">{{$izin->status}}</button>
