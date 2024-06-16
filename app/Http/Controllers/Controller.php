@@ -16,7 +16,7 @@ class Controller extends BaseController
 
     public function side(Request $request)
     {
-        $count = IzinvendorModel::where('status', 'Open')->count();
+        $count = IzinvendorModel::where('status', 'Open')->orwhere('status', 'Waiting')->count();
         $count2 = LayananModel::where('status', 'Open')->count();
 
 
