@@ -531,6 +531,8 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
         $status->status = "Canceled";
     }
     }
+} else {
+    $status->status = "Waiting";
 }
 
     if ($request->mulai_granted != null) {
@@ -554,7 +556,6 @@ if (Carbon::now()->isoFormat('HHmmss') <= 90000){ //jam 00.00 - 09.00
         }
 
 
-    $status->status = "Waiting";
     $status->validatedby = $user;
     $status->save();
     } 
