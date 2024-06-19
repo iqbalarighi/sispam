@@ -29,7 +29,12 @@
                                 @endforeach
                               },
                               inputPlaceholder: "Otorisator",
+                              cancelButtonText: "Batal",
+                              confirmButtonText: "Otorisasi",
                               showCancelButton: true,
+                              inputValidator: (result) => {
+                                return !result && "Mohon pilih otorisator terlebih dahulu !";
+                              }
                             });
                             if (oto) {
                               window.location="{{url('/layanan/otorisasi/'.$show->layanan_id)}}/"+oto
@@ -213,7 +218,7 @@ Swal.fire({
                     </div>
 
                     @if($show->otorizedby != null && $show->validatedby != null)
-                <div align="center">
+                <div align="center" class="mt-4">
                     <a target="_blank" href="{{url('layanan/detail')}}/{{$show->layanan_id}}/{{$show->otorizedby}}/{{$show->validatedby}}"><button class="btn btn-primary btn-sm float-center ml-2">Download PDF</button></a>
                 </div>
                 @endif
