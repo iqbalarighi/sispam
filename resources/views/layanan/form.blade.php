@@ -180,15 +180,15 @@
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen10" name="layanan[]" required onclick="check()" value="Pemeliharaan Rumah Jabatan">
-                    <label class="m-0" for="jen9">Pemeliharaan Rumah Jabatan</label>
+                    <label class="m-0" for="jen10">Pemeliharaan Rumah Jabatan</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen11" name="layanan[]" required onclick="check()" value="Dukungan Acara/Kegiatan">
-                    <label class="m-0" for="jen9">Dukungan Acara/Kegiatan</label>
+                    <label class="m-0" for="jen11">Dukungan Acara/Kegiatan</label>
                 </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input " id="jen12" name="layanan[]" required onclick="check()" value="Peminjaman Peralatan/Perlengkapan">
-                    <label class="m-0" for="jen9">Peminjaman Peralatan/Perlengkapan</label>
+                    <label class="m-0" for="jen12">Peminjaman Peralatan/Perlengkapan</label>
                 </div>
                 <div class="d-flex form-check" style="margin-top: -2px;">
                     <input type="checkbox" class="form-check-input " id="jen8" name="layanan[]" required onclick="check()" value="Lain-lain :">
