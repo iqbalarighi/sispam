@@ -26,7 +26,7 @@ class LayananController extends Controller
      */
     public function index(LayananModel $layananModel)
     {
-        $layan = $layananModel->orderBy('tanggal', 'DESC')->paginate(15);
+        $layan = $layananModel->orderBy('created_at', 'DESC')->paginate(15);
         return view('layanan.index', compact('layan'));
     }
 

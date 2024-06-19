@@ -247,7 +247,7 @@
                 <span class="tooltiptext">Satuan Kerja</span>
             </div>
             <div class="form-floating toolt">
-                <input class="form-control form-control-sm" type="number" name="kontak" onkeypress="return angka(event)" autocomplete="off" id="kontak" maxlength="14" placeholder="" required>
+                <input class="form-control form-control-sm" type="text" name="kontak" onkeypress="return angka(event)" autocomplete="off" id="kontak" maxlength="14" placeholder="" required>
                 <label for="kontak">Nomor Kontak/WhatsApp <font size="2" color="red">*</font></label>
                 <span class="tooltiptext">Nomor Whatsapp Pemohon</span>
             </div>
