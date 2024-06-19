@@ -110,7 +110,7 @@
 
                         </td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->tanggal)->isoFormat('dddd, D MMMM Y')}}</td>
-                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->created_at)->isoFormat('HH:mm')}} WIB</td>
+                        <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail">{{Carbon\Carbon::parse($giat->updated_at)->isoFormat('HH:mm')}} WIB</td>
                         <td onclick="window.location='/giat-detil/{{$giat->id}}'" title="klik untuk lihat detail" style="text-align: left;">{{$giat->site->nama_gd}}</td>
                         @if (Auth::user()->role === 'admin' || Auth::user()->level === 'koordinator')
                         

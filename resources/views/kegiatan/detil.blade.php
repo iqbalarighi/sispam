@@ -50,7 +50,7 @@
                         <b><center>Laporan Kegiatan Petugas Pengamanan</center></b>
                         <b><center>{{$detil->site->nama_gd}}</center></b>
                         <b><center>{{Carbon\Carbon::parse($detil->tanggal)->isoFormat('dddd, D MMMM Y')}}</center></b>
-                        <b><center>Pukul {{Carbon\Carbon::parse($detil->created_at)->isoFormat('HH:mm:ss')}} WIB</center></b>
+                        <b><center>Pukul {{Carbon\Carbon::parse($detil->updated_at)->isoFormat('HH:mm:ss')}} WIB</center></b>
                     </td>
                     </tr>
                     <tr>
