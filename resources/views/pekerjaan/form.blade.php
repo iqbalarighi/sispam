@@ -32,7 +32,6 @@
 }
 </style>
 
-    @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
 <script type="text/javascript">
 function quest() {
         Swal.fire({
@@ -49,6 +48,8 @@ function quest() {
 });
 }
 </script>
+{{--     @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+
 @else
 <script type="text/javascript">
 function quest() {
@@ -66,10 +67,9 @@ function quest() {
 });
 }
 </script>
-@endif
+@endif --}}
                 <div class="card-body px-1 pt-1">
                     @if (session('status'))
-                            @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
                                 <script>
                                 Swal.fire({
                                   title: "Berhasil",
@@ -98,6 +98,8 @@ function quest() {
                             }, 1700); 
                                 
                         </script>
+                            {{-- @if ( Carbon\Carbon::now()->isoFormat('HHmmss') >= 200000 || Carbon\Carbon::now()->isoFormat('HHmmss') <= 80000)
+
                             @else
                                <script>
                                 Swal.fire({
@@ -127,7 +129,7 @@ function quest() {
                             }, 1700); 
                                 
                         </script>
-                            @endif
+                            @endif --}}
                     @endif
                     
             <form action="{{route('simpan_izin')}}" method="post" id="form" enctype="multipart/form-data" onsubmit="return loding(this);">
