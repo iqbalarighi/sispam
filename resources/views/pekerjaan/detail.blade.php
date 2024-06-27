@@ -608,9 +608,13 @@
                         </div>
                     @elseif(Carbon\Carbon::now()->isoFormat('HHmmss') >= 160001)
                         <div align="center" class="mb-2">
-
+                        @if($detail->izin_informasi->perusahaan_pemohon == 'PT. Prima Karya Sarana Sejahtera (PT. PKSS)' || $detail->izin_informasi->perusahaan_pemohon == 'PT. Kopojeka Daya Indonesia (PT. KDI)' || $detail->izin_informasi->perusahaan_pemohon == 'PT. Swadharma Griyasatya (PT. SGRS)' || $detail->izin_informasi->perusahaan_pemohon == 'PT. Bangun Prestasi Bersama (PT. BPB)')
                            <a target="_blank" href="https://wa.me/628128051226?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Tomi Hartono</span></a>
-
+                           <a target="_blank" href="https://wa.me/6281253005354?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Budi Murtopo</span></a>
+                        @else
+                           <a target="_blank" href="https://wa.me/62811163361?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Nanang Arianto</span></a>
+                           <a target="_blank" href="https://wa.me/628128051226?text=Assalamualaikum%20Pak%2C%20mohon%20izin%20untuk%20memberikan%20persetujuan%20pada%20dokumen%20izin%20kerja%20dengan%20nomor%20{{$detail->izin_id}}.%20Terima%20Kasih.%0A%0Ahttps%3A%2F%2Fwww.sispam.id%2Fizin-detail%2F{{$detail->id}}"><span class="bg-success text-white rounded fw-bold py-1 px-2">Tomi Hartono</span></a>
+                        @endif
                         </div>
                     @endif
                 @endif
