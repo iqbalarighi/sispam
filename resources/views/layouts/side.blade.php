@@ -148,7 +148,7 @@ if (notip.coun.count2 != 0){
     setInterval(function () {
                 notifLog();
                 notifIzin();
-        }, 10000);
+        }, 7000);
     </script>
     </head>
     <body>
