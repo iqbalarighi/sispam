@@ -199,7 +199,7 @@
         // Set the interval to 3600000 milliseconds (1 hour)
         setInterval(function() {
             // window.location.reload();
-            location.href = location.href.split('?')[0] + '?' + new Date().getTime();
+            location.href = location.href;
         }, 3600000); // 3600000ms = 1 hour
     </script>
 @endsection
