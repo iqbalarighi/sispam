@@ -1,4 +1,4 @@
-<div wire:poll>
+<div wire:poll.10s>
     <table class="table-striped table-hover" width="100%">
         <tr>
             <th>Dibuat Oleh</th>
