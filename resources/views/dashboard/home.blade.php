@@ -200,6 +200,6 @@
         setInterval(function() {
             // window.location.reload();
             location.href = location.href;
-        }, 3600000); // 3600000ms = 1 hour
+        }, 1800000); // 3600000ms = 1 hour
     </script>
 @endsection
