@@ -154,7 +154,7 @@ if (notip.coun.count2 != 0){
     <body>
         {{-- user level 1 --}}
     @if ( Auth::user()->role === 'admin')
-        <div class="d-flex " id="wrapper">
+        <div class="d-flex {{ Request::is('dashboard') ? 'toggled' : ''}}" id="wrapper"> toggled
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
