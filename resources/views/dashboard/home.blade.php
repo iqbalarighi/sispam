@@ -201,6 +201,6 @@
             // window.location.reload();
             // location.href = location.href;
             location.reload(true);
-        }, 60000); // 3600000ms = 1 hour
+        }, 600000); // 3600000ms = 1 hour
     </script>
 @endsection
