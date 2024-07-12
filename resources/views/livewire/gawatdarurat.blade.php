@@ -18,7 +18,7 @@
             <td>{{$item->no_bencana}}</td>
             <td>{{$item->jenis_bencana}}</td>
             <td>{{Carbon\Carbon::parse($item->tanggal)->isoFormat('D MMMM Y')}}</td>
-            <td>{{Carbon\Carbon::parse($item->update_at)->isoFormat('D MMMM Y')}}</td>
+            <td>{{Carbon\Carbon::parse($item->updated_at)->isoFormat('D MMMM Y')}}</td>
             <td>
                 <span class="text-danger rounded fw-bold px-1">{{$item->status}}</span>
             </td>
@@ -29,7 +29,7 @@
             <td>{{$item->no_bencana}}</td>
             <td>{{$item->jenis_bencana}}</td>
             <td>{{Carbon\Carbon::parse($item->tanggal)->isoFormat('D MMMM Y')}}</td>
-            <td>{{Carbon\Carbon::parse($item->update_at)->isoFormat('D MMMM Y')}}</td>
+            <td>{{Carbon\Carbon::parse($item->updated_at)->isoFormat('D MMMM Y')}}</td>
             <td>
                 <span class="text-success rounded fw-bold px-1">{{$item->status}}</span>
             </td>
