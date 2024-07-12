@@ -146,9 +146,12 @@ if (notip.coun.count2 != 0){
         });
     }
     setInterval(function () {
-                notifLog();
                 notifIzin();
-        }, 7000);
+        }, 10000);   
+
+    setInterval(function () {
+                notifLog();
+        }, 20000);
     </script>
     </head>
     <body>

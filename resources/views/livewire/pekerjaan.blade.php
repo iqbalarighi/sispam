@@ -1,4 +1,4 @@
-<div wire:poll.5s>
+<div wire:poll.60s>
     <style type="text/css">
         th, td { 
             text-align:center;

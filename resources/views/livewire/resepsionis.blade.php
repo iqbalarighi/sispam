@@ -1,4 +1,4 @@
-<div wire:poll.35s>
+<div wire:poll.75s>
     <table class="table-striped table-hover" width="100%">
         <tr>
             <th align="center">Total</th>
