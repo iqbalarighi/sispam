@@ -17,7 +17,7 @@
             <td>{{$items->user_pelapor}}</td>
             <td>{{"Lain-lain :" == Str::substr($items->jenis_potensi, 0,11) ? Str::substr($items->jenis_potensi, 12,100) : $items->jenis_potensi}}</td>
             <td>{{Carbon\Carbon::parse($items->waktu_kejadian)->isoFormat('D MMMM Y')}}</td>
-            <td>{{Carbon\Carbon::parse($items->update_at)->isoFormat('D MMMM Y')}}</td>
+            <td>{{Carbon\Carbon::parse($items->updated_at)->isoFormat('D MMMM Y')}}</td>
             <td>
                 <span class="text-danger rounded fw-bold px-1">{{$items->status}}</span>
             </td>
@@ -28,7 +28,7 @@
             <td>{{$itemx->user_pelapor}}</td>
             <td>{{"Lain-lain :" == Str::substr($itemx->jenis_potensi, 0,11) ? Str::substr($itemx->jenis_potensi, 12,100) : $itemx->jenis_potensi}}</td>
             <td>{{Carbon\Carbon::parse($itemx->waktu_kejadian)->isoFormat('D MMMM Y')}}</td>
-            <td>{{Carbon\Carbon::parse($itemx->update_at)->isoFormat('D MMMM Y')}}</td>
+            <td>{{Carbon\Carbon::parse($itemx->updated_at)->isoFormat('D MMMM Y')}}</td>
             <td>
                 <span class="text-success rounded fw-bold px-1">{{$itemx->status}}</span>
             </td>
