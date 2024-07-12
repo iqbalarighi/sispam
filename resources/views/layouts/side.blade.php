@@ -153,11 +153,18 @@ if (notip.coun.count2 != 0){
                 notifLog();
         }, 20000);
     </script>
+
     </head>
+    @php
+function isMobile() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+    @endphp
+    
     <body>
         {{-- user level 1 --}}
     @if ( Auth::user()->role === 'admin')
-        <div class="d-flex {{ Request::is('dashboard') ? 'toggled' : ''}}" id="wrapper"> 
+        <div class="d-flex @if(Request::is('dashboard')) @if(isMobile()) @else toggled @endif @endif" id="wrapper"> 
         <!-- Sidebar -->
         <div class="bg-light border-right " id="sidebar-wrapper">
         <div class="list-group list-group-flush sticky-top">
@@ -246,7 +253,7 @@ if (notip.coun.count2 != 0){
 
 {{-- user level 3 --}}
         @elseif (Auth::user()->level === 'danru' || Auth::user()->level === 'koordinator')
-            <div class="d-flex " id="wrapper">
+            <div class="d-flex @if(Request::is('dashboard')) @if(isMobile()) @else toggled @endif @endif" id="wrapper">
         <!-- Sidebar -->
         
         <div class="bg-light border-right " id="sidebar-wrapper">
@@ -311,7 +318,7 @@ if (notip.coun.count2 != 0){
         </div>
         <!-- /#sidebar-wrapper -->
         @elseif(Auth::user()->unit_kerja == 'Teknisi')
-        <div class="d-flex " id="wrapper">
+        <div class="d-flex @if(Request::is('dashboard')) @if(isMobile()) @else toggled @endif @endif" id="wrapper">
             <!-- Sidebar -->
             
             <div class="bg-light border-right " id="sidebar-wrapper">
@@ -324,7 +331,7 @@ if (notip.coun.count2 != 0){
 
         @elseif(Auth::user()->unit_kerja == 'Fasilitas Kerja')
          </div>
-         <div class="d-flex " id="wrapper">
+         <div class="d-flex @if(Request::is('dashboard')) @if(isMobile()) @else toggled @endif @endif" id="wrapper">
             <!-- Sidebar -->
             
             <div class="bg-light border-right " id="sidebar-wrapper">
