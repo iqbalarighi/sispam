@@ -171,7 +171,8 @@ $gg[] = null;
         }
     }
 
-        return view('kegiatan.index', compact('giats', 'start', 'end', 'cari', 'gg'));
+
+        return view('kegiatan.index', compact('giats', 'start', 'end', 'cari'));
 
     }
 
