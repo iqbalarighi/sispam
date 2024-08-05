@@ -479,14 +479,14 @@ public function otorisasi($id, $otoid)
         $rese = User::Where('unit_kerja', '=','Health, Safety, & Environment')
             ->get();
     }
-    $hsl[] = "";
+    $hsl =[];
     foreach ($rese as $key => $val) {
         $hsl[] = $val->name;
     }
 $dat = array($izin->pengawas);
 $isi = array_merge($hsl,$dat);
 
-// dd($isi);
+dd($isi);
 
     $user = User::where('unit_kerja', '=','Health, Safety, & Environment')->get();
     return view('pekerjaan.validasi', compact('izinid','valid','izin','user','isi'));
