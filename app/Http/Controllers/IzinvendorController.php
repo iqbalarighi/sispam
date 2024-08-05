@@ -479,7 +479,7 @@ public function otorisasi($id, $otoid)
         $rese = User::Where('unit_kerja', '=','Health, Safety, & Environment')
             ->get();
     }
-
+    $hsl[] = "";
     foreach ($rese as $key => $val) {
         $hsl[] = $val->name;
     }
