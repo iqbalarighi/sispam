@@ -486,7 +486,7 @@ public function otorisasi($id, $otoid)
 $dat = array($izin->pengawas);
 $isi = array_merge($hsl,$dat);
 
-dd($isi);
+// dd($isi);
 
     $user = User::where('unit_kerja', '=','Health, Safety, & Environment')->get();
     return view('pekerjaan.validasi', compact('izinid','valid','izin','user','isi'));
