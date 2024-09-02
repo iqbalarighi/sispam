@@ -67,12 +67,12 @@ class Kernel extends ConsoleKernel
                             }
                         }
 
-                        // if ($status->status == "Expired"){
-                        //     if (Carbon::now() > $done){
-                        //         $status->status = "Done";
-                        //         $status->save();
-                        //     }
-                        // }
+                        if ($status->status == "Expired"){
+                            if (Carbon::now() > $done){
+                                $status->status = "Done";
+                                $status->save();
+                            }
+                        }
                     }
                 }
             })->everyMinute();
