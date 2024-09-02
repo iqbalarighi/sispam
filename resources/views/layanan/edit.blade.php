@@ -119,6 +119,22 @@
                     <input type="checkbox" class="form-check-input " id="jen7" name="layanan[]" required onclick="check()" value="Permintaan Fasilitas Kerja" {{ in_array('Permintaan Fasilitas Kerja', $jenis) ? 'checked' : '' }}>
                     <label class="m-0 p-0" for="jen7">Permintaan Fasilitas Kerja</label>
                 </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen9" name="layanan[]" required onclick="check()" value="Pemeliharaan Gedung" {{ in_array('Pemeliharaan Gedung', $jenis) ? 'checked' : '' }}>
+                    <label class="m-0" for="jen9">Pemeliharaan Gedung</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen10" name="layanan[]" required onclick="check()" value="Pemeliharaan Rumah Jabatan" {{ in_array('Pemeliharaan Rumah Jabatan', $jenis) ? 'checked' : '' }}>
+                    <label class="m-0" for="jen10">Pemeliharaan Rumah Jabatan</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen11" name="layanan[]" required onclick="check()" value="Dukungan Acara/Kegiatan" {{ in_array('Dukungan Acara/Kegiatan', $jenis) ? 'checked' : '' }}>
+                    <label class="m-0" for="jen11">Dukungan Acara/Kegiatan</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input " id="jen12" name="layanan[]" required onclick="check()" value="Peminjaman Peralatan/Perlengkapan" {{ in_array('Peminjaman Peralatan/Perlengkapan', $jenis) ? 'checked' : '' }}>
+                    <label class="m-0" for="jen12">Peminjaman Peralatan/Perlengkapan</label>
+                </div>
                 <div class="d-flex form-check" style="margin-top: -2px;">
                     <input type="checkbox" class="form-check-input " id="jen8" name="layanan[]" required onclick="check()" value="Lain-lain :" {{ 'Lain-lain :' == Str::substr(end($jenis), 0,11) ? 'checked' : '' }}>
                     <label class="m-0 px-0 pl-0 pr-2" for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label> &nbsp;&nbsp;
@@ -196,7 +212,7 @@
                         <b>Foto Dokumentasi</b>: <br> <p></p>
                     <div class="input-group custom-file-button mt-1">
                         <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
-                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
+                        <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" >
                     </div>
                     @else
                     <div>
@@ -215,39 +231,31 @@
                           </div>
                             </div>
 
-
-<script>
-    function ceks() {
-        Swal.fire({
-                  title: "Hapus Foto ?",
-                  text: "File terhapus tidak dapat dikembalikan !",
-                  icon: "warning",
-                  showCancelButton: true,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  cancelButtonText: "Batal",
-                  confirmButtonText: "Hapus"
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    window.location = "{{url('layanan/hapus/'.$foto.'/'.$edit->layanan_id)}}";
-                  }
-                });
-    }
-</script>
+                        <script>
+                            function ceks() {
+                                Swal.fire({
+                                          title: "Hapus Foto ?",
+                                          text: "File terhapus tidak dapat dikembalikan !",
+                                          icon: "warning",
+                                          showCancelButton: true,
+                                          confirmButtonColor: "#3085d6",
+                                          cancelButtonColor: "#d33",
+                                          cancelButtonText: "Batal",
+                                          confirmButtonText: "Hapus"
+                                        }).then((result) => {
+                                          if (result.isConfirmed) {
+                                            window.location = "{{url('layanan/hapus/'.$foto.'/'.$edit->layanan_id)}}";
+                                          }
+                                        });
+                            }
+                        </script>
                             @endforeach 
 
                         </div>
                         </td>
                     </div>
                     <tr>
-                        <td colspan="3">
-                    <div>
-                        <div class="input-group custom-file-button mt-1">
-                            <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
-                            <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
-                        </div>
-                    </div>
-                </td>
+
                 </tr>
                     @endif
 
@@ -255,7 +263,7 @@
             </div>
 
             <div class="text-center mt-2">
-                <button type="submit" class="btn btn-primary ">Kirim</button>
+                <button type="submit" class="btn btn-primary ">Update</button>
             </div>
         </form>
 </div>
@@ -275,6 +283,10 @@
        var jns6 = document.getElementById("jen6");
        var jns7 = document.getElementById("jen7");
        var jns8 = document.getElementById("jen8");
+       var jns9 = document.getElementById("jen9");
+       var jns10 = document.getElementById("jen10");
+       var jns11 = document.getElementById("jen11");
+       var jns12 = document.getElementById("jen12");
 
 
 jns1.required = true;
@@ -285,9 +297,13 @@ jns5.required = true;
 jns6.required = true;
 jns7.required = true;
 jns8.required = true;
+jns9.required = true;
+jns10.required = true;
+jns11.required = true;
+jns12.required = true;
 
  function check(){
-    if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked || jns6.checked || jns7.checked || jns8.checked) === true) {
+    if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked || jns6.checked || jns7.checked || jns8.checked || jns9.checked || jns10.checked || jns11.checked || jns12.checked) === true) {
         jns1.required = false;
         jns2.required = false;
         jns3.required = false;
@@ -296,6 +312,10 @@ jns8.required = true;
         jns6.required = false;
         jns7.required = false;
         jns8.required = false;
+        jns9.required = false;
+        jns10.required = false;
+        jns11.required = false;
+        jns12.required = false;
     } else {
         jns1.required = true;
         jns2.required = true;
@@ -305,11 +325,15 @@ jns8.required = true;
         jns6.required = true;
         jns7.required = true;
         jns8.required = true;
+        jns9.required = true;
+        jns10.required = true;
+        jns11.required = true;
+        jns12.required = true;
     }
 
  }
 
- if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked || jns6.checked || jns7.checked || jns8.checked) === true) {
+ if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns5.checked || jns6.checked || jns7.checked || jns8.checked || jns9.checked || jns10.checked || jns11.checked || jns12.checked) === true) {
         jns1.required = false;
         jns2.required = false;
         jns3.required = false;
@@ -318,6 +342,10 @@ jns8.required = true;
         jns6.required = false;
         jns7.required = false;
         jns8.required = false;
+        jns9.required = false;
+        jns10.required = false;
+        jns11.required = false;
+        jns12.required = false;
     } else {
         jns1.required = true;
         jns2.required = true;
@@ -327,6 +355,10 @@ jns8.required = true;
         jns6.required = true;
         jns7.required = true;
         jns8.required = true;
+        jns9.required = true;
+        jns10.required = true;
+        jns11.required = true;
+        jns12.required = true;
     }
 </script>
 <script>
