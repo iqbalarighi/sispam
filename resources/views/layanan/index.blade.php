@@ -70,7 +70,7 @@
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layan->firstitem()+$key}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->layanan_id}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{Carbon\Carbon::parse($layanan->tanggal)->isoFormat('DD MMMM YYYY')}}
-                        Pukul {{Carbon\Carbon::parse($layanan->tanggal)->isoFormat('HH:mm:ss')}}</td>
+                        Pukul {{Carbon\Carbon::parse($layanan->tanggal)->isoFormat('HH:mm')}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer; text-align: left !important;">
                     
                     @foreach(explode(',',$layanan->layanan) as $item)
