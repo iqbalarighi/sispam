@@ -470,6 +470,7 @@ public function otorisasi($id, $otoid)
 {
     $valid = IzinvalidasiModel::where('izin_id','=', $izinid)->first();
     $izin = IzininformasiModel::where('izin_id','=', $izinid)->first();
+
     if ($valid->nm_pmrks_granted != null) {
     $rese = User::where('name', '!=', $valid->nm_pmrks_granted)
             ->Where('unit_kerja', '=','Health, Safety, & Environment')
@@ -478,11 +479,17 @@ public function otorisasi($id, $otoid)
         $rese = User::Where('unit_kerja', '=','Health, Safety, & Environment')
             ->get();
     }
+    $hsl =[];
+    foreach ($rese as $key => $val) {
+        $hsl[] = $val->name;
+    }
+$dat = array($izin->pengawas);
+$isi = array_merge($hsl,$dat);
 
-// dd($rese);
+// dd($isi);
 
     $user = User::where('unit_kerja', '=','Health, Safety, & Environment')->get();
-    return view('pekerjaan.validasi', compact('izinid','valid','izin','user','rese'));
+    return view('pekerjaan.validasi', compact('izinid','valid','izin','user','isi'));
 }
 
 public function validasi(Request $request, $izinid)
