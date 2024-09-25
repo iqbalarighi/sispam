@@ -133,7 +133,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header fw-bold text-center">{{ __('Form Layanan Kelogistikan') }}</div>
+                <div class="card-header fw-bold text-center">{{ __('Form Layanan Pengamanan') }}</div>
 
                 <div class="card-body">
                     {{-- @if (session('status'))
@@ -147,38 +147,28 @@
             <div class="">
                 <div class="fw-bold">Jenis Layanan <font size="2" color="red">*</font></div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen5" name="layanan[]" required onclick="check()" value="Peminjaman Mobil">
-                    <label class="m-0" for="jen5">Peminjaman Mobil</label>
+                    <input type="checkbox" class="form-check-input " id="jen1" name="layanan[]" required onclick="check()" value="Izin Loading Barang">
+                    <label class="m-0" for="jen1">Izin Loading Barang</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen6" name="layanan[]" required onclick="check()" value="Peminjaman Ruangan">
-                    <label class="m-0" for="jen6">Peminjaman Ruangan</label>
+                    <input type="checkbox" class="form-check-input " id="jen2" name="layanan[]" required onclick="check()" value="Pengamanan Kegiatan/Acara">
+                    <label class="m-0" for="jen2">Pengamanan Kegiatan/Acara</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen7" name="layanan[]" required onclick="check()" value="Permintaan Fasilitas Kerja">
-                    <label class="m-0" for="jen7">Permintaan Fasilitas Kerja</label>
+                    <input type="checkbox" class="form-check-input " id="jen3" name="layanan[]" required onclick="check()" value="Pengawalan">
+                    <label class="m-0" for="jen3">Pengawalan</label>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen9" name="layanan[]" required onclick="check()" value="Pemeliharaan Gedung">
-                    <label class="m-0" for="jen9">Pemeliharaan Gedung</label>
+                    <input type="checkbox" class="form-check-input " id="jen4" name="layanan[]" required onclick="check()" value="Parkir">
+                    <label class="m-0" for="jen4">Parkir</label>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen10" name="layanan[]" required onclick="check()" value="Pemeliharaan Rumah Jabatan">
-                    <label class="m-0" for="jen10">Pemeliharaan Rumah Jabatan</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen11" name="layanan[]" required onclick="check()" value="Dukungan Acara/Kegiatan">
-                    <label class="m-0" for="jen11">Dukungan Acara/Kegiatan</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input " id="jen12" name="layanan[]" required onclick="check()" value="Peminjaman Peralatan/Perlengkapan">
-                    <label class="m-0" for="jen12">Peminjaman Peralatan/Perlengkapan</label>
-                </div>
+
                 <div class="d-flex form-check" style="margin-top: -2px;">
                     <input type="checkbox" class="form-check-input " id="jen8" name="layanan[]" required onclick="check()" value="Lain-lain :">
                     <label class="m-0 pe-2" for="jen8" class="px-2" style="margin-top: 2px;">Lain-lain</label>
                     <input class="form-control form-control-sm px-1" style="width: 200px;" type="text" id="nilain" name="layanan[]" />
                 </div>
+                
             </div>
             <div class="mt-2">
                 <div>
@@ -332,43 +322,36 @@ jen8.addEventListener('change', () => {
 });
 </script>
 <script>
+   
+       var jns1 = document.getElementById("jen1");
+       var jns2 = document.getElementById("jen2");
+       var jns3 = document.getElementById("jen3");
+       var jns4 = document.getElementById("jen4");
+       var jns8 = document.getElementById("jen8");
 
-   var jns5 = document.getElementById("jen5");
-   var jns6 = document.getElementById("jen6");
-   var jns7 = document.getElementById("jen7");
-   var jns8 = document.getElementById("jen8");
-   var jns9 = document.getElementById("jen9");
-   var jns10 = document.getElementById("jen10");
-   var jns11 = document.getElementById("jen11");
-   var jns12 = document.getElementById("jen12");
 
-jns6.required = true;
-jns7.required = true;
+
+jns1.required = true;
+jns2.required = true;
+jns3.required = true;
+jns4.required = true;
 jns8.required = true;
-jns9.required = true;
-jns10.required = true;
-jns11.required = true;
-jns12.required = true;
+
 
  function check(){
-    if ((jns5.checked || jns6.checked || jns7.checked || jns9.checked || jns10.checked || jns11.checked || jns12.checked || jns8.checked) === true) {
-        jns5.required = false;
-        jns6.required = false;
-        jns7.required = false;
+    if ((jns1.checked || jns2.checked || jns3.checked || jns4.checked || jns8.checked) === true) {
+        jns1.required = false;
+        jns2.required = false;
+        jns3.required = false;
+        jns4.required = false;
         jns8.required = false;
-        jns9.required = false;
-        jns10.required = false;
-        jns11.required = false;
-        jns12.required = false;
+
     } else {
-        jns5.required = true;
-        jns6.required = true;
-        jns7.required = true;
+        jns1.required = true;
+        jns2.required = true;
+        jns3.required = true;
+        jns4.required = true;
         jns8.required = true;
-        jns9.required = true;
-        jns10.required = true;
-        jns11.required = true;
-        jns12.required = true;
     }
 
  }

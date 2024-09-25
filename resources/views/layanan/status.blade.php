@@ -194,7 +194,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card cen">
-                <div class="card-header fw-bold">{{ __('Update Status Permintaan Kelogistikan') }}
+                <div class="card-header fw-bold">{{ __('Update Status Permintaan Layanan') }}
                     @if($update != null)
                     <a href="{{url('layanan/status')}}"><span class="btn btn-primary float-end btn-sm mx-2 py-0">Kembali</span></a>
                     @endif

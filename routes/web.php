@@ -331,7 +331,8 @@ Route::get('/upja', [IzinvendorController::class, 'upja'])->name('upja');
 //     return view('layanan.form');
 // })->name('form_layanan');
 
-Route::get('/form-layanan', [LayananController::class, 'create']);
+Route::get('/form-layanan/logistik', [LayananController::class, 'create']);
+Route::get('/form-layanan/pam', [LayananController::class, 'create2']);
 
 Route::controller(LayananController::class)->middleware('auth')->group(function () {
     Route::get('/layanan', 'index')->name('layanan');

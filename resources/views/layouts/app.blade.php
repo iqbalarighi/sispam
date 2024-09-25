@@ -68,13 +68,14 @@
                         @endif
                     <li>
                             <div class="dropdown ">
-                              <a class="nav-link dropdown-toggle {{ Request::is('form-izin') || Request::is('form-layanan') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              <a class="nav-link dropdown-toggle {{ Request::is('form-izin') || Request::is('form-layanan/logistik') || Request::is('form-layanan/pam') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Form Permintaan
                               </a>
 
                               <ul class="dropdown-menu py-1 m-0">
                                 <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-izin') ? 'fw-bold' : '' }}" href="{{ url('form-izin') }}" style="color: black;">{{ __('Izin Kerja') }}</a></li>
-                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-layanan') ? 'fw-bold' : '' }}" href="{{ url('form-layanan') }}" style="color: black;">{{ __('Layanan Kelogistikan') }}</a></li>
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-layanan/logistik') ? 'fw-bold' : '' }}" href="{{ url('form-layanan/logistik') }}" style="color: black;">{{ __('Layanan Kelogistikan') }}</a></li>
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('form-layanan/pam') ? 'fw-bold' : '' }}" href="{{ url('form-layanan/pam') }}" style="color: black;">{{ __('Layanan Pengamanan') }}</a></li>
                                 </ul>
                             </div>
                     </li>
@@ -86,7 +87,7 @@
 
                               <ul class="dropdown-menu py-1 m-0">
                                 <li class="ps-3"><a class="nav-link p-1 {{ Request::is('update_pekerjaan') ? 'fw-bold' : '' }}" href="{{ url('update_pekerjaan') }}" style="color: black;">{{ __('Izin Kerja') }}</a></li>
-                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('layanan/status') ? 'fw-bold' : '' }}" href="{{ url('layanan/status') }}" style="color: black;">{{ __('Layanan Kelogistikan') }}</a></li>
+                                <li class="ps-3"><a class="nav-link p-1 {{ Request::is('layanan/status') ? 'fw-bold' : '' }}" href="{{ url('layanan/status') }}" style="color: black;">{{ __('Layanan') }}</a></li>
                                 </ul>
                             </div>
                     </li>

@@ -41,6 +41,12 @@ class LayananController extends Controller
         return view('layanan.form', compact('sites'));
     }
 
+    public function create2()
+    {
+        $sites = SiteModel::get();
+        return view('layanan.form2', compact('sites'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
