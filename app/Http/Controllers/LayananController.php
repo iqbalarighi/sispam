@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use App\Models\LayananModel;
-use App\Models\OtorisasiModel;
-use App\Models\User;
-use App\Models\SiteModel;
+use PDF;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Helpers\Helper;
+use App\Models\SiteModel;
+use Illuminate\Support\Str;
+use App\Models\LayananModel;
 use Illuminate\Http\Request;
+use App\Exports\LayananExport;
+use App\Models\OtorisasiModel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image as ResizeImage;
-use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Intervention\Image\Facades\Image as ResizeImage;
 
 class LayananController extends Controller
 {
@@ -24,10 +26,25 @@ class LayananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(LayananModel $layananModel)
+    public function index(Request $request, LayananModel $layananModel)
     {
+        $start =$request->start;
+        $end = $request->end;
+
+        if ($start != null){
+            $layan = $layananModel->whereBetween('tanggal', [$start, $end])
+                    ->orderBy('created_at', 'DESC')
+                    ->paginate(100000);
+
+                    $layan->appends(['start' => $start, 'end' => $end]);
+                } else {
+
         $layan = $layananModel->orderBy('created_at', 'DESC')->paginate(15);
-        return view('layanan.index', compact('layan'));
+
+                     }
+
+
+        return view('layanan.index', compact('layan', 'start', 'end'));
     }
 
     /**
@@ -276,6 +293,7 @@ if ($request->images != null) {
     $update->satker = $request->satker;
     $update->kontak = $request->kontak;
     $update->email = $request->email;
+    $update->keterangan = $request->keterangan;
 
 if ($request->images != null) {
     $files = $request->file('images');
@@ -585,5 +603,19 @@ public function hapusFoto(LayananModel $layananModel, $foto, $id)
         ->with('success', 'Otorisasi Dokumen Berhasil');
     }
 
+    public function export(Request $request, $start, $end, $count)
+        {
+            $start = Carbon::parse($request->start)->isoFormat('D MMMM Y');
+            $end = Carbon::parse($request->end)->isoFormat('D MMMM Y');
 
+            if ($start == $end) {
+
+              return Excel::download(new LayananExport($request->start, $request->end, $request->count), 'Layanan Kelogistikan '.$start.'.xlsx');  
+
+            } else {
+                return Excel::download(new LayananExport($request->start, $request->end, $request->count), 'Layanan Kelogistikan '.$start.' - '.$end.'.xlsx');
+            }
+
+            
+        }
 }

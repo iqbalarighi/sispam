@@ -242,9 +242,9 @@
             </div>
             <div class="mt-2">
                     <div class="input-group custom-file-button mt-1 toolt">
-                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Dokumen</label>
+                        <label class="input-group-text p-1" class="form-control form-control-sm" for="foto" style="font-size: 10pt;">Upload Foto</label>
                         <input type="file" class="form-control form-control-sm" accept=".jpeg, .jpg, .png" name="images[]" id="foto" multiple>
-                <span class="tooltiptext">Upload Dokumen Pendukung</span>
+                <span class="tooltiptext">Upload Foto Pendukung</span>
                     </div>
             </div>
 

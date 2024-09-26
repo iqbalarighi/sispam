@@ -165,6 +165,7 @@ Route::get('/tukarjaga/export/{start}/{end}', [TukarjagaController::class, 'expo
 Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
 Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
+Route::get('/layanan/export/{start}/{end}/{count}', [LayananController::class, 'export'])->middleware('auth');
 Route::get('/kejadianPDF/{id}/{oto}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
 Route::get('/unrasojk/export/{start}/{end}/{count}/{cariin}', [UnrasController::class, 'exportojk'])->middleware('auth');
 Route::get('/unras/export/{start}/{end}/{count}', [UnrasController::class, 'export'])->middleware('auth');

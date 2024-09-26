@@ -86,6 +86,8 @@
 
                 <div class="card-body">
 <div class="col-md-8">
+<b>ID Layanan : {{$edit->layanan_id}}</b>
+
 <form action="{{url('layanan/update')}}/{{$edit->layanan_id}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -254,13 +256,19 @@
                         </div>
                         </td>
                     </div>
-                    <tr>
 
-                </tr>
                     @endif
 
-
             </div>
+            @if ($edit->otorizedby != null)
+            <div  class="mt-2">
+                <div class="form-floating">
+                  <textarea class="form-control form-control-sm" placeholder="Leave a comment here" id="keterangan" style="height: 100px;" name="keterangan">{{$edit->keterangan}}</textarea>
+                  <label for="keterangan">Keterangan</label>
+                </div>
+            </div>
+            @endif
+            
 
             <div class="text-center mt-2">
                 <button type="submit" class="btn btn-primary ">Update</button>
