@@ -155,7 +155,7 @@
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->pic}}</td>
                 <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">{{$layanan->satker}}</td>
                 {{-- <td>{{$layanan->email}}</td> --}}
-                <td onclick="window.location='{{route("layanan")}}/detail/{{$layanan->layanan_id}}'" style="cursor: pointer;">
+                <td style="cursor: pointer;">
                     @if($layanan->status == "Open")
                         <button class="btn btn-sm p-1 align-middle btn-danger">{{$layanan->status}}</button>
                     @elseif($layanan->status == "Waiting")
