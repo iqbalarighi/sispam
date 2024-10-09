@@ -414,11 +414,11 @@ $text =
 "Nama: ".$otor->nama."
 Jabatan : ".$otor->jabatan."
 NIP : ".$otor->nip."
-Tanggal Validasi ".Carbon::parse($show->tanggal)->isoFormat('DD/MM/YYYY HH:mm:ss')."
+Tanggal Otorisasi ".Carbon::parse($show->tanggal)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Berlaku Sampai : ".carbon::parse($show->expired)->isoFormat('DD/MM/YYYY HH:mm:ss')."
 Status : ".$status;
 
-        $text2 = 
+$text2 = 
 "Nama: ".$valid->name."
 Unit Kerja : ".$valid->unit_kerja."
 Tanggal Validasi ".Carbon::parse($show->tanggal)->isoFormat('DD/MM/YYYY HH:mm:ss')."

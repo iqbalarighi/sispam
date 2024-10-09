@@ -149,32 +149,32 @@
                     </tr>
                     </table>
                 </div>
-                    <table width="100%" border="0" style="vertical-align: middle; text-align: center;">
+                <div class="px-0 mt-3" style="page-break-before: auto; page-break-inside:avoid;">
+                    <table width="98%" border="0" style="vertical-align: middle; text-align: center;">
                         <tr>
                             <td width="30%"><pre class="narrow">
 Mengetahui,
 {{$otor->jabatan}}
 
-
-
+<img src="data:image/png;base64, {!! $qrcode !!}" >
 <b>{{$otor->nama}}</b>
-NIP. {{$otor->nip}}</pre>
+<font style="font-size: 10pt;">NIP. {{$otor->nip}} </font></pre>
                         </td>
-<td width="33%" style="vertical-align: top;">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
+<td width="33%" style="vertical-align: top;" class="xxxx">Jakarta, {{Carbon\Carbon::parse($detil->created_at)->isoFormat('D MMMM Y')}}</td>
                         <td width="33%" style="vertical-align: top;"><pre class="narrow">
-Disusun Oleh,
+Divalidasi Oleh,
 
 
-
-
-<b>{{$detil->nama_pelapor}}</b>
-{{$detil->uker_pelapor}}</pre>
+<img src="data:image/png;base64, {!! $qrcode2 !!}" >
+<b>{{$valid->name}}</b>
+<font style="font-size: 10pt;"><i>{{$valid->unit_kerja}}</i></font></pre>
                         </td>
                         </tr>
                     </table>
+</div>
                     
 <div style="position: absolute; right: 0; bottom: 0px;" align="center">
-    <img src="data:image/png;base64, {!! $qrcode !!}">
+    <img src="data:image/png;base64, {!! $qrcode3 !!}">
     <figcaption><font size="8pt" style="margin-top: 20px">{{$detil->no_lap}}</font></figcaption>
 </div>
             </body>

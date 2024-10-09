@@ -16,9 +16,9 @@
                     <a href="{{ route('layanan') }}"><span class="btn btn-primary float-right btn-sm mx-2 py-1">Kembali</span></a>
                     @if(Auth::user()->level == 'superadmin')
                         <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return sup()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;" onclick>Otorisasi</span>
-                    @if ($show->validatedby != null)
+
                         <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
-                    @endif
+
 
                     <script type="text/javascript">
                         async function sup(){
@@ -49,7 +49,9 @@
                     @if(Auth::user()->unit_kerja == 'Fasilitas Kerja' || Auth::user()->role == 'admin')
                         @if($otorized == null) 
                             @if($show->validatedby == null)
+                                @if(Auth::user()->level != 'superadmin')
                             <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="window.location='{{route('layanan')}}/validasi/{{$show->layanan_id}}'" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Validasi</span>
+                                @endif
                             @endif
                         @elseif($show->otorizedby == null) 
                             <span class="btn btn-sm btn-primary align-self-center float-right mx-2 py-1" onclick="return oto()" style="cursor: pointer; z-index: 0; vertical-align: middle; margin-bottom: -1px; padding: 4px 3px 4px 3px;">Otorisasi</span>

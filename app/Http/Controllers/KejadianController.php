@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Models\KejadianModel;
 use App\Models\OtorisasiModel;
 use App\Models\SiteModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -394,7 +395,10 @@ class KejadianController extends Controller
     {
         $detil = KejadianModel::with('site')->where('no_lap', '=', $id)->first();
         $otor = OtorisasiModel::all();
-        return view('kejadian.detil', compact('detil','otor'));
+        $validator = User::where('unit_kerja', 'Security Monitoring Center')->orwhere('unit_kerja', 'Health, Safety, & Environment')->get();
+
+        $otorized = $otor->where('nama', Auth::user()->name)->first();
+        return view('kejadian.detil', compact('detil','otor', 'otorized', 'validator'));
     }
 
     public function edit($id)
@@ -413,15 +417,30 @@ class KejadianController extends Controller
         ]);
     }
 
-public function kejadianPDF($id, $oto)
+public function kejadianPDF($id, $oto, $val)
     {   
         $detil = KejadianModel::with('site')->findOrFail($id);
         $otor = OtorisasiModel::findOrFail($oto);
-        $qrcode = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/kejadianPDF/').'/'.$id.'/'.$oto));
+        $valid = User::findOrFail($val);
+
+$text = 
+"Nama: ".$otor->nama."
+Jabatan : ".$otor->jabatan."
+NIP : ".$otor->nip."
+Tanggal Otorisasi ".Carbon::parse($detil->otoritime)->isoFormat('DD/MM/YYYY HH:mm:ss');
+
+$text2 = 
+"Nama: ".$valid->name."
+Unit Kerja : ".$valid->unit_kerja."
+Tanggal Validasi ".Carbon::parse($detil->validatime)->isoFormat('DD/MM/YYYY HH:mm:ss');
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text));
+        $qrcode2 = base64_encode(QrCode::format('svg')->size(80)->errorCorrection('H')->generate($text2));
+        $qrcode3 = base64_encode(QrCode::format('svg')->size(70)->errorCorrection('H')->generate(url('/kejadianPDF/').'/'.$id.'/'.$detil->validatedby.'/'.$detil->otorizedby));
 
         if (Auth::user() == true) {
         $shift = Str::substr($detil->shift, 0,7);
-        $pdf = PDF::loadView('kejadian.savepdf', compact('detil','qrcode','otor')); 
+        $pdf = PDF::loadView('kejadian.savepdf', compact('detil','qrcode','qrcode2','qrcode3','otor','valid')); 
         $pdf->render();
         $pdf->get_canvas()->get_cpdf()->setEncryption(null, null);
     } else {
@@ -749,5 +768,52 @@ public function update(Request $update, $id)
 
         }
     }
+
+    public function validasi($id)
+    {
+        $validasi = KejadianModel::with('site')->where('no_lap', '=', $id)->first();
+        $date = Carbon::now()->parse()->isoFormat('DD-MM-YYYY HH:mm:ss');
+
+        $validasi->validatime = $date;
+        $validasi->validatedby = Auth::user()->id;
+        $validasi->save();
+
+        return back()
+        ->with('berhasil', 'Validasi Dokumen Berhasil');
+    }
+
+    public function validmin($id, $val)
+    {
+        $validasi = KejadianModel::with('site')->where('no_lap', '=', $id)->first();
+        $date = Carbon::now()->parse()->isoFormat('DD-MM-YYYY HH:mm:ss');
+        
+        $validasi->validatime = $date;
+        $validasi->validatedby = $val;
+
+        $validasi->save();
+
+        return back()
+        ->with('berhasil', 'Validasi Dokumen Berhasil');
+    }
+
+    public function otorisasi($id, $oto)
+    {
+        $otorized = KejadianModel::with('site')->where('no_lap', '=', $id)->first();
+        
+        if ($otorized->validatedby == null) {
+            return back()
+        ->with('abort', 'Dokumen Belum di validasi');
+        }
+        $date = Carbon::now()->parse()->isoFormat('DD-MM-YYYY HH:mm:ss');
+
+        $otorized->otoritime = $date;
+        $otorized->otorizedby = $oto;
+
+        $otorized->save();
+
+        return back()
+        ->with('berhasil', 'Otorisasi Dokumen Berhasil');
+    }
+
 
 }

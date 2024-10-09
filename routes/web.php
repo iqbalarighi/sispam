@@ -166,7 +166,7 @@ Route::get('/downloadPDF/{id}', [KegiatanController::class, 'downloadPDF'])->mid
 Route::get('/kegiatan/export/{start}/{end}', [KegiatanController::class, 'export'])->middleware('auth');
 Route::get('/kejadian/export/{start}/{end}/{count}', [KejadianController::class, 'export'])->middleware('auth');
 Route::get('/layanan/export/{start}/{end}/{count}', [LayananController::class, 'export'])->middleware('auth');
-Route::get('/kejadianPDF/{id}/{oto}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
+Route::get('/kejadianPDF/{id}/{oto}/{val}', [KejadianController::class, 'kejadianPDF'])->middleware('auth');
 Route::get('/unrasojk/export/{start}/{end}/{count}/{cariin}', [UnrasController::class, 'exportojk'])->middleware('auth');
 Route::get('/unras/export/{start}/{end}/{count}', [UnrasController::class, 'export'])->middleware('auth');
 Route::get('/unrasPDF/{start}/{end}', [UnrasController::class, 'unrasPDF'])->middleware('auth');
@@ -181,16 +181,21 @@ Route::delete('/hapus-user/{id}', [AdduserController::class, 'hapus'])->middlewa
 Route::put('/update-user/{id}',[AdduserController::class, 'updateuser'])->middleware('auth');
 
 // kejadian Section
-Route::get('/kejadian', [KejadianController::class, 'index'])->middleware('auth')->name('kejadian');
-Route::get('/kejadian-edit/{id}', [KejadianController::class, 'edit'])->middleware('auth');
-Route::get('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');
-Route::get('/kejadian-detil/{id}', [KejadianController::class, 'detil'])->middleware('auth');
-Route::get('/kejadian-tambah', [KejadianController::class, 'tambah'])->middleware('auth')->name('jadi-tambah');
-Route::post('/kejadian/simpan', [KejadianController::class, 'simpan'])->middleware('auth')->name('jadi-simpan');
-Route::put('/kejadian-update/{id}', [KejadianController::class, 'update'])->middleware('auth');
-Route::get('/kejadian/hapus-foto/{item}/{id}', [KejadianController::class, 'hapusFoto'])->middleware('auth');
-Route::delete('/kejadian/hapus/{id}', [KejadianController::class, 'hapus'])->middleware('auth');
-Route::get('/kejadian/status/{id}', [KejadianController::class, 'status'])->middleware('auth');
+Route::controller(KejadianController::class)->middleware('auth')->group(function () {
+    Route::get('/kejadian', 'index')->name('kejadian');
+    Route::get('/kejadian-edit/{id}', 'edit');
+    Route::get('/kejadian/hapus/{id}', 'hapus');
+    Route::get('/kejadian-detil/{id}', 'detil');
+    Route::get('/kejadian-tambah', 'tambah')->name('jadi-tambah');
+    Route::post('/kejadian/simpan', 'simpan')->name('jadi-simpan');
+    Route::put('/kejadian-update/{id}', 'update');
+    Route::get('/kejadian/hapus-foto/{item}/{id}', 'hapusFoto');
+    Route::delete('/kejadian/hapus/{id}', 'hapus');
+    Route::get('/kejadian/status/{id}', 'status');
+    Route::get('/kejadian/otorisasi/{id}/{oto}', 'otorisasi');
+    Route::get('/kejadian/validasi/{id}', 'validasi');
+    Route::get('/kejadian/validasi/{id}/{val}', 'validmin');
+});
 
 // Unras Section
 Route::get('/unras', [UnrasController::class, 'index'])->middleware('auth')->name('unras');
@@ -342,6 +347,7 @@ Route::controller(LayananController::class)->middleware('auth')->group(function 
     Route::get('/layanan/validasi/{id}', 'validasi');
     Route::delete('/layanan/destroy/{id}', 'destroy');
     Route::post('/layanan/valid/{id}', 'valid');
+    Route::post('/layanan/valid/{id}/{val}', 'validamin');
     Route::get('/layanan/detail/{id}/{oto}/{val}', 'savePDF');
     Route::get('/layanan/otorisasi/{id}/', 'superoto');
     Route::get('/layanan/otorisasi/{id}/{oto}', 'otor');
