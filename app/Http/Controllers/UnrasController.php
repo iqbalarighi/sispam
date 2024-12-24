@@ -171,6 +171,7 @@ class UnrasController extends Controller
 
 public function update(Request $request, $id)
 {
+    // dd($request->status);
     $update = UnrasModel::findOrFail($id);
 
     $jam = Carbon::parse($request->waktu2)->isoformat('HH:mm');

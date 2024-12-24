@@ -703,6 +703,11 @@ if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-l
                 $("#kegiatan2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
                 $("#jenis2{{$unras->firstitem()+$key}}").attr("name", "kegiatan2[]");
                 $("#jenis2{{$unras->firstitem()+$key}}").attr("value", "");
+            $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+            $('#statusx{{$unras->firstitem()+$key}}').prop('hidden', false);
+            $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status");
+            $("#statusx{{$unras->firstitem()+$key}} option:selected").removeAttr('selected');
+
           } else if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Audiensi'){
                 $("#stataudi{{$unras->firstitem()+$key}}").prop('hidden', false); 
                 $("#statgiat{{$unras->firstitem()+$key}}").prop('hidden', true); 
@@ -712,6 +717,16 @@ if ($("#kegiatan2{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-l
                 $("#statusx{{$unras->firstitem()+$key}}").prop("disabled", false);
                 $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status");
                 $("#status{{$unras->firstitem()+$key}}").removeAttr("name", "status");
+
+                $("#statx{{$unras->firstitem()+$key}}").prop("disabled", true);
+            $('#statx{{$unras->firstitem()+$key}}').prop('hidden', true);
+            $("#statx{{$unras->firstitem()+$key}}").prop('required', false);
+            $("#statx{{$unras->firstitem()+$key}}").attr("name", '');
+
+            $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
+            $('#statusx{{$unras->firstitem()+$key}}').prop('hidden', false);
+            $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status");
+            $("#statusx{{$unras->firstitem()+$key}} option:selected").removeAttr('selected');
 
 
           } else {
@@ -767,6 +782,17 @@ if ($("#status{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lain
             $("#stat{{$unras->firstitem()+$key}}").attr("name", '');
             $("#status{{$unras->firstitem()+$key}}").prop('required', true);
             $("#status{{$unras->firstitem()+$key}}").attr("name", "status");
+
+            $("#statx{{$unras->firstitem()+$key}}").prop("disabled", true);
+            $('#statx{{$unras->firstitem()+$key}}').prop('hidden', true);
+            $("#statx{{$unras->firstitem()+$key}}").prop('required', false);
+            $("#statx{{$unras->firstitem()+$key}}").attr("name", '');
+
+            $("#statusx{{$unras->firstitem()+$key}}").prop('required', false);
+            $('#statusx{{$unras->firstitem()+$key}}').prop('hidden', true);
+            $("#statusx{{$unras->firstitem()+$key}}").attr("name", "");
+            $("#statusx{{$unras->firstitem()+$key}} option:selected").removeAttr('selected');
+
           }
         }
 );
@@ -803,6 +829,7 @@ if ($("#statusx{{$unras->firstitem()+$key}} option:selected").val() == 'Lain-lai
             $("#statx{{$unras->firstitem()+$key}}").attr("name", '');
             $("#statusx{{$unras->firstitem()+$key}}").prop('required', true);
             $("#statusx{{$unras->firstitem()+$key}}").attr("name", "status");
+            // $('#statx').change().css('background', 'limegreen');
           }
         }
 );
